@@ -1,9 +1,153 @@
 @import 'tailwindcss';
 
+@source '../views/**/*.blade.php';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    --color-primary: #9b3100;
+    --color-primary-container: #c1440e;
+    --color-primary-dark: #8F3209;
+    --color-primary-fixed: #ffdbcf;
+    --color-primary-fixed-dim: #ffb59c;
+    --color-on-primary: #ffffff;
+    --color-on-primary-container: #ffeee9;
+    
+    --color-secondary: #655d57;
+    --color-secondary-container: #eaddd5;
+    --color-secondary-fixed: #ece0d8;
+    --color-secondary-fixed-dim: #d0c4bd;
+    --color-on-secondary: #ffffff;
+    --color-on-secondary-container: #6a615b;
+    
+    --color-tertiary: #754d00;
+    --color-tertiary-container: #91651b;
+    --color-tertiary-fixed: #ffddb1;
+    --color-tertiary-fixed-dim: #f4bd6b;
+    --color-on-tertiary: #ffffff;
+    --color-on-tertiary-container: #ffeedc;
+    
+    --color-surface: #fff8f3;
+    --color-surface-bright: #fff8f3;
+    --color-surface-dim: #e4d8c9;
+    --color-surface-warm: #FFFDF9;
+    --color-surface-variant: #ede1d1;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #fef2e2;
+    --color-surface-container: #f9ecdc;
+    --color-surface-container-high: #f3e6d6;
+    --color-surface-container-highest: #ede1d1;
+    --color-on-surface: #201b11;
+    --color-on-surface-variant: #59413a;
+    
+    --color-cream-bg: #FBF6EE;
+    --color-sand-bg-alt: #F1E6D6;
+    --color-neutral-surface: #F1EEE8;
+    
+    --color-inverse-surface: #362f25;
+    --color-inverse-on-surface: #fcefdf;
+    
+    --color-success: #3F7D53;
+    --color-success-surface: #E7F2EA;
+    --color-danger: #B3432E;
+    --color-outline: #8d7168;
+    --color-outline-variant: #e1bfb5;
 }
+
+@layer utilities {
+    .font-headline-lg {
+        font-family: var(--font-serif);
+        font-size: 48px;
+        line-height: 56px;
+        letter-spacing: -0.015em;
+        font-weight: 600;
+    }
+    .font-headline-md {
+        font-family: var(--font-serif);
+        font-size: 36px;
+        line-height: 44px;
+        letter-spacing: -0.01em;
+        font-weight: 600;
+    }
+    .font-headline-sm {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 600;
+    }
+    .font-headline-sm-mobile {
+        font-family: var(--font-serif);
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600;
+    }
+    .font-body-lg {
+        font-family: var(--font-sans);
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .font-body-md {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .font-body-sm {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .font-label-md {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+    }
+    .font-label-sm {
+        font-family: var(--font-sans);
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+    }
+    .font-numeric-currency {
+        font-family: var(--font-sans);
+        font-size: 20px;
+        line-height: 26px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+/* Smooth Scrolling & Custom Artisanal Scrollbar */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #c1440e #fbf6ee;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fbf6ee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d8c8bc;
+    border-radius: 9999px;
+    border: 2px solid #fbf6ee;
+    transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c1440e;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #8f3209;
+}
+
