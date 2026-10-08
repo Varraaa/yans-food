@@ -5,10 +5,6 @@
     <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-6 md:pt-14 md:pb-10">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-variant/40">
             <div class="space-y-3 max-w-2xl">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant">
-                    <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
-                    <span class="font-label-sm tracking-wide uppercase text-xs">Dapur Kuliner Rumahan &bull; Resep Warisan</span>
-                </div>
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif">
                     Daftar Menu Yan's Food
                 </h1>

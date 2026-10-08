@@ -7,10 +7,6 @@
         <!-- 1. Header / Intro Narrative Sub-Hero -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-14 lg:pt-16 lg:pb-16 w-full relative z-10">
             <div class="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand-bg-alt shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    <span class="font-label-sm uppercase tracking-widest text-primary font-semibold text-xs">TENTANG KAMI &bull; DEDIKASI KULINER</span>
-                </div>
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif leading-tight">
                     Dapur Rumahan yang Tumbuh Bersama Kehangatan &amp; Kejujuran Rasa
                 </h1>

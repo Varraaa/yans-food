@@ -5,10 +5,6 @@
     <section class="relative w-full py-12 lg:py-20 bg-surface-container-low overflow-hidden border-b border-surface-variant/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="max-w-3xl space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-variant text-on-surface-variant text-label-sm uppercase tracking-wider text-xs">
-                    <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
-                    Dapur Buka Hari Ini &bull; 09.00 - 19.30 WIB
-                </div>
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif">
                     Cara Pesan <span class="text-primary italic font-medium">Yan's Food</span>
                 </h1>

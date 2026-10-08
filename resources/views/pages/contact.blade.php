@@ -7,10 +7,6 @@
 
         <!-- 1. Header -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand-bg-alt text-primary font-label-sm tracking-widest uppercase mb-6 shadow-sm text-xs">
-                <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                HUBUNGI KAMI &bull; DAPUR YAN'S FOOD
-            </div>
             <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface max-w-3xl tracking-tight mb-5 font-serif">
                 Pintu Dapur Kami Selalu Terbuka untuk Anda
             </h1>
