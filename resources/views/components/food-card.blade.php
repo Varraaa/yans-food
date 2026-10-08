@@ -74,16 +74,25 @@
         </div>
 
         @if($isAvailable)
-            <button type="button" 
-                    onclick="openQuickOrder('{{ addslashes($title) }}', '{{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}', '{{ addslashes($desc) }}', '{{ $image }}')"
-                    class="px-3.5 py-2 rounded-lg bg-surface-container-high hover:bg-primary-container text-on-surface hover:text-on-primary font-label-md transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95">
-                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
-                <span>Pesan</span>
-            </button>
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <button type="button" 
+                        onclick="addToCart('{{ addslashes($title) }}', 'Rp {{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}')"
+                        aria-label="Tambah {{ $title }} ke Keranjang"
+                        title="Tambah Cepat ke Keranjang"
+                        class="w-9 h-9 rounded-xl bg-surface-container hover:bg-primary-fixed text-on-surface hover:text-primary transition-colors flex items-center justify-center active:scale-90 border border-surface-variant/40">
+                    <span class="material-symbols-outlined text-[18px]">add</span>
+                </button>
+                <button type="button" 
+                        onclick="openQuickOrder('{{ addslashes($title) }}', '{{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}', '{{ addslashes($desc) }}', '{{ $image }}')"
+                        class="px-3 sm:px-3.5 py-2 rounded-xl bg-primary-container hover:bg-primary-dark text-on-primary font-label-md transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95 text-xs sm:text-sm">
+                    <span class="material-symbols-outlined text-[16px] sm:text-[18px]">shopping_bag</span>
+                    <span>Pesan</span>
+                </button>
+            </div>
         @else
             <button type="button" disabled
-                    class="px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant/60 font-label-md flex items-center gap-1.5 cursor-not-allowed">
-                <span class="material-symbols-outlined text-[18px]">block</span>
+                    class="px-3.5 py-2 rounded-xl bg-surface-container text-on-surface-variant/60 font-label-md flex items-center gap-1.5 cursor-not-allowed text-xs sm:text-sm">
+                <span class="material-symbols-outlined text-[16px] sm:text-[18px]">block</span>
                 <span>Habis</span>
             </button>
         @endif

@@ -16,7 +16,7 @@
 
 <aside id="cart-drawer-panel" 
        aria-label="Keranjang dan Kasir Pesanan"
-       class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-surface-warm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col border-l border-surface-variant/30">
+       class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-full sm:max-w-md bg-surface-warm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col border-l border-surface-variant/30">
     
     <!-- Drawer Header -->
     <div class="h-20 px-6 bg-cream-bg/95 border-b border-surface-variant/40 flex items-center justify-between shrink-0">

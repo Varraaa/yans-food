@@ -110,10 +110,11 @@ border-focus: 2px solid #C1440E;
    - Monogram wajan uap artisanal berbalut warna terakota `#C1440E` dan aksen gold `#D6A253`.
    - Disertai wordmark *"Yan's Food"* (serif) dan subline *"DAPUR KULINER RUMAHAN"*.
 
-2. **Navbar:**
-   - Fixed header dengan efek `backdrop-blur-md bg-cream-bg/90`.
-   - Desktop navigasi: `Home | About | Menu | Pesan | Contact` + CTA "Pesan Sekarang".
-   - Mobile: Menu Hamburger membuka drawer layar penuh yang intuitif.
+2. **Navbar & Navigasi Responsif:**
+   - Fixed header dengan efek `backdrop-blur-md bg-cream-bg/95`.
+   - Desktop & Tablet Navigasi: Navigasi modern dengan **animated underline indicator** (`bg-gradient-to-r from-primary to-tertiary`) yang mengembang halus dari tengah saat di-hover dan menetap solid dengan aksen gold dot saat halaman aktif (menggantikan hover kotak warna).
+   - Mobile & Tablet Drawer: Sidebar slide-over dengan backdrop gelap transparan (`backdrop-blur-xs`), link beraksen garis vertikal di sebelah kiri saat aktif, info dapur & media sosial.
+   - Pemicu Keranjang & Kasir terintegrasi dengan badge jumlah pesanan real-time.
 
 3. **Food Product Card:**
    - Wadah `bg-surface-warm rounded-2xl p-4 shadow-sm`.
