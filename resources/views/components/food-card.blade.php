@@ -74,21 +74,12 @@
         </div>
 
         @if($isAvailable)
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                <button type="button" 
-                        onclick="addToCart('{{ addslashes($title) }}', 'Rp {{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}')"
-                        aria-label="Tambah {{ $title }} ke Keranjang"
-                        title="Tambah Cepat ke Keranjang"
-                        class="w-9 h-9 rounded-xl bg-surface-container hover:bg-primary-fixed text-on-surface hover:text-primary transition-colors flex items-center justify-center active:scale-90 border border-surface-variant/40">
-                    <span class="material-symbols-outlined text-[18px]">add</span>
-                </button>
-                <button type="button" 
-                        onclick="openQuickOrder('{{ addslashes($title) }}', '{{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}', '{{ addslashes($desc) }}', '{{ $image }}')"
-                        class="px-3 sm:px-3.5 py-2 rounded-xl bg-primary-container hover:bg-primary-dark text-on-primary font-label-md transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95 text-xs sm:text-sm">
-                    <span class="material-symbols-outlined text-[16px] sm:text-[18px]">shopping_bag</span>
-                    <span>Pesan</span>
-                </button>
-            </div>
+            <button type="button" 
+                    onclick="openQuickOrder('{{ addslashes($title) }}', '{{ is_numeric($price) ? number_format($price, 0, ',', '.') : $price }}', '{{ addslashes($category) }}', '{{ addslashes($desc) }}', '{{ $image }}')"
+                    class="px-4 py-2 rounded-xl bg-primary-container hover:bg-primary-dark text-on-primary font-label-md transition-all duration-200 flex items-center gap-1.5 shadow-sm active:scale-95 text-xs sm:text-sm">
+                <span class="material-symbols-outlined text-[16px] sm:text-[18px]">local_mall</span>
+                <span>Pesan Sekarang</span>
+            </button>
         @else
             <button type="button" disabled
                     class="px-3.5 py-2 rounded-xl bg-surface-container text-on-surface-variant/60 font-label-md flex items-center gap-1.5 cursor-not-allowed text-xs sm:text-sm">

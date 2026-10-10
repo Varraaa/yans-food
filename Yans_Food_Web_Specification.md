@@ -24,73 +24,190 @@ Prinsip:
 
 ## 3. Tech Stack
 
-- PHP / Laravel
+- PHP / Laravel 11
 - Laravel Blade
-- Tailwind CSS
+- Tailwind CSS (Warm Artisanal Design Tokens)
+- Google Fonts (`Outfit` untuk headings, `Plus Jakarta Sans` untuk body/UI)
+- Google Material Symbols (Outlined & Rounded)
 - Vite
-- Filament
+- Filament (Admin Panel)
 - Eloquent ORM
 - MySQL/MariaDB
 - REST API
 - Thermal printer 58mm/80mm
 
-## 4. Public Website
+## 4. Public Website (Company Profile)
 
-Navbar utama:
+Public website Yan's Food dirancang dengan pendekatan visual **"Warm Artisanal Culinary"** (mengacu pada [DESIGN.md](file:///c:/SEKOLAH/12semester1/PROD%20%28PA%20ANGGA%29/Yans%20Food/yans-food/DESIGN.md)), merefleksikan kehangatan dapur rumahan yang bersih, higienis, terpercaya, dan profesional tanpa kesan korporat yang kaku.
 
-```text
-Home | About | Menu | Pesan | Contact
-```
+### 4.1 Desain & Karakteristik Visual
+- **Palet Warna Utama:**
+  - *Primary (Terakota):* `#C1440E` / `#9B3100` (Brand utama, tombol CTA primer, aksen aktif).
+  - *Tertiary (Warm Gold):* `#D6A253` (Aksen bintang rating, border paket katering terpopuler, highlight).
+  - *Base Background (Cream):* `#FBF6EE` / `#FFF8F3` (Latar kanvas utama).
+  - *Background Alt (Soft Sand):* `#F1E6D6` (Latar selang-seling section & banner).
+  - *Surface Warm:* `#FFFDF9` (Card container elevated, modal, drawer).
+  - *Charcoal Text:* `#26201B` / `#655D57` (Tipografi kontras tinggi & nyaman dibaca).
+  - *Success (Halal & Sedia):* `#3F7D53` (Badge status "Sedia" & jaminan halal).
+  - *Muted (Habis):* `#9C9284` (Badge status "Tidak Tersedia / Habis").
+- **Tipografi:**
+  - *Display / Headings / Brand:* `Outfit` (Modern, proporsional, ramah selera makan).
+  - *Body / Content / UI / Numerik:* `Plus Jakarta Sans` (Jernih, proporsi bersih, tabular numerals untuk harga).
+- **Iconography & Micro-interactions:**
+  - Google Material Symbols Outlined & Rounded.
+  - Micro-animations halus (150–250ms `cubic-bezier(0.22, 1, 0.36, 1)`).
 
-Penamaan "Menu" (menggantikan "Products") dan "Pesan" (menggantikan "Catering") digunakan konsisten di navbar, judul halaman, dan URL publik — selaras dengan dokumentasi UI/UX.
+---
 
-Gallery bersifat opsional.
+### 4.2 Struktur Navigasi & Header
+Fixed header dengan efek `backdrop-blur-md bg-cream-bg/95`:
+- **Navbar Utama:**
+  ```text
+  Home | About | Menu | Pesan | Contact
+  ```
+- **Desktop Navigation:**
+  - Dilengkapi **animated underline indicator** (`bg-gradient-to-r from-primary to-primary-container`) yang mengembang halus dari tengah saat hover dan aktif solid pada route yang sesuai (menggantikan kotak warna kaku).
+- **Header Actions:**
+  - **Tombol CTA "Pesan Sekarang":** Tombol aksi utama pada navbar yang langsung mengarahkan pengunjung ke halaman Pesan (`/pesan`) untuk memilih kanal pemesanan (Online Delivery mitra atau Formulir Reservasi Katering terstruktur). Barisan navbar tidak menggunakan keranjang belanja agar fokus company profile tetap sederhana, bersih, dan langsung terarah ke halaman pemesanan resmi.
+  - **Mobile Drawer Hamburger Button:** Membuka slide-over menu navigasi pada resolusi mobile/tablet dengan backdrop gelap transparan (`backdrop-blur-xs`).
 
-### Home
-Hero, pengenalan Yan's Food, CTA produk/catering, produk unggulan, keunggulan bisnis, highlight catering, optional gallery, contact CTA, footer.
+---
 
-### About
-Cerita usaha, visi, misi, nilai, kualitas, kebersihan, dan pelayanan.
+### 4.3 Halaman Home (Beranda) — `pages/home.blade.php`
+1. **Hero Section:**
+   - Review pill badge kredibel: Rating 4.9/5 dari 500+ Pelanggan Puas.
+   - Headline utama: *"Rasa Rumahan, Disajikan dengan Hati"*.
+   - Subheadline tentang dapur rumahan yang bersih, higienis, dan penuh dedikasi.
+   - Tombol CTA ganda: *"Lihat Menu Lengkap"* (`/menu`) dan *"Pesan Sekarang"* (`/pesan`).
+   - 3 Trust Badges: *100% Bahan Segar Alami*, *Fresh Dibuat Hari Ini*, *Halal Higienis & Amanah*.
+   - Visual Collage: Foto kuliner otentik rasio 4:5 dengan floating pill *"Kudapan & Makanan Hangat — Resep Asli Racikan Keluarga"*.
+2. **Pengenalan Singkat Dapur Bersih:**
+   - Cerita komitmen kebersihan dapur dan pengolahan higienis Yan's Food.
+3. **6 Keunggulan Utama Bisnis (Pillar of Excellence):**
+   - Bahan Alami Pilihan (tanpa pengawet buatan).
+   - Higienis & 100% Halal.
+   - Dibuat Fresh Harian (bukan frozen stok lama).
+   - Kemasan Rapi & Higienis (food-grade).
+   - Layanan Ramah Kekeluargaan.
+   - Harga Jujur & Terjangkau.
+4. **Highlight Menu Favorit:**
+   - Menampilkan hidangan unggulan (*Risol Mayo Beef & Egg*, *Pisang Coklat Crispy*, *Nasi Goreng Jadul Yan's*, *Tahu Bakso Kukus/Goreng*).
+   - CTA langsung menuju katalog lengkap di `/menu`.
+5. **Highlight Layanan Katering Acara:**
+   - Banner penjelasan katering rumahan (Snack Box, Nasi Kotak Nusantara, Prasmanan Mini) beserta CTA menuju form di `/pesan`.
+6. **Banner Kontak & Lokasi Dapur:**
+   - Informasi alamat, jam operasional, dan ajakan mampir langsung ke dapur.
 
-### Menu
-*(sebelumnya "Products")*
+---
 
-Menampilkan produk dari database dengan filter kategori. Produk berstatus **Sedia** dapat ditampilkan sebagai tersedia; produk **Tidak Tersedia** tidak boleh dipresentasikan sebagai produk yang dapat dibeli.
+### 4.4 Halaman About (Tentang Kami) — `pages/about.blade.php`
+1. **Header Editorial Sub-Hero:**
+   - Judul: *"Dapur Rumahan yang Tumbuh Bersama Kehangatan & Kejujuran Rasa"*.
+2. **Kisah Usaha (Brand Story):**
+   - Perjalanan dari dapur kecil keluarga dan racikan risol mayo legendaris.
+   - Filosofi utama: *"Bukan Pabrik Makanan, Kami Memasak Seperti untuk Keluarga Sendiri"*.
+   - Highlight Quote Dapur Utama Yan's Food bergaris aksen Warm Gold.
+   - Stat Metrik: *100% Bebas Pengawet*, *15+ Varian Resep*, *500+ Acara Terlayani*.
+3. **4 Nilai Utama Usaha:**
+   - *Kejujuran Rasa:* Rempah asli utuh tanpa pemalsuan atau jalan pintas.
+   - *Higienitas Tanpa Kompromi:* Standar kebersihan dapur setara rumah makan modern.
+   - *Pelayanan Penuh Hati:* Melayani setiap pesanan selayaknya menjamu tamu di rumah.
+   - *Tumbuh Bersama Komunitas:* Menjadi bagian dari momen kebersamaan pelanggan.
+4. **4 Standar Kualitas Dapur Bersih:**
+   - *Seleksi Bahan Pagi Hari:* Sayuran, daging, dan telur segar setiap subuh.
+   - *Minyak & Penggorengan Terkontrol:* Minyak jernih berkala, tidak menggunakan jelantah hitam.
+   - *Dapur Terbuka & Bersih:* Sanitasi alat masak dan area kerja terjadwal ketat.
+   - *Kemasan Food-Grade Ramah Konsumsi:* Kotak dan wadah aman, rapi, dan menjaga kerenyahan makanan.
 
-### Pesan
-*(sebelumnya "Catering"; halaman ini menggabungkan dua kanal pemesanan — Pesan Online & Pesan Katering — karena keduanya sama-sama menjawab pertanyaan "bagaimana cara membeli Yan's Food")*
+---
 
-#### A. Pesan Online
+### 4.5 Halaman Menu (Katalog Menu) — `pages/menu.blade.php`
+1. **Top Banner & Quick Metrics:**
+   - Headline: *"Daftar Menu Yan's Food"*.
+   - Metric strip: *100% Halal — Masakan Higienis* dan *Fresh Cooked — Dibuat Sesuai Order*.
+2. **Category Filter Ribbon & Live Search (`category-filter`):**
+   - Filter chips pill: *Semua*, *Makanan Ringan*, *Makanan Berat*, *Mie Instan*, *Minuman Segar*.
+   - Input pencarian real-time dengan ikon filter yang responsif.
+3. **Product Catalog Grid (`food-card`):**
+   - Menampilkan produk dari database.
+   - Card produk: Foto rasio 1:1 (*square* hover-zoom), badge status (*"Sedia"* warna hijau atau *"Tidak Tersedia"* warna abu-abu netral), label kategori, harga dengan angka tabular tebal.
+   - Tombol Aksi: Tombol Pesan Cepat (*Quick Order* via WhatsApp) atau diarahkan ke `/pesan`.
+   - **Aturan Sistem:** Produk berstatus **Sedia** dapat dipesan; produk **Tidak Tersedia** tidak boleh dipresentasikan sebagai produk yang dapat dibeli (tombol dinonaktifkan).
+4. **Quick Order Modal (`quick-order-modal`):**
+   - Modal popup interaktif untuk pemesanan instan 1 menu via WhatsApp secara langsung.
 
-Bagian ini menjelaskan bahwa Yan's Food tersedia di layanan pesan-antar pihak ketiga untuk pembelian harian (bukan acara/event):
+---
 
-- Menampilkan logo **ShopeeFood**, **GoFood**, **GrabFood**, masing-masing clickable menuju link/aplikasi resmi toko Yan's Food di platform tersebut.
-- Bersifat konten statis/konfigurasi (link platform), tidak memerlukan tabel database baru — tiga link tersebut cukup disimpan sebagai pengaturan sederhana (lihat §17 Pengaturan/Settings, atau bisa di-hardcode di konfigurasi environment bila jarang berubah).
-- Tidak melibatkan `catering_orders` atau proses checkout apa pun di sisi Yan's Food — transaksi dan pembayaran sepenuhnya berlangsung di platform pihak ketiga tersebut.
+### 4.6 Halaman Pesan (Cara Pesan) — `pages/pesan.blade.php`
+Menggabungkan dua kanal pemesanan dalam satu halaman dengan pembagian visual yang tegas:
 
-#### B. Pesan Katering
+#### A. Bagian Pesan Online (Santapan Harian Praktis)
+- Menjelaskan ketersediaan Yan's Food di aplikasi pesan-antar pihak ketiga untuk pembelian harian:
+  - **ShopeeFood:** Voucher promo ongkir & diskon merchant mingguan.
+  - **GoFood:** Pengiriman cepat armada gesit & kemasan tersegel higienis.
+  - **GrabFood:** Promo langganan hemat & rating dapur bintang 4.9.
+- Dilengkapi jam operasional layanan delivery: **09.00 – 19.30 WIB**.
+- Konten bersifat tautan konfigurasi statis/eksternal, tidak melibatkan database `catering_orders` atau checkout sistem internal.
 
-Menjelaskan layanan, paket, menu, dan form pemesanan katering.
+#### Visual Divider Ornamen Kuliner
+Pemisah section anggun beraksen wajan & sendok garpu bernuansa Warm Gold dan Terakota.
 
-Alur pemesanan (bukan chat manual bebas di WA):
-1. Pelanggan mengisi **form terstruktur** di website: nama, alamat, pilih produk (dropdown dari database) + qty, tanggal & jam acara, keperluan, catatan.
-2. Saat submit, Laravel menyimpan data ke `catering_orders` **dan** menghitung total harga otomatis dari harga produk di database (bukan input manual pelanggan).
-3. Data pesanan (termasuk total harga) langsung tersimpan dan tampil di Admin Web pada page Pesanan Catering.
-4. Pelanggan di-redirect ke WhatsApp Admin (`wa.me` dengan pesan terformat otomatis berisi ringkasan pesanan) untuk melanjutkan **konsultasi/komunikasi** — nego menu, detail tambahan, atau perubahan request.
-5. Jika hasil konsultasi WA mengubah pesanan (misal qty nambah, request custom di luar form), admin memperbarui data terkait secara manual di Admin Web — WA tetap jadi kanal komunikasi final yang fleksibel/manusiawi, form hanya starting point yang mempercepat proses.
+#### B. Bagian Pesan Katering (Layanan Acara & Event)
+- **3 Paket Katering Utama:**
+  1. *Paket Snack Box Manis & Gurih:* Mulai Rp 12.000 / box (Min. 15 box). Kudapan gurih (Risol Mayo/Tahu Bakso) + manis (Pisang Coklat) + air mineral & tisu basah.
+  2. *Paket Nasi Kotak Nusantara (Best Seller - Aksen Warm Gold):* Mulai Rp 28.000 / box (Min. 20 box). Nasi putih/kuning, ayam bakar/lengkuas, sambal korek, lalapan, tahu tempe, buah segar.
+  3. *Paket Prasmanan Mini Rumahan:* Mulai Rp 45.000 / porsi (Min. 25 porsi). Solusi hidangan prasmanan hangat untuk acara keluarga atau kantor.
+- **Formulir Reservasi Katering Terstruktur (`catering-form`):**
+  - Input field wajib:
+    - Nama Lengkap Pemesan.
+    - Nomor WhatsApp Aktif.
+    - Tanggal Acara & Waktu Pengantaran Tiba (Validasi min. H-2 acara).
+    - Pilihan Paket Katering.
+    - Jumlah Porsi / Box (Minimum 15 porsi).
+    - Alamat Pengiriman Lengkap (beserta patokan lokasi).
+    - Catatan Khusus (request alergi, pemisahan sambal, dll.).
+- **Alur Sistem & Sinkronisasi Data (Backend & WhatsApp):**
+  1. Pelanggan mengisi form terstruktur di website.
+  2. Saat disubmit, Laravel (`CateringService`) memvalidasi input, mengambil harga produk/paket dari database, dan menghitung total harga secara aman di server (client tidak boleh memanipulasi total harga).
+  3. Data tersimpan ke tabel `catering_orders` dengan status default `PENDING` dan payment status `UNPAID`.
+  4. Data pesanan langsung muncul di Admin Panel pada halaman **Pesanan Catering**.
+  5. Sistem men-generate tautan WhatsApp Admin (`wa.me`) dengan pesan terformat otomatis berisi ringkasan pesanan.
+  6. Pelanggan melanjutkan konsultasi di WhatsApp untuk finalisasi detail atau negosiasi.
+  7. Jika ada perubahan detail pesanan dari hasil chat WA, Admin memperbarui data secara manual di Admin Web (WhatsApp adalah kanal komunikasi manusiawi, form web adalah entry point terstruktur).
 
-Form tidak menggantikan peran WhatsApp sebagai kanal komunikasi personal; form berfungsi sebagai pintu masuk terstruktur agar data awal & estimasi harga otomatis tervalidasi sebelum percakapan berlangsung.
+---
 
-Tampilan: dua bagian (A dan B) dipisahkan jelas secara visual pada halaman yang sama (Pesan Online ditampilkan lebih dulu, diikuti Pesan Katering), bukan dua page terpisah.
+### 4.7 Halaman Contact (Kontak & Lokasi) — `pages/contact.blade.php`
+1. **Header Sub-Hero:**
+   - Judul: *"Pintu Dapur Kami Selalu Terbuka untuk Anda"*.
+2. **4 Kartu Informasi Kontak:**
+   - *Alamat & Pick-up:* Jl. Melati No. 14, Jakarta Selatan (200m timur Masjid At-Taqwa, parkir tersedia).
+   - *Jam Buka Dapur:* Dapur & Ambil: 08.00 - 20.00 WIB | Delivery Online: 09.00 - 19.30 WIB (Buka Setiap Hari).
+   - *WhatsApp Resmi:* +62 812-3456-7890 (Layanan CS & reservasi katering).
+   - *Surel & Medsos:* `halo@yansfood.id` dan Instagram `@yansfood.official`.
+3. **Formulir Tanya Cepat ke Dapur:**
+   - Input nama, nomor kontak, topik pertanyaan, dan isi pesan yang terintegrasi langsung dengan WhatsApp Customer Service.
+4. **Peta Interaktif & Petunjuk Rute:**
+   - Embed Google Maps interaktif dengan card panduan rute dan fasilitas parkir.
+5. **FAQ Dapur (Frequently Asked Questions):**
+   - Tanya jawab seputar pemesanan mendadak, jaminan kehalalan, dan ketentuan DP katering.
 
-### Contact
-Alamat, WhatsApp, Instagram, jam operasional, Maps, dan CTA kontak.
+---
 
-### Gallery
-Opsional; dapat menjadi section Home jika foto belum cukup.
+### 4.8 Komponen Footer Persisten (`footer.blade.php`)
+Tampil konsisten di semua halaman publik:
+- **Kolom 1:** Logo brand monogram, motto rasa rumahan, dan badge *100% Halal & Fresh Cooked*.
+- **Kolom 2:** Tautan navigasi internal (Home, About, Menu, Pesan, Contact).
+- **Kolom 3:** Alamat lengkap, jam operasional, dan kontak nomor WhatsApp resmi.
+- **Kolom 4:** Tautan media sosial resmi (Instagram, TikTok, Surel).
+- **Strip Delivery Persisten:** Baris *"Tersedia juga di: ShopeeFood, GoFood, GrabFood"* sebagai trust signal persisten.
+- **Copyright Bar:** `© 2026 Yan's Food. Semua hak cipta dilindungi.`
 
-### Footer
-Tampil konsisten di semua halaman publik (bukan hanya Home). Selain navigasi, kontak, dan sosial media, footer menampilkan baris **"Tersedia juga di:"** berisi logo ShopeeFood, GoFood, dan GrabFood (link sama seperti pada bagian Pesan Online) — berfungsi sebagai trust signal persisten bahwa Yan's Food sudah tersedia di platform pesan-antar.
+---
+
+### 4.9 Komponen Global Lainnya
+- **Back to Top Button (`back-to-top.blade.php`):** Tombol scroll halus dengan animasi transisi saat pengguna menggulir halaman.
+- **Modal Pemesanan Cepat (`quick-order-modal.blade.php`):** Dialog responsif dengan backdrop blur untuk pemesanan produk tunggal via WhatsApp.
 
 ## 5. Admin Website
 
@@ -590,10 +707,22 @@ yans-food/
 │   ├── css/
 │   ├── js/
 │   └── views/
-│       ├── public/
 │       ├── layouts/
+│       │   └── app.blade.php
+│       ├── pages/
+│       │   ├── home.blade.php
+│       │   ├── about.blade.php
+│       │   ├── menu.blade.php
+│       │   ├── pesan.blade.php
+│       │   └── contact.blade.php
 │       ├── components/
-│       ├── catering/
+│       │   ├── navbar.blade.php
+│       │   ├── footer.blade.php
+│       │   ├── food-card.blade.php
+│       │   ├── category-filter.blade.php
+│       │   ├── catering-form.blade.php
+│       │   ├── quick-order-modal.blade.php
+│       │   └── back-to-top.blade.php
 │       └── printing/
 ├── routes/
 │   ├── web.php

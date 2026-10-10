@@ -54,9 +54,6 @@
     <!-- Quick Order Modal -->
     <x-quick-order-modal />
 
-    <!-- Modular Keranjang & Kasir Drawer -->
-    <x-cart-drawer />
-
     <!-- Global Cart, Scroll Progress & Notification Script -->
     <script>
         // Smooth Scroll Progress

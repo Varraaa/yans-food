@@ -53,20 +53,11 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <!-- Cart / Kasir Trigger Button -->
-            <button type="button" 
-                    onclick="toggleCartDrawer(true)"
-                    aria-label="Buka Keranjang & Kasir"
-                    class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20">
-                <span class="material-symbols-outlined text-[22px] sm:text-[24px]">shopping_bag</span>
-                <span class="cart-badge-count hidden absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 rounded-full bg-primary-container text-on-primary text-[11px] font-bold flex items-center justify-center shadow-xs">
-                    0
-                </span>
-            </button>
-
-            <!-- Order CTA (Desktop & Tablet) -->
-            <a href="{{ url('/pesan') }}" class="hidden sm:inline-flex items-center justify-center font-label-md px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-primary-container text-on-primary hover:bg-primary-dark transition-all duration-200 shadow-sm hover:shadow-md active:translate-y-0.5">
-                Pesan Sekarang
+            <!-- Order CTA Button (Direct ke /pesan) -->
+            <a href="{{ url('/pesan') }}" 
+               class="inline-flex items-center justify-center gap-1.5 font-label-md px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-primary-container text-on-primary hover:bg-primary-dark transition-all duration-200 shadow-sm hover:shadow-md active:translate-y-0.5 text-xs sm:text-sm">
+                <span class="material-symbols-outlined text-[18px] sm:text-[20px]">local_mall</span>
+                <span>Pesan Sekarang</span>
             </a>
 
             <!-- Mobile & Tablet Hamburger Button -->
