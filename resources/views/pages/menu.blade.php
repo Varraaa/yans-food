@@ -44,114 +44,102 @@
     <!-- Product Catalog Grid -->
     <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="productGrid">
-            
-            <!-- Item 1: Risol Mayo Beef & Egg -->
-            <x-food-card 
-                title="Risol Mayo Beef & Egg"
-                category="Makanan Ringan"
-                categorySlug="ringan"
-                price="4.500"
-                unit="/ pcs"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB"
-                desc="Mayo homemade creamy dengan smoked beef dan potongan telur rebus berbalut tepung roti emas renyah."
-                status="sedia"
-                :isFavorite="true" />
+            @if(isset($products) && $products->isNotEmpty())
+                @foreach($products as $product)
+                    @php
+                        $catName = $product->category?->name ?? 'Makanan';
+                        $catSlug = 'all';
+                        if (stripos($catName, 'Ringan') !== false) $catSlug = 'ringan';
+                        elseif (stripos($catName, 'Berat') !== false) $catSlug = 'berat';
+                        elseif (stripos($catName, 'Mie') !== false) $catSlug = 'mie';
+                        elseif (stripos($catName, 'Minum') !== false) $catSlug = 'minuman';
+                        else $catSlug = \Illuminate\Support\Str::slug($catName);
+                    @endphp
+                    <x-food-card 
+                        :title="$product->name"
+                        :category="$catName"
+                        :categorySlug="$catSlug"
+                        :price="$product->price"
+                        :unit="'/ ' . ($product->unit ?? 'pcs')"
+                        :image="$product->image ?? 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'"
+                        :desc="$product->description ?? 'Olahan kuliner lezat khas racikan bumbu dapur Yan\'s Food.'"
+                        :status="$product->status === 'available' ? 'sedia' : 'habis'"
+                        :isFavorite="$loop->first || $loop->iteration <= 2" />
+                @endforeach
+            @else
+                <!-- Fallback Hardcoded Demo Items jika database belum dimigrasikan -->
+                <!-- Item 1: Risol Mayo Beef & Egg -->
+                <x-food-card 
+                    title="Risol Mayo Beef & Egg"
+                    category="Makanan Ringan"
+                    categorySlug="ringan"
+                    price="4.500"
+                    unit="/ pcs"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB"
+                    desc="Mayo homemade creamy dengan smoked beef dan potongan telur rebus berbalut tepung roti emas renyah."
+                    status="sedia"
+                    :isFavorite="true" />
 
-            <!-- Item 2: Pisang Coklat Crispy -->
-            <x-food-card 
-                title="Pisang Coklat Crispy"
-                category="Makanan Ringan"
-                categorySlug="ringan"
-                price="3.500"
-                unit="/ pcs"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX"
-                desc="Pisang manis legit dengan coklat premium leleh di dalam balutan kulit pastry renyah khas racikan Yan's Food."
-                status="sedia"
-                :isFavorite="true" />
+                <!-- Item 2: Pisang Coklat Crispy -->
+                <x-food-card 
+                    title="Pisang Coklat Crispy"
+                    category="Makanan Ringan"
+                    categorySlug="ringan"
+                    price="3.500"
+                    unit="/ pcs"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX"
+                    desc="Pisang manis legit dengan coklat premium leleh di dalam balutan kulit pastry renyah khas racikan Yan's Food."
+                    status="sedia"
+                    :isFavorite="true" />
 
-            <!-- Item 3: Tahu Bakso Kukus / Goreng -->
-            <x-food-card 
-                title="Tahu Bakso Kukus/Goreng"
-                category="Makanan Ringan"
-                categorySlug="ringan"
-                price="4.000"
-                unit="/ pcs"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuBWCJRdB6spLCGTymtJSbPtZOo9HW9h2e5gDOOhwEBsMleb1NUkgXF2RqgdpqDgWsIiYxLJU-17um6yqSXGfVnPGwhcA2IygU-19yHAwJ6H8ttkpLdFe0g_U7Gabr5SOtTcBleLvWsZ6KOhDrJh1hEyy30IU60mbxUEYVPIIROvocFVMKwDDsiyt7_MiGA16pfu0qPrgAGw3l4iKJgmifbCXjfaPjjJeRokLGbi1mepW0guL4PLjhaF"
-                desc="Daging sapi asli berpadu lembutnya tahu pong gurih, disajikan dengan cabai rawit hijau segar menggigit."
-                status="sedia"
-                :isFavorite="false" />
+                <!-- Item 3: Tahu Bakso Kukus / Goreng -->
+                <x-food-card 
+                    title="Tahu Bakso Kukus/Goreng"
+                    category="Makanan Ringan"
+                    categorySlug="ringan"
+                    price="4.000"
+                    unit="/ pcs"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBWCJRdB6spLCGTymtJSbPtZOo9HW9h2e5gDOOhwEBsMleb1NUkgXF2RqgdpqDgWsIiYxLJU-17um6yqSXGfVnPGwhcA2IygU-19yHAwJ6H8ttkpLdFe0g_U7Gabr5SOtTcBleLvWsZ6KOhDrJh1hEyy30IU60mbxUEYVPIIROvocFVMKwDDsiyt7_MiGA16pfu0qPrgAGw3l4iKJgmifbCXjfaPjjJeRokLGbi1mepW0guL4PLjhaF"
+                    desc="Daging sapi asli berpadu lembutnya tahu pong gurih, disajikan dengan cabai rawit hijau segar menggigit."
+                    status="sedia"
+                    :isFavorite="false" />
 
-            <!-- Item 4: Nasi Goreng Jadul Yan's -->
-            <x-food-card 
-                title="Nasi Goreng Jadul Yan's"
-                category="Makanan Berat"
-                categorySlug="berat"
-                price="22.000"
-                unit="/ porsi"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5"
-                desc="Racikan bumbu ulek terasi khas tempo dulu, suwiran ayam gurih, telur ceplok setengah matang, dan acar timun segar."
-                status="sedia"
-                :isFavorite="true" />
+                <!-- Item 4: Nasi Goreng Jadul Yan's -->
+                <x-food-card 
+                    title="Nasi Goreng Jadul Yan's"
+                    category="Makanan Berat"
+                    categorySlug="berat"
+                    price="22.000"
+                    unit="/ porsi"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5"
+                    desc="Racikan bumbu ulek terasi khas tempo dulu, suwiran ayam gurih, telur ceplok setengah matang, dan acar timun segar."
+                    status="sedia"
+                    :isFavorite="true" />
 
-            <!-- Item 5: Nasi Ayam Sambal Korek -->
-            <x-food-card 
-                title="Nasi Ayam Sambal Korek"
-                category="Makanan Berat"
-                categorySlug="berat"
-                price="25.000"
-                unit="/ porsi"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuDM543C3ZwVvzt62Lw2M-Q5CDKmXT-ukbS3bmxrX9-DanGhxv3EUUIu5HyVxZFu1rfermDZ1Y9j2rcyWDv4nXnmFtNPbNb5EKgXWayFrnH4YKUjmrEFqX7o_57TrrJMlntTCfwXQXKbGE2rSEQWM-UVlPI07QCYrplxX_lOcOuhPMI7H18fZXezbhJCMCUuIWu6iEiyLDcs3sRYYJHRcVIqhZjQvFpuOznqXFFitNwLoizx2U53-dQF"
-                desc="Ayam goreng gurih renyah dengan siraman sambal korek bawang pedas nendang, lalapan segar, & nasi hangat."
-                status="sedia"
-                :isFavorite="false" />
+                <!-- Item 5: Nasi Ayam Sambal Korek -->
+                <x-food-card 
+                    title="Nasi Ayam Sambal Korek"
+                    category="Makanan Berat"
+                    categorySlug="berat"
+                    price="25.000"
+                    unit="/ porsi"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau"
+                    desc="Ayam goreng gurih renyah dengan siraman sambal korek bawang pedas nendang, lalapan segar, & nasi hangat."
+                    status="sedia"
+                    :isFavorite="false" />
 
-            <!-- Item 6: Nasi Gila Spesial Dapur (Habis) -->
-            <x-food-card 
-                title="Nasi Gila Spesial Dapur"
-                category="Makanan Berat"
-                categorySlug="berat"
-                price="24.000"
-                unit="/ porsi"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuCvbMqJp4vasmNPRn7HlUQ53R3QwrbMiAJGRmOeSP3xoEqc-hb5EkQx28tGjOOddzhbh0BvjFwX_K2C7FkHaJpySF2zidCDs-Bx_mHHA3URhRcMv1OQhfIUJ4SnK1xWUswF-WwKCxa8-zJZmfBBJz1XBLusLQAzk5BcvZvIXzaDl0b5CzAHuTSEZQKFm2axnelXGbXdYgGwaMGpV41iikvWXq7ZllZ-h_pkIUZOUgUcN8KoU_ETwohF"
-                desc="Tumisan sosis, bakso sapi, dan telur orak-arik dengan saus racikan manis gurih medok di atas nasi putih."
-                status="habis"
-                :isFavorite="false" />
-
-            <!-- Item 7: Indomie Nyemek Telur -->
-            <x-food-card 
-                title="Indomie Nyemek Telur"
-                category="Mie Instan"
-                categorySlug="mie"
-                price="18.000"
-                unit="/ porsi"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuARZOQ96wet-CMX5rdD7lCFZyLs1EkrpKnlUC0RR99N8F7qRKAtVDp0zOXrFg0euopAroL4wdJES5KEUP4Mc10u-UzZYXlvj3_U850HmHFdI-2qa02DqfAOUMw-0VbCaGvmAt2949p2eWuHqz3RcdS7ODq1G6OninQUnQZKMoxPO6O-lS3WjYQWINUV6vdxskptYAzfbyMOIB5K2-d37eZht5g2KMxF67gGOJStQ-AFmbk3gNEvgEtd"
-                desc="Indomie kuah nyemek kental dengan telur setengah matang, sawi hijau segar, tomat, dan taburan bawang goreng."
-                status="sedia"
-                :isFavorite="false" />
-
-            <!-- Item 8: Es Kopi Susu Gula Aren -->
-            <x-food-card 
-                title="Es Kopi Susu Gula Aren"
-                category="Minuman Segar"
-                categorySlug="minuman"
-                price="15.000"
-                unit="/ cup"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuDuU3Yxrcih-pg6m2nRhDlGOylXXNiZpcpRJOwpGtbqdy2tID_2dcQH8vFY45VJyojhQ_EhfmASszkIE7eY72DmaCVEuoHwd-g6ry7je_ScQ_2fJ8jLVTp1o_iCgl3eLUn5tGJpOrxa83pkjoHbquHRihUHOkcatbhcowl5ghx9jMRDqgTc1xq11rmDLIGt391ni6_gw1qdmchrGD1pMbRA1MfIPrtdWISTKpeaLC0pLS0h91QGgf47"
-                desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang pas tanpa rasa manis berlebih."
-                status="sedia"
-                :isFavorite="false" />
-
-            <!-- Item 9: Es Teh Kampul Jeruk Nipis -->
-            <x-food-card 
-                title="Es Teh Kampul Jeruk Nipis"
-                category="Minuman Segar"
-                categorySlug="minuman"
-                price="8.000"
-                unit="/ cup"
-                image="https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX"
-                desc="Teh tubruk wangi melati khas Solo berpadu irisan jeruk nipis segar yang mengambang, dingin menyegarkan tenggorokan."
-                status="sedia"
-                :isFavorite="false" />
+                <!-- Item 6: Es Kopi Susu Gula Aren -->
+                <x-food-card 
+                    title="Es Kopi Susu Gula Aren"
+                    category="Minuman Segar"
+                    categorySlug="minuman"
+                    price="15.000"
+                    unit="/ cup"
+                    image="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80"
+                    desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang pas tanpa rasa manis berlebih."
+                    status="sedia"
+                    :isFavorite="false" />
+            @endif
         </div>
 
         <!-- Empty State Container -->

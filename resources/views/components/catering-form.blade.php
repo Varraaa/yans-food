@@ -106,7 +106,11 @@
 </div>
 
 <script>
-    function submitCateringToWhatsApp() {
+    async function submitCateringToWhatsApp() {
+        const form = document.getElementById('catering-form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
         const nama = document.getElementById('pemesan-nama').value.trim();
         const phone = document.getElementById('pemesan-phone').value.trim();
         const tanggal = document.getElementById('acara-tanggal').value;
@@ -116,8 +120,55 @@
         const alamat = document.getElementById('alamat-kirim').value.trim();
         const catatan = document.getElementById('catatan-khusus').value.trim();
 
-        const adminWA = "6281234567890";
+        if (!nama || !phone || !tanggal || !waktu || !alamat) {
+            alert('Mohon lengkapi semua field bertanda bintang (*)');
+            return;
+        }
 
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Menyimpan Pesanan...</span>';
+
+        try {
+            const response = await fetch('{{ route("pesan-catering.store") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    customer_name: nama,
+                    customer_phone: phone,
+                    customer_address: alamat,
+                    event_date: tanggal,
+                    event_time: waktu,
+                    package_type: paket,
+                    quantity: parseInt(porsi) || 20,
+                    notes: catatan
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success && data.whatsapp_url) {
+                // Open WhatsApp
+                window.open(data.whatsapp_url, '_blank');
+                // Reset form
+                form.reset();
+            } else {
+                fallbackWhatsApp(nama, phone, tanggal, waktu, paket, porsi, alamat, catatan);
+            }
+        } catch (error) {
+            console.error('Error submitting order:', error);
+            fallbackWhatsApp(nama, phone, tanggal, waktu, paket, porsi, alamat, catatan);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    }
+
+    function fallbackWhatsApp(nama, phone, tanggal, waktu, paket, porsi, alamat, catatan) {
+        const adminWA = "6281234567890";
         const text = `Halo Admin Yan's Food, saya ingin melakukan pemesanan katering rumahan:\n\n` +
             `*Data Pemesan:*\n` +
             `• Nama: ${nama}\n` +
