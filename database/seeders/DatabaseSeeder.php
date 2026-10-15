@@ -13,25 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Pastikan user admin default tersedia
+        // 1. Akun Tunggal: Owner & Admin Utama Yan's Food
         User::firstOrCreate(
             ['email' => 'admin@yansfood.id'],
             [
-                'name' => 'Admin Yan\'s Food',
+                'name' => 'Owner / Admin Yan\'s Food',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
             ]
         );
 
-        // User kasir default
-        User::firstOrCreate(
-            ['email' => 'kasir@yansfood.id'],
-            [
-                'name' => 'Kasir Utama',
-                'password' => Hash::make('password'),
-                'role' => 'cashier',
-            ]
-        );
+        // Hapus akun kasir jika sebelumnya sempat terbuat (karena Yan's Food dikelola 1 orang admin tunggal)
+        User::where('email', 'kasir@yansfood.id')->delete();
 
         // 2. Seed Master Data
         $this->call([
