@@ -66,13 +66,13 @@
             <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between">
                 <div>
                     <div class="relative aspect-video bg-stone-100 overflow-hidden">
-                        @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center text-stone-400 font-bold text-xs p-2 text-center">
-                                {{ $product->name }}
-                            </div>
-                        @endif
+                        <img 
+                            src="{{ $product->image_url }}" 
+                            alt="{{ $product->name }}" 
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';"
+                        >
 
                         <span class="absolute top-2 right-2 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase {{ $product->status === 'available' ? 'bg-emerald-600 text-white shadow' : 'bg-rose-600 text-white shadow' }}">
                             {{ $product->status === 'available' ? 'Sedia' : 'Tidak Tersedia' }}

@@ -53,13 +53,13 @@
                     class="product-item group cursor-pointer bg-white border border-stone-200 hover:border-[#C1440E]/60 rounded-2xl overflow-hidden transition-all flex flex-col justify-between hover:shadow-lg active:scale-[0.99]"
                 >
                     <div class="relative aspect-video bg-stone-100 overflow-hidden">
-                        @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='/images/logo.png'">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center text-stone-400 font-bold text-xs p-2 text-center">
-                                {{ $product->name }}
-                            </div>
-                        @endif
+                        <img 
+                            src="{{ $product->image_url }}" 
+                            alt="{{ $product->name }}" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';"
+                        >
 
                         {{-- BADGE IN CART --}}
                         <span id="badge-cart-{{ $product->id }}" class="hidden absolute top-2 left-2 bg-[#C1440E] text-white text-[11px] px-2 py-0.5 rounded-full font-black shadow-md flex items-center gap-1">

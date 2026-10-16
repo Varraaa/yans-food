@@ -163,7 +163,7 @@
                         @forelse($financialData['expenses_by_category'] as $cat)
                             <div class="flex items-center justify-between p-3 rounded-xl bg-stone-50 text-xs">
                                 <div class="font-semibold text-stone-800">
-                                    {{ $cat->category }} <span class="text-stone-400 font-normal">({{ $cat->count }}x)</span>
+                                    {{ $cat->category_name ?? $cat->category ?? 'Operasional' }} <span class="text-stone-400 font-normal">({{ $cat->count }}x)</span>
                                 </div>
                                 <span class="font-bold text-rose-600">
                                     Rp {{ number_format($cat->total_amount, 0, ',', '.') }}

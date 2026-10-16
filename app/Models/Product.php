@@ -57,4 +57,17 @@ class Product extends Model
     {
         return $this->status === 'available';
     }
+
+    public function getImageUrlAttribute(): string
+    {
+        if (empty($this->image)) {
+            return 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';
+        }
+
+        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+            return $this->image;
+        }
+
+        return asset('storage/' . $this->image);
+    }
 }

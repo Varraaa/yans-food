@@ -58,7 +58,6 @@ Route::get('/contact', function () {
 
 Route::post('/pesan-catering', [PublicCateringOrderController::class, 'store'])->name('pesan-catering.store');
 
-
 /*
 |--------------------------------------------------------------------------
 | Admin Authentication Routes
@@ -76,7 +75,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 | Protected Admin Routes (Blade + Flowbite Manual Panel)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');

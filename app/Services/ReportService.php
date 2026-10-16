@@ -212,17 +212,22 @@ class ReportService
         $totalGrossIncome = $posRevenue + $cateringIncome;
 
         // 3. Pengeluaran Dapur / Operasional yang Disetujui
-        $expenseQuery = Expense::where('status', 'APPROVED');
+        $expenseQuery = Expense::where('expenses.status', 'APPROVED');
         if ($startDate && $endDate) {
-            $expenseQuery->whereBetween('expense_date', [$startDate, $endDate]);
+            $expenseQuery->whereBetween('expenses.expense_date', [$startDate, $endDate]);
         }
-        $totalExpenses = (float) $expenseQuery->sum('amount');
+        $totalExpenses = (float) $expenseQuery->sum('expenses.amount');
         $expenseCount = $expenseQuery->count();
 
         // Pengeluaran per Kategori
         $expensesByCategory = (clone $expenseQuery)
-            ->select('category', DB::raw('SUM(amount) as total_amount'), DB::raw('COUNT(*) as count'))
-            ->groupBy('category')
+            ->leftJoin('expense_categories', 'expenses.category_id', '=', 'expense_categories.id')
+            ->select(
+                DB::raw('COALESCE(expense_categories.name, "Operasional") as category_name'),
+                DB::raw('SUM(expenses.amount) as total_amount'),
+                DB::raw('COUNT(expenses.id) as count')
+            )
+            ->groupBy(DB::raw('COALESCE(expense_categories.name, "Operasional")'))
             ->orderByDesc('total_amount')
             ->get();
 

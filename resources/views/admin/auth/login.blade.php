@@ -33,6 +33,12 @@
                 </div>
             @endif
 
+            @if(session('error'))
+                <div class="p-3 text-xs font-semibold text-rose-800 bg-rose-50 rounded-xl border border-rose-200">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             @if($errors->any())
                 <div class="p-3 text-xs font-semibold text-rose-800 bg-rose-50 rounded-xl border border-rose-200">
                     {{ $errors->first() }}
