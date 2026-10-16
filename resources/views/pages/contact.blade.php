@@ -6,8 +6,14 @@
         <div class="absolute -left-20 bottom-0 w-80 h-80 rounded-full bg-tertiary-fixed-dim/20 blur-2xl pointer-events-none"></div>
 
         <!-- 1. Header -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center">
-            <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface max-w-3xl tracking-tight mb-5 font-serif">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center" data-reveal>
+            <!-- Live Operating Status Badge (§5.5) -->
+            <div id="live-status-pill" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container font-label-sm text-xs font-semibold mb-4 border border-surface-variant/40 shadow-xs">
+                <span id="live-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="live-status-text">Memeriksa jam operasional dapur...</span>
+            </div>
+
+            <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface max-w-3xl tracking-tight mb-4 font-serif">
                 Pintu Dapur Kami Selalu Terbuka untuk Anda
             </h1>
             <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-base sm:text-lg">
@@ -16,29 +22,39 @@
         </section>
 
         <!-- 2. Main Content Grid -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 pb-20 w-full">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-20 w-full" data-reveal>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 
                 <!-- Left Column: Info Cards & Form (7 Cols) -->
                 <div class="lg:col-span-7 flex flex-col gap-8">
                     <!-- 4 Info Cards Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-reveal-group>
                         <!-- Card 1: Alamat -->
-                        <div class="bg-surface-warm p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-surface-variant/40">
-                            <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
-                                <span class="material-symbols-outlined text-[22px]">location_on</span>
+                        <div class="bg-surface-warm p-6 rounded-3xl shadow-xs hover:shadow-md transition-shadow border border-surface-variant/40 flex flex-col justify-between">
+                            <div>
+                                <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
+                                    <span class="material-symbols-outlined text-[22px]">location_on</span>
+                                </div>
+                                <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">Alamat &amp; Pick-up</h3>
+                                <p class="font-body-sm text-on-surface font-semibold leading-relaxed">
+                                    Jl. Melati No. 14, Jakarta Selatan
+                                </p>
+                                <p class="font-body-sm text-secondary mt-1.5 text-xs leading-normal">
+                                    Patokan: 200m timur Masjid At-Taqwa. Parkir motor &amp; mobil teduh tersedia.
+                                </p>
                             </div>
-                            <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">Alamat &amp; Pick-up</h3>
-                            <p class="font-body-sm text-on-surface font-semibold leading-relaxed">
-                                Jl. Melati No. 14, Jakarta Selatan
-                            </p>
-                            <p class="font-body-sm text-secondary mt-1.5 text-xs leading-normal">
-                                Patokan: 200m timur Masjid At-Taqwa. Parkir motor &amp; mobil teduh tersedia.
-                            </p>
+                            <div class="pt-4 mt-2">
+                                <button type="button" 
+                                        onclick="window.copyToClipboard('Jl. Melati No. 14, Jakarta Selatan', 'Alamat dapur berhasil disalin!')"
+                                        class="inline-flex items-center gap-1.5 text-xs font-label-md text-primary hover:text-primary-dark font-bold">
+                                    <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                    <span>Salin Alamat</span>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Card 2: Jam Operasional -->
-                        <div class="bg-surface-warm p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-surface-variant/40">
+                        <div class="bg-surface-warm p-6 rounded-3xl shadow-xs hover:shadow-md transition-shadow border border-surface-variant/40">
                             <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
                                 <span class="material-symbols-outlined text-[22px]">schedule</span>
                             </div>
@@ -59,21 +75,29 @@
                         </div>
 
                         <!-- Card 3: WhatsApp Resmi -->
-                        <div class="bg-surface-warm p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-surface-variant/40">
-                            <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
-                                <span class="material-symbols-outlined text-[22px]">chat</span>
+                        <div class="bg-surface-warm p-6 rounded-3xl shadow-xs hover:shadow-md transition-shadow border border-surface-variant/40 flex flex-col justify-between">
+                            <div>
+                                <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
+                                    <span class="material-symbols-outlined text-[22px]">chat</span>
+                                </div>
+                                <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">WhatsApp Resmi</h3>
+                                <p class="font-numeric-currency text-primary-container mb-1 tracking-normal text-base font-bold">
+                                    +62 812-3456-7890
+                                </p>
+                                <p class="font-body-sm text-secondary text-xs">
+                                    Layanan CS, konsultasi menu box, &amp; pemesanan katering acara.
+                                </p>
                             </div>
-                            <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">WhatsApp Resmi</h3>
-                            <p class="font-numeric-currency text-primary-container mb-1 tracking-normal text-base font-bold">
-                                +62 812-3456-7890
-                            </p>
-                            <p class="font-body-sm text-secondary text-xs">
-                                Layanan CS, konsultasi menu box, &amp; pemesanan katering acara.
-                            </p>
+                            <div class="pt-4 mt-2">
+                                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-label-md text-emerald-600 hover:text-emerald-700 font-bold">
+                                    <span class="material-symbols-outlined text-[16px]">send</span>
+                                    <span>Chat Langsung</span>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Card 4: Email & Sosmed -->
-                        <div class="bg-surface-warm p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-surface-variant/40">
+                        <div class="bg-surface-warm p-6 rounded-3xl shadow-xs hover:shadow-md transition-shadow border border-surface-variant/40">
                             <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4">
                                 <span class="material-symbols-outlined text-[22px]">alternate_email</span>
                             </div>
@@ -91,7 +115,7 @@
                     </div>
 
                     <!-- Form Tanya Cepat via WhatsApp -->
-                    <div class="bg-surface-warm p-6 sm:p-8 lg:p-10 rounded-3xl shadow-sm border border-surface-variant/40">
+                    <div class="bg-surface-warm p-6 sm:p-8 lg:p-10 rounded-3xl shadow-xs border border-surface-variant/40">
                         <div class="flex items-start justify-between gap-4 mb-6">
                             <div>
                                 <span class="font-label-sm text-tertiary uppercase tracking-wider font-semibold text-xs">Tanya Cepat</span>
@@ -105,27 +129,27 @@
                         <form class="space-y-5" id="contactForm" onsubmit="event.preventDefault(); sendContactWhatsApp();">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div class="space-y-2">
-                                    <label class="block font-label-md text-on-surface text-sm" for="fullName">Nama Lengkap *</label>
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="fullName">Nama Lengkap *</label>
                                     <input type="text" 
                                            id="fullName" 
                                            placeholder="Contoh: Ibu Rina Hartono" 
                                            required 
-                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all">
+                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="block font-label-md text-on-surface text-sm" for="waNumber">Nomor WhatsApp *</label>
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="waNumber">Nomor WhatsApp *</label>
                                     <input type="tel" 
                                            id="waNumber" 
                                            placeholder="0812xxxxxxx" 
                                            required 
-                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all">
+                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
                                 </div>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="block font-label-md text-on-surface text-sm" for="inquiryType">Jenis Keperluan *</label>
+                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="inquiryType">Jenis Keperluan *</label>
                                 <select id="inquiryType" 
-                                        class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all cursor-pointer">
+                                        class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer text-sm">
                                     <option value="Konsultasi Katering Acara">Konsultasi Katering Acara (Syukuran / Kantor / Pesta)</option>
                                     <option value="Pertanyaan Seputar Menu">Pertanyaan Seputar Menu Harian &amp; Kudapan</option>
                                     <option value="Pemesanan Partai Besar">Pemesanan Khusus / Tumpeng Mini / Hampers</option>
@@ -134,43 +158,44 @@
                             </div>
 
                             <div class="space-y-2">
-                                <label class="block font-label-md text-on-surface text-sm" for="messageContent">Pesan Anda *</label>
+                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="messageContent">Pesan Anda *</label>
                                 <textarea id="messageContent" 
                                           rows="4" 
                                           placeholder="Tuliskan pertanyaan spesifik, tanggal rencana acara, atau jumlah porsi yang ingin ditanyakan..." 
                                           required 
-                                          class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all resize-y"></textarea>
+                                          class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y text-sm"></textarea>
                             </div>
 
                             <button type="submit" 
-                                    class="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md group active:scale-95">
+                                    class="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl bg-primary text-white font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md group active:scale-95 text-sm font-bold">
                                 <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">send</span>
                                 <span>Kirim Pesan via WhatsApp</span>
                             </button>
 
                             <p class="font-body-sm text-secondary text-center text-xs">
-                                Formulir ini akan otomatis membuka aplikasi WhatsApp dengan pesan terformat rapi.
+                                Pesan ini akan otomatis membuka aplikasi WhatsApp admin Yan's Food dengan teks terformat rapi.
                             </p>
                         </form>
                     </div>
                 </div>
 
-                <!-- Right Column: Location Map & Pick-up Guide (5 Cols) -->
+                <!-- Right Column: Location Map Facade & Pick-up Guide (§5.5) -->
                 <div class="lg:col-span-5 flex flex-col gap-6">
-                    <div class="bg-surface-warm rounded-3xl overflow-hidden shadow-sm border border-surface-variant/40 flex flex-col">
-                        <!-- Visual Location Banner -->
-                        <div class="relative w-full h-72 sm:h-80 bg-surface-container overflow-hidden">
+                    <div class="bg-surface-warm rounded-3xl overflow-hidden shadow-xs border border-surface-variant/40 flex flex-col">
+                        <!-- Map Facade Banner with CTA (§5.5) -->
+                        <div class="relative w-full h-72 sm:h-80 bg-surface-container overflow-hidden group">
                             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7y5-2aOwUWUp8TG6NCFQLOSRta_LK5hzQhQjCAERSfSvE1gliowLKgrrCoAfBtv9vJXDuTHVtCNEMVDXPKPRzYAp0XJO7mggJbE37wSRzSyaRRHm6Xc2ennHw-QkkElXtMaHPpXSWCfIDrp7ZtLMsU68bdekqgPUoq5MA-0Tb6kh_xn_5M_jVdAqvAOkHaZmdahfBVa5-96zFPMajx4ohvhiOUAZXwTfIZy82Rv7ScC8XkXxLBa5D" 
                                  alt="Peta Lokasi Yan's Food" 
-                                 class="w-full h-full object-cover">
-                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface-warm/95 backdrop-blur-md shadow-md border border-surface-variant/40 flex items-center justify-between">
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            
+                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-md border border-surface-variant/40 flex items-center justify-between">
                                 <div class="flex items-center gap-2.5">
                                     <span class="material-symbols-outlined text-primary text-[22px]">pin_drop</span>
-                                    <span class="font-label-sm font-semibold text-on-surface">Jakarta Selatan</span>
+                                    <span class="font-label-sm font-semibold text-on-surface text-xs sm:text-sm">Jakarta Selatan</span>
                                 </div>
-                                <a href="https://maps.google.com" target="_blank" rel="noopener" 
-                                   class="text-xs font-label-sm text-primary hover:underline flex items-center gap-1 font-bold">
-                                    <span>Buka Maps</span>
+                                <a href="https://maps.google.com/?q=Jakarta+Selatan" target="_blank" rel="noopener" 
+                                   class="text-xs font-label-md text-primary hover:underline flex items-center gap-1 font-bold">
+                                    <span>Buka di Google Maps</span>
                                     <span class="material-symbols-outlined text-[14px]">open_in_new</span>
                                 </a>
                             </div>
@@ -182,15 +207,15 @@
                             <ul class="space-y-3 font-body-sm text-secondary text-xs sm:text-sm">
                                 <li class="flex items-start gap-2.5">
                                     <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Konfirmasikan pesanan via WhatsApp minimal 30 menit sebelum jadwal ambil.</span>
+                                    <span>Konfirmasikan pesanan via WhatsApp minimal 30 menit sebelum jadwal ambil di dapur.</span>
                                 </li>
                                 <li class="flex items-start gap-2.5">
                                     <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Tunjukkan bukti invoice / chat konfirmasi saat tiba di dapur kami.</span>
+                                    <span>Tunjukkan nama pemesan atau bukti invoice chat saat tiba di depan pintu dapur.</span>
                                 </li>
                                 <li class="flex items-start gap-2.5">
                                     <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Pesanan dikemas rapi dalam kemasan higienis bersuhu hangat.</span>
+                                    <span>Pesanan dikemas rapi dalam kantong higienis dan bersuhu hangat siap santap.</span>
                                 </li>
                             </ul>
                         </div>
@@ -200,7 +225,41 @@
         </section>
     </div>
 
+    <!-- Operating Hours & Contact Script (§5.5) -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateOperatingStatus();
+        });
+
+        function updateOperatingStatus() {
+            const pill = document.getElementById('live-status-pill');
+            const dot = document.getElementById('live-status-dot');
+            const text = document.getElementById('live-status-text');
+            if (!pill || !dot || !text) return;
+
+            // Dapatkan waktu WIB sekarang (UTC+7)
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const wib = new Date(utc + (3600000 * 7));
+            const hours = wib.getHours();
+            const minutes = wib.getMinutes();
+            const currentTime = hours * 60 + minutes;
+
+            // Jam buka: 08:00 (480) - 20:00 (1200)
+            const openTime = 8 * 60;
+            const closeTime = 20 * 60;
+
+            if (currentTime >= openTime && currentTime < closeTime) {
+                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+                text.textContent = "Buka Sekarang • Dapur aktif melayani sampai 20:00 WIB";
+                text.className = "text-emerald-700 font-semibold";
+            } else {
+                dot.className = "w-2 h-2 rounded-full bg-amber-500";
+                text.textContent = "Tutup Sementara • Dapur buka kembali pukul 08:00 WIB";
+                text.className = "text-amber-800 font-semibold";
+            }
+        }
+
         function sendContactWhatsApp() {
             const name = document.getElementById('fullName').value.trim();
             const phone = document.getElementById('waNumber').value.trim();

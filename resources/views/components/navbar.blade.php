@@ -9,29 +9,29 @@
     ];
 @endphp
 
-<header class="fixed top-0 inset-x-0 z-50 bg-cream-bg/95 backdrop-blur-md shadow-[0_1px_8px_rgba(38,32,27,0.04)] transition-all duration-300">
-    <div class="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-3 sm:gap-4">
+<header id="main-navbar" class="fixed top-0 inset-x-0 z-50 bg-cream-bg/95 backdrop-blur-md shadow-[0_1px_8px_rgba(38,32,27,0.04)] transition-all duration-300">
+    <div class="navbar-container h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300">
         
         <!-- Brand Logo -->
-        <a href="{{ url('/') }}" class="flex items-center gap-2 sm:gap-3 group shrink-0">
-            <svg class="h-9 sm:h-10 w-auto" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#C1440E"/>
-                        <stop offset="100%" stop-color="#D6A253"/>
-                    </linearGradient>
-                </defs>
-                <g transform="translate(10, 10)">
-                    <rect x="0" y="0" width="60" height="60" rx="16" fill="#F1E6D6" stroke="#C1440E" stroke-width="1.5"/>
-                    <path d="M30 18 C28 24 35 27 30 33" stroke="#D6A253" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                    <path d="M24 22 C22 26 27 28 24 33" stroke="#C1440E" stroke-width="2" stroke-linecap="round" fill="none"/>
-                    <path d="M18 36 C18 45 42 45 42 36 Z" fill="#C1440E"/>
-                    <line x1="15" y1="36" x2="45" y2="36" stroke="#26201B" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="30" cy="48" r="2.5" fill="#D6A253"/>
-                </g>
-                <text x="82" y="42" font-family="'Outfit', sans-serif" font-weight="700" font-size="28" fill="#26201B" letter-spacing="-0.5">Yan's Food</text>
-                <text x="83" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" fill="#C1440E" letter-spacing="2">DAPUR KULINER RUMAHAN</text>
-            </svg>
+        <a href="{{ url('/') }}" class="brand-logo flex items-center gap-2.5 sm:gap-3 group shrink-0 transition-transform duration-300">
+            <!-- Artisanal Skillet & Steam Monogram Emblem -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-xs group-hover:shadow-md transition-all shrink-0">
+                <div class="w-full h-full rounded-[14px] bg-[#FBF6EE] flex items-center justify-center relative overflow-hidden">
+                    <svg class="w-6 h-6 text-[#C1440E] transition-transform duration-300 group-hover:scale-105" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C11.5 3 13 4 12 5" stroke="#D6A253" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 3.5C7.5 4.5 9 5.5 8 6.5" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M16 3.5C15.5 4.5 17 5.5 16 6.5" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M4 11C4 16 7.5 18 12 18C16.5 18 20 16 20 11H4Z" fill="#C1440E"/>
+                        <line x1="2.5" y1="11" x2="21.5" y2="11" stroke="#26201B" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="12" cy="19.5" r="1.5" fill="#D6A253"/>
+                    </svg>
+                </div>
+            </div>
+            <!-- Brand Wordmark & Tagline -->
+            <div class="flex flex-col justify-center leading-none">
+                <span class="font-headline-sm text-lg sm:text-xl font-black text-on-surface tracking-tight font-serif group-hover:text-primary transition-colors">Yan's Food</span>
+                <span class="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.16em] text-primary pt-1">Dapur Kuliner Rumahan</span>
+            </div>
         </a>
 
         <!-- Desktop Navigation Links with Modern Underline Animation -->
@@ -53,19 +53,21 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <!-- Order CTA Button (Direct ke /pesan) -->
+            <!-- Order CTA Button (Direct ke /pesan, M01 panah geser +4px) -->
             <a href="{{ url('/pesan') }}" 
-               class="inline-flex items-center justify-center gap-1.5 font-label-md px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-primary-container text-on-primary hover:bg-primary-dark transition-all duration-200 shadow-sm hover:shadow-md active:translate-y-0.5 text-xs sm:text-sm">
+               class="inline-flex items-center justify-center gap-1.5 font-label-md px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-primary-container text-on-primary hover:bg-primary-dark transition-all duration-200 shadow-sm hover:shadow-md active:scale-95 text-xs sm:text-sm group">
                 <span class="material-symbols-outlined text-[18px] sm:text-[20px]">local_mall</span>
                 <span>Pesan Sekarang</span>
+                <span class="inline-block transition-transform duration-200 group-hover:translate-x-1 font-bold">→</span>
             </a>
 
-            <!-- Mobile & Tablet Hamburger Button -->
-            <button type="button" 
+            <!-- Mobile & Tablet Hamburger Button (§3.4: 48x48 touch target) -->
+            <button id="mobile-menu-toggle"
+                    type="button" 
                     aria-label="Buka Menu Navigasi"
-                    onclick="openMobileNav()"
-                    class="md:hidden w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl text-on-surface hover:bg-surface-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20">
-                <span class="material-symbols-outlined text-[26px]">menu</span>
+                    aria-expanded="false"
+                    class="md:hidden w-12 h-12 flex items-center justify-center rounded-xl text-on-surface hover:bg-surface-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20">
+                <span class="material-symbols-outlined text-[28px]">menu</span>
             </button>
         </div>
     </div>
@@ -84,12 +86,18 @@
     <!-- Drawer Header -->
     <div class="h-20 px-6 flex items-center justify-between bg-cream-bg/95 border-b border-surface-variant/40 shrink-0">
         <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-lg bg-sand-bg-alt flex items-center justify-center text-primary font-bold">
-                Y
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-xs shrink-0">
+                <div class="w-full h-full rounded-[10px] bg-[#FBF6EE] flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#C1440E]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C11.5 3 13 4 12 5" stroke="#D6A253" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M4 11C4 16 7.5 18 12 18C16.5 18 20 16 20 11H4Z" fill="#C1440E"/>
+                        <line x1="2.5" y1="11" x2="21.5" y2="11" stroke="#26201B" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
             </div>
-            <div>
-                <span class="font-headline-sm text-base font-bold text-on-surface">Yan's Food</span>
-                <p class="text-[10px] uppercase tracking-wider text-primary font-semibold">Dapur Rumahan</p>
+            <div class="flex flex-col leading-none">
+                <span class="font-headline-sm text-base font-bold text-on-surface font-serif">Yan's Food</span>
+                <span class="text-[9px] uppercase tracking-wider text-primary font-bold pt-0.5">Dapur Kuliner Rumahan</span>
             </div>
         </div>
         <button type="button" 

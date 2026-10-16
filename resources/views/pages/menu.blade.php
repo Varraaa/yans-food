@@ -2,7 +2,7 @@
     <x-slot name="title">Daftar Menu & Katalog | Yan's Food</x-slot>
 
     <!-- Top Banner / Editorial Header -->
-    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-6 md:pt-14 md:pb-10">
+    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-4 md:pt-12 md:pb-6" data-reveal>
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-variant/40">
             <div class="space-y-3 max-w-2xl">
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif">
@@ -14,9 +14,9 @@
             </div>
 
             <!-- Quick Metrics Strip -->
-            <div class="flex items-center gap-4 sm:gap-6 p-4 rounded-2xl bg-surface-container shadow-sm self-start lg:self-auto border border-surface-variant/40">
+            <div class="flex items-center gap-4 sm:gap-6 p-4 rounded-2xl bg-surface-container shadow-xs self-start lg:self-auto border border-surface-variant/40">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-surface-warm flex items-center justify-center text-primary-container shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-surface-warm flex items-center justify-center text-primary-container shadow-xs">
                         <span class="material-symbols-outlined text-[22px]">skillet</span>
                     </div>
                     <div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="w-px h-8 bg-surface-variant"></div>
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-surface-warm flex items-center justify-center text-primary-container shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-surface-warm flex items-center justify-center text-primary-container shadow-xs">
                         <span class="material-symbols-outlined text-[22px]">timer</span>
                     </div>
                     <div>
@@ -43,7 +43,7 @@
 
     <!-- Product Catalog Grid -->
     <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-16">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="productGrid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="productGrid" data-reveal-group>
             @if(isset($products) && $products->isNotEmpty())
                 @foreach($products as $product)
                     @php
@@ -160,7 +160,7 @@
     </section>
 
     <!-- Banner Layanan Katering & Konsultasi -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-20">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-20" data-reveal>
         <div class="relative overflow-hidden bg-sand-bg-alt rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 border border-surface-variant/40">
             <div class="space-y-3 max-w-xl text-center md:text-left">
                 <div class="inline-flex items-center gap-2 text-primary font-label-sm font-bold uppercase tracking-wider text-xs">

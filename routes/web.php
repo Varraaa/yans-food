@@ -57,6 +57,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/pesan-catering', [PublicCateringOrderController::class, 'store'])->name('pesan-catering.store');
+Route::get('/pesan/katering/{order_number}/sukses', [PublicCateringOrderController::class, 'success'])->name('pesan.katering.sukses');
 
 /*
 |--------------------------------------------------------------------------

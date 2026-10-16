@@ -66,16 +66,41 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <button type="button" 
                         onclick="confirmAddToCart()" 
-                        class="w-full py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-2 transition-colors">
+                        class="w-full py-3 px-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md flex items-center justify-center gap-2 transition-colors active:scale-95 text-xs sm:text-sm">
                     <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
                     <span>Masuk Keranjang</span>
                 </button>
                 <button type="button" 
                         onclick="confirmOrderToWhatsApp()" 
-                        class="w-full py-3 px-4 rounded-xl bg-primary-container hover:bg-primary-dark text-on-primary font-label-md flex items-center justify-center gap-2 shadow-md transition-colors active:scale-95">
+                        class="w-full py-3 px-4 rounded-xl bg-primary-container hover:bg-primary-dark text-on-primary font-label-md flex items-center justify-center gap-2 shadow-md transition-colors active:scale-95 text-xs sm:text-sm font-semibold">
                     <span class="material-symbols-outlined text-[18px]">chat</span>
                     <span>Pesan via WA</span>
                 </button>
+            </div>
+
+            <!-- Alternative: Online Delivery Apps (§5.2) -->
+            <div class="pt-3 border-t border-surface-variant/40 flex flex-col items-center gap-2.5">
+                <span class="font-label-sm text-secondary text-xs">Atau pesan instan via delivery apps:</span>
+                <div class="flex items-center gap-2 flex-wrap justify-center">
+                    <a href="https://shopee.co.id" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface flex items-center gap-1.5 transition-colors border border-surface-variant/40 group">
+                        <svg class="w-4 h-4 shrink-0 text-[#EE4D2D]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6h-3.18C15.4 3.84 13.78 2 12 2s-3.4 1.84-3.82 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-2c1.08 0 2.09 1.13 2.5 2h-5c.41-.87 1.42-2 2.5-2zm7 16H5V8h14v12zm-7-9c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                        <span class="group-hover:text-[#EE4D2D] transition-colors">ShopeeFood</span>
+                    </a>
+                    <a href="https://gofood.co.id" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface flex items-center gap-1.5 transition-colors border border-surface-variant/40 group">
+                        <svg class="w-4 h-4 shrink-0 text-[#ED2724]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3-5c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
+                        </svg>
+                        <span class="group-hover:text-[#ED2724] transition-colors">GoFood</span>
+                    </a>
+                    <a href="https://food.grab.com" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface flex items-center gap-1.5 transition-colors border border-surface-variant/40 group">
+                        <svg class="w-4 h-4 shrink-0 text-[#00B14F]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                        </svg>
+                        <span class="group-hover:text-[#00B14F] transition-colors">GrabFood</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -130,10 +155,23 @@
 
     function closeQuickOrder() {
         const modal = document.getElementById('quickOrderModal');
+        if (!modal) return;
         modal.classList.add('opacity-0', 'pointer-events-none');
-        modal.firstElementChild.classList.remove('scale-100');
-        modal.firstElementChild.classList.add('scale-95');
+        modal.firstElementChild?.classList.remove('scale-100');
+        modal.firstElementChild?.classList.add('scale-95');
     }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeQuickOrder();
+        }
+    });
+
+    document.getElementById('quickOrderModal')?.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeQuickOrder();
+        }
+    });
 
     function changeModalQty(delta) {
         activeProduct.qty = Math.max(1, activeProduct.qty + delta);

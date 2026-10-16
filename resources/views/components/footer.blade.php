@@ -5,7 +5,21 @@
             <!-- Col 1: Brand & Motto -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <span class="font-headline-sm text-tertiary-fixed font-bold tracking-tight text-2xl font-serif">Yan's Food</span>
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-sm shrink-0">
+                        <div class="w-full h-full rounded-[14px] bg-[#362F25] flex items-center justify-center">
+                            <svg class="w-6 h-6 text-[#D6A253]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C11.5 3 13 4 12 5" stroke="#D6A253" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M8 3.5C7.5 4.5 9 5.5 8 6.5" stroke="#FFDDB1" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M16 3.5C15.5 4.5 17 5.5 16 6.5" stroke="#FFDDB1" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M4 11C4 16 7.5 18 12 18C16.5 18 20 16 20 11H4Z" fill="#D6A253"/>
+                                <line x1="2.5" y1="11" x2="21.5" y2="11" stroke="#FCEFDF" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col leading-none">
+                        <span class="font-headline-sm text-tertiary-fixed font-bold tracking-tight text-xl font-serif">Yan's Food</span>
+                        <span class="text-[9px] font-bold uppercase tracking-[0.16em] text-[#D6A253] pt-0.5">Dapur Kuliner Rumahan</span>
+                    </div>
                 </div>
                 <p class="font-body-sm text-surface-variant leading-relaxed">
                     Usaha kuliner rumahan yang menyajikan aneka kudapan renyah & makanan hangat dengan rasa otentik, higienis, dan penuh dedikasi.
@@ -71,16 +85,27 @@
 
         <!-- Row: Platform Delivery & Copyright -->
         <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-2 flex-wrap">
-                <span class="font-label-sm text-surface-variant mr-2">Tersedia juga di:</span>
-                <a href="{{ url('/pesan') }}" class="px-3 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#EE4D2D] hover:text-white font-label-sm transition-all duration-200">
-                    ShopeeFood
+            <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="font-label-sm text-surface-variant mr-1">Tersedia juga di:</span>
+                <a href="{{ url('/pesan') }}#online" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#EE4D2D] hover:text-white font-label-sm transition-all duration-200 group">
+                    <svg class="w-4 h-4 fill-current text-[#EE4D2D] group-hover:text-white transition-colors" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C10.3 2 9 3.3 9 5H6C5.4 5 5 5.4 5 6L3.5 20C3.4 20.6 3.9 21 4.5 21H19.5C20.1 21 20.6 20.6 20.5 20L19 6C19 5.4 18.6 5 18 5H15C15 3.3 13.7 2 12 2ZM12 3.5C12.8 3.5 13.5 4.2 13.5 5H10.5C10.5 4.2 11.2 3.5 12 3.5ZM12 9C13.7 9 15 10.3 15 12C15 13.7 13.7 15 12 15C10.3 15 9 13.7 9 12C9 10.3 10.3 9 12 9Z"/>
+                    </svg>
+                    <span>ShopeeFood</span>
                 </a>
-                <a href="{{ url('/pesan') }}" class="px-3 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#00AA13] hover:text-white font-label-sm transition-all duration-200">
-                    GoFood
+                <a href="{{ url('/pesan') }}#online" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#ED2724] hover:text-white font-label-sm transition-all duration-200 group">
+                    <svg class="w-4 h-4 fill-current text-[#ED2724] group-hover:text-white transition-colors" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                    </svg>
+                    <span>GoFood</span>
                 </a>
-                <a href="{{ url('/pesan') }}" class="px-3 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#00B14F] hover:text-white font-label-sm transition-all duration-200">
-                    GrabFood
+                <a href="{{ url('/pesan') }}#online" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#00B14F] hover:text-white font-label-sm transition-all duration-200 group">
+                    <svg class="w-4 h-4 fill-current text-[#00B14F] group-hover:text-white transition-colors" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 14C4 9.6 7.6 6 12 6C16.4 6 20 9.6 20 14H4Z"/>
+                        <rect x="3" y="15" width="18" height="3" rx="1.5"/>
+                    </svg>
+                    <span>GrabFood</span>
                 </a>
             </div>
             <div class="font-body-sm text-surface-variant text-center md:text-right">

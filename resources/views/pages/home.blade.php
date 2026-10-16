@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="title">Beranda | Yan's Food — Dapur Kuliner Rumahan</x-slot>
 
-    <!-- HERO SECTION -->
-    <section class="relative w-full overflow-hidden bg-cream-bg py-12 lg:py-20 px-4 sm:px-6 lg:px-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <!-- 1. HERO SECTION (§5.1) -->
+    <section class="relative w-full overflow-hidden bg-cream-bg py-10 lg:py-16 px-4 sm:px-6 lg:px-12 flex items-center min-h-[560px] max-h-[920px] lg:min-h-[calc(100svh-5rem)]" data-reveal>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             <!-- Left Hero Content -->
-            <div class="lg:col-span-7 flex flex-col items-start gap-6 lg:gap-8">
-                <!-- Review Pill Badge -->
-                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container text-tertiary shadow-sm">
+            <div class="lg:col-span-7 flex flex-col items-start gap-5 lg:gap-7">
+                <!-- Review Pill Badge (§5.1) -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container text-tertiary shadow-xs border border-surface-variant/40">
                     <span class="flex items-center text-[#E5A000] text-sm">
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -16,9 +16,9 @@
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                     </span>
-                    <span class="font-label-md text-on-surface font-semibold">4.9/5</span>
+                    <span class="font-label-md text-on-surface font-semibold text-xs sm:text-sm">4.9/5</span>
                     <span class="w-1 h-1 rounded-full bg-outline"></span>
-                    <span class="font-body-sm text-on-surface-variant">500+ Pelanggan Puas</span>
+                    <span class="font-body-sm text-secondary text-xs sm:text-sm">500+ Pelanggan Puas</span>
                 </div>
 
                 <!-- Main Headline -->
@@ -32,66 +32,66 @@
                     Dari dapur rumahan yang bersih dan penuh dedikasi, Yan's Food menghadirkan aneka kudapan gurih, hidangan hangat, hingga minuman segar untuk setiap momen santaimu.
                 </p>
 
-                <!-- CTA Buttons -->
+                <!-- CTA Buttons (§5.1: Primer & Sekunder) -->
                 <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
-                    <a href="{{ url('/menu') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md active:scale-95">
+                    <a href="{{ url('/menu') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md active:scale-95 group">
                         <span>Lihat Menu Lengkap</span>
-                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        <span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md hover:bg-surface-container transition-all duration-200 shadow-sm border border-surface-variant/40 active:scale-95">
+                    <a href="{{ url('/pesan') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md hover:bg-surface-container transition-all duration-200 shadow-xs border border-surface-variant/50 active:scale-95">
                         <span class="material-symbols-outlined text-[20px] text-primary">local_mall</span>
-                        <span>Pesan Sekarang</span>
+                        <span>Pesan Katering & Online</span>
                     </a>
                 </div>
 
-                <!-- Trust Badges Under Hero -->
-                <div class="pt-6 grid grid-cols-3 gap-4 sm:gap-6 w-full max-w-lg bg-surface-container-low p-4 sm:p-5 rounded-2xl shadow-sm border border-surface-variant/30">
+                <!-- Trust Badges Under Hero (§5.1) -->
+                <div class="pt-4 grid grid-cols-3 gap-3 sm:gap-6 w-full max-w-lg bg-surface-warm p-4 sm:p-5 rounded-2xl shadow-xs border border-surface-variant/40">
                     <div class="flex flex-col">
                         <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">100%</span>
-                        <span class="font-label-sm text-secondary text-xs sm:text-sm">Bahan Segar Alami</span>
+                        <span class="font-label-sm text-secondary text-xs">Bahan Segar Alami</span>
                     </div>
                     <div class="flex flex-col border-x border-surface-variant/50 px-3 sm:px-4">
                         <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">Fresh</span>
-                        <span class="font-label-sm text-secondary text-xs sm:text-sm">Dibuat Hari Ini</span>
+                        <span class="font-label-sm text-secondary text-xs">Dibuat Hari Ini</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">Halal</span>
-                        <span class="font-label-sm text-secondary text-xs sm:text-sm">Higienis & Amanah</span>
+                        <span class="font-label-sm text-secondary text-xs">Higienis & Amanah</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Visual Collage -->
-            <div class="lg:col-span-5 relative">
-                <div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-surface-container">
+            <!-- Right Visual Collage with Desktop Tilt (-2deg) (§5.1) -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-surface-container transform transition-transform duration-500 hover:rotate-0 lg:-rotate-2 border-4 border-surface-warm">
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau" 
                          alt="Sajian kuliner otentik Yan's Food" 
                          class="w-full h-full object-cover">
                     
                     <!-- Floating Editorial Pill Overlay -->
-                    <div class="absolute bottom-6 left-6 right-6 p-4 sm:p-5 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-lg flex items-center justify-between border border-surface-variant/40">
+                    <div class="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-lg flex items-center justify-between border border-surface-variant/40">
                         <div class="flex items-center gap-3">
                             <div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center shrink-0">
                                 <span class="material-symbols-outlined text-primary text-[24px]">restaurant_menu</span>
                             </div>
                             <div>
-                                <p class="font-headline-sm text-on-surface text-base sm:text-lg font-serif">Kudapan & Makanan Hangat</p>
-                                <p class="font-body-sm text-secondary text-xs sm:text-sm">Resep Asli Racikan Keluarga</p>
+                                <p class="font-headline-sm text-on-surface text-sm sm:text-base font-serif">Kudapan & Makanan Hangat</p>
+                                <p class="font-body-sm text-secondary text-xs">Resep Asli Racikan Keluarga</p>
                             </div>
                         </div>
-                        <span class="font-label-sm uppercase tracking-wider text-primary font-bold bg-primary/10 px-2.5 py-1 rounded-md text-[11px]">Fresh Cooked</span>
+                        <span class="font-label-sm uppercase tracking-wider text-primary font-bold bg-primary/10 px-2.5 py-1 rounded-md text-[10px]">Fresh Cooked</span>
                     </div>
                 </div>
 
-                <!-- Decorative Ambient Glows -->
+                <!-- Decorative Ambient Warm Glows -->
                 <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
                 <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-tertiary-fixed/30 rounded-full blur-3xl -z-10"></div>
             </div>
         </div>
     </section>
 
-    <!-- PENGENALAN SINGKAT (§4.2 point 2) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-warm border-y border-surface-variant/30">
+    <!-- 2. PENGENALAN SINGKAT (§5.1 point 2) -->
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-warm border-y border-surface-variant/30" data-reveal>
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <!-- Left: Kitchen Craft Photo -->
             <div class="lg:col-span-6 relative">
@@ -146,8 +146,8 @@
         </div>
     </section>
 
-    <!-- PRODUK UNGGULAN (§4.2 point 3) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-cream-bg">
+    <!-- 3. PRODUK UNGGULAN (§5.1 point 3) -->
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-cream-bg" data-reveal>
         <div class="max-w-7xl mx-auto flex flex-col gap-12">
             <!-- Section Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -156,14 +156,14 @@
                     <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface tracking-tight font-serif">Menu Favorit Pilihan Pelanggan</h2>
                     <p class="font-body-lg text-secondary text-base sm:text-lg">Kreasi rumahan yang paling sering dipesan ulang oleh pelanggan setia kami.</p>
                 </div>
-                <a href="{{ url('/menu') }}" class="inline-flex items-center gap-2 font-label-md text-primary hover:text-primary-dark transition-colors font-bold self-start md:self-end pb-1">
+                <a href="{{ url('/menu') }}" class="inline-flex items-center gap-2 font-label-md text-primary hover:text-primary-dark transition-colors font-bold self-start md:self-end pb-1 group">
                     <span>Lihat Semua Menu</span>
-                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                    <span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                 </a>
             </div>
 
             <!-- 4 Featured Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
                 <x-food-card 
                     title="Risol Mayo Spesial"
@@ -215,8 +215,8 @@
         </div>
     </section>
 
-    <!-- KENAPA PILIH KAMI (§4.2 point 4) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-container-low border-y border-surface-variant/30">
+    <!-- 4. KENAPA PILIH KAMI (§5.1 point 4) -->
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-container-low border-y border-surface-variant/30" data-reveal>
         <div class="max-w-7xl mx-auto flex flex-col gap-14">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Keunggulan Yan's Food</span>
@@ -224,36 +224,36 @@
                 <p class="font-body-lg text-secondary text-base sm:text-lg">Kami mengutamakan kesegaran dan higienitas untuk menghadirkan rasa yang selalu bisa dipercaya.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group>
                 <!-- Feature 1 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-sm flex flex-col gap-4 border border-surface-variant/30 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary">
                         <span class="material-symbols-outlined text-[30px]">eco</span>
                     </div>
                     <h3 class="font-headline-sm text-on-surface text-xl font-serif">Bahan Baku Segar Setiap Hari</h3>
-                    <p class="font-body-md text-secondary leading-relaxed">
+                    <p class="font-body-md text-secondary leading-relaxed text-sm sm:text-base">
                         Dibuat fresh tanpa stok beku lama, menjaga nutrisi, kesegaran rempah, dan kerenyahan tekstur terbaik di setiap gigitan.
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-sm flex flex-col gap-4 border border-surface-variant/30 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
                         <span class="material-symbols-outlined text-[30px]">sanitizer</span>
                     </div>
                     <h3 class="font-headline-sm text-on-surface text-xl font-serif">Higienis & Standar Dapur Rapi</h3>
-                    <p class="font-body-md text-secondary leading-relaxed">
+                    <p class="font-body-md text-secondary leading-relaxed text-sm sm:text-base">
                         Proses pembuatan bersih berstandar rumahan premium dengan sanitasi peralatan masak dan kebersihan kemasan yang disiplin.
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-sm flex flex-col gap-4 border border-surface-variant/30 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary">
                         <span class="material-symbols-outlined text-[30px]">soup_kitchen</span>
                     </div>
                     <h3 class="font-headline-sm text-on-surface text-xl font-serif">Rasa Otentik & Jujur</h3>
-                    <p class="font-body-md text-secondary leading-relaxed">
+                    <p class="font-body-md text-secondary leading-relaxed text-sm sm:text-base">
                         Bumbu rempah asli warisan keluarga tanpa perisa sintetik berlebih, menghadirkan nostalgia kelezatan masakan ibu di rumah.
                     </p>
                 </div>
@@ -261,41 +261,135 @@
         </div>
     </section>
 
-    <!-- TEASER DELIVERY PLATFORMS (§4.2 point 5) -->
-    <section class="w-full py-16 px-4 sm:px-6 lg:px-12 bg-cream-bg">
-        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-8 sm:p-10 lg:p-14 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-10 border border-surface-variant/40">
+    <!-- 5. TEASER DELIVERY PLATFORMS & KATERING (§5.1 point 5) -->
+    <section class="w-full py-16 px-4 sm:px-6 lg:px-12 bg-cream-bg" data-reveal>
+        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-8 sm:p-10 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-10 border border-surface-variant/40">
             <div class="space-y-4 max-w-xl text-center lg:text-left">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Pesan Mudah & Cepat</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu</h2>
-                <p class="font-body-lg text-secondary">
-                    Mau santap lezat tanpa repot keluar rumah? Kami siap antar langsung pesanan hangat ke depan pintumu.
+                <p class="font-body-lg text-secondary text-sm sm:text-base">
+                    Mau santap lezat tanpa repot keluar rumah? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery atau pesan paket katering box.
                 </p>
             </div>
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
                 <div class="flex items-center gap-3 flex-wrap justify-center">
-                    <a href="{{ url('/pesan') }}" class="px-5 py-3 rounded-xl bg-surface-warm shadow-sm flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40">
-                        <span class="w-3 h-3 rounded-full bg-[#EE4D2D]"></span>
-                        <span>ShopeeFood</span>
+                    <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
+                        <svg class="w-5 h-5 shrink-0 text-[#EE4D2D]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6h-3.18C15.4 3.84 13.78 2 12 2s-3.4 1.84-3.82 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-2c1.08 0 2.09 1.13 2.5 2h-5c.41-.87 1.42-2 2.5-2zm7 16H5V8h14v12zm-7-9c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                        <span class="font-medium group-hover:text-primary transition-colors">ShopeeFood</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="px-5 py-3 rounded-xl bg-surface-warm shadow-sm flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40">
-                        <span class="w-3 h-3 rounded-full bg-[#00AA13]"></span>
-                        <span>GoFood</span>
+                    <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
+                        <svg class="w-5 h-5 shrink-0 text-[#ED2724]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3-5c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
+                        </svg>
+                        <span class="font-medium group-hover:text-primary transition-colors">GoFood</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="px-5 py-3 rounded-xl bg-surface-warm shadow-sm flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40">
-                        <span class="w-3 h-3 rounded-full bg-[#00B14F]"></span>
-                        <span>GrabFood</span>
+                    <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
+                        <svg class="w-5 h-5 shrink-0 text-[#00B14F]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                        </svg>
+                        <span class="font-medium group-hover:text-primary transition-colors">GrabFood</span>
                     </a>
                 </div>
-                <a href="{{ url('/pesan') }}" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-inverse-surface text-inverse-on-surface hover:bg-black font-label-md transition-all shadow-sm shrink-0 active:scale-95">
-                    <span>Lihat Semua Cara Pesan</span>
+                <a href="{{ url('/pesan') }}" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-inverse-surface text-inverse-on-surface hover:bg-black font-label-md transition-all shadow-xs shrink-0 active:scale-95">
+                    <span>Lihat Panduan Pesan</span>
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- CTA PENUTUP (§4.2 point 7) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary">
+    <!-- 6. TESTIMONI & SUARA PELANGGAN (§5.1 point 6) -->
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-warm border-t border-surface-variant/30" data-reveal>
+        <div class="max-w-7xl mx-auto flex flex-col gap-12">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Kata Pelanggan Kami</span>
+                <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface tracking-tight font-serif">Kisah Nyata dari Meja Mereka</h2>
+                <p class="font-body-lg text-secondary text-base">Testimoni tulus dari para pelanggan yang telah mempercayakan santapan harian dan acara spesial mereka kepada Yan's Food.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" data-reveal-group>
+                <!-- Quote 1 -->
+                <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex items-center text-[#E5A000] text-sm">
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
+                            &ldquo;Snack box arisan kemarin laris manis! Risol mayonya masih hangat dan sausnya lumer creamy. Ibu-ibu RT pada nanyain pesannya di mana. Pasti langganan terus.&rdquo;
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary text-sm font-serif">
+                            RW
+                        </div>
+                        <div>
+                            <p class="font-label-md text-on-surface font-semibold text-sm">Ibu Rina Wardani</p>
+                            <p class="font-body-sm text-secondary text-xs">Arisan Warga Melati (40 Box)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote 2 -->
+                <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex items-center text-[#E5A000] text-sm">
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
+                            &ldquo;Nasi kotak nusantaranya komplit banget. Ayam bumbu rempahnya meresap empuk, sambalnya pas nggak bikin mules, dan box-nya disegel rapi untuk rapat kantor.&rdquo;
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center font-bold text-tertiary text-sm font-serif">
+                            DH
+                        </div>
+                        <div>
+                            <p class="font-label-md text-on-surface font-semibold text-sm">Dimas Hendrawan</p>
+                            <p class="font-body-sm text-secondary text-xs">Staff Keuangan (Rapat 25 Porsi)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote 3 -->
+                <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex items-center text-[#E5A000] text-sm">
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
+                            &ldquo;Pisang coklat crispy-nya nagih parah! Kulit luarnya garing renyah tahan lama, coklatnya meleleh banyak. Sering order lewat GoFood buat nemenin kerja sore.&rdquo;
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed text-sm font-serif">
+                            SA
+                        </div>
+                        <div>
+                            <p class="font-label-md text-on-surface font-semibold text-sm">Sarah Anindya</p>
+                            <p class="font-body-sm text-secondary text-xs">Penikmat Kudapan Sore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CTA PENUTUP (§5.1 point 7) -->
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary" data-reveal>
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
             <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-inner">
                 <span class="material-symbols-outlined text-tertiary-fixed text-[36px]">lunch_dining</span>
