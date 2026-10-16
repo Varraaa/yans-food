@@ -75,13 +75,13 @@
 
 <!-- Mobile & Tablet Responsive Drawer Navigation with Dimmed Backdrop -->
 <div id="mobile-nav-backdrop" 
-     class="fixed inset-0 z-50 bg-charcoal/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out md:hidden"
+     class="fixed inset-0 z-[70] bg-charcoal/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out md:hidden"
      onclick="closeMobileNav()">
 </div>
 
 <aside id="mobile-drawer" 
        aria-label="Navigasi Menu Mobile"
-       class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-xs sm:max-w-sm bg-surface-warm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col md:hidden border-l border-surface-variant/40">
+       class="fixed top-0 right-0 bottom-0 z-[70] w-full max-w-xs sm:max-w-sm bg-surface-warm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col md:hidden border-l border-surface-variant/40">
     
     <!-- Drawer Header -->
     <div class="h-20 px-6 flex items-center justify-between bg-cream-bg/95 border-b border-surface-variant/40 shrink-0">

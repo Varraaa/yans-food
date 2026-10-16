@@ -77,57 +77,28 @@ function initScrollReveal() {
 }
 
 // ==========================================================================
-// 3. NAVBAR SCROLL BEHAVIOR (§3.4: Shrink & Hide on scroll down / Show on up)
+// 3. NAVBAR SCROLL BEHAVIOR: Sticky & Persistent Across All Pages
 // ==========================================================================
 function initNavbarScroll() {
     const navbar = document.getElementById('main-navbar');
     if (!navbar) return;
 
-    let lastScrollY = window.scrollY;
-    let accumulatedDown = 0;
-    let accumulatedUp = 0;
-    let isHidden = false;
+    // Pastikan navbar selalu terlihat (tidak pernah transform translateY(-100%))
+    navbar.style.transform = 'translateY(0)';
 
-    window.addEventListener('scroll', () => {
+    function handleScroll() {
         const currentScrollY = window.scrollY;
-        const diff = currentScrollY - lastScrollY;
 
-        // Shrink state (> 24px)
-        if (currentScrollY > 24) {
-            navbar.classList.add('is-shrunk');
+        // Shrink & elevated state saat di-scroll (> 16px)
+        if (currentScrollY > 16) {
+            navbar.classList.add('is-shrunk', 'is-scrolled');
         } else {
-            navbar.classList.remove('is-shrunk');
+            navbar.classList.remove('is-shrunk', 'is-scrolled');
         }
+    }
 
-        // Hide on scroll down (> 120px cepat) / Show on scroll up (>= 8px)
-        if (currentScrollY <= 80 || document.body.classList.contains('mobile-menu-open')) {
-            // Selalu tampil jika di dekat atas halaman atau menu terbuka
-            if (isHidden) {
-                navbar.style.transform = 'translateY(0)';
-                isHidden = false;
-            }
-            accumulatedDown = 0;
-            accumulatedUp = 0;
-        } else if (diff > 0) {
-            // Scrolling down
-            accumulatedUp = 0;
-            accumulatedDown += diff;
-            if (accumulatedDown > 120 && !isHidden) {
-                navbar.style.transform = 'translateY(-100%)';
-                isHidden = true;
-            }
-        } else {
-            // Scrolling up
-            accumulatedDown = 0;
-            accumulatedUp += Math.abs(diff);
-            if (accumulatedUp >= 8 && isHidden) {
-                navbar.style.transform = 'translateY(0)';
-                isHidden = false;
-            }
-        }
-
-        lastScrollY = currentScrollY;
-    }, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Trigger initial state
 }
 
 // ==========================================================================

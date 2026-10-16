@@ -18,6 +18,31 @@
     <style>
         [x-cloak] { display: none !important; }
         html { scroll-behavior: smooth; }
+        /* Style untuk persistent sticky navbar */
+        #main-navbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 50 !important;
+            transform: translateY(0) !important;
+        }
+        #main-navbar.is-shrunk,
+        #main-navbar.is-scrolled {
+            background-color: rgba(251, 246, 238, 0.95) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border-bottom: 1px solid rgba(193, 68, 14, 0.14) !important;
+            box-shadow: 0 4px 20px -2px rgba(38, 32, 27, 0.08), 0 2px 6px -1px rgba(38, 32, 27, 0.04) !important;
+        }
+        #main-navbar.is-shrunk .navbar-container,
+        #main-navbar.is-scrolled .navbar-container {
+            height: 64px !important;
+        }
+        #main-navbar.is-shrunk .brand-logo,
+        #main-navbar.is-scrolled .brand-logo {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body class="bg-cream-bg font-sans text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary-dark relative">
