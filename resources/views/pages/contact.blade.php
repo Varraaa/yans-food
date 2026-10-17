@@ -45,8 +45,9 @@
                             </div>
                             <div class="pt-4 mt-2">
                                 <button type="button" 
-                                        onclick="window.copyToClipboard('Jl. Melati No. 14, Jakarta Selatan', 'Alamat dapur berhasil disalin!')"
-                                        class="inline-flex items-center gap-1.5 text-xs font-label-md text-primary hover:text-primary-dark font-bold">
+                                        id="btn-copy-address"
+                                        data-address="Jl. Melati No. 14, Jakarta Selatan"
+                                        class="inline-flex items-center gap-1.5 text-xs font-label-md text-primary hover:text-primary-dark font-bold cursor-pointer">
                                     <span class="material-symbols-outlined text-[16px]">content_copy</span>
                                     <span>Salin Alamat</span>
                                 </button>
@@ -126,7 +127,7 @@
                             </div>
                         </div>
 
-                        <form class="space-y-5" id="contactForm" onsubmit="event.preventDefault(); sendContactWhatsApp();">
+                        <form class="space-y-5" id="contactForm">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div class="space-y-2">
                                     <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="fullName">Nama Lengkap *</label>
@@ -224,58 +225,4 @@
             </div>
         </section>
     </div>
-
-    <!-- Operating Hours & Contact Script (§5.5) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            updateOperatingStatus();
-        });
-
-        function updateOperatingStatus() {
-            const pill = document.getElementById('live-status-pill');
-            const dot = document.getElementById('live-status-dot');
-            const text = document.getElementById('live-status-text');
-            if (!pill || !dot || !text) return;
-
-            // Dapatkan waktu WIB sekarang (UTC+7)
-            const now = new Date();
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const wib = new Date(utc + (3600000 * 7));
-            const hours = wib.getHours();
-            const minutes = wib.getMinutes();
-            const currentTime = hours * 60 + minutes;
-
-            // Jam buka: 08:00 (480) - 20:00 (1200)
-            const openTime = 8 * 60;
-            const closeTime = 20 * 60;
-
-            if (currentTime >= openTime && currentTime < closeTime) {
-                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-                text.textContent = "Buka Sekarang • Dapur aktif melayani sampai 20:00 WIB";
-                text.className = "text-emerald-700 font-semibold";
-            } else {
-                dot.className = "w-2 h-2 rounded-full bg-amber-500";
-                text.textContent = "Tutup Sementara • Dapur buka kembali pukul 08:00 WIB";
-                text.className = "text-amber-800 font-semibold";
-            }
-        }
-
-        function sendContactWhatsApp() {
-            const name = document.getElementById('fullName').value.trim();
-            const phone = document.getElementById('waNumber').value.trim();
-            const type = document.getElementById('inquiryType').value;
-            const message = document.getElementById('messageContent').value.trim();
-            const adminWA = "6281234567890";
-
-            const text = `Halo Admin Yan's Food, saya ingin bertanya:\n\n` +
-                `• Nama: ${name}\n` +
-                `• Nomor Kontak: ${phone}\n` +
-                `• Keperluan: ${type}\n` +
-                `• Pesan: ${message}\n\n` +
-                `Mohon informasinya lebih lanjut. Terima kasih!`;
-
-            const encodedUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(text)}`;
-            window.open(encodedUrl, '_blank');
-        }
-    </script>
 </x-app-layout>

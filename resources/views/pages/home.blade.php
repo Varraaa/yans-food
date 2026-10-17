@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="title">Beranda | Yan's Food — Dapur Kuliner Rumahan</x-slot>
 
-    <!-- 1. HERO SECTION (§5.1) -->
-    <section class="relative w-full overflow-hidden bg-cream-bg py-10 lg:py-16 px-4 sm:px-6 lg:px-12 flex items-center min-h-[560px] max-h-[920px] lg:min-h-[calc(100svh-5rem)]" data-reveal>
+    <!-- 1. HERO SECTION (§5.1 & §3.3) -->
+    <section class="relative w-full overflow-hidden bg-cream-bg py-10 lg:py-16 px-4 sm:px-6 lg:px-12 flex items-center min-h-[560px] max-h-[920px] lg:min-h-[calc(100svh-5rem)]" data-hero-section>
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             <!-- Left Hero Content -->
@@ -10,11 +10,11 @@
                 <!-- Review Pill Badge (§5.1) -->
                 <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container text-tertiary shadow-xs border border-surface-variant/40">
                     <span class="flex items-center text-[#E5A000] text-sm">
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                     </span>
                     <span class="font-label-md text-on-surface font-semibold text-xs sm:text-sm">4.9/5</span>
                     <span class="w-1 h-1 rounded-full bg-outline"></span>
@@ -22,23 +22,23 @@
                 </div>
 
                 <!-- Main Headline -->
-                <h1 class="font-headline-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.15]">
+                <h1 class="font-headline-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.15]" data-hero-step="headline">
                     Rasa Rumahan, <br class="hidden sm:block"/>
                     <span class="text-primary italic font-normal">Disajikan dengan Hati</span>
                 </h1>
 
                 <!-- Subheadline -->
-                <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-base sm:text-lg">
+                <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-base sm:text-lg" data-hero-step="subheadline">
                     Dari dapur rumahan yang bersih dan penuh dedikasi, Yan's Food menghadirkan aneka kudapan gurih, hidangan hangat, hingga minuman segar untuk setiap momen santaimu.
                 </p>
 
-                <!-- CTA Buttons (§5.1: Primer & Sekunder) -->
-                <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
-                    <a href="{{ url('/menu') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md active:scale-95 group">
+                <!-- CTA Buttons (§5.1: Primer & Sekunder M01-M04) -->
+                <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto" data-hero-step="cta">
+                    <a href="{{ url('/menu') }}" class="btn-primary w-full sm:w-auto">
                         <span>Lihat Menu Lengkap</span>
                         <span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md hover:bg-surface-container transition-all duration-200 shadow-xs border border-surface-variant/50 active:scale-95">
+                    <a href="{{ url('/pesan') }}" class="btn-outline w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[20px] text-primary">local_mall</span>
                         <span>Pesan Katering & Online</span>
                     </a>
@@ -61,9 +61,9 @@
                 </div>
             </div>
 
-            <!-- Right Visual Collage with Desktop Tilt (-2deg) (§5.1) -->
+            <!-- Right Visual Collage with Desktop Tilt (-2deg) (§5.1 & §3.3) -->
             <div class="lg:col-span-5 relative flex justify-center">
-                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-surface-container transform transition-transform duration-500 hover:rotate-0 lg:-rotate-2 border-4 border-surface-warm">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-surface-container transform transition-transform duration-500 hover:rotate-0 lg:-rotate-2 border-4 border-surface-warm hero-photo-intro">
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau" 
                          alt="Sajian kuliner otentik Yan's Food" 
                          class="w-full h-full object-cover">
@@ -87,6 +87,12 @@
                 <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
                 <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-tertiary-fixed/30 rounded-full blur-3xl -z-10"></div>
             </div>
+        </div>
+
+        <!-- Scroll Indicator (§3.3) -->
+        <div class="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 items-center gap-1.5 text-secondary font-label-sm text-xs opacity-75" data-hero-step="scroll-indicator">
+            <span>Scroll untuk melihat menu</span>
+            <span class="material-symbols-outlined text-[16px] animate-bounce">arrow_downward</span>
         </div>
     </section>
 
@@ -165,52 +171,56 @@
             <!-- 4 Featured Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Risol Mayo Spesial"
                     category="Kudapan Gurih"
                     categorySlug="ringan"
-                    price="4.500"
+                    price="4500"
                     unit="/ pcs"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuCyfuXln7cyGrY2lKM07Nk3VKMQjY3ZTmHoC1dw90oSQpU6K9GToD9dsNw7j-ONqeDlAGA4dUHsambXmkUw1VSykY9WS5EuOrd2vXOLVz_gDlJDQpTckcMcGct8EuAcmM-Aj5VFqr78aR9bpsCfWc7L5uPmlfvvfJvmZbLdxztCm-fUjNoCNBg6rJwiIGonOikHOEVhan_cN8QOl7vVORz_mOuXsXhhH3TopjOFzgKMvjN75USyuea4"
                     desc="Kulit renyah lembut, smoked beef, telur, & racikan saus mayo gurih lumer khas racikan Yan's Food."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="risol-mayo-spesial" />
 
                 <!-- 2: Nasi Goreng Jadul -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Nasi Goreng Jadul"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="22.000"
+                    price="22000"
                     unit="/ porsi"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuCvbMqJp4vasmNPRn7HlUQ53R3QwrbMiAJGRmOeSP3xoEqc-hb5EkQx28tGjOOddzhbh0BvjFwX_K2C7FkHaJpySF2zidCDs-Bx_mHHA3URhRcMv1OQhfIUJ4SnK1xWUswF-WwKCxa8-zJZmfBBJz1XBLusLQAzk5BcvZvIXzaDl0b5CzAHuTSEZQKFm2axnelXGbXdYgGwaMGpV41iikvWXq7ZllZ-h_pkIUZOUgUcN8KoU_ETwohF"
                     desc="Aroma bumbu ulek terasi tradisional dengan suwiran ayam, telur ceplok setengah matang, & kerupuk."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="nasi-goreng-jadul" />
 
                 <!-- 3: Pisang Coklat Crispy -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Pisang Coklat Lumer"
                     category="Kudapan Manis"
                     categorySlug="ringan"
-                    price="3.500"
+                    price="3500"
                     unit="/ pcs"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX"
                     desc="Pisang raja manis legit dengan coklat melimpah berbalut kulit crispy emas yang renyah tahan lama."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="pisang-coklat-lumer" />
 
                 <!-- 4: Es Kopi Susu Aren -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Es Kopi Susu Aren"
                     category="Minuman Segar"
                     categorySlug="minuman"
-                    price="15.000"
+                    price="15000"
                     unit="/ cup"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuDuU3Yxrcih-pg6m2nRhDlGOylXXNiZpcpRJOwpGtbqdy2tID_2dcQH8vFY45VJyojhQ_EhfmASszkIE7eY72DmaCVEuoHwd-g6ry7je_ScQ_2fJ8jLVTp1o_iCgl3eLUn5tGJpOrxa83pkjoHbquHRihUHOkcatbhcowl5ghx9jMRDqgTc1xq11rmDLIGt391ni6_gw1qdmchrGD1pMbRA1MfIPrtdWISTKpeaLC0pLS0h91QGgf47"
                     desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang menyegarkan."
                     status="sedia"
-                    :isFavorite="false" />
+                    :isFavorite="false"
+                    slug="es-kopi-susu-aren" />
             </div>
         </div>
     </section>
@@ -314,11 +324,11 @@
                 <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm">
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
                             &ldquo;Snack box arisan kemarin laris manis! Risol mayonya masih hangat dan sausnya lumer creamy. Ibu-ibu RT pada nanyain pesannya di mana. Pasti langganan terus.&rdquo;
@@ -339,11 +349,11 @@
                 <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm">
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
                             &ldquo;Nasi kotak nusantaranya komplit banget. Ayam bumbu rempahnya meresap empuk, sambalnya pas nggak bikin mules, dan box-nya disegel rapi untuk rapat kantor.&rdquo;
@@ -364,11 +374,11 @@
                 <div class="p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm">
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                            <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base">
                             &ldquo;Pisang coklat crispy-nya nagih parah! Kulit luarnya garing renyah tahan lama, coklatnya meleleh banyak. Sering order lewat GoFood buat nemenin kerja sore.&rdquo;

@@ -285,29 +285,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    @media print {
-        body * {
-            visibility: hidden !important;
-        }
-        #printable-receipt, #printable-receipt * {
-            visibility: visible !important;
-        }
-        #printable-receipt {
-            position: fixed !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 78mm !important;
-            margin: 0 !important;
-            padding: 10px !important;
-            background: #ffffff !important;
-            color: #000000 !important;
-            box-shadow: none !important;
-            border: none !important;
-        }
-    }
-</style>
 @endsection
 
 @push('scripts')

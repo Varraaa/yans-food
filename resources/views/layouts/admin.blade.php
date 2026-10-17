@@ -14,11 +14,6 @@
     <!-- Tailwind / Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <style>
-        [x-cloak] { display: none !important; }
-        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
-        .sidebar-scroll::-webkit-scrollbar-thumb { background-color: rgba(156, 163, 175, 0.3); border-radius: 4px; }
-    </style>
 </head>
 <body class="h-full font-sans text-stone-800 bg-stone-100 flex flex-col antialiased">
 

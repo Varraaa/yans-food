@@ -1,23 +1,24 @@
 <x-app-layout>
     <x-slot name="title">Pesanan Berhasil Dicatat — {{ $order->order_number }} | Yan's Food</x-slot>
 
-    <div class="w-full py-12 lg:py-20 px-4 sm:px-6 lg:px-12 bg-cream-bg min-h-[calc(100vh-14rem)] flex items-center justify-center">
+    <div class="w-full py-12 lg:py-20 px-4 sm:px-6 lg:px-12 bg-cream-bg min-h-[calc(100vh-14rem)] flex items-center justify-center" data-order-success>
         <div class="max-w-3xl w-full mx-auto" data-reveal>
             
             <!-- Success Status Header (§6.7) -->
             <div class="text-center space-y-4 mb-10">
                 <!-- Animated Checkmark Badge -->
                 <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 shadow-md ring-8 ring-emerald-50 mb-2">
-                    <span class="material-symbols-outlined text-[44px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    <span class="material-symbols-outlined text-[44px] icon-fill">check_circle</span>
                 </div>
                 
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface font-mono text-xs font-semibold shadow-2xs border border-surface-variant/50">
                     <span>Nomor Pesanan:</span>
                     <span class="text-primary font-bold">{{ $order->order_number }}</span>
                     <button type="button" 
-                            onclick="window.copyToClipboard('{{ $order->order_number }}', 'Nomor pesanan berhasil disalin!')"
+                            id="btn-copy-order-number"
+                            data-copy-target="{{ $order->order_number }}"
                             title="Salin nomor pesanan"
-                            class="text-secondary hover:text-on-surface ml-1 p-0.5">
+                            class="text-secondary hover:text-on-surface ml-1 p-0.5 cursor-pointer">
                         <span class="material-symbols-outlined text-[16px]">content_copy</span>
                     </button>
                 </div>
@@ -123,12 +124,32 @@
                     </a>
 
                     <button type="button" 
-                            onclick="copyOrderSummary()"
-                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-sm border border-surface-variant/40 transition-colors active:scale-95">
+                            id="btn-copy-order-summary"
+                            class="btn-outline w-full sm:w-auto">
                         <span class="material-symbols-outlined text-[18px]">content_copy</span>
                         <span>Salin Ringkasan</span>
                     </button>
                 </div>
+
+                <pre id="order-summary-payload" class="hidden">
+*RINGKASAN PESANAN KATERING YAN'S FOOD*
+
+• Nomor Pesanan: {{ $order->order_number }}
+• Pemesan: {{ $order->customer_name }} ({{ $order->customer_phone }})
+• Jadwal Acara: {{ $order->event_date ? $order->event_date->format('d/m/Y') : '-' }} jam {{ $order->event_time }} WIB
+• Keperluan: {{ $order->event_purpose ?: 'Acara' }}
+• Alamat Kirim: {{ $order->customer_address }}
+@if($order->notes)
+• Catatan: {{ $order->notes }}
+@endif
+
+*Menu Pesanan:*
+@foreach($order->items as $item)
+- {{ $item->product_name }} x{{ $item->quantity }} = Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+@endforeach
+
+• Estimasi Total: Rp {{ number_format($order->total, 0, ',', '.') }}
+                </pre>
 
                 <!-- Footer Navigation -->
                 <div class="pt-4 flex items-center justify-center gap-6 text-xs sm:text-sm font-label-md text-secondary border-t border-surface-variant/30">
@@ -145,35 +166,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Script to Clear Draft & Copy Summary (§6.6 & §6.8) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Bersihkan draf form yang tersimpan di browser setelah order sukses
-            try {
-                localStorage.removeItem('yf_catering_draft_v1');
-            } catch (e) {
-                console.warn('Could not remove localStorage draft', e);
-            }
-        });
-
-        function copyOrderSummary() {
-            const summaryText = `*RINGKASAN PESANAN KATERING YAN'S FOOD*\n\n` +
-                `• Nomor Pesanan: {{ $order->order_number }}\n` +
-                `• Pemesan: {{ $order->customer_name }} ({{ $order->customer_phone }})\n` +
-                `• Jadwal Acara: {{ $order->event_date ? $order->event_date->format('d/m/Y') : '-' }} jam {{ $order->event_time }} WIB\n` +
-                `• Keperluan: {{ $order->event_purpose ?: 'Acara' }}\n` +
-                `• Alamat Kirim: {{ $order->customer_address }}\n` +
-                @if($order->notes)
-                `• Catatan: {{ $order->notes }}\n` +
-                @endif
-                `\n*Menu Pesanan:*\n` +
-                @foreach($order->items as $item)
-                `- {{ $item->product_name }} x{{ $item->quantity }} = Rp {{ number_format($item->subtotal, 0, ',', '.') }}\n` +
-                @endforeach
-                `\n• Estimasi Total: Rp {{ number_format($order->total, 0, ',', '.') }}`;
-
-            window.copyToClipboard(summaryText, 'Ringkasan pesanan berhasil disalin ke clipboard!');
-        }
-    </script>
 </x-app-layout>

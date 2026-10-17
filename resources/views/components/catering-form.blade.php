@@ -1,83 +1,116 @@
-<!-- 3-Step Catering Reservation Form (§6) -->
-<div class="max-w-4xl mx-auto rounded-3xl bg-surface-warm p-6 sm:p-8 lg:p-12 shadow-xs border border-surface-variant/40" 
-     id="catering-form-container"
-     x-data="cateringWizard()">
+@props(['products' => null])
+
+@php
+    $minDate = \Carbon\Carbon::now()->addDays(2)->format('Y-m-d');
+    
+    // Prepare catalog data for JSON embedding
+    $catalogList = [];
+    if ($products && $products->count() > 0) {
+        foreach ($products as $prod) {
+            $catalogList[] = [
+                'id' => $prod->id,
+                'name' => $prod->name,
+                'category' => $prod->category?->name ?? 'Menu Katering',
+                'price' => (int) $prod->price,
+                'unit' => $prod->unit ?: 'porsi',
+                'image' => $prod->image_url ?: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=150',
+                'slug' => $prod->slug,
+                'qty' => 0,
+            ];
+        }
+    }
+@endphp
+
+<!-- 3-Step Catering Reservation Form (§6.1–§6.6) -->
+<div class="max-w-5xl mx-auto rounded-3xl bg-surface-warm p-6 sm:p-8 lg:p-12 shadow-xs border border-surface-variant/40" 
+     id="catering-form-container">
+
+    <!-- Embedded Catalog Data (§6.3) -->
+    @if(!empty($catalogList))
+        <script id="catering-products-data" type="application/json">
+            {!! json_encode($catalogList) !!}
+        </script>
+    @endif
     
     <!-- Draft Restore Banner (§6.6) -->
-    <div x-show="hasDraft && !draftDismissed" 
-         x-cloak
-         class="mb-8 p-4 rounded-2xl bg-amber-50/80 border border-amber-200/70 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
+    <div id="catering-draft-banner" 
+         class="hidden mb-8 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm shadow-xs">
         <div class="flex items-center gap-2.5">
             <span class="material-symbols-outlined text-[20px] text-amber-700">history_toggle_off</span>
-            <span>Kamu memiliki draf pesanan yang belum selesai disimpan.</span>
+            <span>Kamu memiliki draf pesanan katering yang belum dikirim.</span>
         </div>
         <div class="flex items-center gap-3">
             <button type="button" 
-                    @click="restoreDraft()" 
-                    class="font-bold text-primary hover:underline">
+                    id="btn-restore-draft"
+                    class="font-bold text-primary hover:underline cursor-pointer">
                 Lanjutkan Draf
             </button>
             <span class="text-amber-300">•</span>
             <button type="button" 
-                    @click="discardDraft()" 
-                    class="text-amber-700 hover:text-amber-950">
+                    id="btn-discard-draft"
+                    class="text-amber-700 hover:text-amber-950 cursor-pointer">
                 Mulai Baru
             </button>
         </div>
     </div>
 
-    <!-- Stepper Indicator (§6.2) -->
+    <!-- Stepper Indicator (§6.1) -->
     <div class="mb-10">
         <div class="flex items-center justify-between max-w-lg mx-auto relative">
             <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-surface-variant -z-0"></div>
-            <div class="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 bg-primary transition-all duration-300 -z-0"
-                 :style="`width: ${step === 1 ? '0%' : (step === 2 ? '50%' : '100%')}`"></div>
+            <div data-stepper-fill class="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 bg-primary transition-all duration-300 -z-0" style="width: 0%;"></div>
 
             <!-- Step 1 Circle -->
             <button type="button" 
-                    @click="if(step > 1) step = 1"
-                    :class="step >= 1 ? 'bg-primary text-white ring-4 ring-primary/20' : 'bg-surface-warm text-secondary border border-surface-variant'"
-                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10">
-                <span x-show="step > 1" class="material-symbols-outlined text-[18px]">check</span>
-                <span x-show="step <= 1">1</span>
+                    data-step-circle="1"
+                    data-goto-step="1"
+                    aria-label="Langkah 1: Acara Kamu"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10 bg-primary text-white ring-4 ring-primary/20 cursor-pointer">
+                <span class="step-check-icon hidden material-symbols-outlined text-[18px]">check</span>
+                <span class="step-num-text">1</span>
             </button>
 
             <!-- Step 2 Circle -->
             <button type="button" 
-                    @click="if(step > 2) step = 2"
-                    :class="step >= 2 ? 'bg-primary text-white ring-4 ring-primary/20' : 'bg-surface-warm text-secondary border border-surface-variant'"
-                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10">
-                <span x-show="step > 2" class="material-symbols-outlined text-[18px]">check</span>
-                <span x-show="step <= 2">2</span>
+                    data-step-circle="2"
+                    data-goto-step="2"
+                    aria-label="Langkah 2: Pilih Menu"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10 bg-surface-warm text-secondary border border-surface-variant cursor-pointer">
+                <span class="step-check-icon hidden material-symbols-outlined text-[18px]">check</span>
+                <span class="step-num-text">2</span>
             </button>
 
             <!-- Step 3 Circle -->
-            <div :class="step === 3 ? 'bg-primary text-white ring-4 ring-primary/20' : 'bg-surface-warm text-secondary border border-surface-variant'"
-                 class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10">
-                <span>3</span>
-            </div>
+            <button type="button" 
+                    data-step-circle="3"
+                    data-goto-step="3"
+                    aria-label="Langkah 3: Data Pemesan"
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all relative z-10 bg-surface-warm text-secondary border border-surface-variant cursor-pointer">
+                <span class="step-check-icon hidden material-symbols-outlined text-[18px]">check</span>
+                <span class="step-num-text">3</span>
+            </button>
         </div>
 
         <div class="flex items-center justify-between max-w-lg mx-auto mt-2 text-xs font-label-md text-secondary text-center">
-            <span :class="step === 1 ? 'font-bold text-primary' : ''" class="w-24 text-left">1. Info Acara</span>
-            <span :class="step === 2 ? 'font-bold text-primary' : ''" class="w-24 text-center">2. Pilih Menu</span>
-            <span :class="step === 3 ? 'font-bold text-primary' : ''" class="w-24 text-right">3. Data Pemesan</span>
+            <span class="w-24 text-left font-bold text-primary">1. Acara</span>
+            <span class="w-24 text-center">2. Menu</span>
+            <span class="w-24 text-right">3. Konfirmasi</span>
         </div>
     </div>
 
-    <!-- The Form -->
-    <form @submit.prevent="submitOrder()" class="space-y-8" id="catering-booking-form">
+    <!-- The Form Container -->
+    <form id="catering-booking-form" class="space-y-8" novalidate>
         <!-- Honeypot anti-spam (§6.5) -->
-        <input type="text" name="website_trap" x-model="form.website_trap" class="hidden" tabindex="-1" autocomplete="off">
+        <input type="text" name="website_trap" class="hidden" tabindex="-1" autocomplete="off">
 
         <!-- ==============================================
              STEP 1: INFO ACARA (§6.2)
              ============================================== -->
-        <div x-show="step === 1" x-transition.opacity.duration.300ms class="space-y-6">
+        <div data-step="1" class="space-y-6">
             <div class="border-b border-surface-variant/40 pb-4">
                 <h3 class="font-headline-md text-2xl text-on-surface font-serif">Langkah 1: Rencana Acara Anda</h3>
                 <p class="font-body-sm text-secondary text-xs sm:text-sm mt-1">
-                    Beri tahu kami jadwal dan jenis acara untuk memastikan ketersediaan dapur kami.
+                    Beri tahu kami jadwal dan lokasi acara untuk mengamankan slot dapur kami.
                 </p>
             </div>
 
@@ -89,505 +122,328 @@
                     </label>
                     <input type="date" 
                            id="event_date" 
-                           x-model="form.event_date" 
-                           :min="minDate" 
+                           name="event_date"
+                           min="{{ $minDate }}" 
+                           value="{{ $minDate }}"
                            required 
-                           @change="saveDraft()"
                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
-                </div>
-
-                <!-- Waktu Tiba (08:00 - 18:00 WIB) -->
-                <div class="space-y-2">
-                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="event_time">
-                        Waktu Pengantaran Tiba * <span class="text-secondary font-normal text-xs">(08.00 - 18.00 WIB)</span>
-                    </label>
-                    <input type="time" 
-                           id="event_time" 
-                           x-model="form.event_time" 
-                           min="08:00" 
-                           max="18:00" 
-                           required 
-                           @change="saveDraft()"
-                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Jenis Acara -->
-                <div class="space-y-2">
-                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="event_purpose">
-                        Jenis Acara *
-                    </label>
-                    <select id="event_purpose" 
-                            x-model="form.event_purpose" 
-                            required 
-                            @change="saveDraft()"
-                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm cursor-pointer">
-                        <option value="" disabled>Pilih Jenis Acara</option>
-                        <option value="Arisan Keluarga / RT">Arisan Keluarga / RT</option>
-                        <option value="Rapat Kantor / Meeting">Rapat Kantor / Meeting</option>
-                        <option value="Syukuran / Selamatan Rumah">Syukuran / Selamatan Rumah</option>
-                        <option value="Ulang Tahun / Pesta Santai">Ulang Tahun / Pesta Santai</option>
-                        <option value="Pengajian / Kegiatan Ibadah">Pengajian / Kegiatan Ibadah</option>
-                        <option value="Acara Lainnya">Acara Lainnya</option>
-                    </select>
-                </div>
-
-                <!-- Estimasi Tamu / Porsi -->
-                <div class="space-y-2">
-                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="estimated_guests">
-                        Estimasi Tamu / Porsi * <span class="text-secondary font-normal text-xs">(Min. 15 porsi)</span>
-                    </label>
-                    <input type="number" 
-                           id="estimated_guests" 
-                           x-model.number="form.estimated_guests" 
-                           min="15" 
-                           required 
-                           @input="saveDraft()"
-                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
-                </div>
-            </div>
-
-            <!-- Nav Step 1 to 2 -->
-            <div class="pt-6 flex justify-end border-t border-surface-variant/40">
-                <button type="button" 
-                        @click="goToStep2()" 
-                        class="px-7 py-3.5 rounded-xl bg-primary text-white font-label-md font-bold text-sm shadow-md hover:bg-primary-dark transition-all flex items-center gap-2 active:scale-95">
-                    <span>Lanjut: Pilih Menu</span>
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- ==============================================
-             STEP 2: PILIH MENU & ESTIMASI BIAYA (§6.2)
-             ============================================== -->
-        <div x-show="step === 2" x-transition.opacity.duration.300ms class="space-y-6">
-            <div class="border-b border-surface-variant/40 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                    <h3 class="font-headline-md text-2xl text-on-surface font-serif">Langkah 2: Pilih Menu Katering</h3>
-                    <p class="font-body-sm text-secondary text-xs sm:text-sm mt-1">
-                        Pilih menu paket utama atau racik kombinasi hidangan sesuai kebutuhan tamu Anda.
+                    <p class="text-xs text-secondary leading-relaxed">
+                        Acara kurang dari 2 hari lagi? <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20butuh%20katering%20mendesak" target="_blank" rel="noopener noreferrer" class="text-primary font-semibold hover:underline">Chat admin via WhatsApp</a> untuk cek slot darurat.
                     </p>
                 </div>
-                <div class="text-right">
-                    <span class="font-label-sm text-secondary text-xs block">Estimasi Subtotal</span>
-                    <span class="font-numeric-currency text-primary text-xl font-bold font-serif" x-text="formatRupiah(calculateTotal())"></span>
+
+                <!-- Jam Dibutuhkan (08:00 - 18:00 WIB) -->
+                <div class="space-y-2">
+                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="event_time">
+                        Jam Pesanan Tiba / Dibutuhkan *
+                    </label>
+                    <select id="event_time" 
+                            name="event_time" 
+                            required
+                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
+                        <option value="08:00">08:00 WIB (Pagi)</option>
+                        <option value="09:00">09:00 WIB</option>
+                        <option value="10:00">10:00 WIB</option>
+                        <option value="11:00" selected>11:00 WIB (Siang / Makan Siang)</option>
+                        <option value="12:00">12:00 WIB</option>
+                        <option value="13:00">13:00 WIB</option>
+                        <option value="14:00">14:00 WIB</option>
+                        <option value="15:00">15:00 WIB</option>
+                        <option value="16:00">16:00 WIB</option>
+                        <option value="17:00">17:00 WIB (Sore)</option>
+                        <option value="18:00">18:00 WIB (Malam)</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- Minimum Order Notice (§6.2: Rp 200.000 / 15 box) -->
-            <div x-show="calculateTotal() < 200000" 
-                 class="p-4 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 flex items-center gap-2.5 text-xs sm:text-sm">
-                <span class="material-symbols-outlined text-[20px] text-amber-700">warning</span>
-                <span>Minimal pemesanan katering adalah <strong>Rp 200.000</strong> (atau 15 porsi). Tambahkan menu untuk melanjutkan.</span>
+            <!-- Jenis Acara Chips (§6.2) -->
+            <div class="space-y-2">
+                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold">
+                    Jenis Acara / Keperluan
+                </label>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-purpose-chip="Arisan Keluarga / RT" class="px-3.5 py-1.5 rounded-full bg-primary text-white text-xs font-semibold shadow-2xs transition-all">
+                        Arisan Keluarga / RT
+                    </button>
+                    <button type="button" data-purpose-chip="Rapat Kantor / Seminar" class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-variant text-xs font-semibold transition-all">
+                        Rapat Kantor / Seminar
+                    </button>
+                    <button type="button" data-purpose-chip="Pengajian / Tasyakuran" class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-variant text-xs font-semibold transition-all">
+                        Pengajian / Tasyakuran
+                    </button>
+                    <button type="button" data-purpose-chip="Ulang Tahun / Syukuran" class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-variant text-xs font-semibold transition-all">
+                        Ulang Tahun / Syukuran
+                    </button>
+                    <button type="button" data-purpose-chip="Pernikahan / Lamaran" class="px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-variant text-xs font-semibold transition-all">
+                        Pernikahan / Lamaran
+                    </button>
+                </div>
+                <input type="hidden" id="event_purpose" name="event_purpose" value="Arisan Keluarga / RT">
             </div>
 
-            <!-- Menu Selector Cards Grid -->
-            <div class="space-y-4">
-                <template x-for="(item, index) in menuCatalog" :key="item.id">
-                    <div class="p-4 rounded-2xl bg-cream-bg border border-surface-variant/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all"
-                         :class="item.qty > 0 ? 'ring-2 ring-primary/40 bg-white' : ''">
-                        <div class="flex items-center gap-3.5">
-                            <img :src="item.image" :alt="item.name" class="w-14 h-14 rounded-xl object-cover bg-surface-container shrink-0">
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <h4 class="font-headline-sm text-on-surface font-semibold text-sm sm:text-base font-serif" x-text="item.name"></h4>
-                                    <span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary text-[10px] font-semibold" x-text="item.category"></span>
-                                </div>
-                                <p class="font-body-sm text-secondary text-xs line-clamp-1 mt-0.5" x-text="item.desc"></p>
-                                <span class="font-numeric-currency text-primary font-bold text-xs sm:text-sm" x-text="formatRupiah(item.price) + ' / ' + item.unit"></span>
-                            </div>
+            <!-- Pengantaran vs Ambil Sendiri (§6.2) -->
+            <div class="space-y-4 pt-2">
+                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold">
+                    Metode Pengambilan Pesanan *
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="p-4 rounded-2xl border border-surface-variant/60 bg-cream-bg flex items-center gap-3 cursor-pointer hover:border-primary transition-all">
+                        <input type="radio" name="delivery_type" value="diantar" checked class="w-4 h-4 text-primary focus:ring-primary">
+                        <div>
+                            <span class="font-bold text-xs sm:text-sm text-on-surface block">Diantar ke Lokasi Acara</span>
+                            <span class="text-secondary text-[11px] block">Armada kami siap antar ke alamat tujuan</span>
                         </div>
+                    </label>
+                    <label class="p-4 rounded-2xl border border-surface-variant/60 bg-cream-bg flex items-center gap-3 cursor-pointer hover:border-primary transition-all">
+                        <input type="radio" name="delivery_type" value="ambil" class="w-4 h-4 text-primary focus:ring-primary">
+                        <div>
+                            <span class="font-bold text-xs sm:text-sm text-on-surface block">Ambil Sendiri di Dapur</span>
+                            <span class="text-secondary text-[11px] block">Ambil langsung di dapur Yan's Food (Bebas ongkir)</span>
+                        </div>
+                    </label>
+                </div>
 
-                        <!-- Stepper Quantity Control -->
-                        <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
-                            <button type="button" 
-                                    @click="adjustQty(item, -1)" 
-                                    :disabled="item.qty === 0"
-                                    class="w-9 h-9 rounded-lg bg-surface-warm border border-surface-variant/40 flex items-center justify-center text-on-surface hover:bg-surface-container disabled:opacity-30 disabled:cursor-not-allowed transition-colors active:scale-95">
-                                <span class="material-symbols-outlined text-[16px]">remove</span>
-                            </button>
-                            <span class="font-mono font-bold text-sm sm:text-base w-8 text-center" x-text="item.qty"></span>
-                            <button type="button" 
-                                    @click="adjustQty(item, 1)" 
-                                    class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-colors active:scale-95 shadow-xs">
-                                <span class="material-symbols-outlined text-[16px]">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </template>
+                <!-- Textarea Alamat Pengantaran -->
+                <div id="delivery-address-wrapper" class="space-y-2 pt-2">
+                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="customer_address">
+                        Alamat Lengkap Pengantaran *
+                    </label>
+                    <textarea id="customer_address" 
+                              name="customer_address" 
+                              rows="2" 
+                              placeholder="Contoh: Jl. Melati No. 12, RT 03/RW 05, Kel. Sukamaju (Patokan dekat Masjid Al-Ikhlas)"
+                              class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm leading-relaxed"></textarea>
+                </div>
             </div>
 
-            <!-- Nav Step 2 -->
-            <div class="pt-6 flex items-center justify-between border-t border-surface-variant/40">
+            <!-- Navigation Button -->
+            <div class="pt-6 flex justify-end border-t border-surface-variant/40">
                 <button type="button" 
-                        @click="step = 1" 
-                        class="px-5 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-xs sm:text-sm hover:bg-surface-container-high transition-colors flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-                    <span>Kembali</span>
-                </button>
-                <button type="button" 
-                        @click="goToStep3()" 
-                        :disabled="calculateTotal() < 200000"
-                        class="px-7 py-3.5 rounded-xl bg-primary text-white font-label-md font-bold text-sm shadow-md hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2 active:scale-95">
-                    <span>Lanjut: Data Pemesan</span>
+                        id="btn-next-step-1"
+                        class="btn-primary w-full sm:w-auto">
+                    <span>Lanjut ke Pilih Menu</span>
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </button>
             </div>
         </div>
 
         <!-- ==============================================
-             STEP 3: DATA PEMESAN & REVIEW (§6.2)
+             STEP 2: PILIH MENU & ESTIMASI LIVE (§6.3)
              ============================================== -->
-        <div x-show="step === 3" x-transition.opacity.duration.300ms class="space-y-6">
+        <div data-step="2" class="hidden space-y-6">
             <div class="border-b border-surface-variant/40 pb-4">
-                <h3 class="font-headline-md text-2xl text-on-surface font-serif">Langkah 3: Data Pemesan & Konfirmasi</h3>
+                <h3 class="font-headline-md text-2xl text-on-surface font-serif">Langkah 2: Tentukan Menu Katering</h3>
                 <p class="font-body-sm text-secondary text-xs sm:text-sm mt-1">
-                    Pastikan nomor WhatsApp dan alamat pengantaran akurat agar admin dapat mengonfirmasi slot pesanan.
+                    Pilih menu favorit Anda dan atur jumlah porsi yang dibutuhkan untuk tamu acara.
                 </p>
             </div>
 
+            <!-- Main Layout: Menu Catalog (Left) + Live Sticky Summary (Right) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Catalog Column (7 cols) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="flex items-center justify-between text-xs text-secondary font-semibold pb-1">
+                        <span>DAFTAR MENU KATERING</span>
+                        <span>ATUR PORSI (+ / -)</span>
+                    </div>
+
+                    <!-- Items List Container rendered by JS -->
+                    <div id="catering-menu-items" class="space-y-3">
+                        <!-- Populated dynamically via catering-form.js -->
+                    </div>
+                </div>
+
+                <!-- Right Live Summary Column (5 cols) (§6.3) -->
+                <div class="lg:col-span-5 sticky top-28 space-y-4">
+                    <div class="p-6 rounded-3xl bg-sand-bg border border-surface-variant/60 shadow-xs space-y-5">
+                        <div class="flex items-center justify-between border-b border-surface-variant/40 pb-3">
+                            <span class="font-headline-sm font-serif font-bold text-base text-on-surface">Rincian Pesananmu</span>
+                            <span id="live-items-count" class="font-label-sm text-xs text-secondary">0 item dipilih</span>
+                        </div>
+
+                        <!-- Selected Items List -->
+                        <div id="live-selected-items-list" class="max-h-56 overflow-y-auto space-y-1">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <!-- Minimum Order Progress Rule (§6.3) -->
+                        <div class="space-y-2 pt-2 border-t border-surface-variant/40">
+                            <div class="w-full h-2 rounded-full bg-surface-variant/40 overflow-hidden">
+                                <div id="min-order-progress" class="h-full bg-primary transition-all duration-300" style="width: 0%;"></div>
+                            </div>
+                            <div id="min-order-alert" class="p-3 rounded-xl bg-amber-50 text-amber-900 text-xs flex items-center gap-2 border border-amber-200">
+                                <span class="material-symbols-outlined text-[18px] text-amber-600">info</span>
+                                <span>Minimal pesanan katering adalah Rp 200.000</span>
+                            </div>
+                        </div>
+
+                        <!-- Live Total Estimation -->
+                        <div class="pt-3 border-t border-surface-variant/40 flex items-center justify-between">
+                            <div>
+                                <span class="font-label-sm text-xs text-secondary block">Estimasi Total</span>
+                                <span class="text-[10px] text-secondary italic">Dikonfirmasi ulang oleh admin</span>
+                            </div>
+                            <div id="live-total-desktop" class="font-numeric-currency text-2xl font-bold text-primary font-serif">
+                                Rp 0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-surface-variant/40">
+                <button type="button" 
+                        data-action="prev-step" 
+                        class="btn-outline w-full sm:w-auto">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    <span>Kembali ke Jadwal</span>
+                </button>
+
+                <button type="button" 
+                        id="btn-next-step-2" 
+                        disabled
+                        class="btn-primary w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span>Lanjut ke Data Pemesan</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==============================================
+             STEP 3: DATA PEMESAN & KONFIRMASI (§6.4)
+             ============================================== -->
+        <div data-step="3" class="hidden space-y-6">
+            <div class="border-b border-surface-variant/40 pb-4">
+                <h3 class="font-headline-md text-2xl text-on-surface font-serif">Langkah 3: Data Pemesan & Konfirmasi</h3>
+                <p class="font-body-sm text-secondary text-xs sm:text-sm mt-1">
+                    Periksa kembali ringkasan pesanan Anda sebelum mengirim permintaan ke WhatsApp admin.
+                </p>
+            </div>
+
+            <!-- Customer Contact Fields -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Nama Pemesan -->
                 <div class="space-y-2">
                     <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="customer_name">
                         Nama Lengkap Pemesan *
                     </label>
                     <input type="text" 
                            id="customer_name" 
-                           x-model="form.customer_name" 
-                           placeholder="Contoh: Ibu Rina Hartono" 
+                           name="customer_name" 
+                           autocomplete="name"
+                           placeholder="Contoh: Ibu Siti Rahma" 
                            required 
-                           @input="saveDraft()"
                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
                 </div>
 
-                <!-- Nomor WhatsApp -->
                 <div class="space-y-2">
                     <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="customer_phone">
                         Nomor WhatsApp Aktif *
                     </label>
-                    <input type="tel" 
-                           id="customer_phone" 
-                           x-model="form.customer_phone" 
-                           placeholder="Contoh: 081234567890" 
-                           required 
-                           @input="saveDraft()"
-                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
+                    <div class="relative flex items-center">
+                        <span class="absolute left-4 font-mono font-bold text-sm text-secondary select-none">
+                            +62
+                        </span>
+                        <input type="tel" 
+                               id="customer_phone" 
+                               name="customer_phone" 
+                               inputmode="tel"
+                               autocomplete="tel"
+                               placeholder="812 3456 7890" 
+                               required 
+                               class="w-full pl-14 pr-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
+                    </div>
+                    <span class="text-[11px] text-secondary">Admin kami akan menghubungi nomor ini untuk konfirmasi akhir.</span>
                 </div>
             </div>
 
-            <!-- Alamat Pengiriman -->
+            <!-- Special Notes (§6.4) -->
             <div class="space-y-2">
-                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="customer_address">
-                    Alamat Pengantaran Lengkap * <span class="text-secondary font-normal text-xs">(Sertakan patokan lokasi/gedung)</span>
-                </label>
-                <textarea id="customer_address" 
-                          x-model="form.customer_address" 
-                          rows="3" 
-                          placeholder="Jalan, Nomor Rumah / Gedung / Kantor, RT/RW, Kelurahan, Kecamatan, Patokan..." 
-                          required 
-                          @input="saveDraft()"
-                          class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm resize-y"></textarea>
+                <div class="flex items-center justify-between">
+                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="catering_notes">
+                        Catatan Khusus (Opsional)
+                    </label>
+                    <span id="notes-char-count" class="text-xs text-secondary">0/500</span>
+                </div>
+                <textarea id="catering_notes" 
+                          name="notes" 
+                          rows="2" 
+                          maxlength="500"
+                          placeholder="Alergi makanan, tingkat pedas, permintaan kemasan khusus, atau request tambahan..." 
+                          class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm leading-relaxed"></textarea>
             </div>
 
-            <!-- Catatan Khusus -->
-            <div class="space-y-2">
-                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="notes">
-                    Catatan Khusus (Opsional)
-                </label>
-                <input type="text" 
-                       id="notes" 
-                       x-model="form.notes" 
-                       placeholder="Misal: Sambal dipisah wadah tersendiri, mohon diantar tepat jam 11 siang..." 
-                       @input="saveDraft()"
-                       class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm">
-            </div>
-
-            <!-- Live Review Card -->
-            <div class="p-5 rounded-2xl bg-cream-bg border border-surface-variant/50 space-y-4">
+            <!-- Final Order Recap Card (§6.4) -->
+            <div class="rounded-2xl bg-surface-container/40 p-5 sm:p-6 border border-surface-variant/50 space-y-4">
                 <div class="flex items-center justify-between border-b border-surface-variant/40 pb-3">
-                    <span class="font-label-md text-on-surface font-bold text-sm uppercase tracking-wider">Ringkasan Pesanan Katering</span>
-                    <span class="font-mono text-xs text-secondary" x-text="form.event_date + ' (' + form.event_time + ' WIB)'"></span>
+                    <h4 class="font-headline-sm font-serif font-bold text-on-surface text-base">Ringkasan Pesanan Katering</h4>
+                    <span class="text-xs text-primary font-semibold">Cek Sebelum Mengirim</span>
                 </div>
-                
-                <div class="space-y-2 text-xs sm:text-sm font-body-sm text-secondary">
-                    <div class="flex justify-between">
-                        <span>Acara:</span>
-                        <span class="font-semibold text-on-surface" x-text="form.event_purpose"></span>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-secondary">Jadwal Acara:</span>
+                            <a href="#" data-goto-step="1" class="text-primary hover:underline font-semibold">Ubah</a>
+                        </div>
+                        <p id="recap-schedule" class="font-bold text-on-surface">-</p>
                     </div>
-                    <div class="flex justify-between">
-                        <span>Pemesan:</span>
-                        <span class="font-semibold text-on-surface" x-text="form.customer_name + ' (' + form.customer_phone + ')'"></span>
+
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-secondary">Metode / Lokasi:</span>
+                            <a href="#" data-goto-step="1" class="text-primary hover:underline font-semibold">Ubah</a>
+                        </div>
+                        <p id="recap-delivery" class="font-bold text-on-surface">-</p>
                     </div>
-                    <div class="border-t border-surface-variant/30 pt-2 space-y-1">
-                        <template x-for="item in getSelectedItems()" :key="item.id">
-                            <div class="flex justify-between text-on-surface">
-                                <span x-text="item.qty + 'x ' + item.name"></span>
-                                <span class="font-mono font-semibold" x-text="formatRupiah(item.price * item.qty)"></span>
-                            </div>
-                        </template>
+                </div>
+
+                <div class="space-y-1.5 pt-3 border-t border-surface-variant/40">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-secondary">Menu yang Dipesan:</span>
+                        <a href="#" data-goto-step="2" class="text-primary hover:underline font-semibold">Ubah</a>
                     </div>
-                    <div class="border-t border-surface-variant/40 pt-3 flex justify-between items-center text-sm sm:text-base">
-                        <span class="font-bold text-on-surface">Total Estimasi:</span>
-                        <span class="font-numeric-currency text-primary text-xl font-bold font-serif" x-text="formatRupiah(calculateTotal())"></span>
+                    <div id="recap-menu-list" class="space-y-1 text-on-surface">
+                        <!-- Populated dynamically -->
                     </div>
+                </div>
+
+                <div class="pt-3 border-t border-surface-variant/40 flex items-center justify-between">
+                    <span class="font-bold text-sm text-on-surface">Estimasi Total Biaya</span>
+                    <span id="recap-total" class="font-numeric-currency text-xl font-bold text-primary font-serif">Rp 0</span>
                 </div>
             </div>
 
-            <!-- Nav Step 3 & Submit Button -->
+            <!-- Agreement Checkbox (§6.4) -->
+            <div class="pt-2">
+                <label class="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" 
+                           id="order_agreement" 
+                           required 
+                           class="w-5 h-5 rounded text-primary focus:ring-primary mt-0.5">
+                    <span class="text-xs sm:text-sm text-secondary leading-relaxed select-none">
+                        Saya paham ini merupakan formulir permintaan pesanan awal; total final dan kesepakatan uang muka (DP 50%) akan dikonfirmasi resmi oleh admin Yan's Food via WhatsApp.
+                    </span>
+                </label>
+            </div>
+
+            <!-- Navigation & Submit Action (§6.4) -->
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-surface-variant/40">
                 <button type="button" 
-                        @click="step = 2" 
-                        class="w-full sm:w-auto px-5 py-3 rounded-xl bg-surface-container text-on-surface font-label-md text-xs sm:text-sm hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+                        data-action="prev-step" 
+                        class="btn-outline w-full sm:w-auto">
                     <span class="material-symbols-outlined text-[18px]">arrow_back</span>
                     <span>Kembali ke Menu</span>
                 </button>
+
                 <button type="submit" 
-                        :disabled="isSubmitting"
-                        class="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-white font-label-md font-bold text-sm shadow-md hover:bg-primary-dark transition-all flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-50">
-                    <span x-show="!isSubmitting" class="material-symbols-outlined text-[20px]">send</span>
-                    <span x-show="isSubmitting" class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
-                    <span x-text="isSubmitting ? 'Mencatat Pesanan...' : 'Kirim Pesanan Katering'"></span>
+                        id="btn-submit-catering" 
+                        class="btn-primary w-full sm:w-auto px-8">
+                    <span class="submit-spinner hidden material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+                    <span class="submit-label">Kirim Pesanan Katering</span>
+                    <span class="material-symbols-outlined text-[18px]">send</span>
                 </button>
             </div>
         </div>
     </form>
 </div>
-
-<!-- Alpine Wizard Script (§6) -->
-<script>
-    function cateringWizard() {
-        const today = new Date();
-        // Minimal H-2 (§6.2)
-        const minD = new Date(today);
-        minD.setDate(today.getDate() + 2);
-        const minDateStr = minD.toISOString().split('T')[0];
-
-        // Format default time 10:00
-        const defaultDateStr = minDateStr;
-
-        const defaultCatalog = [
-            {
-                id: 1,
-                name: 'Paket Snack Box Manis & Gurih',
-                category: 'Snack Box',
-                desc: 'Risol Mayo + Pisang Coklat + Tahu Bakso + Air Mineral Cup',
-                price: 12000,
-                unit: 'box',
-                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuARZOQ96wet-CMX5rdD7lCFZyLs1EkrpKnlUC0RR99N8F7qRKAtVDp0zOXrFg0euopAroL4wdJES5KEUP4Mc10u-UzZYXlvj3_U850HmHFdI-2qa02DqfAOUMw-0VbCaGvmAt2949p2eWuHqz3RcdS7ODq1G6OninQUnQZKMoxPO6O-lS3WjYQWINUV6vdxskptYAzfbyMOIB5K2-d37eZht5g2KMxF67gGOJStQ-AFmbk3gNEvgEtd',
-                qty: 20
-            },
-            {
-                id: 2,
-                name: 'Paket Nasi Kotak Nusantara (Terpopuler)',
-                category: 'Nasi Kotak',
-                desc: 'Nasi Daun Jeruk + Ayam Goreng Rempah + Telur Balado + Sambal + Kerupuk',
-                price: 28000,
-                unit: 'box',
-                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFkmFBQYeBj264oHilvJ9JGnrJ_1PQwJXxR2gokTFFviNr5gzGCDexUL9qKdLaBaTQmtl7Kr6kSRlVtonMXlr1NwwYVSGTCtr6AFa_iWNSqQ0D74vSZRm_HMXg6AOgcxsT3bHsrxoTQvSyHcyUcv3avNKLywFGPb8AYZAxOuVzhC-mVzhPiHFbQD6tEbON-W1f62G9pLQr_QEupaxxHXBTmkPriy348OCpVdEAQzNnXKeNuLYcLUDR',
-                qty: 0
-            },
-            {
-                id: 3,
-                name: 'Risol Mayo Spesial (Satuan)',
-                category: 'Kudapan',
-                desc: 'Kulit renyah lembut, smoked beef, telur, & saus mayo gurih lumer',
-                price: 4500,
-                unit: 'pcs',
-                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCyfuXln7cyGrY2lKM07Nk3VKMQjY3ZTmHoC1dw90oSQpU6K9GToD9dsNw7j-ONqeDlAGA4dUHsambXmkUw1VSykY9WS5EuOrd2vXOLVz_gDlJDQpTckcMcGct8EuAcmM-Aj5VFqr78aR9bpsCfWc7L5uPmlfvvfJvmZbLdxztCm-fUjNoCNBg6rJwiIGonOikHOEVhan_cN8QOl7vVORz_mOuXsXhhH3TopjOFzgKMvjN75USyuea4',
-                qty: 0
-            },
-            {
-                id: 4,
-                name: 'Pisang Coklat Crispy (Satuan)',
-                category: 'Kudapan',
-                desc: 'Pisang raja manis legit dengan coklat melimpah berbalut kulit crispy emas',
-                price: 3500,
-                unit: 'pcs',
-                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX',
-                qty: 0
-            },
-            {
-                id: 5,
-                name: 'Nasi Goreng Jadul Yan\'s',
-                category: 'Makanan Berat',
-                desc: 'Bumbu ulek terasi tradisional, suwiran ayam, telur ceplok, & kerupuk',
-                price: 22000,
-                unit: 'porsi',
-                image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCvbMqJp4vasmNPRn7HlUQ53R3QwrbMiAJGRmOeSP3xoEqc-hb5EkQx28tGjOOddzhbh0BvjFwX_K2C7FkHaJpySF2zidCDs-Bx_mHHA3URhRcMv1OQhfIUJ4SnK1xWUswF-WwKCxa8-zJZmfBBJz1XBLusLQAzk5BcvZvIXzaDl0b5CzAHuTSEZQKFm2axnelXGbXdYgGwaMGpV41iikvWXq7ZllZ-h_pkIUZOUgUcN8KoU_ETwohF',
-                qty: 0
-            }
-        ];
-
-        return {
-            step: 1,
-            minDate: minDateStr,
-            hasDraft: false,
-            draftDismissed: false,
-            isSubmitting: false,
-            form: {
-                event_date: defaultDateStr,
-                event_time: '11:00',
-                event_purpose: 'Arisan Keluarga / RT',
-                estimated_guests: 20,
-                customer_name: '',
-                customer_phone: '',
-                customer_address: '',
-                notes: '',
-                website_trap: ''
-            },
-            menuCatalog: defaultCatalog,
-
-            init() {
-                this.checkDraft();
-            },
-
-            checkDraft() {
-                try {
-                    const raw = localStorage.getItem('yf_catering_draft_v1');
-                    if (raw) {
-                        const parsed = JSON.parse(raw);
-                        const ttl = 48 * 60 * 60 * 1000; // 48 jam (§6.6)
-                        if (Date.now() - (parsed.savedAt || 0) < ttl) {
-                            this.hasDraft = true;
-                        } else {
-                            localStorage.removeItem('yf_catering_draft_v1');
-                        }
-                    }
-                } catch (e) {
-                    console.warn(e);
-                }
-            },
-
-            saveDraft() {
-                try {
-                    const data = {
-                        form: this.form,
-                        menuCatalog: this.menuCatalog,
-                        step: this.step,
-                        savedAt: Date.now()
-                    };
-                    localStorage.setItem('yf_catering_draft_v1', JSON.stringify(data));
-                } catch (e) {
-                    console.warn(e);
-                }
-            },
-
-            restoreDraft() {
-                try {
-                    const raw = localStorage.getItem('yf_catering_draft_v1');
-                    if (raw) {
-                        const parsed = JSON.parse(raw);
-                        if (parsed.form) this.form = Object.assign(this.form, parsed.form);
-                        if (parsed.menuCatalog) this.menuCatalog = parsed.menuCatalog;
-                        if (parsed.step) this.step = parsed.step;
-                    }
-                    this.hasDraft = false;
-                    this.draftDismissed = true;
-                    if (window.showToast) window.showToast('Draf pesanan berhasil dipulihkan!');
-                } catch (e) {
-                    console.warn(e);
-                }
-            },
-
-            discardDraft() {
-                try {
-                    localStorage.removeItem('yf_catering_draft_v1');
-                } catch (e) {}
-                this.hasDraft = false;
-                this.draftDismissed = true;
-            },
-
-            adjustQty(item, delta) {
-                item.qty = Math.max(0, item.qty + delta);
-                this.saveDraft();
-            },
-
-            calculateTotal() {
-                return this.menuCatalog.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            },
-
-            getSelectedItems() {
-                return this.menuCatalog.filter(it => it.qty > 0);
-            },
-
-            formatRupiah(num) {
-                return 'Rp ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            },
-
-            goToStep2() {
-                if (!this.form.event_date || !this.form.event_time || !this.form.event_purpose) {
-                    alert('Mohon lengkapi seluruh informasi rencana acara Anda.');
-                    return;
-                }
-                this.step = 2;
-                this.saveDraft();
-            },
-
-            goToStep3() {
-                if (this.calculateTotal() < 200000) {
-                    alert('Minimal pemesanan katering adalah Rp 200.000.');
-                    return;
-                }
-                this.step = 3;
-                this.saveDraft();
-            },
-
-            async submitOrder() {
-                if (!this.form.customer_name || !this.form.customer_phone || !this.form.customer_address) {
-                    alert('Mohon lengkapi nama pemesan, nomor WhatsApp, dan alamat pengiriman.');
-                    return;
-                }
-
-                this.isSubmitting = true;
-
-                const selectedItems = this.getSelectedItems();
-                const primaryItem = selectedItems[0] || null;
-
-                const payload = {
-                    customer_name: this.form.customer_name,
-                    customer_phone: this.form.customer_phone,
-                    customer_address: this.form.customer_address,
-                    event_date: this.form.event_date,
-                    event_time: this.form.event_time,
-                    event_purpose: this.form.event_purpose,
-                    notes: this.form.notes,
-                    package_type: primaryItem ? primaryItem.name : 'Custom Katering',
-                    quantity: primaryItem ? primaryItem.qty : this.form.estimated_guests,
-                    website_trap: this.form.website_trap
-                };
-
-                try {
-                    const response = await fetch('{{ route("pesan-catering.store") }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const res = await response.json();
-
-                    if (res.success && res.redirect_url) {
-                        localStorage.removeItem('yf_catering_draft_v1');
-                        window.location.href = res.redirect_url;
-                    } else if (res.whatsapp_url) {
-                        localStorage.removeItem('yf_catering_draft_v1');
-                        window.location.href = res.whatsapp_url;
-                    } else {
-                        alert(res.message || 'Terjadi kendala saat menyimpan pesanan.');
-                    }
-                } catch (err) {
-                    console.error('Submit error', err);
-                    alert('Koneksi terputus. Silakan hubungi WhatsApp kami langsung.');
-                } finally {
-                    this.isSubmitting = false;
-                }
-            }
-        };
-    }
-</script>

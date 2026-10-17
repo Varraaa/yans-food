@@ -41,7 +41,7 @@
         <x-category-filter />
     </section>
 
-    <!-- Product Catalog Grid -->
+    <!-- Product Catalog Grid (§5.3) -->
     <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="productGrid" data-reveal-group>
             @if(isset($products) && $products->isNotEmpty())
@@ -55,7 +55,7 @@
                         elseif (stripos($catName, 'Minum') !== false) $catSlug = 'minuman';
                         else $catSlug = \Illuminate\Support\Str::slug($catName);
                     @endphp
-                    <x-food-card 
+                    <x-public.product-card 
                         :title="$product->name"
                         :category="$catName"
                         :categorySlug="$catSlug"
@@ -63,98 +63,118 @@
                         :unit="'/ ' . ($product->unit ?? 'pcs')"
                         :image="$product->image ?? 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'"
                         :desc="$product->description ?? 'Olahan kuliner lezat khas racikan bumbu dapur Yan\'s Food.'"
-                        :status="$product->status === 'available' ? 'sedia' : 'habis'"
-                        :isFavorite="$loop->first || $loop->iteration <= 2" />
+                        :status="$product->status ?? 'sedia'"
+                        :isFavorite="$loop->first || $loop->iteration <= 2"
+                        :slug="\Illuminate\Support\Str::slug($product->name)" />
                 @endforeach
             @else
-                <!-- Fallback Hardcoded Demo Items jika database belum dimigrasikan -->
+                <!-- Fallback Curated Items (§5.3) -->
                 <!-- Item 1: Risol Mayo Beef & Egg -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Risol Mayo Beef & Egg"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="4.500"
+                    price="4500"
                     unit="/ pcs"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB"
                     desc="Mayo homemade creamy dengan smoked beef dan potongan telur rebus berbalut tepung roti emas renyah."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="risol-mayo-beef-egg" />
 
                 <!-- Item 2: Pisang Coklat Crispy -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Pisang Coklat Crispy"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="3.500"
+                    price="3500"
                     unit="/ pcs"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX"
                     desc="Pisang manis legit dengan coklat premium leleh di dalam balutan kulit pastry renyah khas racikan Yan's Food."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="pisang-coklat-crispy" />
 
                 <!-- Item 3: Tahu Bakso Kukus / Goreng -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Tahu Bakso Kukus/Goreng"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="4.000"
+                    price="4000"
                     unit="/ pcs"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuBWCJRdB6spLCGTymtJSbPtZOo9HW9h2e5gDOOhwEBsMleb1NUkgXF2RqgdpqDgWsIiYxLJU-17um6yqSXGfVnPGwhcA2IygU-19yHAwJ6H8ttkpLdFe0g_U7Gabr5SOtTcBleLvWsZ6KOhDrJh1hEyy30IU60mbxUEYVPIIROvocFVMKwDDsiyt7_MiGA16pfu0qPrgAGw3l4iKJgmifbCXjfaPjjJeRokLGbi1mepW0guL4PLjhaF"
                     desc="Daging sapi asli berpadu lembutnya tahu pong gurih, disajikan dengan cabai rawit hijau segar menggigit."
                     status="sedia"
-                    :isFavorite="false" />
+                    :isFavorite="false"
+                    slug="tahu-bakso-kukus-goreng" />
 
                 <!-- Item 4: Nasi Goreng Jadul Yan's -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Nasi Goreng Jadul Yan's"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="22.000"
+                    price="22000"
                     unit="/ porsi"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5"
                     desc="Racikan bumbu ulek terasi khas tempo dulu, suwiran ayam gurih, telur ceplok setengah matang, dan acar timun segar."
                     status="sedia"
-                    :isFavorite="true" />
+                    :isFavorite="true"
+                    slug="nasi-goreng-jadul-yans" />
 
                 <!-- Item 5: Nasi Ayam Sambal Korek -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Nasi Ayam Sambal Korek"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="25.000"
+                    price="25000"
                     unit="/ porsi"
                     image="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau"
                     desc="Ayam goreng gurih renyah dengan siraman sambal korek bawang pedas nendang, lalapan segar, & nasi hangat."
                     status="sedia"
-                    :isFavorite="false" />
+                    :isFavorite="false"
+                    slug="nasi-ayam-sambal-korek" />
 
                 <!-- Item 6: Es Kopi Susu Gula Aren -->
-                <x-food-card 
+                <x-public.product-card 
                     title="Es Kopi Susu Gula Aren"
                     category="Minuman Segar"
                     categorySlug="minuman"
-                    price="15.000"
+                    price="15000"
                     unit="/ cup"
                     image="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80"
                     desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang pas tanpa rasa manis berlebih."
                     status="sedia"
-                    :isFavorite="false" />
+                    :isFavorite="false"
+                    slug="es-kopi-susu-gula-aren" />
             @endif
         </div>
 
-        <!-- Empty State Container -->
-        <div id="empty-state" class="hidden flex-col items-center justify-center py-16 px-4 text-center">
-            <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4">
-                <span class="material-symbols-outlined text-primary text-[32px]">soup_kitchen</span>
+        <!-- Empty State Container (§5.3 point 355, §7) -->
+        <div id="menuEmptyState" class="hidden flex-col items-center justify-center py-16 px-4 text-center bg-surface-warm/50 rounded-3xl border border-surface-variant/30 mt-6">
+            <div class="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center mb-4 text-primary shadow-xs">
+                <span class="material-symbols-outlined text-[36px]">search_off</span>
             </div>
-            <h3 class="font-headline-sm text-on-surface font-semibold text-lg mb-1 font-serif">Menu Tidak Ditemukan</h3>
-            <p class="font-body-sm text-secondary max-w-xs mb-5">
-                Coba cari dengan kata kunci lain atau pilih kategori masakan kami yang lain.
+            <h3 class="font-headline-sm text-on-surface font-semibold text-xl mb-1.5 font-serif">Belum Ada Menu yang Cocok</h3>
+            <p class="font-body-md text-secondary max-w-sm mb-6 text-sm">
+                Tidak ada menu yang sesuai dengan <span id="emptySearchQuery" class="font-semibold text-on-surface"></span>. Coba kata kunci lain atau reset filter.
             </p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <button type="button" 
+                        id="menuResetFilterBtn"
+                        class="btn-primary text-xs sm:text-sm">
+                    <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                    <span>Tampilkan Semua Menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Load More Button (§5.3 point 353) -->
+        <div class="pt-10 flex justify-center">
             <button type="button" 
-                    onclick="document.querySelector('.category-btn[data-filter=\'all\']').click(); document.getElementById('searchInput').value = '';"
-                    class="px-5 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md shadow-sm">
-                Tampilkan Semua Menu
+                    id="menuLoadMoreBtn" 
+                    class="hidden btn-outline text-xs sm:text-sm">
+                <span>Tampilkan Lebih Banyak Menu</span>
+                <span class="material-symbols-outlined text-[18px]">expand_more</span>
             </button>
         </div>
     </section>

@@ -1,214 +1,51 @@
 /**
- * Yan's Food — Public Web UX & Micro-interactions
+ * Yan's Food — Main Application Script
  * Compliant with YANS-FOOD-WEB-UX-SPECIFICATION.md
  */
+
+import { initScrollReveal } from './modules/reveal.js';
+import { initNavbar } from './modules/navbar.js';
+import { initHeroIntro } from './modules/hero-intro.js';
+import { initFloatingWA } from './modules/wa-fab.js';
+import { initToast } from './modules/toast.js';
+import { initScrollProgress } from './modules/scroll-progress.js';
+import { initOperatingHours } from './modules/operating-hours.js';
+import { initOrderSuccess } from './modules/order-success.js';
+import { initContactPage } from './modules/contact.js';
+import { initMenuCatalog } from './modules/menu-catalog.js';
+import { initProductModal } from './modules/product-modal.js';
+import { initPesanIntent } from './modules/pesan-intent.js';
+import { initAccordions } from './modules/accordion.js';
+import { initCateringForm } from './modules/catering-form.js';
+import { initLightbox } from './modules/lightbox.js';
+import { initAnalytics } from './modules/analytics.js';
 
 // 1. Progressive Enhancement Marker (§3.2)
 document.documentElement.classList.add('js');
 
+// 2. Initialize UX Modules on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
+    initAnalytics();
     initScrollReveal();
-    initNavbarScroll();
-    initMobileNav();
+    initNavbar();
+    initHeroIntro();
     initFloatingWA();
-    initBackToTop();
+    initToast();
+    initScrollProgress();
+    initOperatingHours();
+    initOrderSuccess();
+    initContactPage();
+    initMenuCatalog();
+    initProductModal();
+    initPesanIntent();
+    initAccordions();
+    initCateringForm();
+    initLightbox();
+    initBackToTopButton();
 });
 
-// ==========================================================================
-// 2. SCROLL REVEAL (IntersectionObserver Tunggal - §3.2)
-// ==========================================================================
-function initScrollReveal() {
-    const revealElements = document.querySelectorAll('[data-reveal]');
-    if (!revealElements.length) return;
-
-    // Hormati prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-        revealElements.forEach(el => el.classList.add('is-revealed'));
-        return;
-    }
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                
-                // Cek delay manual
-                const delay = el.getAttribute('data-reveal-delay');
-                if (delay) {
-                    setTimeout(() => el.classList.add('is-revealed'), parseInt(delay, 10));
-                } else {
-                    el.classList.add('is-revealed');
-                }
-                
-                obs.unobserve(el);
-            }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -8% 0px'
-    });
-
-    revealElements.forEach(el => {
-        // Abaikan elemen di atas lipatan layar saat pemuatan awal
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            el.classList.add('is-revealed');
-        } else {
-            observer.observe(el);
-        }
-    });
-
-    // Handle container data-reveal-group
-    const groups = document.querySelectorAll('[data-reveal-group]');
-    groups.forEach(group => {
-        const children = group.children;
-        Array.from(children).forEach((child, index) => {
-            if (!child.hasAttribute('data-reveal')) {
-                child.setAttribute('data-reveal', 'up');
-            }
-            if (!child.hasAttribute('data-reveal-delay')) {
-                const stagger = Math.min(index, 6) * 60; // --stagger 60ms, max 6
-                child.setAttribute('data-reveal-delay', stagger);
-            }
-            observer.observe(child);
-        });
-    });
-}
-
-// ==========================================================================
-// 3. NAVBAR SCROLL BEHAVIOR: Sticky & Persistent Across All Pages
-// ==========================================================================
-function initNavbarScroll() {
-    const navbar = document.getElementById('main-navbar');
-    if (!navbar) return;
-
-    // Pastikan navbar selalu terlihat (tidak pernah transform translateY(-100%))
-    navbar.style.transform = 'translateY(0)';
-
-    function handleScroll() {
-        const currentScrollY = window.scrollY;
-
-        // Shrink & elevated state saat di-scroll (> 16px)
-        if (currentScrollY > 16) {
-            navbar.classList.add('is-shrunk', 'is-scrolled');
-        } else {
-            navbar.classList.remove('is-shrunk', 'is-scrolled');
-        }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Trigger initial state
-}
-
-// ==========================================================================
-// 4. MOBILE DRAWER OVERLAY (§3.4)
-// ==========================================================================
-function initMobileNav() {
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const drawer = document.getElementById('mobile-drawer');
-    const backdrop = document.getElementById('mobile-nav-backdrop');
-    const closeBtn = document.getElementById('mobile-drawer-close');
-
-    if (!toggleBtn || !drawer || !backdrop) return;
-
-    function openNav() {
-        document.body.classList.add('mobile-menu-open', 'overflow-hidden');
-        backdrop.classList.remove('opacity-0', 'pointer-events-none');
-        backdrop.classList.add('opacity-100', 'pointer-events-auto');
-        drawer.classList.remove('translate-x-full');
-        drawer.classList.add('translate-x-0');
-        toggleBtn.classList.add('is-active');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeNav() {
-        document.body.classList.remove('mobile-menu-open', 'overflow-hidden');
-        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
-        backdrop.classList.add('opacity-0', 'pointer-events-none');
-        drawer.classList.remove('translate-x-0');
-        drawer.classList.add('translate-x-full');
-        toggleBtn.classList.remove('is-active');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        const isOpen = document.body.classList.contains('mobile-menu-open');
-        if (isOpen) closeNav(); else openNav();
-    });
-
-    if (closeBtn) closeBtn.addEventListener('click', closeNav);
-    backdrop.addEventListener('click', closeNav);
-
-    // Close on Escape key
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) {
-            closeNav();
-            toggleBtn.focus();
-        }
-    });
-
-    // Close when tapping navigation link inside drawer
-    drawer.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            closeNav();
-        });
-    });
-
-    // Expose globally for inline buttons if needed
-    window.openMobileNav = openNav;
-    window.closeMobileNav = closeNav;
-}
-
-// ==========================================================================
-// 5. FLOATING WHATSAPP CTA (§3.5)
-// ==========================================================================
-function initFloatingWA() {
-    const waBtn = document.getElementById('floating-wa-btn');
-    if (!waBtn) return;
-
-    let hasPulsed = false;
-    const cateringFormSection = document.getElementById('katering');
-
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-
-        // Hide in first 600px
-        if (scrollY < 600) {
-            waBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            waBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            return;
-        }
-
-        // Hide when catering form is actively in view (§3.5)
-        if (cateringFormSection) {
-            const rect = cateringFormSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                waBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-                waBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-                return;
-            }
-        }
-
-        // Show button
-        waBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-        waBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-
-        // One-time gentle pulse (§3.5)
-        if (!hasPulsed) {
-            hasPulsed = true;
-            waBtn.classList.add('animate-pulse');
-            setTimeout(() => {
-                waBtn.classList.remove('animate-pulse');
-            }, 1200);
-        }
-    }, { passive: true });
-}
-
-// ==========================================================================
-// 6. BACK TO TOP BUTTON (§3.4, M25)
-// ==========================================================================
-function initBackToTop() {
+// 3. Back to Top Button (§3.4, M25)
+function initBackToTopButton() {
     const btn = document.getElementById('back-to-top-btn');
     if (!btn) return;
 
@@ -227,61 +64,23 @@ function initBackToTop() {
     });
 }
 
-// ==========================================================================
-// 7. TOAST NOTIFICATION SYSTEM (§3.6)
-// ==========================================================================
-window.showToast = function(message, type = 'status') {
-    let toast = document.getElementById('toast-feedback');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toast-feedback';
-        toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
-        toast.setAttribute('aria-live', 'polite');
-        toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center gap-3 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl max-w-sm text-xs font-semibold border border-white/10';
-        document.body.appendChild(toast);
-    }
+// 4. Global Add to Cart & Storage Helper
+window.addToCart = function(title, price, category = 'Makanan') {
+    let cart = JSON.parse(localStorage.getItem('yans_cart') || '[]');
+    const numericPrice = typeof price === 'number' ? price : parseInt(String(price).replace(/[^0-9]/g, ''), 10) || 0;
+    const existing = cart.find(item => item.title === title);
 
-    toast.innerHTML = `
-        <span class="text-amber-400 text-base">${type === 'error' ? '⚠️' : '✅'}</span>
-        <span>${message}</span>
-    `;
-
-    toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-    toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-
-    clearTimeout(window._toastTimeout);
-    window._toastTimeout = setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-    }, 4000);
-};
-
-// Clipboard copy helper with toast (M23)
-window.copyToClipboard = function(text, successMessage = 'Teks berhasil disalin!') {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-            window.showToast(successMessage);
-        }).catch(() => {
-            fallbackCopyText(text, successMessage);
-        });
+    if (existing) {
+        existing.qty += 1;
     } else {
-        fallbackCopyText(text, successMessage);
+        cart.push({ title, price: numericPrice, category, qty: 1 });
+    }
+
+    localStorage.setItem('yans_cart', JSON.stringify(cart));
+    if (typeof window.updateCartBadge === 'function') {
+        window.updateCartBadge();
+    }
+    if (typeof window.showToast === 'function') {
+        window.showToast(`${title} ditambahkan ke pesanan!`);
     }
 };
-
-function fallbackCopyText(text, successMessage) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-9999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-        document.execCommand('copy');
-        window.showToast(successMessage);
-    } catch (err) {
-        window.showToast('Gagal menyalin teks.', 'error');
-    }
-    document.body.removeChild(textArea);
-}
