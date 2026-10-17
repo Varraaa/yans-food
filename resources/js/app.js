@@ -41,28 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initAccordions();
     initCateringForm();
     initLightbox();
-    initBackToTopButton();
 });
-
-// 3. Back to Top Button (§3.4, M25)
-function initBackToTopButton() {
-    const btn = document.getElementById('back-to-top-btn');
-    if (!btn) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > window.innerHeight * 1.5) {
-            btn.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
-            btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-        } else {
-            btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            btn.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
-        }
-    }, { passive: true });
-
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
 
 // 4. Global Add to Cart & Storage Helper
 window.addToCart = function(title, price, category = 'Makanan') {

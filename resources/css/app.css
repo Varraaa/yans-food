@@ -493,8 +493,8 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
     /* 5. Floating WhatsApp Button (§3.5) */
     #floating-wa-btn {
         position: fixed;
-        bottom: max(16px, env(safe-area-inset-bottom, 16px));
-        right: 16px;
+        bottom: max(24px, env(safe-area-inset-bottom, 24px));
+        left: max(24px, env(safe-area-inset-left, 24px));
         z-index: 45;
         height: 56px;
         min-width: 56px;
@@ -531,6 +531,13 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
         font-size: 14px;
         transition: max-width var(--dur-base) var(--ease-out),
                     opacity var(--dur-fast) var(--ease-out);
+    }
+
+    @media (min-width: 640px) {
+        #floating-wa-btn {
+            bottom: max(32px, env(safe-area-inset-bottom, 32px));
+            left: max(32px, env(safe-area-inset-left, 32px));
+        }
     }
 
     /* 6. Toast Notification (§3.6) */
