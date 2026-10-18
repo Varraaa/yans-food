@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
+    // menampilkan data
     public function index(Request $request)
     {
         $query = Expense::query()->orderBy('expense_date', 'desc');
@@ -49,6 +50,7 @@ class ExpenseController extends Controller
         return view('admin.expenses.index', compact('expenses', 'totalExpenses', 'categories'));
     }
 
+    // membuat tambah data
     public function create()
     {
         $categories = \App\Models\ExpenseCategory::orderBy('name')->pluck('name')->toArray();
@@ -69,6 +71,7 @@ class ExpenseController extends Controller
         return view('admin.expenses.create', compact('categories'));
     }
 
+    // menyimpan data baru dan menyimpan data baru
     public function store(Request $request)
     {
         $validated = $request->validate([
