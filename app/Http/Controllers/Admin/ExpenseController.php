@@ -19,7 +19,9 @@ class ExpenseController extends Controller
         }
 
         if ($request->filled('category') && $request->category !== 'all') {
-            $query->where('category', $request->category);
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category);
+            });
         }
 
         if ($request->filled('month')) {
@@ -27,36 +29,42 @@ class ExpenseController extends Controller
         }
 
         $totalExpenses = (float) (clone $query)->where('status', 'APPROVED')->sum('amount');
-        $expenses = $query->paginate(15)->withQueryString();
+        $expenses = $query->with('category')->paginate(15)->withQueryString();
 
-        $categories = [
-            'Bahan Baku',
-            'Gas',
-            'Listrik',
-            'Air',
-            'Kemasan',
-            'Transportasi',
-            'Peralatan',
-            'Maintenance',
-            'Lain-lain',
-        ];
+        $categories = \App\Models\ExpenseCategory::orderBy('name')->pluck('name')->toArray();
+        if (empty($categories)) {
+            $categories = [
+                'Bahan Baku',
+                'Gas',
+                'Listrik',
+                'Air',
+                'Kemasan',
+                'Transportasi',
+                'Peralatan',
+                'Maintenance',
+                'Lain-lain',
+            ];
+        }
 
         return view('admin.expenses.index', compact('expenses', 'totalExpenses', 'categories'));
     }
 
     public function create()
     {
-        $categories = [
-            'Bahan Baku',
-            'Gas',
-            'Listrik',
-            'Air',
-            'Kemasan',
-            'Transportasi',
-            'Peralatan',
-            'Maintenance',
-            'Lain-lain',
-        ];
+        $categories = \App\Models\ExpenseCategory::orderBy('name')->pluck('name')->toArray();
+        if (empty($categories)) {
+            $categories = [
+                'Bahan Baku',
+                'Gas',
+                'Listrik',
+                'Air',
+                'Kemasan',
+                'Transportasi',
+                'Peralatan',
+                'Maintenance',
+                'Lain-lain',
+            ];
+        }
 
         return view('admin.expenses.create', compact('categories'));
     }
@@ -76,6 +84,10 @@ class ExpenseController extends Controller
         if ($request->hasFile('receipt_image')) {
             $validated['receipt_image'] = $request->file('receipt_image')->store('expenses', 'public');
         }
+
+        $category = \App\Models\ExpenseCategory::firstOrCreate(['name' => $validated['category']]);
+        $validated['category_id'] = $category->id;
+        unset($validated['category']);
 
         $validated['expense_number'] = 'EXP-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -4));
         $validated['status'] = 'APPROVED';

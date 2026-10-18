@@ -81,14 +81,15 @@ class TransactionService
 
             $change = $amountPaid - $total;
 
-            // Generate Transaction Number Unik (Format: TR-YYYYMMDD-XXXX)
-            $transactionNumber = 'TR-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -5));
+            // Generate Transaction Number Unik & Waktu WIB (Asia/Jakarta)
+            $wibNow = now('Asia/Jakarta');
+            $transactionNumber = 'TR-' . $wibNow->format('Ymd') . '-' . strtoupper(substr(uniqid(), -5));
 
-            // Simpan Data Transaksi
+            // Simpan Data Transaksi dengan waktu real-time WIB
             $transaction = Transaction::create([
                 'transaction_number' => $transactionNumber,
-                'transaction_date' => now()->toDateString(),
-                'transaction_time' => now()->toTimeString(),
+                'transaction_date' => $wibNow->toDateString(),
+                'transaction_time' => $wibNow->format('H:i:s'),
                 'cashier_id' => $cashierId,
                 'subtotal' => $subtotal,
                 'discount' => $discount,

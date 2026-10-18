@@ -90,7 +90,7 @@
                             </td>
                             <td class="py-3.5 px-4">
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-stone-100 text-stone-700">
-                                    {{ $exp->category }}
+                                    {{ $exp->category?->name ?? 'Operasional' }}
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 text-center font-semibold text-stone-600">{{ $exp->payment_method }}</td>

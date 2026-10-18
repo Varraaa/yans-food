@@ -133,6 +133,18 @@
             </button>
         </div>
 
+        {{-- REAL-TIME WIB CLOCK --}}
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/60 text-xs">
+            <div class="flex items-center gap-1.5 text-stone-700">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-bold text-[11px] text-stone-600">Waktu Real-Time:</span>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono font-black text-stone-900 text-xs">
+                <span id="pos-realtime-clock">--:--:--</span>
+                <span class="px-1.5 py-0.5 bg-[#C1440E] text-white rounded text-[10px] font-bold">WIB</span>
+            </div>
+        </div>
+
         {{-- CART ITEMS LIST --}}
         <div id="cart-list" class="max-h-64 overflow-y-auto space-y-3 divide-y divide-stone-100 pr-1">
             <div id="cart-empty-state" class="py-10 text-center text-stone-400 text-xs">
@@ -710,7 +722,7 @@
                     </div>
                     <div class="flex justify-between text-stone-500">
                         <span>Tgl: ${orderDate}</span>
-                        <span>Jam: ${orderTime}</span>
+                        <span>Jam: ${orderTime.includes('WIB') ? orderTime : orderTime + ' WIB'}</span>
                     </div>
                 </div>
 
@@ -760,5 +772,27 @@
         const modal = document.getElementById('receipt-modal');
         if (modal) modal.classList.add('hidden');
     };
+
+    // Live Real-Time WIB Clock (Asia/Jakarta)
+    function updatePosRealtimeClock() {
+        const clockEl = document.getElementById('pos-realtime-clock');
+        if (!clockEl) return;
+        try {
+            const now = new Date();
+            const timeString = new Intl.DateTimeFormat('id-ID', {
+                timeZone: 'Asia/Jakarta',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            clockEl.textContent = timeString;
+        } catch (e) {
+            const now = new Date();
+            clockEl.textContent = now.toTimeString().split(' ')[0];
+        }
+    }
+    updatePosRealtimeClock();
+    setInterval(updatePosRealtimeClock, 1000);
 </script>
 @endpush

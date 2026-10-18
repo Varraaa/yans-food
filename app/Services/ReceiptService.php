@@ -38,7 +38,7 @@ class ReceiptService
             ? $transaction->transaction_date->format('d/m/Y') 
             : date('d/m/Y', strtotime($transaction->transaction_date));
 
-        $timeStr = substr($transaction->transaction_time, 0, 5);
+        $timeStr = (strlen($transaction->transaction_time) >= 5 ? substr($transaction->transaction_time, 0, 5) : $transaction->transaction_time) . ' WIB';
 
         return [
             'header' => [
@@ -99,7 +99,7 @@ class ReceiptService
             : date('d/m/Y', strtotime($transaction->transaction_date));
 
         $out .= "No: " . $transaction->transaction_number . "\n";
-        $out .= "Tgl: " . $dateStr . " " . substr($transaction->transaction_time, 0, 5) . "\n";
+        $out .= "Tgl: " . $dateStr . " " . substr($transaction->transaction_time, 0, 5) . " WIB\n";
         $out .= "Kasir: " . ($transaction->cashier?->name ?? 'Kasir') . "\n";
         $out .= $line . "\n";
 

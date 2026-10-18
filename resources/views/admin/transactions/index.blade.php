@@ -81,7 +81,7 @@
                                 {{ $tx->transaction_number }}
                             </td>
                             <td class="py-3.5 px-4 font-mono text-stone-600">
-                                {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }} <span class="text-stone-400">{{ $tx->transaction_time }}</span>
+                                {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }} <span class="text-stone-500 font-semibold text-[11px]">{{ substr($tx->transaction_time, 0, 5) }} WIB</span>
                             </td>
                             <td class="py-3.5 px-4 text-stone-700">
                                 {{ $tx->cashier?->name ?? 'Kasir' }}
