@@ -63,7 +63,7 @@
                 <label class="block font-bold text-stone-700 uppercase tracking-wider">Ganti Foto Produk (Opsional)</label>
                 @if($product->image)
                     <div class="mb-2">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-24 h-16 object-cover rounded-lg border border-stone-200">
+                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-24 h-16 object-cover rounded-lg border border-stone-200">
                     </div>
                 @endif
                 <input type="file" name="image" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs">

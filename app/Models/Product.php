@@ -43,6 +43,11 @@ class Product extends Model
         return $this->hasMany(TransactionItem::class, 'product_id');
     }
 
+    public function items()
+    {
+        return $this->transactionItems();
+    }
+
     public function cateringOrderItems()
     {
         return $this->hasMany(CateringOrderItem::class, 'product_id');

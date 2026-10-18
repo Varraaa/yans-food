@@ -95,8 +95,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->items()->exists()) {
-            return back()->with('error', 'Produk tidak dapat dihapus karena memiliki riwayat transaksi.');
+        if ($product->transactionItems()->exists() || $product->cateringOrderItems()->exists()) {
+            return back()->with('error', 'Produk tidak dapat dihapus karena memiliki riwayat transaksi kasir atau pesanan katering.');
         }
 
         if ($product->image && Storage::disk('public')->exists($product->image)) {

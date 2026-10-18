@@ -42,24 +42,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initCateringForm();
     initLightbox();
 });
-
-// 4. Global Add to Cart & Storage Helper
-window.addToCart = function(title, price, category = 'Makanan') {
-    let cart = JSON.parse(localStorage.getItem('yans_cart') || '[]');
-    const numericPrice = typeof price === 'number' ? price : parseInt(String(price).replace(/[^0-9]/g, ''), 10) || 0;
-    const existing = cart.find(item => item.title === title);
-
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({ title, price: numericPrice, category, qty: 1 });
-    }
-
-    localStorage.setItem('yans_cart', JSON.stringify(cart));
-    if (typeof window.updateCartBadge === 'function') {
-        window.updateCartBadge();
-    }
-    if (typeof window.showToast === 'function') {
-        window.showToast(`${title} ditambahkan ke pesanan!`);
-    }
-};

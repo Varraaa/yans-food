@@ -42,15 +42,19 @@
         {{-- PRODUCTS GRID --}}
         <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4" id="products-grid">
             @forelse($products as $product)
+                @php
+                    $isAvailable = $product->status === 'available' && $product->stock > 0;
+                @endphp
                 <div 
                     id="product-card-{{ $product->id }}"
                     data-id="{{ $product->id }}"
                     data-name="{{ $product->name }}"
                     data-price="{{ (float) $product->price }}"
                     data-unit="{{ $product->unit }}"
+                    data-stock="{{ (int) $product->stock }}"
                     data-category="{{ $product->category_id }}"
-                    onclick="addToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ (float) $product->price }}, '{{ $product->unit }}')"
-                    class="product-item group cursor-pointer bg-white border border-stone-200 hover:border-[#C1440E]/60 rounded-2xl overflow-hidden transition-all flex flex-col justify-between hover:shadow-lg active:scale-[0.99]"
+                    onclick="posAddToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ (float) $product->price }}, '{{ $product->unit }}', {{ (int) $product->stock }})"
+                    class="product-item group {{ $isAvailable ? 'cursor-pointer hover:border-[#C1440E]/60 hover:shadow-lg active:scale-[0.99]' : 'opacity-60 cursor-not-allowed border-stone-200' }} bg-white border rounded-2xl overflow-hidden transition-all flex flex-col justify-between"
                 >
                     <div class="relative aspect-video bg-stone-100 overflow-hidden">
                         <img 
@@ -67,10 +71,16 @@
                             <span id="badge-qty-{{ $product->id }}">1x</span>
                         </span>
 
-                        <span class="absolute top-2 right-2 bg-emerald-600/90 text-white text-[10px] px-2 py-0.5 rounded-full font-bold shadow flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                            Sedia
-                        </span>
+                        @if($product->stock > 0)
+                            <span class="absolute top-2 right-2 bg-emerald-600/90 text-white text-[10px] px-2 py-0.5 rounded-full font-bold shadow flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                                <span id="card-stock-label-{{ $product->id }}">Stok: {{ $product->stock }}</span>
+                            </span>
+                        @else
+                            <span class="absolute top-2 right-2 bg-rose-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold shadow">
+                                Habis
+                            </span>
+                        @endif
                     </div>
 
                     <div class="p-3.5 flex-1 flex flex-col justify-between">
@@ -87,7 +97,7 @@
                             <span class="text-sm font-black text-[#C1440E]">
                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                             </span>
-                            <button type="button" class="w-7 h-7 rounded-lg bg-stone-100 text-stone-700 group-hover:bg-[#C1440E] group-hover:text-white flex items-center justify-center transition text-xs font-black shadow-sm">
+                            <button type="button" class="w-7 h-7 rounded-lg {{ $isAvailable ? 'bg-stone-100 text-stone-700 group-hover:bg-[#C1440E] group-hover:text-white' : 'bg-stone-100 text-stone-400' }} flex items-center justify-center transition text-xs font-black shadow-sm">
                                 +
                             </button>
                         </div>
@@ -289,14 +299,14 @@
 
 @push('scripts')
 <script>
-    let cart = {}; // { productId: { id, name, price, unit, qty } }
-    let paymentMethod = 'CASH';
+    window.cart = {}; // { productId: { id, name, price, unit, qty, stock } }
+    window.paymentMethod = 'CASH';
 
-    function formatRupiah(number) {
+    window.formatRupiah = function(number) {
         return 'Rp ' + new Intl.NumberFormat('id-ID').format(number);
-    }
+    };
 
-    function filterCategory(catId, btn) {
+    window.filterCategory = function(catId, btn) {
         document.querySelectorAll('.category-btn').forEach(b => {
             b.className = 'category-btn px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition bg-stone-100 text-stone-700 hover:bg-stone-200';
         });
@@ -310,52 +320,73 @@
                 el.style.display = 'none';
             }
         });
-    }
+    };
 
-    document.getElementById('search-input').addEventListener('input', function(e) {
-        const query = e.target.value.toLowerCase();
-        document.querySelectorAll('.product-item').forEach(el => {
-            const name = el.querySelector('.product-title').textContent.toLowerCase();
-            if (name.includes(query)) {
-                el.style.display = 'flex';
-            } else {
-                el.style.display = 'none';
-            }
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.product-item').forEach(el => {
+                const name = (el.querySelector('.product-title')?.textContent || '').toLowerCase();
+                if (name.includes(query)) {
+                    el.style.display = 'flex';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
         });
-    });
+    }
 
-    function addToCart(id, name, price, unit) {
-        if (cart[id]) {
-            cart[id].qty += 1;
+    window.posAddToCart = function(id, name, price, unit, stock) {
+        if (stock <= 0) {
+            alert(`Stok produk "${name}" sedang habis.`);
+            return;
+        }
+
+        if (window.cart[id]) {
+            if (window.cart[id].qty >= stock) {
+                alert(`Kuantitas di keranjang sudah mencapai batas sisa stok (${stock} ${unit}).`);
+                return;
+            }
+            window.cart[id].qty += 1;
         } else {
-            cart[id] = { id, name, price, unit, qty: 1 };
+            window.cart[id] = { id, name, price, unit, qty: 1, stock: stock };
         }
-        renderCart();
-    }
+        window.renderCart();
+    };
+    window.addToCart = window.posAddToCart;
 
-    function updateCartQty(id, delta) {
-        if (!cart[id]) return;
-        cart[id].qty += delta;
-        if (cart[id].qty <= 0) {
-            delete cart[id];
+    window.updateCartQty = function(id, delta) {
+        if (!window.cart[id]) return;
+
+        if (delta > 0 && window.cart[id].stock !== undefined && window.cart[id].qty >= window.cart[id].stock) {
+            alert(`Kuantitas maksimal adalah sisa stok yang tersedia (${window.cart[id].stock} ${window.cart[id].unit}).`);
+            return;
         }
-        renderCart();
-    }
 
-    function removeFromCart(id) {
-        delete cart[id];
-        renderCart();
-    }
+        window.cart[id].qty += delta;
+        if (window.cart[id].qty <= 0) {
+            delete window.cart[id];
+        }
+        window.renderCart();
+    };
 
-    function clearCart() {
-        cart = {};
-        document.getElementById('input-discount').value = 0;
-        document.getElementById('input-amount-paid').value = '';
-        renderCart();
-    }
+    window.removeFromCart = function(id) {
+        delete window.cart[id];
+        window.renderCart();
+    };
 
-    function setPaymentMethod(method) {
-        paymentMethod = method;
+    window.clearCart = function() {
+        window.cart = {};
+        const discountInput = document.getElementById('input-discount');
+        const amountPaidInput = document.getElementById('input-amount-paid');
+        if (discountInput) discountInput.value = 0;
+        if (amountPaidInput) amountPaidInput.value = '';
+        window.renderCart();
+    };
+
+    window.setPaymentMethod = function(method) {
+        window.paymentMethod = method;
         document.querySelectorAll('.method-btn').forEach(b => {
             b.className = 'method-btn py-2 px-3 rounded-xl font-bold text-xs flex flex-col items-center justify-center gap-1 transition bg-stone-100 text-stone-700 hover:bg-stone-200';
         });
@@ -370,82 +401,89 @@
         const nonCashTitle = document.getElementById('non-cash-title');
 
         if (method === 'CASH') {
-            cashContainer.classList.remove('hidden');
-            nonCashContainer.classList.add('hidden');
+            if (cashContainer) cashContainer.classList.remove('hidden');
+            if (nonCashContainer) nonCashContainer.classList.add('hidden');
         } else {
-            cashContainer.classList.add('hidden');
-            nonCashContainer.classList.remove('hidden');
-            nonCashTitle.textContent = method === 'QRIS' ? 'QRIS Standar (BCA / GoPay / OVO / Dana)' : 'Transfer Bank (BCA / Mandiri)';
-            setExactAmount();
+            if (cashContainer) cashContainer.classList.add('hidden');
+            if (nonCashContainer) nonCashContainer.classList.remove('hidden');
+            if (nonCashTitle) {
+                nonCashTitle.textContent = method === 'QRIS' ? 'QRIS Standar (BCA / GoPay / OVO / Dana / ShopeePay)' : 'Transfer Bank (BCA / Mandiri / BNI / BRI)';
+            }
+            window.setExactAmount();
         }
 
-        recalculate();
-    }
+        window.recalculate();
+    };
 
-    function setExactAmount() {
-        const total = calculateTotal();
-        document.getElementById('input-amount-paid').value = total;
-        recalculate();
-    }
+    window.setExactAmount = function() {
+        const total = window.calculateTotal();
+        const amountInput = document.getElementById('input-amount-paid');
+        if (amountInput) amountInput.value = total > 0 ? total : '';
+        window.recalculate();
+    };
 
-    function setNominal(val) {
-        setPaymentMethod('CASH');
-        document.getElementById('input-amount-paid').value = val;
-        recalculate();
-    }
+    window.setNominal = function(val) {
+        window.setPaymentMethod('CASH');
+        const amountInput = document.getElementById('input-amount-paid');
+        if (amountInput) amountInput.value = val;
+        window.recalculate();
+    };
 
-    function calculateSubtotal() {
+    window.calculateSubtotal = function() {
         let subtotal = 0;
-        for (const id in cart) {
-            subtotal += cart[id].price * cart[id].qty;
+        for (const id in window.cart) {
+            subtotal += window.cart[id].price * window.cart[id].qty;
         }
         return subtotal;
-    }
+    };
 
-    function calculateTotal() {
-        const subtotal = calculateSubtotal();
-        const discount = parseFloat(document.getElementById('input-discount').value) || 0;
+    window.calculateTotal = function() {
+        const subtotal = window.calculateSubtotal();
+        const discountInput = document.getElementById('input-discount');
+        const discount = Math.max(0, parseFloat(discountInput ? discountInput.value : 0) || 0);
         return Math.max(0, subtotal - discount);
-    }
+    };
 
-    function renderCart() {
+    window.renderCart = function() {
         const cartList = document.getElementById('cart-list');
         const clearBtn = document.getElementById('btn-clear-cart');
-        const keys = Object.keys(cart);
+        const keys = Object.keys(window.cart);
 
-        // Update product badges in catalog
+        // Update badges pada katalog produk
         document.querySelectorAll('.product-item').forEach(el => {
             const id = el.getAttribute('data-id');
             const badge = document.getElementById('badge-cart-' + id);
             const badgeQty = document.getElementById('badge-qty-' + id);
-            if (cart[id]) {
-                badge.classList.remove('hidden');
-                badgeQty.textContent = cart[id].qty + 'x';
+            if (window.cart[id]) {
+                if (badge) badge.classList.remove('hidden');
+                if (badgeQty) badgeQty.textContent = window.cart[id].qty + 'x';
                 el.classList.add('border-[#C1440E]', 'shadow-sm', 'ring-1', 'ring-[#C1440E]');
             } else {
-                badge.classList.add('hidden');
+                if (badge) badge.classList.add('hidden');
                 el.classList.remove('border-[#C1440E]', 'shadow-sm', 'ring-1', 'ring-[#C1440E]');
             }
         });
 
         if (keys.length === 0) {
-            cartList.innerHTML = `
-                <div id="cart-empty-state" class="py-10 text-center text-stone-400 text-xs">
-                    <div class="text-2xl mb-1">👈</div>
-                    Klik menu di sebelah kiri untuk menambah ke struk pesanan
-                </div>
-            `;
-            clearBtn.classList.add('hidden');
+            if (cartList) {
+                cartList.innerHTML = `
+                    <div id="cart-empty-state" class="py-10 text-center text-stone-400 text-xs">
+                        <div class="text-2xl mb-1">👈</div>
+                        Klik menu di sebelah kiri untuk menambah ke struk pesanan
+                    </div>
+                `;
+            }
+            if (clearBtn) clearBtn.classList.add('hidden');
         } else {
-            clearBtn.classList.remove('hidden');
+            if (clearBtn) clearBtn.classList.remove('hidden');
             let html = '';
-            for (const id in cart) {
-                const item = cart[id];
+            for (const id in window.cart) {
+                const item = window.cart[id];
                 html += `
                     <div class="pt-3 first:pt-0 flex items-center justify-between gap-3 text-sm">
                         <div class="flex-1 min-w-0">
                             <h5 class="font-bold text-stone-800 truncate text-xs">${item.name}</h5>
-                            <span class="text-[11px] text-stone-500">${formatRupiah(item.price)} / ${item.unit}</span>
+                            <span class="text-[11px] text-stone-500">${window.formatRupiah(item.price)} / ${item.unit}</span>
                         </div>
 
                         <div class="flex items-center gap-1.5 bg-stone-50 p-1 rounded-lg border border-stone-200">
@@ -455,142 +493,224 @@
                         </div>
 
                         <div class="text-right min-w-[70px]">
-                            <span class="font-bold text-stone-900 text-xs">${formatRupiah(item.price * item.qty)}</span>
+                            <span class="font-bold text-stone-900 text-xs">${window.formatRupiah(item.price * item.qty)}</span>
                         </div>
                     </div>
                 `;
             }
-            cartList.innerHTML = html;
+            if (cartList) cartList.innerHTML = html;
         }
 
-        if (paymentMethod !== 'CASH') {
-            setExactAmount();
+        if (window.paymentMethod !== 'CASH') {
+            window.setExactAmount();
         } else {
-            recalculate();
+            window.recalculate();
         }
-    }
+    };
 
-    function recalculate() {
-        const subtotal = calculateSubtotal();
-        const total = calculateTotal();
-        const amountPaid = parseFloat(document.getElementById('input-amount-paid').value) || 0;
+    window.recalculate = function() {
+        const subtotal = window.calculateSubtotal();
+        const total = window.calculateTotal();
+        const amountPaidInput = document.getElementById('input-amount-paid');
+        let amountPaid = parseFloat(amountPaidInput ? amountPaidInput.value : 0) || 0;
 
-        document.getElementById('label-subtotal').textContent = formatRupiah(subtotal);
-        document.getElementById('label-total').textContent = formatRupiah(total);
+        if (window.paymentMethod !== 'CASH') {
+            amountPaid = total;
+            if (amountPaidInput && total > 0) amountPaidInput.value = total;
+        }
+
+        const labelSubtotal = document.getElementById('label-subtotal');
+        const labelTotal = document.getElementById('label-total');
+        if (labelSubtotal) labelSubtotal.textContent = window.formatRupiah(subtotal);
+        if (labelTotal) labelTotal.textContent = window.formatRupiah(total);
 
         const change = Math.max(0, amountPaid - total);
         const shortfall = Math.max(0, total - amountPaid);
 
-        document.getElementById('label-change').textContent = formatRupiah(change);
-        document.getElementById('label-shortfall').textContent = formatRupiah(shortfall);
+        const labelChange = document.getElementById('label-change');
+        const labelShortfall = document.getElementById('label-shortfall');
+        if (labelChange) labelChange.textContent = window.formatRupiah(change);
+        if (labelShortfall) labelShortfall.textContent = window.formatRupiah(shortfall);
 
         const statusShortfall = document.getElementById('status-shortfall');
         const statusChange = document.getElementById('status-change');
         const btnProcess = document.getElementById('btn-process');
         const btnProcessText = document.getElementById('btn-process-text');
 
-        btnProcessText.textContent = `⚡ SELESAIKAN TRANSAKSI (${paymentMethod})`;
-
-        if (amountPaid < total && total > 0 && paymentMethod === 'CASH') {
-            statusShortfall.classList.remove('hidden');
-            statusChange.classList.add('hidden');
-        } else {
-            statusShortfall.classList.add('hidden');
-            statusChange.classList.remove('hidden');
+        if (btnProcessText) {
+            btnProcessText.textContent = `⚡ SELESAIKAN TRANSAKSI (${window.paymentMethod})`;
         }
 
-        const hasItems = Object.keys(cart).length > 0;
-        const isPaidEnough = amountPaid >= total && total > 0;
-
-        if (hasItems && isPaidEnough) {
-            btnProcess.disabled = false;
-            btnProcess.className = 'w-full py-3.5 px-4 rounded-xl font-black text-white shadow-md transition flex items-center justify-center gap-2 bg-[#C1440E] hover:bg-[#a3380b] active:scale-[0.99] cursor-pointer';
+        if (amountPaid < total && total > 0 && window.paymentMethod === 'CASH') {
+            if (statusShortfall) statusShortfall.classList.remove('hidden');
+            if (statusChange) statusChange.classList.add('hidden');
         } else {
-            btnProcess.disabled = true;
-            btnProcess.className = 'w-full py-3.5 px-4 rounded-xl font-black text-white shadow-md transition flex items-center justify-center gap-2 bg-stone-300 cursor-not-allowed';
+            if (statusShortfall) statusShortfall.classList.add('hidden');
+            if (statusChange) statusChange.classList.remove('hidden');
         }
-    }
 
-    function submitTransaction() {
+        const hasItems = Object.keys(window.cart).length > 0;
+        const isPaidEnough = (amountPaid >= total && total > 0) || (window.paymentMethod !== 'CASH' && total > 0);
+
+        if (btnProcess) {
+            if (hasItems && isPaidEnough) {
+                btnProcess.disabled = false;
+                btnProcess.className = 'w-full py-3.5 px-4 rounded-xl font-black text-white shadow-md transition flex items-center justify-center gap-2 bg-[#C1440E] hover:bg-[#a3380b] active:scale-[0.99] cursor-pointer';
+            } else {
+                btnProcess.disabled = true;
+                btnProcess.className = 'w-full py-3.5 px-4 rounded-xl font-black text-white shadow-md transition flex items-center justify-center gap-2 bg-stone-300 cursor-not-allowed';
+            }
+        }
+    };
+
+    window.submitTransaction = function() {
         const items = [];
-        for (const id in cart) {
+        for (const id in window.cart) {
             items.push({
                 product_id: parseInt(id),
-                quantity: cart[id].qty
+                quantity: window.cart[id].qty
             });
         }
 
-        if (items.length === 0) return;
+        if (items.length === 0) {
+            alert('Pilih minimal 1 menu sebelum checkout.');
+            return;
+        }
 
-        const amountPaid = parseFloat(document.getElementById('input-amount-paid').value) || 0;
-        const discount = parseFloat(document.getElementById('input-discount').value) || 0;
+        const subtotal = window.calculateSubtotal();
+        const total = window.calculateTotal();
+        const discountInput = document.getElementById('input-discount');
+        const discount = Math.max(0, parseFloat(discountInput ? discountInput.value : 0) || 0);
+        const amountPaidInput = document.getElementById('input-amount-paid');
+        let amountPaid = parseFloat(amountPaidInput ? amountPaidInput.value : 0) || 0;
+
+        if (window.paymentMethod !== 'CASH') {
+            amountPaid = total;
+        }
+
+        if (window.paymentMethod === 'CASH' && amountPaid < total) {
+            alert('Uang pembayaran tunai masih kurang dari total belanja.');
+            return;
+        }
+
         const btnProcess = document.getElementById('btn-process');
+        if (btnProcess) {
+            btnProcess.disabled = true;
+            btnProcess.innerHTML = `<span class="flex items-center gap-2">⏳ Menyimpan Transaksi...</span>`;
+        }
 
-        btnProcess.disabled = true;
-        btnProcess.innerHTML = `<span>⏳ Menyimpan Transaksi...</span>`;
+        const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+        const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
 
         fetch("{{ route('admin.pos.checkout') }}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 items: items,
                 amount_paid: amountPaid,
                 discount: discount,
-                payment_method: paymentMethod
+                payment_method: window.paymentMethod
             })
         })
-        .then(res => res.json())
+        .then(async (res) => {
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.message || 'Gagal menyimpan transaksi.');
+            }
+            return data;
+        })
         .then(data => {
-            btnProcess.disabled = false;
-            btnProcess.innerHTML = `<span id="btn-process-text">⚡ SELESAIKAN TRANSAKSI (${paymentMethod})</span>`;
+            if (btnProcess) {
+                btnProcess.disabled = false;
+                btnProcess.innerHTML = `<span id="btn-process-text">⚡ SELESAIKAN TRANSAKSI (${window.paymentMethod})</span>`;
+            }
 
             if (data.success) {
-                clearCart();
-                showReceiptModal(data.receipt);
+                // Kurangi stok di katalog secara langsung tanpa reload
+                items.forEach(it => {
+                    const card = document.getElementById('product-card-' + it.product_id);
+                    if (card) {
+                        const currentStock = parseInt(card.getAttribute('data-stock') || '0', 10);
+                        const newStock = Math.max(0, currentStock - it.quantity);
+                        card.setAttribute('data-stock', newStock);
+
+                        const stockLabel = document.getElementById('card-stock-label-' + it.product_id);
+                        if (stockLabel) stockLabel.textContent = 'Stok: ' + newStock;
+
+                        if (newStock <= 0) {
+                            card.classList.remove('cursor-pointer', 'hover:border-[#C1440E]/60', 'hover:shadow-lg', 'active:scale-[0.99]');
+                            card.classList.add('opacity-60', 'cursor-not-allowed');
+                        }
+                    }
+                });
+
+                window.clearCart();
+                window.showReceiptModal(data.receipt);
             } else {
                 alert('Gagal: ' + data.message);
             }
         })
         .catch(err => {
-            btnProcess.disabled = false;
-            btnProcess.innerHTML = `<span id="btn-process-text">⚡ SELESAIKAN TRANSAKSI (${paymentMethod})</span>`;
-            alert('Terjadi kesalahan jaringan.');
+            if (btnProcess) {
+                btnProcess.disabled = false;
+                btnProcess.innerHTML = `<span id="btn-process-text">⚡ SELESAIKAN TRANSAKSI (${window.paymentMethod})</span>`;
+            }
+            alert('Kesalahan Transaksi: ' + err.message);
         });
-    }
+    };
 
-    function showReceiptModal(receipt) {
+    window.showReceiptModal = function(receipt) {
+        if (!receipt) return;
+
         let itemsHtml = '';
         (receipt.items || []).forEach(item => {
             itemsHtml += `
                 <div>
                     <div class="font-bold text-stone-900">${item.name}</div>
                     <div class="flex justify-between text-stone-600 pl-2">
-                        <span>${item.qty} x ${formatRupiah(item.price)}</span>
-                        <span class="font-semibold">${formatRupiah(item.subtotal)}</span>
+                        <span>${item.qty} x ${window.formatRupiah(item.price)}</span>
+                        <span class="font-semibold">${window.formatRupiah(item.subtotal)}</span>
                     </div>
                 </div>
             `;
         });
 
+        const storeName = receipt.header?.store_name || "YAN'S FOOD";
+        const storeAddress = receipt.header?.address || 'Jl. Melati No. 14, Jaksel';
+        const storePhone = receipt.header?.phone || '081234567890';
+        const orderNum = receipt.order_info?.number || '-';
+        const cashierName = receipt.order_info?.cashier || 'Kasir';
+        const orderDate = receipt.order_info?.date || '';
+        const orderTime = receipt.order_info?.time || '';
+        const subtotal = receipt.summary?.subtotal || 0;
+        const discount = receipt.summary?.discount || 0;
+        const total = receipt.summary?.total || 0;
+        const method = receipt.payment?.method || window.paymentMethod;
+        const paid = receipt.payment?.paid || 0;
+        const change = receipt.payment?.change || 0;
+        const footerMsg = receipt.footer?.message || 'Terima kasih atas kunjungan Anda!';
+        const footerSub = receipt.footer?.sub_message || 'Selamat Menikmati';
+
         const html = `
             <div id="printable-receipt" class="bg-amber-50/50 p-6 rounded-xl border border-stone-200 text-stone-800 font-mono text-xs max-w-sm mx-auto shadow-sm">
                 <div class="text-center pb-3 border-b border-dashed border-stone-300">
-                    <h3 class="text-base font-bold text-stone-900 tracking-wider">${receipt.header.store_name}</h3>
-                    <p class="text-stone-600">${receipt.header.address}</p>
-                    <p class="text-stone-500">WA: ${receipt.header.phone}</p>
+                    <h3 class="text-base font-bold text-stone-900 tracking-wider">${storeName}</h3>
+                    <p class="text-stone-600">${storeAddress}</p>
+                    <p class="text-stone-500">WA: ${storePhone}</p>
                 </div>
 
                 <div class="py-2 border-b border-dashed border-stone-300 space-y-1">
                     <div class="flex justify-between">
-                        <span>No: ${receipt.order_info.number}</span>
-                        <span>Kasir: ${receipt.order_info.cashier}</span>
+                        <span>No: ${orderNum}</span>
+                        <span>Kasir: ${cashierName}</span>
                     </div>
                     <div class="flex justify-between text-stone-500">
-                        <span>Tgl: ${receipt.order_info.date}</span>
-                        <span>Jam: ${receipt.order_info.time}</span>
+                        <span>Tgl: ${orderDate}</span>
+                        <span>Jam: ${orderTime}</span>
                     </div>
                 </div>
 
@@ -601,41 +721,44 @@
                 <div class="py-3 border-b border-dashed border-stone-300 space-y-1.5">
                     <div class="flex justify-between">
                         <span>Subtotal:</span>
-                        <span>${formatRupiah(receipt.summary.subtotal)}</span>
+                        <span>${window.formatRupiah(subtotal)}</span>
                     </div>
-                    ${receipt.summary.discount > 0 ? `
+                    ${discount > 0 ? `
                         <div class="flex justify-between text-emerald-600">
                             <span>Diskon:</span>
-                            <span>- ${formatRupiah(receipt.summary.discount)}</span>
+                            <span>- ${window.formatRupiah(discount)}</span>
                         </div>
                     ` : ''}
                     <div class="flex justify-between font-bold text-sm text-stone-900 pt-1.5 border-t border-dotted border-stone-300">
                         <span>TOTAL:</span>
-                        <span>${formatRupiah(receipt.summary.total)}</span>
+                        <span>${window.formatRupiah(total)}</span>
                     </div>
                     <div class="flex justify-between pt-1">
-                        <span>Bayar (${receipt.payment.method}):</span>
-                        <span>${formatRupiah(receipt.payment.paid)}</span>
+                        <span>Bayar (${method}):</span>
+                        <span>${window.formatRupiah(paid)}</span>
                     </div>
                     <div class="flex justify-between font-bold text-stone-900">
                         <span>Kembalian:</span>
-                        <span>${formatRupiah(receipt.payment.change)}</span>
+                        <span>${window.formatRupiah(change)}</span>
                     </div>
                 </div>
 
                 <div class="text-center pt-4 text-stone-500 space-y-1">
-                    <p>${receipt.footer.message}</p>
-                    <p class="text-[10px]">${receipt.footer.sub_message}</p>
+                    <p>${footerMsg}</p>
+                    <p class="text-[10px]">${footerSub}</p>
                 </div>
             </div>
         `;
 
-        document.getElementById('receipt-modal-body').innerHTML = html;
-        document.getElementById('receipt-modal').classList.remove('hidden');
-    }
+        const modalBody = document.getElementById('receipt-modal-body');
+        const modal = document.getElementById('receipt-modal');
+        if (modalBody) modalBody.innerHTML = html;
+        if (modal) modal.classList.remove('hidden');
+    };
 
-    function closeReceiptModal() {
-        document.getElementById('receipt-modal').classList.add('hidden');
-    }
+    window.closeReceiptModal = function() {
+        const modal = document.getElementById('receipt-modal');
+        if (modal) modal.classList.add('hidden');
+    };
 </script>
 @endpush

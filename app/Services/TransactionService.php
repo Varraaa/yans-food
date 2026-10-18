@@ -110,8 +110,20 @@ class TransactionService
                     'subtotal' => $prep['subtotal'],
                 ]);
 
-                // Potong stok (jika trigger MySQL tidak aktif/sebagai cadangan aman)
-                $prep['product']->decrement('stock', $prep['quantity']);
+                // Potong stok via PHP hanya jika database trigger MySQL belum ada/tidak aktif
+                $hasTrigger = false;
+                if (DB::getDriverName() === 'mysql') {
+                    try {
+                        $hasTrigger = DB::table('information_schema.TRIGGERS')
+                            ->where('TRIGGER_SCHEMA', DB::getDatabaseName())
+                            ->where('TRIGGER_NAME', 'trg_after_transaction_item_insert')
+                            ->exists();
+                    } catch (\Throwable $e) {}
+                }
+
+                if (!$hasTrigger) {
+                    $prep['product']->decrement('stock', $prep['quantity']);
+                }
             }
 
             // ==========================================
