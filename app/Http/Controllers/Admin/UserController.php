@@ -20,24 +20,53 @@ class UserController extends Controller
     {
         $user = Auth::user() ?? User::where('role', 'admin')->firstOrFail();
 
-        $validated = $request->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'password' => ['nullable', 'string', 'min:6'],
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email login admin wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email ini sudah digunakan oleh akun lain.',
         ]);
 
         $data = [
-            'name' => $validated['name'],
-            'email' => $validated['email'],
+            'name' => $request->name,
+            'email' => $request->email,
         ];
 
-        if (!empty($validated['password'])) {
-            $data['password'] = Hash::make($validated['password']);
+        // Keamanan: Wajib input kata sandi yang sedang dipakai sebelum bisa membuat kata sandi baru
+        if ($request->filled('password') || $request->filled('current_password')) {
+            $request->validate([
+                'current_password' => ['required', 'string'],
+                'password' => ['required', 'string', 'min:6', 'confirmed'],
+            ], [
+                'current_password.required' => 'Anda wajib memasukkan kata sandi yang sedang digunakan saat ini untuk verifikasi keamanan.',
+                'password.required' => 'Kata sandi baru tidak boleh kosong.',
+                'password.min' => 'Kata sandi baru minimal terdiri dari 6 karakter.',
+                'password.confirmed' => 'Konfirmasi kata sandi baru tidak cocok. Silakan ketik ulang dengan benar.',
+            ]);
+
+            // Cek apakah kata sandi saat ini cocok dengan yang tersimpan di database
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors([
+                    'current_password' => 'Kata sandi saat ini yang Anda masukkan salah. Verifikasi keamanan gagal!',
+                ])->withInput();
+            }
+
+            // Pastikan kata sandi baru tidak sama persis dengan kata sandi lama
+            if (Hash::check($request->password, $user->password)) {
+                return back()->withErrors([
+                    'password' => 'Kata sandi baru tidak boleh sama dengan kata sandi yang sedang aktif.',
+                ])->withInput();
+            }
+
+            $data['password'] = Hash::make($request->password);
         }
 
         $user->update($data);
 
         return redirect()->route('admin.users.index')
-            ->with('success', 'Profil Akun Admin Pemilik berhasil diperbarui!');
+            ->with('success', 'Profil dan pengaturan keamanan akun Admin Pemilik berhasil diperbarui!');
     }
 }
