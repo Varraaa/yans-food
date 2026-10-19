@@ -25,6 +25,10 @@ class CateringService
             throw new Exception("Pesanan katering harus memiliki minimal 1 menu.");
         }
 
+        // ==========================================
+        // 1. DATABASE TRANSACTION: BEGIN TRANSACTION
+        // Memulai transaksi database agar order header dan item katering tersimpan utuh
+        // ==========================================
         DB::beginTransaction();
 
         try {
@@ -84,11 +88,19 @@ class CateringService
                 ]);
             }
 
+            // ==========================================
+            // 2. DATABASE TRANSACTION: COMMIT
+            // Simpan pesanan beserta seluruh item ke database jika semua valid
+            // ==========================================
             DB::commit();
 
             return $order->load('items');
 
         } catch (Exception $e) {
+            // ==========================================
+            // 3. DATABASE TRANSACTION: ROLLBACK
+            // Batalkan seluruh data jika ada menu tidak valid atau terjadi error
+            // ==========================================
             DB::rollBack();
             throw $e;
         }

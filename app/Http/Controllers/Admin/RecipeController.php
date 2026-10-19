@@ -48,6 +48,11 @@ class RecipeController extends Controller
             'ingredients.*.notes' => ['nullable', 'string'],
         ]);
 
+        // ==========================================
+        // DATABASE TRANSACTION: COMMIT & ROLLBACK (Closure Pattern)
+        // Laravel DB::transaction otomatis melakukan BEGIN TRANSACTION,
+        // COMMIT jika pembuatan resep & bahan sukses, dan ROLLBACK jika ada error.
+        // ==========================================
         DB::transaction(function () use ($validated) {
             $recipe = Recipe::create([
                 'product_id' => $validated['product_id'],
@@ -105,6 +110,11 @@ class RecipeController extends Controller
             'ingredients.*.notes' => ['nullable', 'string'],
         ]);
 
+        // ==========================================
+        // DATABASE TRANSACTION: COMMIT & ROLLBACK (Closure Pattern)
+        // Menjamin proses update info resep dan replace bahan baku
+        // ter-COMMIT bersamaan atau di-ROLLBACK penuh jika ada kegagalan.
+        // ==========================================
         DB::transaction(function () use ($recipe, $validated) {
             $recipe->update([
                 'product_id' => $validated['product_id'],

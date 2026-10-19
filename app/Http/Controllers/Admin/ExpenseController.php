@@ -50,7 +50,7 @@ class ExpenseController extends Controller
         return view('admin.expenses.index', compact('expenses', 'totalExpenses', 'categories'));
     }
 
-    // membuat tambah data
+    // tambah data
     public function create()
     {
         $categories = \App\Models\ExpenseCategory::orderBy('name')->pluck('name')->toArray();

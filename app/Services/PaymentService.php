@@ -33,6 +33,10 @@ class PaymentService
             throw new Exception("Nominal pembayaran harus lebih besar dari 0.");
         }
 
+        // ==========================================
+        // 1. DATABASE TRANSACTION: BEGIN TRANSACTION
+        // Memulai transaksi database agar operasi insert & update berjalan atomik
+        // ==========================================
         DB::beginTransaction();
 
         try {
@@ -77,11 +81,19 @@ class PaymentService
                 $order->update(['payment_status' => 'UNPAID']);
             }
 
+            // ==========================================
+            // 2. DATABASE TRANSACTION: COMMIT
+            // Simpan seluruh perubahan secara permanen jika validasi & operasi sukses
+            // ==========================================
             DB::commit();
 
             return $payment;
 
         } catch (Exception $e) {
+            // ==========================================
+            // 3. DATABASE TRANSACTION: ROLLBACK
+            // Batalkan seluruh data pembayaran jika terjadi error/kegagalan sistem
+            // ==========================================
             DB::rollBack();
             throw $e;
         }

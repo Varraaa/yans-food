@@ -13,7 +13,15 @@ return new class extends Migration
             return;
         }
 
-        // 1. TRIGGER: Potong stok produk otomatis setelah item transaksi POS dimasukkan
+        // =========================================================================
+        // 1. TRIGGER: Potong stok produk otomatis setelah item transaksi POS tersimpan
+        // =========================================================================
+        // Tabel: transaction_items
+        // Event: AFTER INSERT
+        // Deskripsi: Setiap kali kasir menyelesaikan transaksi dan detail item menu
+        //            masuk ke tabel transaction_items, stok produk pada tabel 'products'
+        //            akan otomatis berkurang sesuai kuantitas yang dibeli pembeli.
+        // =========================================================================
         DB::unprepared("DROP TRIGGER IF EXISTS trg_after_transaction_item_insert");
         DB::unprepared("
             CREATE TRIGGER trg_after_transaction_item_insert
@@ -28,7 +36,17 @@ return new class extends Migration
             END
         ");
 
+        // =========================================================================
         // 2. TRIGGER: Update payment_status katering otomatis setelah pembayaran dicatat
+        // =========================================================================
+        // Tabel: catering_payments
+        // Event: AFTER INSERT
+        // Deskripsi: Setiap kali admin menginput pembayaran katering (DP atau Pelunasan),
+        //            trigger ini menghitung total uang yang sudah masuk:
+        //            - Jika total bayar >= total tagihan -> status 'PAID' (Lunas)
+        //            - Jika total bayar > 0 tapi belum lunas -> status 'DP' (Uang Muka)
+        //            - Jika belum bayar -> status 'UNPAID'
+        // =========================================================================
         DB::unprepared("DROP TRIGGER IF EXISTS trg_after_catering_payment_insert");
         DB::unprepared("
             CREATE TRIGGER trg_after_catering_payment_insert
@@ -62,7 +80,14 @@ return new class extends Migration
             END
         ");
 
+        // =========================================================================
         // 3. STORED FUNCTION: Hitung sisa tagihan katering (Total Order - Total Terbayar)
+        // =========================================================================
+        // Nama: fn_get_catering_remaining_balance(p_order_id)
+        // Return: DECIMAL(14, 2)
+        // Deskripsi: Fungsi MySQL untuk mengembalikan sisa tagihan yang belum dibayar
+        //            pada suatu pesanan katering tertentu.
+        // =========================================================================
         DB::unprepared("DROP FUNCTION IF EXISTS fn_get_catering_remaining_balance");
         DB::unprepared("
             CREATE FUNCTION fn_get_catering_remaining_balance(p_order_id BIGINT)
@@ -87,8 +112,15 @@ return new class extends Migration
             END
         ");
 
+        // =========================================================================
         // 4. STORED FUNCTION: Hitung Laba Bersih Sederhana pada rentang tanggal
-        // Formula: (Total POS + Total Bayar Catering) - Total Pengeluaran
+        // =========================================================================
+        // Nama: fn_calculate_simple_profit(p_start_date, p_end_date)
+        // Return: DECIMAL(14, 2)
+        // Rumus: (Total Omset Kasir POS + Total Uang Masuk Katering) - Total Pengeluaran Dapur
+        // Deskripsi: Menghitung laba bersih operasional riil Yan's Food dalam rentang
+        //            tanggal tertentu langsung dieksekusi di level database MySQL.
+        // =========================================================================
         DB::unprepared("DROP FUNCTION IF EXISTS fn_calculate_simple_profit");
         DB::unprepared("
             CREATE FUNCTION fn_calculate_simple_profit(p_start_date DATE, p_end_date DATE)
@@ -121,7 +153,14 @@ return new class extends Migration
             END
         ");
 
+        // =========================================================================
         // 5. STORED PROCEDURE: Hitung ulang subtotal dan total pesanan katering
+        // =========================================================================
+        // Nama: sp_recalculate_catering_order_totals(IN p_order_id)
+        // Deskripsi: Prosedur tersimpan di database untuk menghitung ulang nilai
+        //            subtotal (penjumlahan rincian item) dan total (setelah diskon)
+        //            pada pesanan katering tertentu.
+        // =========================================================================
         DB::unprepared("DROP PROCEDURE IF EXISTS sp_recalculate_catering_order_totals");
         DB::unprepared("
             CREATE PROCEDURE sp_recalculate_catering_order_totals(IN p_order_id BIGINT)
