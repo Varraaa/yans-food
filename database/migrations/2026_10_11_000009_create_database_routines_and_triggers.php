@@ -37,87 +37,11 @@ return new class extends Migration
         ");
 
         // =========================================================================
-        // 2. TRIGGER: Update payment_status katering otomatis setelah pembayaran dicatat
-        // =========================================================================
-        // Tabel: catering_payments
-        // Event: AFTER INSERT
-        // Deskripsi: Setiap kali admin menginput pembayaran katering (DP atau Pelunasan),
-        //            trigger ini menghitung total uang yang sudah masuk:
-        //            - Jika total bayar >= total tagihan -> status 'PAID' (Lunas)
-        //            - Jika total bayar > 0 tapi belum lunas -> status 'DP' (Uang Muka)
-        //            - Jika belum bayar -> status 'UNPAID'
-        // =========================================================================
-        DB::unprepared("DROP TRIGGER IF EXISTS trg_after_catering_payment_insert");
-        DB::unprepared("
-            CREATE TRIGGER trg_after_catering_payment_insert
-            AFTER INSERT ON catering_payments
-            FOR EACH ROW
-            BEGIN
-                DECLARE v_total_order DECIMAL(14, 2);
-                DECLARE v_total_paid DECIMAL(14, 2);
-
-                SELECT total INTO v_total_order 
-                FROM catering_orders 
-                WHERE id = NEW.catering_order_id;
-
-                SELECT COALESCE(SUM(amount), 0) INTO v_total_paid 
-                FROM catering_payments 
-                WHERE catering_order_id = NEW.catering_order_id;
-
-                IF v_total_paid >= v_total_order THEN
-                    UPDATE catering_orders 
-                    SET payment_status = 'PAID'
-                    WHERE id = NEW.catering_order_id;
-                ELSEIF v_total_paid > 0 THEN
-                    UPDATE catering_orders 
-                    SET payment_status = 'DP'
-                    WHERE id = NEW.catering_order_id;
-                ELSE
-                    UPDATE catering_orders 
-                    SET payment_status = 'UNPAID'
-                    WHERE id = NEW.catering_order_id;
-                END IF;
-            END
-        ");
-
-        // =========================================================================
-        // 3. STORED FUNCTION: Hitung sisa tagihan katering (Total Order - Total Terbayar)
-        // =========================================================================
-        // Nama: fn_get_catering_remaining_balance(p_order_id)
-        // Return: DECIMAL(14, 2)
-        // Deskripsi: Fungsi MySQL untuk mengembalikan sisa tagihan yang belum dibayar
-        //            pada suatu pesanan katering tertentu.
-        // =========================================================================
-        DB::unprepared("DROP FUNCTION IF EXISTS fn_get_catering_remaining_balance");
-        DB::unprepared("
-            CREATE FUNCTION fn_get_catering_remaining_balance(p_order_id BIGINT)
-            RETURNS DECIMAL(14, 2)
-            DETERMINISTIC
-            READS SQL DATA
-            BEGIN
-                DECLARE v_total_order DECIMAL(14, 2) DEFAULT 0.00;
-                DECLARE v_total_paid DECIMAL(14, 2) DEFAULT 0.00;
-                DECLARE v_remaining DECIMAL(14, 2) DEFAULT 0.00;
-
-                SELECT COALESCE(total, 0) INTO v_total_order 
-                FROM catering_orders 
-                WHERE id = p_order_id;
-
-                SELECT COALESCE(SUM(amount), 0) INTO v_total_paid 
-                FROM catering_payments 
-                WHERE catering_order_id = p_order_id;
-
-                SET v_remaining = GREATEST(0.00, v_total_order - v_total_paid);
-                RETURN v_remaining;
-            END
-        ");
-
-        // =========================================================================
-        // 4. STORED FUNCTION: Hitung Laba Bersih Sederhana pada rentang tanggal
+        // 2. STORED FUNCTION: Hitung Laba Bersih Sederhana pada rentang tanggal
         // =========================================================================
         // Nama: fn_calculate_simple_profit(p_start_date, p_end_date)
         // Return: DECIMAL(14, 2)
-        // Rumus: (Total Omset Kasir POS + Total Uang Masuk Katering) - Total Pengeluaran Dapur
+        // Rumus: Total Omset Kasir POS - Total Pengeluaran Dapur
         // Deskripsi: Menghitung laba bersih operasional riil Yan's Food dalam rentang
         //            tanggal tertentu langsung dieksekusi di level database MySQL.
         // =========================================================================
@@ -129,7 +53,6 @@ return new class extends Migration
             READS SQL DATA
             BEGIN
                 DECLARE v_pos_income DECIMAL(14, 2) DEFAULT 0.00;
-                DECLARE v_catering_income DECIMAL(14, 2) DEFAULT 0.00;
                 DECLARE v_expenses DECIMAL(14, 2) DEFAULT 0.00;
 
                 -- Pendapatan POS berstatus completed
@@ -138,48 +61,13 @@ return new class extends Migration
                 WHERE status = 'completed'
                   AND transaction_date BETWEEN p_start_date AND p_end_date;
 
-                -- Penghasilan riil catering (uang masuk dari catering_payments)
-                SELECT COALESCE(SUM(amount), 0) INTO v_catering_income
-                FROM catering_payments
-                WHERE payment_date BETWEEN p_start_date AND p_end_date;
-
                 -- Total pengeluaran yang approved
                 SELECT COALESCE(SUM(amount), 0) INTO v_expenses
                 FROM expenses
                 WHERE status = 'APPROVED'
                   AND expense_date BETWEEN p_start_date AND p_end_date;
 
-                RETURN (v_pos_income + v_catering_income) - v_expenses;
-            END
-        ");
-
-        // =========================================================================
-        // 5. STORED PROCEDURE: Hitung ulang subtotal dan total pesanan katering
-        // =========================================================================
-        // Nama: sp_recalculate_catering_order_totals(IN p_order_id)
-        // Deskripsi: Prosedur tersimpan di database untuk menghitung ulang nilai
-        //            subtotal (penjumlahan rincian item) dan total (setelah diskon)
-        //            pada pesanan katering tertentu.
-        // =========================================================================
-        DB::unprepared("DROP PROCEDURE IF EXISTS sp_recalculate_catering_order_totals");
-        DB::unprepared("
-            CREATE PROCEDURE sp_recalculate_catering_order_totals(IN p_order_id BIGINT)
-            BEGIN
-                DECLARE v_subtotal DECIMAL(14, 2) DEFAULT 0.00;
-                DECLARE v_discount DECIMAL(14, 2) DEFAULT 0.00;
-
-                SELECT COALESCE(SUM(subtotal), 0) INTO v_subtotal
-                FROM catering_order_items
-                WHERE catering_order_id = p_order_id;
-
-                SELECT COALESCE(discount, 0) INTO v_discount
-                FROM catering_orders
-                WHERE id = p_order_id;
-
-                UPDATE catering_orders
-                SET subtotal = v_subtotal,
-                    total = GREATEST(0.00, v_subtotal - v_discount)
-                WHERE id = p_order_id;
+                RETURN v_pos_income - v_expenses;
             END
         ");
     }
@@ -191,9 +79,6 @@ return new class extends Migration
         }
 
         DB::unprepared("DROP TRIGGER IF EXISTS trg_after_transaction_item_insert");
-        DB::unprepared("DROP TRIGGER IF EXISTS trg_after_catering_payment_insert");
-        DB::unprepared("DROP FUNCTION IF EXISTS fn_get_catering_remaining_balance");
         DB::unprepared("DROP FUNCTION IF EXISTS fn_calculate_simple_profit");
-        DB::unprepared("DROP PROCEDURE IF EXISTS sp_recalculate_catering_order_totals");
     }
 };

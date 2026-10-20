@@ -39,8 +39,8 @@ export function initScrollReveal() {
             }
         });
     }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -8% 0px'
+        threshold: 0.02,
+        rootMargin: '0px 0px 50px 0px'
     });
 
     // 3. Elemen data-reveal individual

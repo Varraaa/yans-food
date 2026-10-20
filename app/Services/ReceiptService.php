@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\CateringOrder;
 use App\Models\Transaction;
 
 class ReceiptService
@@ -127,40 +126,6 @@ class ReceiptService
         return $out;
     }
 
-    /**
-     * Format Kitchen Note (Catatan Dapur / Katering tanpa harga)
-     */
-    public function formatKitchenNote(CateringOrder $order, int $width = 32): string
-    {
-        $doubleLine = str_repeat('=', $width);
-        $line = str_repeat('-', $width);
-
-        $out = "";
-        $out .= $this->center("KITCHEN ORDER NOTE", $width) . "\n";
-        $out .= $this->center("YAN'S FOOD CATERING", $width) . "\n";
-        $out .= $doubleLine . "\n";
-
-        $out .= "Order: " . $order->order_number . "\n";
-        $out .= "Pelanggan: " . $order->customer_name . "\n";
-        $out .= "Acara: " . ($order->event_purpose ?? '-') . "\n";
-        $out .= "Tgl/Jam: " . $order->event_date->format('d/m/Y') . " " . $order->event_time . "\n";
-        $out .= $line . "\n";
-        $out .= "MENU PESANAN:\n";
-
-        foreach ($order->items as $item) {
-            $out .= "[ ] " . $item->quantity . "x " . $item->product_name . "\n";
-        }
-
-        if ($order->notes) {
-            $out .= $line . "\n";
-            $out .= "CATATAN KHUSUS:\n";
-            $out .= wordwrap($order->notes, $width, "\n") . "\n";
-        }
-
-        $out .= $doubleLine . "\n\n\n";
-
-        return $out;
-    }
 
     private function center(string $text, int $width): string
     {

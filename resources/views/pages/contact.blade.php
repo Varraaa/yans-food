@@ -6,23 +6,17 @@
         <div class="absolute -left-20 bottom-0 w-80 h-80 rounded-full bg-tertiary-fixed-dim/20 blur-2xl pointer-events-none"></div>
 
         <!-- 1. Header -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center" data-reveal>
-            <!-- Live Operating Status Badge (§5.5) -->
-            <div id="live-status-pill" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container font-label-sm text-xs font-semibold mb-4 border border-surface-variant/40 shadow-xs">
-                <span id="live-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="live-status-text">Memeriksa jam operasional dapur...</span>
-            </div>
-
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center" data-reveal>
             <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface max-w-3xl tracking-tight mb-4 font-serif">
                 Pintu Dapur Kami Selalu Terbuka untuk Anda
             </h1>
             <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-base sm:text-lg">
-                Ada pertanyaan seputar menu, reservasi katering acara, atau saran rasa? Kami siap menyambut Anda dengan ramah.
+                Ada pertanyaan seputar menu, pemesanan, atau saran rasa? Kami siap menyambut Anda dengan ramah.
             </p>
         </section>
 
         <!-- 2. Main Content Grid -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-20 w-full" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 pb-20 w-full" data-reveal>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 
                 <!-- Left Column: Info Cards & Form (7 Cols) -->
@@ -86,7 +80,7 @@
                                     +62 812-3456-7890
                                 </p>
                                 <p class="font-body-sm text-secondary text-xs">
-                                    Layanan CS, konsultasi menu box, &amp; pemesanan katering acara.
+                                    Layanan CS, informasi menu, &amp; pemesanan takeout/delivery.
                                 </p>
                             </div>
                             <div class="pt-4 mt-2">
@@ -151,10 +145,9 @@
                                 <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="inquiryType">Jenis Keperluan *</label>
                                 <select id="inquiryType" 
                                         class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer text-sm">
-                                    <option value="Konsultasi Katering Acara">Konsultasi Katering Acara (Syukuran / Kantor / Pesta)</option>
                                     <option value="Pertanyaan Seputar Menu">Pertanyaan Seputar Menu Harian &amp; Kudapan</option>
-                                    <option value="Pemesanan Partai Besar">Pemesanan Khusus / Tumpeng Mini / Hampers</option>
-                                    <option value="Kemitraan atau Saran">Kerjasama, Liputan, atau Masukan Rasa</option>
+                                    <option value="Pemesanan Makanan / Takeaway">Pemesanan Makanan &amp; Takeaway</option>
+                                    <option value="Kerjasama atau Masukan">Kerjasama, Masukan, atau Saran Rasa</option>
                                 </select>
                             </div>
 
@@ -162,7 +155,7 @@
                                 <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="messageContent">Pesan Anda *</label>
                                 <textarea id="messageContent" 
                                           rows="4" 
-                                          placeholder="Tuliskan pertanyaan spesifik, tanggal rencana acara, atau jumlah porsi yang ingin ditanyakan..." 
+                                          placeholder="Tuliskan pertanyaan spesifik atau pesanan yang ingin ditanyakan..." 
                                           required 
                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y text-sm"></textarea>
                             </div>

@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
         $berat  = ProductCategory::where('name', 'Makanan Berat')->first();
         $mie    = ProductCategory::where('name', 'Mie Instan')->first();
         $minum  = ProductCategory::where('name', 'Minuman Segar')->first();
-        $paket  = ProductCategory::where('name', 'Paket Katering')->first();
+        $lauk   = ProductCategory::where('name', 'Aneka Lauk')->first() ?? $berat;
 
         $products = [
             // Makanan Ringan
@@ -105,25 +105,25 @@ class ProductSeeder extends Seeder
                 'status' => 'available',
             ],
 
-            // Paket Katering
+            // Makanan Berat & Aneka Lauk
             [
-                'category_id' => $paket->id,
-                'name' => 'Paket Snack Box Manis & Gurih',
-                'description' => '1 Risol Mayo + 1 Pisang Coklat + 1 Tahu Bakso + Air Mineral cup & tisu basah.',
-                'price' => 12000,
-                'stock' => 100,
-                'unit' => 'box',
-                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuARZOQ96wet-CMX5rdD7lCFZyLs1EkrpKnlUC0RR99N8F7qRKAtVDp0zOXrFg0euopAroL4wdJES5KEUP4Mc10u-UzZYXlvj3_U850HmHFdI-2qa02DqfAOUMw-0VbCaGvmAt2949p2eWuHqz3RcdS7ODq1G6OninQUnQZKMoxPO6O-lS3WjYQWINUV6vdxskptYAzfbyMOIB5K2-d37eZht5g2KMxF67gGOJStQ-AFmbk3gNEvgEtd',
+                'category_id' => $berat->id,
+                'name' => 'Nasi Kotak Ayam Bakar Spesial',
+                'description' => 'Nasi putih pulen, ayam bakar bumbu kecap manis legit, lalapan segar, sambal korek pedas, dan tahu tempe goreng.',
+                'price' => 25000,
+                'stock' => 50,
+                'unit' => 'porsi',
+                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau',
                 'status' => 'available',
             ],
             [
-                'category_id' => $paket->id,
-                'name' => 'Paket Nasi Kotak Nusantara (Best Seller)',
-                'description' => 'Nasi putih/kuning pulen, ayam bakar/lengkuas, sambal korek, tahu tempe, lalapan, buah pisang/jeruk, dan air mineral.',
-                'price' => 28000,
-                'stock' => 100,
-                'unit' => 'box',
-                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau',
+                'category_id' => $ringan->id,
+                'name' => 'Tahu Bakso Goreng Renyah',
+                'description' => 'Tahu pong isi adonan bakso sapi gurih berpadu rempah bawang, digoreng garing keemasan dengan cabe rawit hijau.',
+                'price' => 3500,
+                'stock' => 60,
+                'unit' => 'pcs',
+                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuARZOQ96wet-CMX5rdD7lCFZyLs1EkrpKnlUC0RR99N8F7qRKAtVDp0zOXrFg0euopAroL4wdJES5KEUP4Mc10u-UzZYXlvj3_U850HmHFdI-2qa02DqfAOUMw-0VbCaGvmAt2949p2eWuHqz3RcdS7ODq1G6OninQUnQZKMoxPO6O-lS3WjYQWINUV6vdxskptYAzfbyMOIB5K2-d37eZht5g2KMxF67gGOJStQ-AFmbk3gNEvgEtd',
                 'status' => 'available',
             ],
         ];

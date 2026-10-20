@@ -10,7 +10,7 @@
                 class="px-4 py-2.5 rounded-xl font-bold whitespace-nowrap transition flex items-center gap-2 {{ $activeTab === 'financial' ? 'bg-[#C1440E] text-white shadow' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
             >
                 <span>⚖️</span>
-                <span>Laba Rugi & Arus Kas</span>
+                <span>Laba Rugi &amp; Arus Kas</span>
             </a>
             <a 
                 href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'pos'])) }}"
@@ -18,13 +18,6 @@
             >
                 <span>🍔</span>
                 <span>Penjualan Kasir POS</span>
-            </a>
-            <a 
-                href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'catering'])) }}"
-                class="px-4 py-2.5 rounded-xl font-bold whitespace-nowrap transition flex items-center gap-2 {{ $activeTab === 'catering' ? 'bg-[#C1440E] text-white shadow' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
-            >
-                <span>🍱</span>
-                <span>Pesanan Katering</span>
             </a>
         </div>
 
@@ -35,7 +28,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
-            <span>Export {{ $activeTab === 'financial' ? 'Laba Rugi' : ($activeTab === 'pos' ? 'Data POS' : 'Data Katering') }} (CSV)</span>
+            <span>Export {{ $activeTab === 'financial' ? 'Laba Rugi' : 'Data POS' }} (CSV)</span>
         </a>
     </div>
 
@@ -95,14 +88,14 @@
                 <div class="bg-gradient-to-br from-[#C1440E] to-amber-600 text-white p-5 rounded-2xl shadow-sm">
                     <span class="text-[11px] uppercase tracking-wider font-bold opacity-80">Total Kas Masuk (Gross)</span>
                     <h3 class="text-2xl font-black mt-1">Rp {{ number_format($financialData['total_gross_income'], 0, ',', '.') }}</h3>
-                    <p class="text-[11px] opacity-80 mt-2 font-medium">Omset POS + Uang Masuk Katering</p>
+                    <p class="text-[11px] opacity-80 mt-2 font-medium">Omset Penjualan Kasir POS</p>
                 </div>
 
                 {{-- TOTAL BIAYA DAPUR --}}
                 <div class="bg-gradient-to-br from-rose-600 to-red-700 text-white p-5 rounded-2xl shadow-sm">
-                    <span class="text-[11px] uppercase tracking-wider font-bold opacity-80">Total Biaya & Pengeluaran</span>
+                    <span class="text-[11px] uppercase tracking-wider font-bold opacity-80">Total Biaya &amp; Pengeluaran</span>
                     <h3 class="text-2xl font-black mt-1">Rp {{ number_format($financialData['total_expenses'], 0, ',', '.') }}</h3>
-                    <p class="text-[11px] opacity-80 mt-2 font-medium">Bahan baku, operasional, & gas</p>
+                    <p class="text-[11px] opacity-80 mt-2 font-medium">Bahan baku, operasional, &amp; gas</p>
                 </div>
 
                 {{-- LABA BERSIH OPERASIONAL --}}
@@ -139,16 +132,6 @@
                                 Rp {{ number_format($financialData['pos_revenue'], 0, ',', '.') }}
                             </span>
                         </div>
-
-                        <div class="p-4 rounded-xl bg-sky-50/50 border border-sky-200 flex justify-between items-center">
-                            <div>
-                                <div class="font-bold text-stone-800 text-sm">🍱 Realisasi Katering (DP & Pelunasan)</div>
-                                <div class="text-xs text-stone-500 mt-0.5">{{ $financialData['catering_payment_count'] }} kali pembayaran masuk</div>
-                            </div>
-                            <span class="font-black text-base text-sky-700">
-                                Rp {{ number_format($financialData['catering_income'], 0, ',', '.') }}
-                            </span>
-                        </div>
                     </div>
                 </div>
 
@@ -180,7 +163,7 @@
         </div>
 
     {{-- TAB 2: POS REPORT --}}
-    @elseif($activeTab === 'pos')
+    @else
         <div class="space-y-6">
             {{-- POS SUMMARY CARDS --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -206,7 +189,7 @@
             {{-- TOP SELLING PRODUCTS TABLE --}}
             @if(empty($productId) && count($salesData['product_sales'] ?? []) > 0)
                 <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-5 space-y-3">
-                    <h4 class="font-bold text-stone-900 text-sm">🏆 Menu Paling Laris & Terpopuler</h4>
+                    <h4 class="font-bold text-stone-900 text-sm">🏆 Menu Paling Laris &amp; Terpopuler</h4>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-xs">
                             <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
@@ -243,7 +226,7 @@
                         <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                             <tr>
                                 <th class="py-3 px-4">No. Transaksi</th>
-                                <th class="py-3 px-4">Tanggal & Jam</th>
+                                <th class="py-3 px-4">Tanggal &amp; Jam</th>
                                 <th class="py-3 px-4">Kasir</th>
                                 <th class="py-3 px-4 text-center">Metode</th>
                                 <th class="py-3 px-4 text-right">Total</th>
@@ -268,100 +251,6 @@
                                 <tr>
                                     <td colspan="6" class="py-10 text-center text-stone-400 text-xs">
                                         Tidak ada transaksi kasir tercatat pada periode ini.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    {{-- TAB 3: CATERING REPORT --}}
-    @else
-        <div class="space-y-6">
-            {{-- CATERING SUMMARY CARDS --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white p-5 rounded-2xl shadow-sm">
-                    <span class="text-xs uppercase tracking-wider font-bold opacity-80">Total Nilai Pesanan Catering</span>
-                    <h3 class="text-2xl font-black mt-1">Rp {{ number_format($cateringData['summary']['total_order_value'] ?? 0, 0, ',', '.') }}</h3>
-                    <p class="text-[11px] opacity-80 mt-1 font-medium">Akumulasi nilai kontrak katering</p>
-                </div>
-
-                <div class="bg-gradient-to-br from-emerald-600 to-teal-700 text-white p-5 rounded-2xl shadow-sm">
-                    <span class="text-xs uppercase tracking-wider font-bold opacity-80">Realisasi Dana Masuk</span>
-                    <h3 class="text-2xl font-black mt-1">Rp {{ number_format($cateringData['summary']['total_income'] ?? 0, 0, ',', '.') }}</h3>
-                    <p class="text-[11px] opacity-80 mt-1 font-medium">Dana riil yang telah diterima (DP + Pelunasan)</p>
-                </div>
-
-                <div class="bg-white border border-stone-200 p-5 rounded-2xl shadow-sm">
-                    <span class="text-xs uppercase tracking-wider font-bold text-stone-500">Jumlah Pesanan Acara</span>
-                    <h3 class="text-2xl font-black text-stone-900 mt-1">{{ number_format($cateringData['summary']['order_count'] ?? 0) }} acara</h3>
-                    <p class="text-[11px] text-stone-400 mt-1 font-medium">Pesanan katering pada periode terpilih</p>
-                </div>
-            </div>
-
-            {{-- STATUS BREAKDOWN PILLS --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-4">
-                <h4 class="font-bold text-stone-900 text-xs uppercase tracking-wider mb-2">Breakdown Status Progres:</h4>
-                <div class="flex flex-wrap gap-2 text-xs">
-                    @foreach($cateringData['status_breakdown'] as $status => $count)
-                        <span class="px-3 py-1.5 rounded-lg bg-stone-100 font-semibold text-stone-700">
-                            {{ $status }}: <strong class="text-stone-900">{{ $count }}</strong>
-                        </span>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- CATERING ORDERS TABLE --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
-                <div class="p-4 border-b border-stone-200">
-                    <h4 class="font-bold text-stone-900 text-sm">Daftar Order Catering</h4>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
-                            <tr>
-                                <th class="py-3 px-4">No. Order</th>
-                                <th class="py-3 px-4">Pelanggan & WA</th>
-                                <th class="py-3 px-4">Tgl. Acara</th>
-                                <th class="py-3 px-4 text-right">Nilai Kontrak</th>
-                                <th class="py-3 px-4 text-center">Progres</th>
-                                <th class="py-3 px-4 text-center">Status Bayar</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-stone-100">
-                            @forelse($cateringData['orders'] as $order)
-                                <tr class="hover:bg-stone-50">
-                                    <td class="py-3.5 px-4 font-mono font-bold text-stone-800">{{ $order->order_number }}</td>
-                                    <td class="py-3.5 px-4">
-                                        <div class="font-bold text-stone-900">{{ $order->customer_name }}</div>
-                                        @if($order->customer_phone)
-                                            <span class="text-[11px] text-stone-500">{{ $order->customer_phone }}</span>
-                                        @endif
-                                    </td>
-                                    <td class="py-3.5 px-4 font-mono font-medium text-stone-600">
-                                        {{ \Carbon\Carbon::parse($order->event_date)->format('d M Y') }}
-                                    </td>
-                                    <td class="py-3.5 px-4 text-right font-black text-stone-900">
-                                        Rp {{ number_format($order->total, 0, ',', '.') }}
-                                    </td>
-                                    <td class="py-3.5 px-4 text-center">
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-stone-100 text-stone-800">
-                                            {{ $order->status }}
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-center">
-                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase {{ $order->payment_status === 'PAID' ? 'bg-emerald-100 text-emerald-800' : ($order->payment_status === 'DP' ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800') }}">
-                                            {{ $order->payment_status }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="py-10 text-center text-stone-400 text-xs">
-                                        Tidak ada pesanan katering pada periode ini.
                                     </td>
                                 </tr>
                             @endforelse

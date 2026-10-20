@@ -6,8 +6,7 @@
  * - menu_search
  * - menu_category_filter
  * - product_view_modal
- * - catering_step
- * - catering_submit
+ * - platform_delivery_click
  * - wa_click
  */
 

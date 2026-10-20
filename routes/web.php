@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\CateringIncomeController;
-use App\Http\Controllers\Admin\CateringOrderController;
-use App\Http\Controllers\Admin\CateringPaymentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\PosController;
@@ -14,7 +11,6 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\PublicCateringOrderController;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
@@ -56,9 +52,6 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::post('/pesan-catering', [PublicCateringOrderController::class, 'store'])->name('pesan-catering.store');
-Route::get('/pesan/katering/{order_number}/sukses', [PublicCateringOrderController::class, 'success'])->name('pesan.katering.sukses');
-
 /*
 |--------------------------------------------------------------------------
 | Admin Authentication Routes
@@ -97,22 +90,6 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     // Resep
     Route::resource('recipes', RecipeController::class);
 
-    // Catering
-    Route::prefix('catering')->name('catering.')->group(function () {
-        // Orders
-        Route::get('/orders', [CateringOrderController::class, 'index'])->name('orders.index');
-        Route::get('/orders/{order}', [CateringOrderController::class, 'show'])->name('orders.show');
-        Route::patch('/orders/{order}/status', [CateringOrderController::class, 'updateStatus'])->name('orders.status');
-
-        // Payments
-        Route::get('/payments', [CateringPaymentController::class, 'index'])->name('payments.index');
-        Route::get('/payments/create', [CateringPaymentController::class, 'create'])->name('payments.create');
-        Route::post('/payments', [CateringPaymentController::class, 'store'])->name('payments.store');
-
-        // Income
-        Route::get('/income', [CateringIncomeController::class, 'index'])->name('income.index');
-        Route::get('/income/export', [CateringIncomeController::class, 'exportCsv'])->name('income.export');
-    });
 
     // Pengeluaran
     Route::resource('expenses', ExpenseController::class)->only(['index', 'create', 'store']);
@@ -132,3 +109,5 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
+
+

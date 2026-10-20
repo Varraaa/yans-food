@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\CateringOrder;
-use App\Models\CateringPayment;
 use App\Models\Expense;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionItem;
 use Carbon\Carbon;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class ReportService
 {
     /**
-     * KPI Dashboard Ringkasan Hari Ini
+     * KPI Dashboard Ringkasan Hari Ini (POS & Keuangan)
      */
     public function getDashboardKpis(): array
     {
@@ -27,65 +26,22 @@ class ReportService
             ->whereDate('transaction_date', $today)
             ->count();
 
-        $cateringIncomeToday = (float) CateringPayment::whereDate('payment_date', $today)
-            ->sum('amount');
-
         $expensesToday = (float) Expense::where('status', 'APPROVED')
             ->whereDate('expense_date', $today)
             ->sum('amount');
 
-        $simpleNetProfitToday = ($revenueToday + $cateringIncomeToday) - $expensesToday;
+        $simpleNetProfitToday = $revenueToday - $expensesToday;
 
-        $cateringUnpaidCount = CateringOrder::whereIn('payment_status', ['UNPAID', 'DP'])->count();
-        $cateringCompletedCount = CateringOrder::where('status', 'COMPLETED')->count();
+        $totalProducts = Product::count();
+        $lowStockCount = Product::where('stock', '<=', 5)->count();
 
         return [
             'revenue_today' => $revenueToday,
             'transactions_today' => $transactionsToday,
-            'catering_income_today' => $cateringIncomeToday,
             'expenses_today' => $expensesToday,
             'simple_net_profit_today' => $simpleNetProfitToday,
-            'catering_unpaid_count' => $cateringUnpaidCount,
-            'catering_completed_count' => $cateringCompletedCount,
-        ];
-    }
-
-    /**
-     * Laporan Penghasilan Riil Katering (dari catering_payments)
-     */
-    public function getCateringIncomeReport(?string $startDate = null, ?string $endDate = null, ?string $paymentType = null, ?string $paymentMethod = null): array
-    {
-        $query = CateringPayment::with('order');
-
-        if ($startDate && $endDate) {
-            $query->whereBetween('payment_date', [$startDate, $endDate]);
-        }
-
-        if ($paymentType && $paymentType !== 'all') {
-            $query->where('payment_type', $paymentType);
-        }
-
-        if ($paymentMethod && $paymentMethod !== 'all') {
-            $query->where('payment_method', $paymentMethod);
-        }
-
-        $payments = $query->orderBy('payment_date', 'desc')->get();
-
-        $totalIncome = (float) $payments->sum('amount');
-        $dpIncome = (float) $payments->where('payment_type', 'DP')->sum('amount');
-        $pelunasanIncome = (float) $payments->where('payment_type', 'PELUNASAN')->sum('amount');
-        $paymentCount = $payments->count();
-        $ordersCount = $payments->pluck('catering_order_id')->unique()->count();
-
-        return [
-            'summary' => [
-                'total_income' => $totalIncome,
-                'dp_income' => $dpIncome,
-                'pelunasan_income' => $pelunasanIncome,
-                'payment_count' => $paymentCount,
-                'orders_count' => $ordersCount,
-            ],
-            'payments' => $payments,
+            'total_products' => $totalProducts,
+            'low_stock_count' => $lowStockCount,
         ];
     }
 
@@ -142,52 +98,6 @@ class ReportService
     }
 
     /**
-     * Laporan Khusus Catering
-     */
-    public function getCateringReport(?string $startDate = null, ?string $endDate = null): array
-    {
-        $query = CateringOrder::with('items');
-
-        if ($startDate && $endDate) {
-            $query->whereBetween('event_date', [$startDate, $endDate]);
-        }
-
-        $orders = $query->orderBy('event_date', 'desc')->get();
-
-        $totalOrderValue = (float) $orders->sum('total');
-        $orderCount = $orders->count();
-
-        // Realisasi uang masuk katering
-        $paymentsQuery = CateringPayment::query();
-        if ($startDate && $endDate) {
-            $paymentsQuery->whereBetween('payment_date', [$startDate, $endDate]);
-        }
-        $totalIncome = (float) $paymentsQuery->sum('amount');
-
-        // Status breakdown
-        $statusBreakdown = [
-            'PENDING' => $orders->where('status', 'PENDING')->count(),
-            'CONFIRMED' => $orders->where('status', 'CONFIRMED')->count(),
-            'IN_PROGRESS' => $orders->where('status', 'IN_PROGRESS')->count(),
-            'READY' => $orders->where('status', 'READY')->count(),
-            'DELIVERING' => $orders->where('status', 'DELIVERING')->count(),
-            'COMPLETED' => $orders->where('status', 'COMPLETED')->count(),
-            'CANCELLED' => $orders->where('status', 'CANCELLED')->count(),
-        ];
-
-        return [
-            'summary' => [
-                'total_order_value' => $totalOrderValue,
-                'total_income' => $totalIncome,
-                'order_count' => $orderCount,
-            ],
-            'orders' => $orders,
-            'status_breakdown' => $statusBreakdown,
-            'statusBreakdown' => $statusBreakdown,
-        ];
-    }
-
-    /**
      * Laporan Laba Rugi & Arus Kas (Financial Summary)
      */
     public function getFinancialSummaryReport(?string $startDate = null, ?string $endDate = null): array
@@ -200,16 +110,8 @@ class ReportService
         $posRevenue = (float) $posQuery->sum('total');
         $posCount = $posQuery->count();
 
-        // 2. Realisasi Uang Masuk Katering (DP + Pelunasan)
-        $cateringPaymentQuery = CateringPayment::query();
-        if ($startDate && $endDate) {
-            $cateringPaymentQuery->whereBetween('payment_date', [$startDate, $endDate]);
-        }
-        $cateringIncome = (float) $cateringPaymentQuery->sum('amount');
-        $cateringPaymentCount = $cateringPaymentQuery->count();
-
-        // Total Pendapatan Kas Masuk
-        $totalGrossIncome = $posRevenue + $cateringIncome;
+        // 2. Total Pendapatan Kas Masuk
+        $totalGrossIncome = $posRevenue;
 
         // 3. Pengeluaran Dapur / Operasional yang Disetujui
         $expenseQuery = Expense::where('expenses.status', 'APPROVED');
@@ -238,8 +140,6 @@ class ReportService
         return [
             'pos_revenue' => $posRevenue,
             'pos_count' => $posCount,
-            'catering_income' => $cateringIncome,
-            'catering_payment_count' => $cateringPaymentCount,
             'total_gross_income' => $totalGrossIncome,
             'total_expenses' => $totalExpenses,
             'expense_count' => $expenseCount,

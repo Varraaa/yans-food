@@ -71,7 +71,7 @@
 
         <!-- 2. Typography & Story Description (Max 2 lines, §5.3) -->
         <div class="space-y-1 sm:space-y-1.5">
-            <h3 class="font-headline-sm text-on-surface group-hover:text-primary transition-colors text-sm sm:text-base md:text-xl font-serif line-clamp-2 leading-snug">
+            <h3 class="font-headline-sm text-on-surface group-hover:text-primary transition-colors text-sm sm:text-base md:text-lg lg:text-xl font-serif line-clamp-2 leading-snug">
                 {{ $title }}
             </h3>
             <p class="font-body-sm text-secondary line-clamp-2 text-[11px] sm:text-xs md:text-sm leading-relaxed">

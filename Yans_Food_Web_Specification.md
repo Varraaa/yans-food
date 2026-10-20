@@ -2,11 +2,9 @@
 
 ## 1. Konsep
 
-Yan's Food adalah website berbasis Laravel yang menggabungkan **company profile** dan **sistem manajemen bisnis kuliner** dalam satu platform. Public website digunakan pelanggan untuk melihat profil, produk, catering, dan kontak. Admin website digunakan untuk mengelola operasional bisnis.
+Yan's Food adalah platform web berbasis Laravel yang menggabungkan **company profile publik** dan **sistem manajemen bisnis kuliner terpadu (POS Kasir & Manajemen Produk)** dalam satu sistem. Public website digunakan pelanggan untuk melihat profil, katalog menu kudapan dan makanan hangat, informasi dapur, serta kanal pemesanan online delivery dan takeaway via WhatsApp. Admin website digunakan pemilik usaha dan kasir untuk mengelola operasional harian gerai.
 
-POS adalah salah satu modul, bukan keseluruhan sistem.
-
-**Kategori:** Integrated Food Business Management System.
+**Kategori:** Integrated POS, Product Management & Culinary Company Profile.
 
 ## 2. Arsitektur
 
@@ -24,17 +22,14 @@ Prinsip:
 
 ## 3. Tech Stack
 
-- PHP / Laravel
-- Laravel Blade (public website & admin panel, manual — bukan package admin panel)
-- Tailwind CSS
-- Flowbite (komponen UI Tailwind: sidebar, tabel, modal, form, dsb — dipakai sebagai referensi/template markup, diadaptasi manual ke Blade)
+- PHP 8.2+ / Laravel 12
+- Laravel Blade (public website & admin panel manual)
+- Tailwind CSS v4
+- Flowbite & Vanilla JS interaktif
 - Vite
 - Eloquent ORM
-- MySQL/MariaDB
-- REST API
+- MySQL 8.x
 - Thermal printer 58mm/80mm
-
-> **Catatan perubahan:** Admin panel semula direncanakan memakai Filament v3. Diputuskan untuk **tidak memakai Filament** — admin panel dibangun manual dengan Laravel Blade + Tailwind CSS, mengadaptasi komponen dari Flowbite (flowbite.com) sebagai basis UI (sidebar, tabel data, form, modal, dashboard card, dll). Seluruh struktur modul, sidebar, dan halaman admin pada dokumen ini **tidak berubah secara fungsional** — hanya cara implementasinya yang berpindah dari resource/page Filament menjadi route, controller, dan view Blade buatan sendiri.
 
 ## 4. Public Website
 
@@ -44,61 +39,38 @@ Navbar utama:
 Home | About | Menu | Pesan | Contact
 ```
 
-Penamaan "Menu" (menggantikan "Products") dan "Pesan" (menggantikan "Catering") digunakan konsisten di navbar, judul halaman, dan URL publik — selaras dengan dokumentasi UI/UX.
-
-Gallery bersifat opsional.
-
 ### Home
-Hero, pengenalan Yan's Food, CTA produk/catering, produk unggulan, keunggulan bisnis, highlight catering, optional gallery, contact CTA, footer.
+Hero, pengenalan dapur Yan's Food, CTA pesan online delivery, menu favorit pilihan pelanggan, filosofi rasa rumahan, kontak cepat, dan footer.
 
 ### About
-Cerita usaha, visi, misi, nilai, kualitas, kebersihan, dan pelayanan.
+Cerita usaha dapur rumahan, filosofi "Cita Rasa Rumahan Disajikan dengan Hati", komitmen bahan baku segar higienis, dan timeline perjalanan usaha.
 
 ### Menu
-*(sebelumnya "Products")*
-
-Menampilkan produk dari database dengan filter kategori. Produk berstatus **Sedia** dapat ditampilkan sebagai tersedia; produk **Tidak Tersedia** tidak boleh dipresentasikan sebagai produk yang dapat dibeli.
+Katalog kuliner dinamis dari basis data produk dengan filter kategori (Kudapan Renyah, Makanan Hangat, Aneka Lauk, Minuman Segar). Produk berstatus **Sedia** ditampilkan dengan badge hijau; produk **Tidak Tersedia** ditampilkan non-aktif.
 
 ### Pesan
-*(sebelumnya "Catering"; halaman ini menggabungkan dua kanal pemesanan — Pesan Online & Pesan Katering — karena keduanya sama-sama menjawab pertanyaan "bagaimana cara membeli Yan's Food")*
 
-#### A. Pesan Online
+Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
 
-Bagian ini menjelaskan bahwa Yan's Food tersedia di layanan pesan-antar pihak ketiga untuk pembelian harian (bukan acara/event):
+#### A. Pesan Online Delivery (Mitra Platform)
+- Menampilkan card interaktif **ShopeeFood**, **GoFood**, dan **GrabFood**, masing-masing clickable menuju toko resmi Yan's Food di aplikasi tersebut untuk pemesanan instan harian dengan kurir platform.
+- Transaksi dan pembayaran berlangsung di platform pihak ketiga tersebut.
 
-- Menampilkan logo **ShopeeFood**, **GoFood**, **GrabFood**, masing-masing clickable menuju link/aplikasi resmi toko Yan's Food di platform tersebut.
-- Bersifat konten statis/konfigurasi (link platform), tidak memerlukan tabel database baru — tiga link tersebut cukup disimpan sebagai pengaturan sederhana (lihat §17 Pengaturan/Settings, atau bisa di-hardcode di konfigurasi environment bila jarang berubah).
-- Tidak melibatkan `catering_orders` atau proses checkout apa pun di sisi Yan's Food — transaksi dan pembayaran sepenuhnya berlangsung di platform pihak ketiga tersebut.
-
-#### B. Pesan Katering
-
-Menjelaskan layanan, paket, menu, dan form pemesanan katering.
-
-Alur pemesanan (bukan chat manual bebas di WA):
-1. Pelanggan mengisi **form terstruktur** di website: nama, alamat, pilih produk (dropdown dari database) + qty, tanggal & jam acara, keperluan, catatan.
-2. Saat submit, Laravel menyimpan data ke `catering_orders` **dan** menghitung total harga otomatis dari harga produk di database (bukan input manual pelanggan).
-3. Data pesanan (termasuk total harga) langsung tersimpan dan tampil di Admin Web pada page Pesanan Catering.
-4. Pelanggan di-redirect ke WhatsApp Admin (`wa.me` dengan pesan terformat otomatis berisi ringkasan pesanan) untuk melanjutkan **konsultasi/komunikasi** — nego menu, detail tambahan, atau perubahan request.
-5. Jika hasil konsultasi WA mengubah pesanan (misal qty nambah, request custom di luar form), admin memperbarui data terkait secara manual di Admin Web — WA tetap jadi kanal komunikasi final yang fleksibel/manusiawi, form hanya starting point yang mempercepat proses.
-
-Form tidak menggantikan peran WhatsApp sebagai kanal komunikasi personal; form berfungsi sebagai pintu masuk terstruktur agar data awal & estimasi harga otomatis tervalidasi sebelum percakapan berlangsung.
-
-Tampilan: dua bagian (A dan B) dipisahkan jelas secara visual pada halaman yang sama (Pesan Online ditampilkan lebih dulu, diikuti Pesan Katering), bukan dua page terpisah.
+#### B. Pesan Takeaway Dapur (Ambil Sendiri via WhatsApp)
+- Layanan pemesanan langsung untuk diambil di dapur (*self pick-up*).
+- Dilengkapi panduan pemesanan, format pesan otomatis ke WhatsApp Admin, serta nomor kontak resmi untuk konfirmasi waktu pengambilan pesanan.
 
 ### Contact
-Alamat, WhatsApp, Instagram, jam operasional, Maps, dan CTA kontak.
-
-### Gallery
-Opsional; dapat menjadi section Home jika foto belum cukup.
+Alamat dapur, WhatsApp, email, jam operasional, Google Maps interaktif, dan formulir kontak/pertanyaan.
 
 ### Footer
-Tampil konsisten di semua halaman publik (bukan hanya Home). Selain navigasi, kontak, dan sosial media, footer menampilkan baris **"Tersedia juga di:"** berisi logo ShopeeFood, GoFood, dan GrabFood (link sama seperti pada bagian Pesan Online) — berfungsi sebagai trust signal persisten bahwa Yan's Food sudah tersedia di platform pesan-antar.
+Tampil konsisten di seluruh halaman publik. Memuat navigasi cepat, kontak dapur, jam operasional, tautan media sosial, serta baris **"Tersedia juga di:"** (ShopeeFood, GoFood, GrabFood).
 
 ## 5. Admin Website
 
-Dibangun manual dengan Laravel Blade + Tailwind CSS, mengadaptasi komponen **Flowbite** (sidebar, navbar, tabel, card, modal, form, badge, pagination) sebagai basis tampilan — bukan admin panel generated seperti Filament. Setiap halaman admin punya Controller, route, dan Blade view sendiri, memakai layout Blade bersama (`layouts/admin.blade.php`) agar sidebar, navbar, dan struktur halaman konsisten di semua modul.
+Admin panel dibangun manual dengan Laravel Blade + Tailwind CSS menggunakan satu layout bersama (`layouts/admin.blade.php`).
 
-Sidebar final:
+Sidebar navigasi:
 
 ```text
 YAN'S FOOD
@@ -115,11 +87,6 @@ CATALOG
 - Produk
 - Resep
 
-CATERING
-- Pesanan Catering
-- Pembayaran Catering
-- Penghasilan Catering
-
 FINANCE
 - Pengeluaran
 - Laporan
@@ -132,40 +99,25 @@ SYSTEM
 
 ## 6. Dashboard
 
-KPI:
-- Pendapatan hari ini
-- Transaksi hari ini
-- Pengeluaran hari ini
-- Laba bersih sederhana
-- Catering belum lunas
-- Catering selesai
+KPI & Metrik Harian:
+- Omset POS Hari Ini
+- Total Transaksi Hari Ini
+- Pengeluaran Belanja Operasional Hari Ini
+- Laba Bersih Sederhana
+- Peringatan Stok Produk Menipis / Habis
 
-Formula awal:
+Formula:
+`Laba Bersih Sederhana = Total Penjualan POS Kasir - Total Biaya Operasional Disetujui`
 
-`Laba Bersih Sederhana = Total Pemasukan - Total Pengeluaran`
-
-## 7. Produk
-
-Hanya satu page **Produk**. Tidak ada page kategori terpisah.
+## 7. Produk & Manajemen Katalog
 
 Fitur:
-- semua produk;
-- search;
-- filter kategori;
-- create/read/update/delete;
-- foto;
-- harga;
-- stock;
-- unit;
-- status.
-
-Status wajib:
-- `Sedia`
-- `Tidak Tersedia`
-
-Status berbeda dengan stock. Produk Tidak Tersedia tidak boleh dijual di POS.
-
-Kategori dapat dikelola langsung dari form/modal produk.
+- Manajemen seluruh katalog menu kuliner;
+- Pencarian dan filter kategori;
+- Tambah, edit, dan hapus produk (dengan proteksi integritas transaksi kasir);
+- Upload foto menu kuliner;
+- Harga jual, stok fisik, satuan, dan deskripsi menu;
+- Sakelar status: `Sedia` (*available*) dan `Tidak Tersedia` (*unavailable*).
 
 ### Database
 
@@ -192,11 +144,11 @@ created_at
 updated_at
 ```
 
-Relationship: Product Category 1:N Product.
+Relationship: `ProductCategory` 1:N `Product`.
 
-## 8. Resep
+## 8. Resep & Inventaris Dapur
 
-Hanya satu page **Resep**. Detail resep berisi bahan.
+Dokumentasi standar resep dapur (*Bill of Materials*) yang mengaitkan menu jadi dengan daftar bahan baku, takaran per porsi, dan petunjuk masak.
 
 `recipes`:
 ```text
@@ -223,33 +175,27 @@ updated_at
 ```
 
 Relationship:
-- Product 1:N Recipe
-- Recipe 1:N RecipeIngredient
+- `Product` 1:N `Recipe`
+- `Recipe` 1:N `RecipeIngredient`
 
-## 9. POS
+## 9. POS (Point of Sale / Kasir)
 
 Flow:
-
 ```text
-Pilih Produk
-→ Quantity
+Pilih Produk Sedia
+→ Atur Kuantitas
 → Subtotal
-→ Total
-→ Cash
-→ Amount Received
-→ Change
-→ Confirm
-→ TransactionService
-→ Database
-→ Payment Success
-→ Print Receipt
+→ Diskon (opsional)
+→ Total Tagihan
+→ Input Nominal Uang Tunai Diterima
+→ Perhitungan Kembalian Otomatis
+→ Simpan Transaksi (Atomic Transaction & Potong Stok Otomatis)
+→ Cetak Struk Kasir Thermal
 ```
 
-Tahap awal pembayaran: CASH.
+Kalkulasi harga, subtotal, total, dan kembalian dihitung ulang oleh backend service. Client tidak menjadi sumber kebenaran transaksi.
 
-Laravel wajib menghitung ulang harga, subtotal, total, dan kembalian. Client tidak boleh menjadi sumber kebenaran transaksi.
-
-## 10. Transaksi
+## 10. Transaksi Kasir
 
 `transactions`:
 ```text
@@ -282,141 +228,28 @@ created_at
 updated_at
 ```
 
-Nama dan harga disimpan sebagai snapshot historis agar transaksi lama tetap terbaca.
+Nama produk dan harga satuan disimpan sebagai snapshot historis agar nota lama tetap akurat meskipun harga katalog diubah di masa depan.
 
-Produk yang sudah pernah dipakai transaksi sebaiknya tidak di-hard-delete; gunakan status/soft delete.
+## 11. Pengeluaran Operasional Dapur
 
-## 11. Catering
-
-Pesanan, pembayaran, dan penghasilan adalah page terpisah.
-
-### 11.1 Alur Masuknya Pesanan (Form Publik → Admin)
-
-Pesanan katering **tidak diinput manual oleh admin dari chat WA**. Sumber data resmi adalah form pemesanan di halaman publik (lihat §4 Pesan — bagian B. Pesan Katering):
-
-```text
-Pelanggan isi form (Nama, Alamat, Produk+Qty, Tanggal/Jam, Keperluan, Catatan)
-→ Submit
-→ CateringService: validasi input, ambil harga produk dari database
-→ Hitung subtotal & total otomatis (server-side, bukan dari input pelanggan)
-→ Simpan ke `catering_orders` dengan status default PENDING, payment_status UNPAID
-→ Data & total harga langsung tampil di Admin Web (page Pesanan Catering)
-→ Generate pesan WA terformat → redirect pelanggan ke WhatsApp Admin
-   (kanal ini dipakai untuk konsultasi/komunikasi lanjutan, bukan sumber data)
-```
-
-Jika hasil konsultasi WA mengubah detail pesanan (menu, qty, tanggal), **admin memperbarui data tersebut secara manual** melalui page Pesanan Catering di Admin Web — form publik hanya jadi entry point awal yang mempercepat proses, bukan satu-satunya titik update. WA tetap menjadi kanal komunikasi final yang fleksibel/manusiawi antara admin dan pelanggan.
-
-### 11.2 Status
-
-Status order:
-- PENDING
-- CONFIRMED
-- IN_PROGRESS
-- READY
-- **DELIVERING** (dikirim — pesanan sedang diantar ke lokasi acara)
-- COMPLETED
-- CANCELLED
-
-Payment status:
-- UNPAID
-- DP
-- PAID
-
-Admin mengubah status order melalui dropdown/select di page Pesanan Catering (tidak melalui form terpisah), sesuai progres pesanan: PENDING → CONFIRMED → IN_PROGRESS → READY → DELIVERING → COMPLETED.
-
-Status DELIVERING eksplisit dipisah dari READY karena "siap" (bahan/produk selesai disiapkan) dan "sedang diantar" adalah dua kondisi berbeda yang perlu diketahui admin maupun pelanggan — terutama untuk pesanan yang diantar ke lokasi acara, bukan diambil sendiri oleh pelanggan. Untuk pesanan yang diambil sendiri (self pick-up), admin dapat melewati status ini langsung dari READY ke COMPLETED.
-
-### 11.3 Struktur Data
-
-`catering_orders`:
-```text
-id
-order_number
-customer_name
-customer_phone
-customer_address
-event_date
-event_time
-event_purpose
-notes
-subtotal
-discount
-total
-status
-payment_status
-created_by
-created_at
-updated_at
-```
-
-`catering_order_items`:
-```text
-id
-catering_order_id
-product_id
-product_name
-quantity
-unit_price
-subtotal
-created_at
-updated_at
-```
-
-Payment:
-- CASH
-- DP
-- PELUNASAN
-
-`catering_payments`:
-```text
-id
-catering_order_id
-payment_number
-payment_type
-amount
-payment_method
-payment_date
-received_by
-notes
-created_at
-updated_at
-```
-
-Formula:
-
-`Total Dibayar = SUM(payment.amount)`
-
-`Sisa = Total Pesanan - Total Dibayar`
-
-Pembayaran yang melebihi sisa harus ditolak. Order COMPLETED tidak otomatis berarti PAID.
-
-### 11.4 Penghasilan Catering (Page Baru)
-
-Page khusus untuk melihat rekap **uang yang benar-benar diterima** dari pesanan katering — berbeda dari page Pesanan Catering (fokus status order) dan Pembayaran Catering (fokus input transaksi DP/pelunasan per order).
-
-Tidak memerlukan tabel baru — data diagregasi dari `catering_payments` (join ke `catering_orders` untuk info order terkait).
-
-Fitur:
-- Filter rentang tanggal (Hari Ini, Minggu Ini, Bulan Ini, Custom, Keseluruhan) berdasarkan `payment_date`
-- Ringkasan: total penghasilan catering pada periode terpilih, jumlah pembayaran diterima, jumlah order terkait
-- Tabel rincian: tanggal bayar, order terkait, nama pelanggan, jenis pembayaran (DP/Pelunasan), nominal
-- Nilai mengikuti filter aktif, konsisten dengan pola filter yang sudah dipakai di page Laporan (§13)
-
-`ReportService` bertanggung jawab menyediakan data agregat ini (lihat §15), tidak perlu service baru. 
-
-## 12. Pengeluaran
-
-Kategori:
+Pencatatan biaya operasional harian dapur:
 - Bahan Baku
-- Gas
+- Gas Dapur
 - Listrik
 - Air
-- Kemasan
+- Kemasan / Packaging
 - Transportasi
-- Peralatan
-- Maintenance
-- Lain-lain
+- Peralatan Dapur
+- Pemeliharaan / Maintenance
+- Biaya Lain-lain
+
+`expense_categories`:
+```text
+id
+name
+created_at
+updated_at
+```
 
 `expenses`:
 ```text
@@ -438,73 +271,16 @@ created_at
 updated_at
 ```
 
-## 13. Laporan
+## 12. Laporan Keuangan & Penjualan
 
-Page Laporan adalah pusat analisis transaksi dan performa bisnis.
+Page Laporan adalah pusat analisis performa finansial dan penjualan produk:
+- Ringkasan Finansial: Total Penjualan POS, Total Pengeluaran Operasional, dan Laba Bersih Sederhana.
+- Analisis Produk Terlaris: Kuantitas terjual, jumlah transaksi, dan kontribusi omset per item menu.
+- Riwayat Transaksi Kasir lengkap dengan filter waktu.
+- Filter Rentang Waktu: Hari Ini, Minggu Ini, Bulan Ini, Custom Date, dan Keseluruhan.
+- **Export CSV:** Mengunduh data penjualan dan performa produk secara dinamis mengikuti filter yang sedang aktif di layar.
 
-Ringkasan:
-- Pendapatan
-- Transaksi
-- Total Semua Transaksi
-
-Filter:
-- Hari Ini
-- Minggu Ini
-- Bulan Ini
-- Custom Date
-- Keseluruhan
-
-Filter tanggal memengaruhi summary dan riwayat transaksi.
-
-**Keseluruhan** berarti seluruh data sejak sistem mulai mencatat transaksi sampai sekarang.
-
-### Filter Produk
-
-Admin dapat memilih produk tertentu. Hasil menampilkan:
-- quantity terjual;
-- jumlah transaksi;
-- pendapatan produk;
-- riwayat transaksi terkait.
-
-Filter tanggal + produk dapat dipakai bersamaan.
-
-Tujuan analisis:
-- mengetahui produk sering dibeli;
-- mengetahui produk jarang dibeli;
-- mengetahui quantity terjual;
-- mengetahui pendapatan per produk.
-
-Contoh:
-```text
-Produk       Terjual     Pendapatan
-Nasi Box       185       Rp2.775.000
-Gorengan       520       Rp1.040.000
-Es Teh         310       Rp1.240.000
-```
-
-Laporan Web dan Mobile harus menggunakan definisi dan sumber data yang sama.
-
-### Filter Laporan Catering
-
-Section terpisah (tab/switch) di page Laporan, khusus menganalisis performa penjualan katering — terpisah dari laporan penjualan POS reguler karena sifat datanya beda (order berbasis event, bukan transaksi harian).
-
-Menggunakan filter yang sama seperti laporan reguler:
-- Hari Ini / Minggu Ini / Bulan Ini / Custom / Keseluruhan (berdasarkan `event_date` atau `payment_date`, dapat dipilih sesuai kebutuhan analisis)
-
-Menampilkan:
-- Total order catering pada periode terpilih
-- Total penghasilan catering (dari `catering_payments`, sinkron dengan page Penghasilan Catering §11.4)
-- Breakdown per status order (berapa PENDING, COMPLETED, CANCELLED, dst.)
-- Rincian order: nomor order, pelanggan, tanggal acara, total, status, payment status
-
-### Export CSV
-
-Berlaku di seluruh page Laporan (baik laporan penjualan reguler maupun section Laporan Catering):
-- Tombol "Export CSV" mengekspor data **sesuai filter yang sedang aktif** (rentang tanggal, produk, atau kombinasi keduanya untuk laporan reguler; rentang tanggal & status untuk laporan catering)
-- Kolom export mengikuti kolom yang ditampilkan di tabel pada tampilan aktif, agar hasil unduhan konsisten dengan apa yang dilihat admin di layar
-- Proses export tidak menghitung ulang di sisi client — data diambil dari hasil query `ReportService` yang sama dengan yang menampilkan angka di layar
-
-## 14. Printer
+## 13. Printer Thermal
 
 `printers`:
 ```text
@@ -518,20 +294,14 @@ created_at
 updated_at
 ```
 
-Mendukung Bluetooth/USB/Network sesuai printing layer. Jangan mengasumsikan browser/Laravel dapat mengontrol Bluetooth secara langsung.
+- Mendukung cetak nota kasir thermal 58mm dan 80mm.
+- Struk pelanggan mencakup nomor transaksi, tanggal/waktu, nama kasir, rincian menu, subtotal, diskon, total, uang diterima, dan kembalian.
+- Kegagalan cetak printer fisik tidak menggagalkan penyimpanan transaksi kasir; transaksi dapat dicetak ulang kapan saja.
 
-Receipt customer berisi nomor transaksi, tanggal/waktu, kasir, item, qty, harga, subtotal, total, payment, change, dan footer.
-
-Order/kitchen note dapat berisi customer, order, tanggal acara, item, quantity, dan catatan tanpa harga.
-
-Jika printer gagal, transaksi tetap sukses dan dapat dicetak ulang.
-
-## 15. Service Layer
+## 14. Service Layer Architecture
 
 ```text
 app/Services/
-- CateringService.php
-- PaymentService.php
 - TransactionService.php
 - ReceiptService.php
 - ReportService.php
@@ -539,188 +309,65 @@ app/Services/
 ```
 
 Tanggung jawab:
-- TransactionService: transaksi, validasi, total, change.
-- CateringService: order dan status.
-- PaymentService: DP, pelunasan, sisa, payment status.
-- ReceiptService: data receipt/order note.
-- ReportService: sales, catering, expenses, profit, filter tanggal/produk.
-- ThermalPrinterService: data/command printing.
+- `TransactionService`: Alur transaksi kasir, validasi stok, pemotongan stok atomik, dan kalkulasi kembalian.
+- `ReceiptService`: Format struk kasir thermal (header, baris item, subtotal, footer).
+- `ReportService`: Agregasi performa omset POS, laporan laba bersih, rangkuman biaya operasional, dan penyiapan ekspor CSV.
+- `ThermalPrinterService`: Abstraksi perintah printer dan format teks ESC/POS.
 
-## 16. Database Transaction Safety
+## 15. Database Transaction Safety & Triggers
 
-Operasi penting:
-
+Operasi penyimpanan kasir dan pencatatan belanja dijalankan secara atomik:
 ```text
-BEGIN
-→ Validate
-→ Save
-→ Update
-→ COMMIT
+DB::beginTransaction()
+→ Validasi Data & Ketersediaan Stok
+→ Simpan Transaksi Kasir
+→ Simpan Snapshot Detail Item
+→ Trigger trg_after_transaction_item_insert memotong stok produk
+→ DB::commit()
 ```
+Jika terjadi kegagalan: `DB::rollBack()`.
 
-Jika gagal:
+## 16. Manajemen Hak Akses Pengguna
 
-```text
-ROLLBACK
-```
+Peran pengguna:
+- **Admin:** Memiliki akses penuh ke seluruh modul sistem (Dashboard, POS, Transaksi, Produk, Resep, Pengeluaran, Laporan Keuangan, Printer, dan Pengaturan Pengguna).
+- **Kasir:** Terbatas pada modul operasional harian (POS Kasir, Riwayat Transaksi Penjualan, dan Konfigurasi Printer).
 
-## 17. Authentication
-
-Role awal:
-- Admin
-- Cashier
-
-Authorization harus diterapkan di backend.
-
-## 18. Folder Structure
+## 17. Struktur Folder Proyek
 
 ```text
 yans-food/
 ├── app/
-│   ├── Enums/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       ├── Public/          (LandingController, MenuController, PesanController, ContactController)
-│   │       ├── Admin/           (DashboardController, ProductController, RecipeController,
-│   │       │                     PosController, TransactionController, CateringOrderController,
-│   │       │                     CateringPaymentController, CateringIncomeController,
-│   │       │                     ExpenseController, ReportController, PrinterController,
-│   │       │                     UserController, SettingController)
-│   │       └── Api/             (untuk kebutuhan mobile, lihat §4 Mobile Specification)
-│   ├── Models/
-│   ├── Services/
-│   └── Providers/
+│   ├── Http/Controllers/
+│   │   ├── Admin/               (Dashboard, Pos, Transaction, Product, Recipe, Expense, Report, Printer, User, Setting)
+│   │   └── PageController.php   (Home, About, Menu, Pesan, Contact)
+│   ├── Models/                  (Product, ProductCategory, Recipe, RecipeIngredient, Transaction, TransactionItem, Expense, ExpenseCategory, Printer, User)
+│   └── Services/                (TransactionService, ReceiptService, ReportService, ThermalPrinterService)
 ├── database/
-│   ├── factories/
-│   ├── migrations/
-│   └── seeders/
+│   ├── migrations/              (Users, Product Categories, Products, Recipes, Expenses, Transactions, Printers, Routines)
+│   └── seeders/                 (DatabaseSeeder, ProductCategorySeeder, ProductSeeder, ExpenseCategorySeeder, PrinterSeeder)
 ├── resources/
-│   ├── css/
-│   ├── js/
+│   ├── css/app.css              (Tailwind CSS v4)
+│   ├── js/                      (Navbar, Search, Cart, POS, Modal, Analytics)
 │   └── views/
-│       ├── public/              (home, about, menu, pesan, contact)
-│       ├── admin/                (dashboard, products, recipes, pos, transactions,
-│       │                          catering, expenses, reports, printers, users, settings)
-│       ├── layouts/              (app.blade.php untuk publik, admin.blade.php untuk admin)
-│       ├── components/           (komponen Blade reusable, diadaptasi dari Flowbite:
-│       │                          sidebar, navbar, table, modal, card, badge, pagination, form-input)
-│       ├── catering/
-│       └── printing/
+│       ├── admin/               (Dashboard, POS, Products, Recipes, Transactions, Expenses, Reports, Printers, Users, Settings)
+│       ├── components/          (Public Navbar, Footer, Floating WA, Alert, Confirmation Modal)
+│       ├── layouts/             (app.blade.php untuk publik, admin.blade.php untuk admin)
+│       └── pages/               (home, about, menu, pesan, contact)
 ├── routes/
-│   ├── web.php                   (public + admin, prefix /admin dengan middleware auth)
-│   └── api.php
-├── storage/app/public/
-│   ├── products/
-│   ├── recipes/
-│   └── expenses/
-├── public/
-├── tests/
+│   └── web.php                  (Rute publik & rute panel admin)
 └── README.md
 ```
 
-## 19. Migration Order
+## 18. Prinsip Final
 
-```text
-users
-product_categories
-products
-recipes
-recipe_ingredients
-expense_categories
-expenses
-transactions
-transaction_items
-catering_orders
-catering_order_items
-catering_payments
-printers
-```
+1. **One Backend, One Database, One Business Logic.**
+2. **Server-Side Truth:** Jangan mempercayai total atau harga dari sisi client.
+3. **Auditable History:** Tidak melakukan hard-delete pada data produk yang memiliki riwayat transaksi kasir.
+4. **Sinkronisasi Stok:** Pemotongan stok dieksekusi secara real-time via database trigger saat transaksi kasir tersimpan.
+5. **Cetak Mandiri & Andal:** Kegagalan perangkat printer tidak membatalkan transaksi kasir; nota dapat dicetak ulang.
+6. **Laporan Realistis:** Laba bersih sederhana mencerminkan omset kasir riil dikurangi seluruh pengeluaran operasional dapur yang disetujui.
 
-## 20. Development Roadmap
+---
 
-```text
-Foundation
-→ Public Website
-→ Product
-→ Recipe
-→ POS
-→ Catering
-→ Catering Payment
-→ Expense
-→ Report
-→ Printing
-→ Testing
-```
-
-Implement per module:
-
-`DATABASE → MODEL → MIGRATION → RELATIONSHIP → SERVICE → CONTROLLER → ROUTE → BLADE VIEW (Tailwind + Flowbite) → VALIDATION → UI → REPORT → PRINTING → TESTING`
-
-## 21. Git
-
-Branches:
-```text
-main
-develop
-feature/*
-fix/*
-```
-
-Examples:
-```text
-feature/product-crud
-feature/pos
-feature/catering-payment
-feature/thermal-print
-fix/payment-validation
-```
-
-## 22. Definition of Done
-
-Setiap modul harus memiliki:
-- database;
-- model;
-- relationship;
-- CRUD;
-- validation;
-- authorization;
-- responsive UI;
-- error handling;
-- testing;
-- dokumentasi;
-- tidak ada duplikasi data yang tidak diperlukan.
-
-## 23. Prinsip Final
-
-1. One backend, one database, one business logic.
-2. Jangan percaya total dari client.
-3. Jangan hard-delete data histori.
-4. Status produk berbeda dari stock.
-5. Order status berbeda dari payment status.
-6. Printer gagal tidak menghapus transaksi.
-7. Laporan mengikuti filter yang dipilih.
-8. Filter produk digunakan untuk analisis performa produk.
-9. Web dan Mobile harus membaca sumber data yang sama.
-10. Pesanan catering masuk melalui form publik terstruktur (server menghitung total), bukan diketik manual dari chat WA; WhatsApp tetap menjadi kanal komunikasi/konsultasi, bukan sumber data. Perubahan hasil konsultasi WA diupdate manual oleh admin di Admin Web.
-11. Export CSV laporan (reguler maupun catering) selalu mengikuti filter yang sedang aktif di layar, tidak pernah mengekspor seluruh data di luar konteks filter.
-12. Admin panel dibangun manual dengan Laravel Blade + Tailwind CSS (komponen diadaptasi dari Flowbite), bukan package admin panel (Filament) — setiap modul admin punya Controller, route, dan Blade view sendiri yang berbagi satu layout (`layouts/admin.blade.php`).
-
-## 24. Target
-
-```text
-Company Profile
-+ Product Management
-+ Recipe Management
-+ POS
-+ Transaction Management
-+ Catering
-+ Catering Payment
-+ Catering Income (Penghasilan Catering)
-+ Expense
-+ Reporting
-+ Product Analysis
-+ Thermal Printing
-+ User Management
-=
-YAN'S FOOD INTEGRATED FOOD BUSINESS MANAGEMENT SYSTEM
-```
+**YAN'S FOOD — POS, PRODUCT MANAGEMENT & COMPANY PROFILE**

@@ -12,7 +12,7 @@
 3. [Sistem UX Global](#3-sistem-ux-global)
 4. [Katalog Micro-interaction](#4-katalog-micro-interaction)
 5. [UX per Halaman](#5-ux-per-halaman)
-6. [UX Form Katering (Detail Lengkap)](#6-ux-form-katering-detail-lengkap)
+6. [UX Pemesanan Online & Takeaway (Detail Lengkap)](#6-ux-pemesanan-online--takeaway-detail-lengkap)
 7. [Empty, Loading, Error, & Offline State](#7-empty-loading-error--offline-state)
 8. [Performa sebagai Bagian dari UX](#8-performa-sebagai-bagian-dari-ux)
 9. [Aksesibilitas](#9-aksesibilitas)
@@ -64,20 +64,20 @@ Orang yang membuka website ini harus merasa tiga hal dalam 5 detik pertama:
 | Persona | Konteks | Tujuan | Kebutuhan UX utama |
 |---|---|---|---|
 | **A. Pelanggan Lapar** | Buka dari HP, sering dari link IG/WA. Sering sedang lapar sekarang. | Lihat menu dan harga, pesan cepat. | Menu cepat dimuat, harga jelas, tombol pesan online (ShopeeFood/GoFood/GrabFood) langsung terlihat. |
-| **B. Penyelenggara Acara** | Arisan, ulang tahun, kantor. Biasanya di laptop atau HP, bandingkan beberapa katering. | Tahu apakah Yan's Food layak dipercaya dan berapa kira-kira biayanya. | Kredibilitas (foto nyata, cerita), estimasi harga transparan, form tidak melelahkan, bisa konsultasi via WA. |
+| **B. Pembeli Takeaway Dapur** | Ingin memesan makanan/kudapan untuk diambil sendiri langsung ke dapur Yan's Food. | Memesan langsung tanpa perantara kurir, memastikan pesanan siap saat tiba. | Alamat jelas, nomor WhatsApp aktif, format pesan otomatis, instruksi pengambilan transparan. |
 | **C. Pengunjung Penasaran** | Diberi link teman atau baru lihat promosi. | Kenal usaha ini. | Cerita singkat, kesan tepercaya, mudah menemukan kontak. |
 
 ### 2.2 Perjalanan kunci (harus mulus)
 
-**Journey 1 — Pesan cepat (Persona A)**
+**Journey 1 — Pesan cepat delivery (Persona A)**
 `Link IG → Home → (scroll sedikit / tap "Lihat Menu") → Menu → lihat produk → "Pesan Online" → pilih platform → keluar ke ShopeeFood/GoFood/GrabFood`
 - Target: dari landing sampai tap platform **≤ 3 tap**.
 - Titik rawan: user bingung "beli di mana?". Solusi: CTA "Pesan Sekarang" permanen di navbar, dan di modal detail produk ada tautan "Pesan lewat platform" ke `/pesan#online`.
 
-**Journey 2 — Pesan katering (Persona B)**
-`Home / Menu / Navbar → Pesan → scroll ke "Pesan Katering" → isi form 3 langkah → kirim → halaman sukses (nomor pesanan) → tap "Lanjut Konsultasi via WhatsApp"`
-- Target: form selesai dalam **≤ 3 menit**, ≤ 3 layar pada mobile.
-- Titik rawan: form terasa panjang, takut harga tidak jelas. Solusi: stepper, estimasi total live, simpan draft otomatis (lihat §6).
+**Journey 2 — Pesan takeaway dapur (Persona B)**
+`Home / Menu / Navbar → Pesan → pilih "Takeaway Dapur" → klik Chat WhatsApp → aplikasi WA terbuka dengan pesan terformat otomatis`
+- Target: dari website ke percakapan WhatsApp resmi **≤ 2 tap**.
+- Titik rawan: nomor tidak tersimpan atau pesan kosong. Solusi: direct link WhatsApp dengan template teks terisi otomatis berisi nama produk/pesanan.
 
 **Journey 3 — Cek kredibilitas (Persona B/C)**
 `Home → About → (galeri / cerita) → Contact → WA`
@@ -191,13 +191,13 @@ Urutan, total ≤ 900ms, tidak memblokir interaksi:
 - **Skip link** "Lewati ke konten" sebagai elemen fokus pertama (terlihat saat difokus).
 - **Breadcrumb tidak dipakai** (struktur situs datar, 5 halaman).
 - **Tombol "Kembali ke atas"** muncul setelah scroll > 1.5 layar, kecil, kiri-bawah (kanan-bawah dipakai tombol WhatsApp), hanya di halaman panjang (Menu, About).
-- **Anchor scroll** (`#online`, `#katering`): `scroll-behavior: smooth` dan `scroll-margin-top` sebesar tinggi navbar + 16px agar judul section tidak tertutup navbar.
+- **Anchor scroll** (`#online`, `#takeaway`): `scroll-behavior: smooth` dan `scroll-margin-top` sebesar tinggi navbar + 16px agar judul section tidak tertutup navbar.
 
 ### 3.5 Tombol WhatsApp Mengambang (Floating Action)
 
 - Posisi kanan-bawah, offset 16px (mobile) / 24px (desktop), memperhitungkan `env(safe-area-inset-bottom)` untuk iPhone.
 - Bentuk: lingkaran 56px hijau WhatsApp resmi `#25D366`, ikon putih. Di desktop saat hover, melebar menjadi pil dengan teks "Chat Admin" (280ms).
-- **Kemunculan:** tidak muncul di 600px pertama halaman (agar tidak menumpuk dengan hero), fade-in setelahnya. Di halaman Pesan bagian form katering, tombol **disembunyikan** agar tidak menutupi tombol submit/stepper.
+- **Kemunculan:** tidak muncul di 600px pertama halaman (agar tidak menumpuk dengan hero), fade-in setelahnya.
 - Pesan awal otomatis berbeda per halaman (`?text=` terkonfigurasi):
   - Umum: "Halo Yan's Food, saya ingin bertanya."
   - Dari halaman Menu: "Halo Yan's Food, saya ingin bertanya soal menu."
@@ -238,8 +238,8 @@ Urutan, total ≤ 900ms, tidak memblokir interaksi:
 
 | Aspek | Aturan |
 |---|---|
-| Sapaan | Bahasa Indonesia santai-sopan, memakai "kamu" untuk pelanggan, bukan "Anda" yang kaku, kecuali di bagian formal (syarat katering). Pilih satu dan konsisten di seluruh situs. |
-| Tombol | Kata kerja + hasil: "Lihat Menu", "Pesan Katering", "Lanjut ke WhatsApp". Hindari "Klik di sini", "Submit", "Selengkapnya" tanpa konteks. |
+| Sapaan | Bahasa Indonesia santai-sopan, memakai "kamu" untuk pelanggan, ramah dan hangat khas dapur rumahan. |
+| Tombol | Kata kerja + hasil: "Lihat Menu", "Pesan Online", "Pesan Takeaway", "Lanjut ke WhatsApp". Hindari "Klik di sini", "Submit", "Selengkapnya" tanpa konteks. |
 | Error | Menjelaskan apa yang salah dan cara memperbaikinya, tanpa menyalahkan: "Nomor WhatsApp belum lengkap. Contoh: 0812 3456 7890". Bukan "Input tidak valid". |
 | Angka | Format rupiah `Rp 12.500` (titik pemisah ribuan), tanpa desimal. Angka harga memakai `font-variant-numeric: tabular-nums`. |
 | Tanggal | "Sabtu, 24 Oktober 2026" (nama hari + tanggal lengkap) agar tidak ambigu. |
@@ -312,12 +312,12 @@ Daftar lengkap interaksi kecil. Implementasi harus **seragam**: komponen yang sa
 **Tujuan:** membangun kepercayaan personal. Cerita jujur UMKM rumahan.
 
 - **Header halaman:** judul besar + satu kalimat pembuka. Foto lebar dengan reveal "scale".
-- **Cerita bergaya timeline vertikal:** garis tipis gold di tengah (desktop) / kiri (mobile) yang **tergambar mengikuti scroll** (progress line). Tiap tonggak (misal: awal mulai jualan, produk pertama, bergabung ke platform online, mulai katering) muncul bergantian kiri-kanan di desktop, satu sisi di mobile. Hanya tonggak yang benar-benar terjadi yang ditampilkan.
+- **Cerita bergaya timeline vertikal:** garis tipis gold di tengah (desktop) / kiri (mobile) yang **tergambar mengikuti scroll** (progress line). Tiap tonggak (misal: awal mulai jualan, produk pertama, bergabung ke platform online, pembukaan gerai) muncul bergantian kiri-kanan di desktop, satu sisi di mobile. Hanya tonggak yang benar-benar terjadi yang ditampilkan.
 - **Visi, Misi, Nilai:** 3 card, hover M07, ikon tergambar.
 - **Proses & dapur:** strip foto (3–5) dengan caption singkat per foto (misal "Mengaduk adonan risol setiap pagi"). Tap membuka lightbox.
 - **Pemilik/tim (opsional):** foto + nama + satu kalimat. Wajah manusia meningkatkan kepercayaan secara signifikan pada usaha kuliner rumahan.
 - **Garis progres baca** M26 (opsional).
-- **CTA akhir:** "Mau cicip? Lihat Menu" + "Ada acara? Pesan Katering".
+- **CTA akhir:** "Mau cicip? Lihat Menu" + "Mau pesan? Pesan Online & Takeaway".
 
 ### 5.3 Menu
 
@@ -339,7 +339,7 @@ Daftar lengkap interaksi kecil. Implementasi harus **seragam**: komponen yang sa
 - Foto (4:5), badge kategori kecil di pojok kiri-atas foto, badge status di pojok kanan-atas.
 - Nama (maks. 2 baris, potong dengan ellipsis), harga (tebal, tabular), satuan kecil ("/ pcs", "/ porsi").
 - Hover/tap sesuai M07–M09.
-- **Tidak ada tombol "tambah ke keranjang"** (website tidak punya keranjang online; pemesanan lewat platform atau katering). Aksi card = buka detail.
+- **Tidak ada tombol "tambah ke keranjang"** (website tidak punya keranjang online; pemesanan lewat platform delivery atau takeaway via WhatsApp). Aksi card = buka detail.
 
 **Modal detail produk (bottom sheet di mobile):**
 - Foto besar (swipe jika lebih dari 1 foto), nama, kategori, harga, status, deskripsi lengkap.
@@ -362,9 +362,8 @@ Daftar lengkap interaksi kecil. Implementasi harus **seragam**: komponen yang sa
 
 1. **Hero kecil + pemilih niat (intent switcher):**
    Dua kartu besar yang dapat diketuk, tepat di bawah judul:
-   - 🍽 "Mau makan sekarang?" → scroll halus ke `#online`
-   - 🎉 "Ada acara?" → scroll halus ke `#katering`
-   (Gunakan ikon Lucide, bukan emoji, pada implementasi akhir.)
+   - 🛵 "Online Delivery" → scroll halus ke `#online`
+   - 🥡 "Takeaway Dapur" → scroll halus ke `#takeaway`
    Fungsi: user langsung sampai ke bagian relevan tanpa menggulung bagian lain. Pada desktop, kedua kartu juga bertindak sebagai **tab penanda posisi** (kartu aktif ditandai sesuai section yang sedang terlihat, memakai IntersectionObserver).
 
 2. **Section A — Pesan Online (`#online`)**
@@ -372,19 +371,17 @@ Daftar lengkap interaksi kecil. Implementasi harus **seragam**: komponen yang sa
    - Isi kartu: logo, nama, satu baris keterangan, tombol "Buka di {platform}" dengan ikon panah-keluar.
    - Di mobile, tautan membuka **aplikasi** bila terpasang (gunakan tautan universal resmi toko), jika tidak, membuka web.
    - Pesan kecil "Link akan terbuka di tab baru" tidak perlu ditulis. Cukup ikon panah-keluar (M24).
-   - Platform yang belum aktif ditampilkan dengan label "Segera hadir" dan tidak dapat diklik (jangan sembunyikan, jangan tautkan ke halaman kosong).
+   - Platform yang belum aktif ditampilkan dengan label "Segera hadir" dan tidak dapat diklik.
 
-3. **Divider:** garis tipis + label "atau" di tengah, jarak ekstra 64px. Sengaja jelas, supaya tidak tertukar.
+3. **Divider:** garis tipis + label "atau pesan langsung untuk diambil" di tengah, jarak ekstra 64px.
 
-4. **Section B — Pesan Katering (`#katering`)**
-   - **Cara kerja 3 langkah** (ikon + teks pendek): "Isi form → Kami konfirmasi via WhatsApp → Pesanan diproses". Mengurangi kecemasan "setelah ini bagaimana?".
-   - **Paket / kisaran harga** (jika ada): card dengan highlight paket populer (border gold, badge).
-   - **Ketentuan ringkas** (accordion): minimal pesanan, jeda pemesanan (misal H-2), area antar, sistem DP, kebijakan pembatalan. Nilai default disarankan, **sesuaikan dengan kebijakan nyata Yan's Food** dan simpan sebagai pengaturan, bukan hardcode.
-   - **Form pemesanan** → detail lengkap di **§6**.
-   - **FAQ singkat** (accordion M21): "Berapa lama sebelum acara harus pesan?", "Bisa antar ke luar kota?", "Bagaimana pembayaran DP?", "Bisa request menu di luar daftar?".
-   - Di bawah form: tombol sekunder "Lebih suka ngobrol dulu? Chat Admin" (WA tanpa form), untuk user yang enggan mengisi form.
+4. **Section B — Pesan Takeaway Dapur (`#takeaway`)**
+   - **Panduan 3 langkah mudah**: "Pilih Menu → Hubungi via WhatsApp → Ambil di Dapur Yan's Food".
+   - **Tombol WhatsApp Utama**: Mengarahkan langsung ke WhatsApp dengan template pesan terformat rapi.
+   - **Informasi Dapur**: Alamat lengkap, estimasi waktu penyiapan pesanan, dan jam operasional pengambilan.
 
-**Perilaku deep link:** `/pesan#online` dan `/pesan#katering` harus mendarat tepat di section dengan offset navbar. Jika datang dengan `?produk=risol-mayo` (dari modal produk), form katering otomatis menambahkan produk tersebut ke daftar pilihan.
+**Perilaku deep link:** `/pesan#online` dan `/pesan#takeaway` harus mendarat tepat di section dengan offset navbar.
+
 
 ### 5.5 Contact
 
@@ -408,141 +405,46 @@ Daftar lengkap interaksi kecil. Implementasi harus **seragam**: komponen yang sa
 
 ---
 
-## 6. UX Form Katering (Detail Lengkap)
+## 6. UX Pemesanan Online & Takeaway (Detail Lengkap)
 
-Form ini adalah **titik konversi terpenting** dan paling berisiko ditinggalkan. Setiap detail di bawah bertujuan menurunkan gesekan.
+Halaman Pesan adalah **titik konversi terpenting** yang menghubungkan pengunjung dengan kanal transaksi nyata.
 
-### 6.1 Arsitektur Form: 3 Langkah (Stepper)
+### 6.1 Arsitektur Halaman Pesan: Dua Kanal Utama
 
-| Langkah | Judul | Isi |
-|---|---|---|
-| **1** | Acara kamu | Tanggal acara, jam diperlukan, jenis acara (opsional: Arisan / Ulang tahun / Kantor / Pernikahan / Lainnya), alamat pengantaran (atau "Ambil sendiri") |
-| **2** | Pilih menu | Daftar produk yang dapat dipesan katering, jumlah per item, **ringkasan & estimasi total live** |
-| **3** | Data kamu & konfirmasi | Nama, nomor WA, catatan, ringkasan akhir, persetujuan, tombol kirim |
+| Kanal | Tujuan | Sasaran Pengguna | Perilaku Utama |
+|---|---|---|---|
+| **A. Online Delivery Platform** | Pesan antar langsung ke rumah via kurir aplikasi | Konsumen yang ingin diantar segera (ShopeeFood, GoFood, GrabFood) | Card interaktif langsung membuka aplikasi mitra atau website toko resmi |
+| **B. Takeaway Dapur via WhatsApp** | Pesan langsung untuk diambil sendiri di dapur Yan's Food | Konsumen yang ingin ambil sendiri tanpa biaya antar | Tombol WhatsApp terformat otomatis untuk konfirmasi menu & jam ambil |
 
-- **Indikator progres** di atas: 3 titik/segmen dengan label ("Acara", "Menu", "Konfirmasi"). Segmen selesai berwarna primary dengan centang. Pada mobile tampil ringkas ("Langkah 2 dari 3").
-- Transisi antar langkah: konten keluar ke kiri 160ms, langkah baru masuk dari kanan 280ms (arah terbalik saat kembali). Tinggi container beranimasi halus (tidak melompat). Fokus berpindah ke judul langkah baru (`tabindex="-1"`, agar pembaca layar mengumumkan).
-- Tombol: "Lanjut" (primary) dan "Kembali" (teks). Pada mobile, bar tombol **menempel di bawah layar** (sticky bottom bar) dan menampilkan **total estimasi** di sisi kiri, tombol di sisi kanan.
-- User dapat **kembali ke langkah sebelumnya tanpa kehilangan data**. Klik pada titik langkah yang sudah selesai juga melompat ke sana.
-- Tanpa JavaScript: ketiga langkah tampil sebagai satu form panjang biasa dan tetap dapat dikirim (progressive enhancement).
+### 6.2 UX Online Delivery Platform (`#online`)
+- **Tiga Kartu Mitra (ShopeeFood, GoFood, GrabFood):**
+  - Desain elevated card dengan logo resmi, nama platform, badge ketersediaan (Aktif / Buka), dan tombol CTA "Buka Aplikasi / Web".
+  - Pada perangkat mobile, link menggunakan tautan universal yang otomatis membuka aplikasi native Shopee/Gojek/Grab bila terpasang.
+  - Setiap kartu memiliki micro-interaction hover halus (scale 1.02 & shadow terangkat).
 
-### 6.2 Langkah 1 — Acara Kamu
+### 6.3 UX Pemesanan Takeaway Dapur via WhatsApp (`#takeaway`)
+- **Panduan 3 Langkah Jelas:**
+  1. *Pilih Menu Favorit*: Tentukan menu dari halaman katalog atau menu harian.
+  2. *Konfirmasi via WhatsApp*: Tekan tombol chat WA untuk mengirim rincian menu dan jam estimasi kedatangan.
+  3. *Ambil di Dapur Yan's Food*: Pesanan disiapkan hangat dan higienis siap diambil di lokasi dapur.
+- **Informasi Transparan:**
+  - Menampilkan alamat lengkap dapur dengan tombol "Buka Google Maps".
+  - Jam operasional dapur dan estimasi waktu penyiapan makanan.
 
-| Field | Tipe & perilaku | Validasi |
-|---|---|---|
-| Tanggal acara | Date picker kustom ringan (atau `<input type="date">` native di mobile). Tanggal yang terlalu dekat (kurang dari lead time pengaturan, default **2 hari**) dan tanggal di masa lalu **dinonaktifkan** dengan tooltip penjelasan: "Pemesanan minimal H-2 sebelum acara." Tanggal penuh (jika dikelola admin) ditandai tidak tersedia. | Wajib; ≥ hari ini + lead time |
-| Jam dibutuhkan | Pilihan jam dalam interval 30 menit (select besar, mudah di mobile) | Wajib |
-| Jenis acara | Chip pilihan (satu pilihan) + opsi "Lainnya" memunculkan input teks | Opsional |
-| Pengantaran | Toggle dua pilihan: "Diantar" / "Ambil sendiri". Pilihan "Diantar" memunculkan field alamat (slide down 280ms) | Alamat wajib bila "Diantar", minimal 10 karakter |
-| Alamat | Textarea 2 baris yang bertumbuh otomatis, placeholder berisi **contoh nyata** ("Jl. Melati No. 12, RT 03/RW 05, Kel. …") | Wajib bila diantar |
+### 6.4 Template Pesan WhatsApp Takeaway Dapur
 
-- Pesan bantu di bawah tanggal: "Acara kurang dari 2 hari lagi? Chat admin saja, kami bantu cek ketersediaan." + tautan WA.
+Format pesan yang di-generate otomatis saat pelanggan menekan tombol WhatsApp Takeaway:
 
-### 6.3 Langkah 2 — Pilih Menu
-
-**Tata letak:**
-- Daftar produk yang dapat dipesan katering ditampilkan sebagai baris/kartu horizontal ringkas: foto kecil 64px, nama, harga satuan, **stepper kuantitas** (M16).
-- Filter chip kategori yang sama dengan halaman Menu (tersticky di dalam langkah), plus pencarian cepat.
-- Produk berstatus "Tidak Tersedia" tampil redup dengan label dan stepper nonaktif (tidak disembunyikan, agar user tahu).
-- Baris produk yang sudah dipilih (jumlah > 0) **disorot** (latar sand + border kiri 3px primary) dan naik ke atas bagian "Pilihanmu" (opsional, mobile).
-
-**Ringkasan live (panel "Pesananmu"):**
-- Desktop: panel sticky di kanan (lebar 320px). Mobile: **bottom bar** ringkas "3 item · Estimasi Rp 450.000" yang bisa diketuk untuk membuka bottom sheet berisi rincian.
-- Isi rincian: nama × jumlah, subtotal per item, **Estimasi total**. Setiap baris dapat dihapus (ikon tempat sampah, dengan konfirmasi undo "Dihapus · Urungkan" selama 5 detik).
-- Total memakai animasi M17.
-- **Label wajib dan jujur:** "**Estimasi** total. Total final dihitung & dikonfirmasi admin." Estimasi di klien hanyalah tampilan. Server menghitung ulang dari harga di database saat menyimpan (sesuai prinsip *server-side calculation* di spesifikasi fungsional).
-- **Aturan minimum** (konfigurasi): jika total atau jumlah belum memenuhi minimal pesanan katering, tombol "Lanjut" nonaktif dan tampil pesan jelas: "Minimal pesanan katering Rp 200.000 (kurang Rp 50.000)". Ditampilkan sebagai progress bar kecil menuju minimum.
-- **Harga berubah:** bila admin mengubah harga setelah halaman dimuat, server mengabaikan harga klien dan hasil akhir mengikuti server. Halaman sukses menampilkan total versi server. Bila ada selisih dengan estimasi, tampil catatan: "Harga diperbarui sesuai daftar terbaru."
-
-### 6.4 Langkah 3 — Data Kamu & Konfirmasi
-
-| Field | Perilaku |
-|---|---|
-| Nama | `autocomplete="name"`, wajib, 2–100 karakter |
-| Nomor WhatsApp | `type="tel"`, `inputmode="tel"`, `autocomplete="tel"`. **Format otomatis** saat mengetik ("0812 3456 7890"). Diterima `08…`, `+62…`, `62…`; **dinormalisasi ke `628…`** di server. Validasi: 9–13 digit setelah kode negara. Awalan ditampilkan sebagai prefiks tetap "+62" di sisi kiri input. |
-| Catatan | Textarea opsional + penghitung karakter (maks. 500). Placeholder: "Alergi, tingkat pedas, permintaan khusus…" |
-| Persetujuan | Checkbox: "Saya paham ini permintaan pesanan; total final dikonfirmasi admin via WhatsApp." (Menghindari kesalahpahaman bahwa form = pesanan final.) |
-
-- **Ringkasan akhir** (kartu) ditampilkan di atas tombol kirim: tanggal & jam, pengantaran/alamat, daftar item, estimasi total, nama & nomor. Setiap blok memiliki tautan "Ubah" yang melompat ke langkah terkait.
-- Tombol kirim: **"Kirim Pesanan Katering"** (bukan "Submit"). Di bawahnya teks kecil: "Setelah ini kamu akan diarahkan ke WhatsApp admin untuk konsultasi."
-
-### 6.5 Validasi & Penanganan Error
-
-- **Validasi bertahap (progressive):**
-  - Saat mengetik: tidak menampilkan error (jangan memarahi user di tengah mengetik).
-  - Saat meninggalkan field (blur): validasi dan tampilkan centang (M14) atau error.
-  - Setelah satu error muncul, validasi ulang secara live untuk field tersebut agar error hilang begitu diperbaiki.
-  - Saat "Lanjut" ditekan dengan error: fokus berpindah ke **field error pertama**, ringkasan error singkat di atas langkah (`role="alert"`), field digulir ke tengah layar.
-- **Pesan error spesifik per field** (contoh):
-  - Tanggal: "Pilih tanggal acara (minimal H-2 dari hari ini)."
-  - WA: "Nomor WhatsApp belum lengkap. Contoh: 0812 3456 7890."
-  - Menu: "Pilih minimal 1 menu untuk melanjutkan."
-- **Validasi server selalu ada** (tidak hanya klien). Error dari server dipetakan kembali ke field masing-masing dengan pesan yang sama gayanya, dan form **mempertahankan semua isian** (`old()` di Blade / state Alpine).
-- **Kegagalan jaringan:** tombol kembali aktif, banner "Koneksi terputus. Data kamu aman, coba kirim lagi." dengan tombol "Coba Lagi". Data tidak hilang.
-- **Anti-spam tanpa menyiksa user:**
-  - Honeypot field tersembunyi (tidak terlihat oleh pengguna & pembaca layar).
-  - Pemeriksaan waktu minimum pengisian (≥ 4 detik) di server.
-  - `throttle` Laravel: maks. 5 pengiriman / 10 menit / IP.
-  - **Tidak memakai CAPTCHA gambar.** Jika perlu, gunakan Cloudflare Turnstile mode tak terlihat.
-- **Cegah kirim ganda:** tombol dinonaktifkan setelah klik pertama + token idempotensi (UUID dibuat di klien, dicek di server) sehingga tekan dua kali / refresh tidak menghasilkan dua pesanan.
-
-### 6.6 Simpan Draft Otomatis
-
-- Isian form disimpan ke `localStorage` (debounce 400ms) dengan kunci `yf_catering_draft_v1`, berikut langkah terakhir. Data kedaluwarsa setelah **48 jam**.
-- Saat user kembali (tab tertutup tidak sengaja, kembali dari WA, pindah halaman), tampil banner kecil: "Kamu punya pesanan yang belum dikirim. **Lanjutkan** · Mulai baru".
-- Draft **dihapus** setelah pengiriman berhasil. Tidak menyimpan data sensitif selain nama/nomor/alamat yang memang diisi user; di perangkat bersama, tombol "Mulai baru" menghapus semuanya.
-- Seluruh akses `localStorage` dibungkus `try/catch` dan form tetap bekerja bila storage tidak tersedia.
-
-### 6.7 Setelah Kirim: Halaman/Layar Sukses
-
-Server menyimpan pesanan (status awal `PENDING`, `payment_status` `UNPAID`, `created_by` kosong) dan **mengarahkan ke halaman sukses** (`/pesan/katering/{order_number}/sukses`). Bukan langsung melempar ke WhatsApp (karena popup/redirect otomatis sering diblokir dan membingungkan user).
-
-**Isi halaman sukses:**
-1. Animasi centang tergambar + (opsional) konfeti halus M28.
-2. Judul: "Pesananmu sudah kami terima 🎉" (ikon, bukan emoji, pada implementasi).
-3. **Nomor pesanan** besar dan dapat disalin ("YF-CTR-20261024-0007") + keterangan "Simpan nomor ini untuk menanyakan pesanan".
-4. Ringkasan pesanan (tanggal, item, total versi server, status "Menunggu konfirmasi").
-5. **CTA utama:** "Lanjut Konsultasi via WhatsApp" (tombol hijau WA, besar). Membuka WA admin dengan **pesan terformat otomatis** (6.8).
-6. Hitung mundur lembut opsional: *tidak* ada auto-redirect. Teks bantu: "Belum terbuka? Tekan tombol di atas, atau salin pesan ini dan kirim manual." + tombol "Salin pesan".
-7. Langkah selanjutnya (3 butir): "Admin menghubungi via WhatsApp → Konfirmasi harga & DP → Pesanan diproses".
-8. Tautan sekunder: "Kembali ke Menu", "Beranda".
-- Halaman ini dapat dibuka ulang dengan nomor pesanan (URL bertanda tangan / token acak, **bukan** ID berurutan yang bisa ditebak). Isi halaman tidak menampilkan data berlebih (alamat lengkap boleh disamarkan sebagian).
-- Halaman ini tidak diindeks mesin pencari (`noindex`).
-
-### 6.8 Template Pesan WhatsApp (terformat)
-
-Dikirim lewat `https://wa.me/{nomor_admin}?text={urlencoded}`. Contoh isi:
-
-```
+```text
 Halo Admin Yan's Food 👋
-Saya sudah mengisi form pesanan katering.
+Saya ingin memesan menu untuk takeaway (ambil sendiri di dapur):
 
-*No. Pesanan:* YF-CTR-20261024-0007
-*Nama:* Siti Rahma
-*Tanggal acara:* Sabtu, 24 Oktober 2026, 13.00 WIB
-*Pengantaran:* Diantar – Jl. Melati No. 12, ...
+Nama: [Nama Pemesan]
+Menu yang ingin dipesan: [Tuliskan menu & jumlah]
+Estimasi waktu pengambilan: [Hari & Jam]
 
-*Pesanan:*
-• Risol Mayo × 50 — Rp 250.000
-• Pisang Coklat × 30 — Rp 90.000
-• Nasi Goreng Jadul × 20 — Rp 300.000
-
-*Estimasi total:* Rp 640.000
-*Catatan:* Tidak pedas, tolong dikemas per box.
-
-Mohon dikonfirmasi ya. Terima kasih 🙏
+Mohon konfirmasi ketersediaan dan total pembayarannya ya. Terima kasih 🙏
 ```
-
-- Panjang `text` dibatasi (mis. ±1.500 karakter). Bila daftar item panjang, tampilkan 8 item pertama lalu "…dan N item lain (lihat di pesanan)".
-- Nomor pesanan adalah kunci agar admin mencocokkan pesan WA dengan data di panel admin.
-- Dibuat di server (satu sumber), bukan di klien, agar konsisten.
-
-### 6.9 Aksesibilitas Form
-- Setiap input memiliki `<label>` terhubung (`for`/`id`), bukan placeholder saja.
-- Pesan error terhubung ke input dengan `aria-describedby` dan `aria-invalid="true"`.
-- Field wajib ditandai teks "(wajib)" atau "(opsional)", bukan hanya warna/tanda bintang.
-- Stepper kuantitas: tombol memiliki `aria-label` ("Kurangi Risol Mayo", "Tambah Risol Mayo"), nilai diumumkan lewat `aria-live="polite"`.
-- Seluruh form dapat dioperasikan hanya dengan keyboard; urutan tab logis; tombol Enter pada langkah memajukan langkah, bukan mengirim form lebih awal.
 
 ---
 
@@ -615,17 +517,16 @@ Standar acuan: **WCAG 2.2 level AA**.
 
 ## 10. SEO & Pengalaman Berbagi (Share)
 
-Banyak pengunjung datang dari hasil pencarian "kuliner/katering di {kota}" dan dari tautan yang dibagikan di WhatsApp/Instagram. **Cara tampilan tautan saat dibagikan adalah bagian dari UX.**
+Banyak pengunjung datang dari hasil pencarian kuliner rumahan dan dari tautan yang dibagikan di WhatsApp/Instagram. **Cara tampilan tautan saat dibagikan adalah bagian dari UX.**
 
 - **Meta per halaman:** `<title>` unik (≤ 60 karakter, "Menu — Yan's Food | Risol Mayo, Nasi Goreng Jadul & Lainnya"), meta description (≤ 155 karakter) yang menjual, canonical URL.
 - **Open Graph & Twitter Card:** `og:title`, `og:description`, `og:image` (1200×630, foto makanan menggugah + logo, bukan foto kosong), `og:locale="id_ID"`. Setiap produk memiliki OG sendiri (foto + nama + harga) agar saat dibagikan ke WA terlihat menarik.
 - **Structured data (JSON-LD):**
   - `Restaurant`/`FoodEstablishment` (nama, alamat, telepon, jam buka, `servesCuisine`, `priceRange`, `sameAs` ke sosmed & platform).
   - `Menu` / `MenuItem` / `Product` + `Offer` (harga, `availability` sesuai status) untuk halaman Menu/produk.
-  - `FAQPage` untuk FAQ katering.
   - `BreadcrumbList` tidak diperlukan (struktur datar).
 - **Google Business Profile:** konsisten (nama, alamat, telepon, jam) dengan data di website.
-- **Sitemap.xml & robots.txt** dibuat otomatis; halaman sukses form dan halaman admin `noindex`.
+- **Sitemap.xml & robots.txt** dibuat otomatis; halaman admin `noindex`.
 - **Favicon & ikon:** monogram Yan's Food (SVG + PNG 192/512 + apple-touch-icon), `theme-color` terracotta/cream agar bar browser seluruh di HP selaras.
 - **Web App Manifest ringan (opsional):** agar bisa "Tambahkan ke layar utama". Tidak perlu fitur offline penuh.
 
@@ -644,22 +545,18 @@ Tujuan: tahu bagian mana yang berhasil dan mana yang membuat orang pergi, tanpa 
 | `menu_filter` | Ganti kategori/cari | kategori / panjang kata (bukan isi kata bila sensitif) |
 | `product_open` | Buka modal produk | slug, kategori, tersedia/tidak |
 | `platform_click` | Klik ShopeeFood/GoFood/GrabFood | platform, lokasi |
-| `catering_step_view` | Masuk langkah form | nomor langkah |
-| `catering_step_abandon` | Meninggalkan form (visibilitychange/unload) | langkah terakhir |
-| `catering_field_error` | Error validasi | nama field (tanpa nilai) |
-| `catering_submit` | Kirim berhasil | jumlah item, rentang total (bucket), diantar/ambil |
-| `wa_click` | Klik WhatsApp | sumber (floating/contact/sukses/produk) |
+| `takeaway_click` | Klik pesan takeaway | sumber |
+| `wa_click` | Klik WhatsApp | sumber (floating/contact/takeaway/produk) |
 | `phone_copy` / `map_open` | Salin nomor / buka peta | – |
 | `scroll_depth` | 25/50/75/100% | halaman |
 
-- **Funnel yang dipantau:** Home → Pesan → mulai form → langkah 2 → langkah 3 → kirim → klik WA di halaman sukses.
+- **Funnel yang dipantau:** Home → Pesan → pilih platform / takeaway → klik WA.
 - **KPI UX (tinjau bulanan):**
-  - Rasio penyelesaian form katering (kirim ÷ mulai) ≥ 35% (patokan awal).
-  - Klik platform online per kunjungan Pesan.
+  - Klik platform online & takeaway per kunjungan Pesan.
   - Rasio pentalan (bounce) Home < 55% (seluler).
   - Waktu rata-rata sampai klik CTA pertama.
   - Skor Core Web Vitals "Good" ≥ 75% kunjungan.
-- **Uji kegunaan ringan (wajib sebelum peluncuran):** 5 orang nyata (campuran: pembeli kuliner & penyelenggara acara), tugas: (1) cari harga Risol Mayo, (2) pesan katering untuk 30 orang, (3) temukan nomor WA/alamat. Catat titik bingung, perbaiki, ulangi dengan 3 orang lagi.
+- **Uji kegunaan ringan (wajib sebelum peluncuran):** 5 orang nyata (pembeli kuliner), tugas: (1) cari harga Risol Mayo, (2) pesan takeaway via WhatsApp, (3) temukan nomor WA/alamat. Catat titik bingung, perbaiki, ulangi dengan 3 orang lagi.
 
 ---
 
@@ -679,7 +576,6 @@ resources/
 │   │   ├── navbar.js            # shrink, hide-on-scroll, overlay mobile, focus trap
 │   │   ├── lightbox.js          # galeri (hanya halaman yang butuh)
 │   │   ├── menu-filter.js       # filter/cari/urut + sinkron URL
-│   │   ├── catering-form.js     # stepper, estimasi, draft, validasi, kirim
 │   │   ├── contact-hours.js     # status buka/tutup
 │   │   └── share-copy.js        # Web Share + salin + toast
 │   └── lib/
@@ -694,7 +590,6 @@ resources/
     │   ├── menu/index.blade.php
     │   ├── menu/show.blade.php  # deep link produk
     │   ├── pesan/index.blade.php
-    │   ├── pesan/sukses.blade.php
     │   └── contact.blade.php
     └── components/public/
         ├── navbar.blade.php
@@ -721,10 +616,7 @@ resources/
 - **Endpoint publik yang dibutuhkan UX** (selaras dengan spesifikasi fungsional):
   - `GET /menu` (+ query filter) dan `GET /menu/{slug}`
   - `GET /pesan`
-  - `POST /pesan/katering` (validasi, hitung server, simpan `catering_orders` + `catering_order_items`, kembalikan redirect ke halaman sukses)
-  - `GET /pesan/katering/{token}/sukses`
-  - `GET /api/public/products` (opsional, JSON ringan untuk form katering)
-- **Konfigurasi yang dapat diubah admin (disarankan tabel/setting, tanpa hardcode):** nomor WA admin, teks default WA, link platform (ShopeeFood/GoFood/GrabFood) & status aktif, jam operasional & hari libur, lead time katering, minimal pesanan katering, daftar tanggal penuh, teks ketentuan katering.
+- **Konfigurasi yang dapat diubah admin (disarankan tabel/setting, tanpa hardcode):** nomor WA admin, teks default WA, link platform (ShopeeFood/GoFood/GrabFood) & status aktif, jam operasional & hari libur.
 
 ---
 
@@ -744,14 +636,13 @@ Dibagi supaya hasil terlihat bertahap dan risiko kecil.
 ### Fase 2 — Menu & Konversi Pesan Online
 - [ ] Chip kategori sticky + pencarian + sinkron URL (§5.3)
 - [ ] Card produk + modal/bottom sheet + deep link produk (§5.3)
-- [ ] Halaman Pesan: intent switcher + Section A platform (§5.4)
+- [ ] Halaman Pesan: intent switcher + Section A platform delivery (§5.4)
 - [ ] Empty/loading/error state dasar (§7)
 
-### Fase 3 — Form Katering Premium
-- [ ] Stepper 3 langkah + validasi progresif (§6.1–6.5)
-- [ ] Stepper kuantitas, estimasi live, aturan minimum (§6.3)
-- [ ] Draft otomatis, anti-spam, idempotensi (§6.5–6.6)
-- [ ] Halaman sukses + template WA terformat (§6.7–6.8)
+### Fase 3 — Pemesanan Takeaway Dapur via WhatsApp
+- [ ] Section B Takeaway Dapur: instruksi alur pemesanan takeaway mandiri (§6.1–6.3)
+- [ ] Tombol WhatsApp direct link dengan template terformat otomatis (§6.4)
+- [ ] Informasi alamat dapur lengkap dan estimasi waktu penyiapan makanan
 
 ### Fase 4 — Kredibilitas & Polesan
 - [ ] About: timeline progres, galeri + lightbox (§5.2, M27)
@@ -784,14 +675,9 @@ Dibagi supaya hasil terlihat bertahap dan risiko kecil.
 - [ ] Filter menu + URL + tombol Back/Forward konsisten
 - [ ] Modal produk: deep link, tutup, fokus kembali, geser tutup di mobile
 
-**Form katering**
-- [ ] Setiap validasi (klien & server) menampilkan pesan benar, isian tidak hilang
-- [ ] Lead time & minimal pesanan ditegakkan di server
-- [ ] Total server = total di halaman sukses, selisih dijelaskan
-- [ ] Kirim ganda / refresh tidak menggandakan pesanan
-- [ ] Draft dipulihkan dan dihapus setelah sukses
-- [ ] Halaman sukses: nomor pesanan, tombol WA membuka pesan terformat benar
-- [ ] Jalur cadangan WA saat server error berfungsi
+**Pemesanan Online & Takeaway WhatsApp**
+- [ ] Tombol platform delivery (ShopeeFood, GoFood, GrabFood) membuka aplikasi/web dengan benar
+- [ ] Tombol WhatsApp takeaway membuka percakapan dengan pesan terformat rapi
 - [ ] Normalisasi nomor (`08…`, `+62…`, `62…`) benar
 
 **Performa & aksesibilitas**
@@ -801,7 +687,7 @@ Dibagi supaya hasil terlihat bertahap dan risiko kecil.
 - [ ] VoiceOver/TalkBack: struktur, label tombol, pengumuman hasil filter & error
 - [ ] Reduced-motion aktif: tidak ada gerak berlebihan, semua tetap dapat dipakai
 - [ ] Zoom 200% dan lebar 320px tanpa scroll horizontal
-- [ ] JS dinonaktifkan: konten, menu, navigasi, dan form tetap berfungsi
+- [ ] JS dinonaktifkan: konten, menu, navigasi tetap berfungsi
 
 **Konten & kejujuran**
 - [ ] Tidak ada angka/testimoni/klaim palsu
@@ -818,4 +704,4 @@ Website dianggap memenuhi spesifikasi UX ini bila:
 2. Target performa & aksesibilitas §8.1 dan §9 tercapai pada perangkat nyata.
 3. Perjalanan kunci §2.2 dapat diselesaikan oleh pengguna uji tanpa bantuan.
 4. Tidak ada anti-pola §1.3 yang tersisa.
-5. Pemilik usaha dapat mengubah nomor WA, link platform, jam operasional, dan aturan katering tanpa menyentuh kode.
+5. Pemilik usaha dapat mengubah nomor WA, link platform, dan jam operasional tanpa menyentuh kode.

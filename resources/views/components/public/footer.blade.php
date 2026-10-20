@@ -1,6 +1,6 @@
 <!-- Modular Footer (§5.6) -->
 <footer class="w-full bg-inverse-surface text-inverse-on-surface pt-16 pb-24 lg:pb-12 mt-auto">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20">
             
             <!-- Col 1: Brand & Motto -->
@@ -25,10 +25,6 @@
                 <p class="font-body-sm text-surface-variant leading-relaxed">
                     Usaha kuliner rumahan yang menyajikan aneka kudapan renyah & makanan hangat dengan rasa otentik, higienis, dan penuh dedikasi.
                 </p>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest/20 text-tertiary-fixed font-label-sm text-xs">
-                    <span class="w-2 h-2 rounded-full bg-success"></span>
-                    <span>100% Halal & Fresh Cooked</span>
-                </div>
             </div>
 
             <!-- Col 2: Navigasi Cepat -->
@@ -38,7 +34,7 @@
                     <li><a href="{{ url('/') }}" class="text-surface-variant hover:text-on-primary transition-colors">Home (Beranda)</a></li>
                     <li><a href="{{ url('/about') }}" class="text-surface-variant hover:text-on-primary transition-colors">About (Tentang Kami)</a></li>
                     <li><a href="{{ url('/menu') }}" class="text-surface-variant hover:text-on-primary transition-colors">Menu (Katalog Lengkap)</a></li>
-                    <li><a href="{{ url('/pesan') }}" class="text-surface-variant hover:text-on-primary transition-colors">Pesan (Online & Katering)</a></li>
+                    <li><a href="{{ url('/pesan') }}" class="text-surface-variant hover:text-on-primary transition-colors">Pesan (Online & Takeaway)</a></li>
                     <li><a href="{{ url('/contact') }}" class="text-surface-variant hover:text-on-primary transition-colors">Contact (Kontak & Lokasi)</a></li>
                 </ul>
             </div>

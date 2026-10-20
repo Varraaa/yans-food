@@ -1,10 +1,10 @@
 <!-- Sticky Filter Bar & Live Search (§5.3, M11, M12) -->
-<div class="sticky top-16 md:top-20 z-30 bg-cream-bg/95 backdrop-blur-md py-4 border-b border-surface-variant/40 -mx-4 sm:-mx-6 lg:-mx-12 px-4 sm:px-6 lg:px-12 transition-all">
+<div class="sticky top-16 md:top-20 z-30 bg-cream-bg/95 backdrop-blur-md py-4 border-b border-surface-variant/40 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 px-4 sm:px-6 md:px-8 lg:px-12 transition-all">
     <div class="max-w-7xl mx-auto space-y-3">
         <!-- Top Controls: Search, Sort, & Availability Toggle -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <!-- Live Search Box with Debounce & Clear (§5.3) -->
-            <div class="relative w-full md:w-80 shrink-0">
+            <div class="relative w-full sm:w-64 md:w-72 lg:w-80 shrink-0">
                 <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-secondary text-[20px] pointer-events-none">search</span>
                 <input type="text" 
                        id="menuSearchInput" 

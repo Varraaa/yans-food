@@ -12,13 +12,13 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Yan's Food">
     <meta property="og:title" content="{{ $title ?? "Yan's Food — Dapur Kuliner Rumahan" }}">
-    <meta property="og:description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan katering acara higienis terpercaya.">
+    <meta property="og:description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.">
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $title ?? "Yan's Food — Dapur Kuliner Rumahan" }}">
-    <meta name="twitter:description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan katering acara higienis terpercaya.">
+    <meta name="twitter:description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.">
 
     <!-- Schema.org JSON-LD LocalBusiness / Restaurant (§10) -->
     <script type="application/ld+json">
@@ -27,7 +27,7 @@
         "{{ '@type' }}": "Restaurant",
         "name": "Yan's Food",
         "image": "{{ asset('images/logo.png') }}",
-        "description": "Kuliner rumahan otentik, kudapan renyah, dan katering acara higienis terpercaya.",
+        "description": "Kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.",
         "servesCuisine": "Indonesian",
         "priceRange": "$$",
         "telephone": "+6281234567890",
@@ -84,9 +84,6 @@
 
     <!-- Back to Top Button (§3.4, M25) -->
     <x-back-to-top />
-
-    <!-- Floating WhatsApp Action Button (§3.5) -->
-    <x-public.wa-fab />
 
     <!-- Toast Notification Container (§3.6) -->
     <x-public.toast />

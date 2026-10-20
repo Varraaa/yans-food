@@ -2,7 +2,7 @@
     <x-slot name="title">Daftar Menu & Katalog | Yan's Food</x-slot>
 
     <!-- Top Banner / Editorial Header -->
-    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-4 md:pt-12 md:pb-6" data-reveal>
+    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-8 pb-4 md:pt-12 md:pb-6" data-reveal>
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-variant/40">
             <div class="space-y-3 max-w-2xl">
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif">
@@ -41,9 +41,9 @@
         <x-category-filter />
     </section>
 
-    <!-- Product Catalog Grid (§5.3) -->
-    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 pb-16">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="productGrid" data-reveal-group>
+    <!-- Product Catalog Grid (§5.3: Mobile Grid 2, Tablet/Desktop Grid 3) -->
+    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 pb-16">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3.5 sm:gap-5 lg:gap-8" id="productGrid" data-reveal-group>
             @if(isset($products) && $products->isNotEmpty())
                 @foreach($products as $product)
                     @php
@@ -179,29 +179,34 @@
         </div>
     </section>
 
-    <!-- Banner Layanan Katering & Konsultasi -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-20" data-reveal>
-        <div class="relative overflow-hidden bg-sand-bg-alt rounded-3xl p-6 sm:p-8 lg:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 border border-surface-variant/40">
-            <div class="space-y-3 max-w-xl text-center md:text-left">
+    <!-- Banner Pesan Online & Takeaway Delivery -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20" data-reveal>
+        <div class="relative overflow-hidden bg-sand-bg-alt rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 border border-surface-variant/40">
+            <div class="space-y-3 w-full lg:max-w-xl text-left">
                 <div class="inline-flex items-center gap-2 text-primary font-label-sm font-bold uppercase tracking-wider text-xs">
-                    <span class="material-symbols-outlined text-[18px]">corporate_fare</span>
-                    <span>Layanan Katering Khusus</span>
+                    <span class="material-symbols-outlined text-[18px]">delivery_dining</span>
+                    <span>Pemesanan Cepat & Praktis</span>
                 </div>
-                <h3 class="font-headline-md text-2xl sm:text-3xl text-on-surface font-serif">
-                    Butuh Katering Acara, Arisan, atau Rapat Kantor?
+                <h3 class="font-headline-md text-2xl sm:text-3xl text-on-surface font-serif leading-snug">
+                    Mau Menikmati Sajian Lezat Yan's Food Sekarang?
                 </h3>
                 <p class="font-body-md text-secondary leading-relaxed text-sm sm:text-base">
-                    Yan's Food melayani pesanan nasi box, snack box arisan, dan prasmanan mini dengan penyesuaian menu serta bumbu istimewa.
+                    Pesan menu favorit Anda langsung melalui platform online delivery (ShopeeFood, GoFood, GrabFood) atau ambil langsung di dapur kami.
                 </p>
             </div>
-            <div class="flex flex-col sm:flex-row items-center gap-3.5 shrink-0 w-full sm:w-auto">
-                <a href="{{ url('/pesan') }}" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md flex items-center justify-center gap-2 shadow-md hover:bg-primary-dark transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">assignment</span>
-                    <span>Lihat Halaman Pemesanan</span>
+            
+            <!-- Action Buttons: Clean Row on Tablet & Desktop, Full Width Stack on Mobile -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full lg:w-auto">
+                <a href="{{ url('/pesan') }}" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md flex items-center justify-center gap-2 shadow-sm hover:bg-primary-dark active:scale-[0.98] transition-all text-xs sm:text-sm font-bold">
+                    <span class="material-symbols-outlined text-[20px]">local_mall</span>
+                    <span>Pesan Online Delivery</span>
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20konsultasi%20katering" target="_blank" rel="noopener" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-sm hover:bg-surface-container transition-colors border border-surface-variant/40">
-                    <span class="material-symbols-outlined text-[20px] text-success">chat</span>
-                    <span>Konsultasi via WA</span>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20pesan" 
+                   target="_blank" 
+                   rel="noopener" 
+                   class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container active:scale-[0.98] transition-all border border-surface-variant/40 text-xs sm:text-sm font-semibold">
+                    <span class="material-symbols-outlined text-[20px] text-emerald-600">chat</span>
+                    <span>Pesan via WA</span>
                 </a>
             </div>
         </div>

@@ -2,90 +2,87 @@
     <x-slot name="title">Beranda | Yan's Food — Dapur Kuliner Rumahan</x-slot>
 
     <!-- 1. HERO SECTION (§5.1 & §3.3) -->
-    <section class="relative w-full overflow-hidden bg-cream-bg pt-6 pb-12 sm:pt-10 sm:pb-16 lg:py-16 px-4 sm:px-6 lg:px-12 block lg:flex lg:items-center lg:min-h-[calc(100svh-5rem)] lg:max-h-[920px]" data-hero-section>
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+    <section class="relative w-full overflow-hidden bg-cream-bg pt-6 pb-12 sm:pt-10 sm:pb-16 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-12 block lg:flex lg:items-center lg:min-h-[calc(100svh-5rem)] lg:max-h-[920px]" data-hero-section>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 lg:gap-14 items-center">
             
-            <!-- Left Hero Content -->
-            <div class="lg:col-span-7 flex flex-col items-start gap-4 sm:gap-5 lg:gap-7">
-                <!-- Review Pill Badge (§5.1) -->
-                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container text-tertiary shadow-xs border border-surface-variant/40">
-                    <span class="flex items-center text-[#E5A000] text-sm">
-                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
-                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
-                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
-                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
-                        <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
-                    </span>
-                    <span class="font-label-md text-on-surface font-semibold text-xs sm:text-sm">4.9/5</span>
-                    <span class="w-1 h-1 rounded-full bg-outline"></span>
-                    <span class="font-body-sm text-secondary text-xs sm:text-sm">500+ Pelanggan Puas</span>
-                </div>
-
+            <!-- Left Hero Content (md:col-span-7) -->
+            <div class="md:col-span-7 flex flex-col items-start gap-4 sm:gap-5 lg:gap-7">
                 <!-- Main Headline -->
-                <h1 class="font-headline-lg text-3xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.2] sm:leading-[1.15]" data-hero-step="headline">
+                <h1 class="font-headline-lg text-3xl sm:text-4xl md:text-[38px] lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.2] sm:leading-[1.15]" data-hero-step="headline">
                     Rasa Rumahan, <br class="hidden sm:block"/>
                     <span class="text-primary italic font-normal">Disajikan dengan Hati</span>
                 </h1>
 
                 <!-- Subheadline -->
-                <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-base sm:text-lg" data-hero-step="subheadline">
+                <p class="font-body-lg text-secondary max-w-2xl leading-relaxed text-sm sm:text-base lg:text-lg" data-hero-step="subheadline">
                     Dari dapur rumahan yang bersih dan penuh dedikasi, Yan's Food menghadirkan aneka kudapan gurih, hidangan hangat, hingga minuman segar untuk setiap momen santaimu.
                 </p>
 
                 <!-- CTA Buttons (§5.1: Primer & Sekunder M01-M04) -->
-                <div class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto" data-hero-step="cta">
-                    <a href="{{ url('/menu') }}" class="btn-primary w-full sm:w-auto">
+                <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto" data-hero-step="cta">
+                    <a href="{{ url('/menu') }}" class="btn-primary w-full sm:w-auto text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5">
                         <span>Lihat Menu Lengkap</span>
-                        <span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+                        <span class="material-symbols-outlined text-[18px] sm:text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="btn-outline w-full sm:w-auto">
-                        <span class="material-symbols-outlined text-[20px] text-primary">local_mall</span>
-                        <span>Pesan Katering & Online</span>
+                    <a href="{{ url('/pesan') }}" class="btn-outline w-full sm:w-auto text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5">
+                        <span class="material-symbols-outlined text-[18px] sm:text-[20px] text-primary">local_mall</span>
+                        <span>Pesan Online Delivery</span>
                     </a>
                 </div>
 
                 <!-- Trust Badges Under Hero (§5.1) -->
-                <div class="pt-4 grid grid-cols-3 gap-3 sm:gap-6 w-full max-w-lg bg-surface-warm p-4 sm:p-5 rounded-2xl shadow-xs border border-surface-variant/40">
+                <div class="pt-2 sm:pt-4 grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 w-full max-w-lg bg-surface-warm p-3 sm:p-4 lg:p-5 rounded-2xl shadow-xs border border-surface-variant/40">
                     <div class="flex flex-col">
-                        <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">100%</span>
-                        <span class="font-label-sm text-secondary text-xs">Bahan Segar Alami</span>
+                        <span class="font-headline-sm text-primary font-bold text-base sm:text-xl lg:text-2xl font-serif">100%</span>
+                        <span class="font-label-sm text-secondary text-[10px] sm:text-xs">Bahan Alami</span>
                     </div>
-                    <div class="flex flex-col border-x border-surface-variant/50 px-3 sm:px-4">
-                        <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">Fresh</span>
-                        <span class="font-label-sm text-secondary text-xs">Dibuat Hari Ini</span>
+                    <div class="flex flex-col border-x border-surface-variant/50 px-2 sm:px-3 lg:px-4">
+                        <span class="font-headline-sm text-primary font-bold text-base sm:text-xl lg:text-2xl font-serif">Fresh</span>
+                        <span class="font-label-sm text-secondary text-[10px] sm:text-xs">Dibuat Hari Ini</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="font-headline-sm text-primary font-bold text-xl sm:text-2xl font-serif">Halal</span>
-                        <span class="font-label-sm text-secondary text-xs">Higienis & Amanah</span>
+                        <span class="font-headline-sm text-primary font-bold text-base sm:text-xl lg:text-2xl font-serif">Halal</span>
+                        <span class="font-label-sm text-secondary text-[10px] sm:text-xs">Higienis Amanah</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Visual Collage with Desktop Tilt (-2deg) (§5.1 & §3.3) -->
-            <div class="lg:col-span-5 relative flex justify-center">
-                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-surface-container transform transition-transform duration-500 hover:rotate-0 lg:-rotate-2 border-4 border-surface-warm hero-photo-intro">
+            <!-- Right Visual Interactive Photo Card (md:col-span-5) with Modern UX -->
+            <div class="md:col-span-5 relative flex justify-center w-full">
+                <a href="{{ url('/menu') }}" 
+                   class="group relative block w-full max-w-[280px] sm:max-w-xs md:max-w-[290px] lg:max-w-md aspect-[4/5] max-h-[360px] sm:max-h-[420px] md:max-h-[440px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-surface-warm bg-surface-container cursor-pointer select-none"
+                   aria-label="Lihat Semua Menu dan Sajian Kuliner Yan's Food">
+                    
+                    <!-- Culinary Photo with Smooth Hover Zoom -->
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau" 
                          alt="Sajian kuliner otentik Yan's Food" 
-                         class="w-full h-full object-cover">
-                    
-                    <!-- Floating Editorial Pill Overlay -->
-                    <div class="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-lg flex items-center justify-between border border-surface-variant/40">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary text-[24px]">restaurant_menu</span>
+                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+
+                    <!-- Subtle Dark Gradient Scrim for Bottom Legibility -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
+
+                    <!-- Interactive Glassmorphic Editorial Card at Bottom -->
+                    <div class="absolute bottom-3.5 left-3.5 right-3.5 z-20 p-2.5 sm:p-4 rounded-2xl bg-[#FDFBF7]/95 backdrop-blur-md shadow-lg border border-white/70 flex items-center justify-between gap-2 sm:gap-3 transition-transform duration-300 group-hover:-translate-y-0.5">
+                        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-orange-100 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <span class="material-symbols-outlined text-[18px] sm:text-[22px]">restaurant_menu</span>
                             </div>
-                            <div>
-                                <p class="font-headline-sm text-on-surface text-sm sm:text-base font-serif">Kudapan & Makanan Hangat</p>
-                                <p class="font-body-sm text-secondary text-xs">Resep Asli Racikan Keluarga</p>
+                            <div class="min-w-0">
+                                <p class="font-headline-sm text-on-surface text-xs sm:text-sm font-bold font-serif truncate">Kudapan & Makanan Hangat</p>
+                                <p class="font-body-sm text-secondary text-[10px] sm:text-xs truncate">Resep Asli Racikan Keluarga</p>
                             </div>
                         </div>
-                        <span class="font-label-sm uppercase tracking-wider text-primary font-bold bg-primary/10 px-2.5 py-1 rounded-md text-[10px]">Fresh Cooked</span>
+
+                        <!-- Micro Interactive Chevron Button -->
+                        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0 shadow-2xs">
+                            <span class="material-symbols-outlined text-[15px] sm:text-[17px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Decorative Ambient Warm Glows -->
-                <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10"></div>
-                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-tertiary-fixed/30 rounded-full blur-3xl -z-10"></div>
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 rounded-full blur-2xl -z-10 pointer-events-none"></div>
+                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-tertiary-fixed/30 rounded-full blur-3xl -z-10 pointer-events-none"></div>
             </div>
         </div>
 
@@ -97,17 +94,17 @@
     </section>
 
     <!-- 2. PENGENALAN SINGKAT (§5.1 point 2) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-warm border-y border-surface-variant/30" data-reveal>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <section class="w-full py-14 sm:py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-warm border-y border-surface-variant/30" data-reveal>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-16 items-center">
             <!-- Left: Kitchen Craft Photo -->
-            <div class="lg:col-span-6 relative">
-                <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-md bg-surface-container">
+            <div class="md:col-span-6 relative">
+                <div class="aspect-[4/3] max-h-[280px] sm:max-h-[350px] md:max-h-[400px] rounded-3xl overflow-hidden shadow-md bg-surface-container">
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1TinkqNIVV7h2qq1GxjrOnc4gBx76s0MsWSkKpaCqOcpu0_YHs1PEx71CI1kVG54saVxEsBaCarut2IMBc3gB6FkdYFLWED9CzdQiyWN4JpOaLwxKrC-omYS70DjFf4YAAWzb7Q7OFbMVdeleBHwkI366riPzhZPmJJdm5Q1lZ_nbh7rMkIvcv8ky4vmqUmgNQSU03ql4J3e2Q_Py6cpZw8GlulXxb1w4VV49vZ6dLfJO-FeEheV" 
                          alt="Dapur Bersih Yan's Food" 
                          class="w-full h-full object-cover">
                 </div>
-                <!-- Offset Detail Card -->
-                <div class="absolute -bottom-6 right-2 sm:right-4 lg:-right-6 p-5 sm:p-6 rounded-2xl bg-inverse-surface text-inverse-on-surface max-w-xs shadow-xl hidden sm:block">
+                <!-- Offset Detail Card (Visible on Desktop lg) -->
+                <div class="absolute -bottom-6 right-2 sm:right-4 lg:-right-6 p-4 sm:p-6 rounded-2xl bg-inverse-surface text-inverse-on-surface max-w-xs shadow-xl hidden lg:block">
                     <div class="flex items-center gap-2 mb-2 text-tertiary-fixed">
                         <span class="material-symbols-outlined text-[20px]">verified</span>
                         <span class="font-label-sm font-bold uppercase tracking-wider text-xs">Komitmen Kualitas</span>
@@ -119,7 +116,7 @@
             </div>
 
             <!-- Right: Story & Philosophy -->
-            <div class="lg:col-span-6 flex flex-col items-start gap-6">
+            <div class="md:col-span-6 flex flex-col items-start gap-5 sm:gap-6">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Tentang Dapur Kami</span>
                 <h2 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif leading-tight">
                     Dapur Rumahan yang Naik Kelas Tanpa Kehilangan <span class="text-primary italic">Rasa Aslinya</span>
@@ -153,7 +150,7 @@
     </section>
 
     <!-- 3. PRODUK UNGGULAN (§5.1 point 3) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-cream-bg" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-cream-bg" data-reveal>
         <div class="max-w-7xl mx-auto flex flex-col gap-12">
             <!-- Section Header -->
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -169,7 +166,7 @@
             </div>
 
             <!-- 4 Featured Cards Grid (Mobile & Tablet 2-Cols, Desktop 4-Cols) -->
-            <div class="grid grid-cols-2 xl:grid-cols-4 gap-3.5 sm:gap-6" data-reveal-group>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
                 <x-public.product-card 
                     title="Risol Mayo Spesial"
@@ -226,7 +223,7 @@
     </section>
 
     <!-- 4. KENAPA PILIH KAMI (§5.1 point 4) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-container-low border-y border-surface-variant/30" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-container-low border-y border-surface-variant/30" data-reveal>
         <div class="max-w-7xl mx-auto flex flex-col gap-14">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Keunggulan Yan's Food</span>
@@ -234,9 +231,9 @@
                 <p class="font-body-lg text-secondary text-base sm:text-lg">Kami mengutamakan kesegaran dan higienitas untuk menghadirkan rasa yang selalu bisa dipercaya.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8" data-reveal-group>
                 <!-- Feature 1 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary">
                         <span class="material-symbols-outlined text-[30px]">eco</span>
                     </div>
@@ -247,7 +244,7 @@
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
                         <span class="material-symbols-outlined text-[30px]">sanitizer</span>
                     </div>
@@ -258,7 +255,7 @@
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
+                <div class="p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 hover:-translate-y-1 transition-all duration-300">
                     <div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary">
                         <span class="material-symbols-outlined text-[30px]">soup_kitchen</span>
                     </div>
@@ -271,14 +268,14 @@
         </div>
     </section>
 
-    <!-- 5. TEASER DELIVERY PLATFORMS & KATERING (§5.1 point 5) -->
-    <section class="w-full py-16 px-4 sm:px-6 lg:px-12 bg-cream-bg" data-reveal>
-        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-8 sm:p-10 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-10 border border-surface-variant/40">
+    <!-- 5. TEASER DELIVERY PLATFORMS & TAKEAWAY (§5.1 point 5) -->
+    <section class="w-full py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-cream-bg" data-reveal>
+        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-6 sm:p-8 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 border border-surface-variant/40">
             <div class="space-y-4 max-w-xl text-center lg:text-left">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Pesan Mudah & Cepat</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu</h2>
                 <p class="font-body-lg text-secondary text-sm sm:text-base">
-                    Mau santap lezat tanpa repot keluar rumah? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery atau pesan paket katering box.
+                    Mau santap lezat tanpa repot keluar rumah? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery atau ambil pesanan takeaway langsung di dapur kami.
                 </p>
             </div>
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
@@ -311,7 +308,7 @@
     </section>
 
     <!-- 6. TESTIMONI & SUARA PELANGGAN (§5.1 point 6) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-surface-warm border-t border-surface-variant/30" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-warm border-t border-surface-variant/30" data-reveal>
         <div class="max-w-7xl mx-auto flex flex-col gap-12">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Kata Pelanggan Kami</span>
@@ -399,7 +396,7 @@
     </section>
 
     <!-- 7. CTA PENUTUP (§5.1 point 7) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary" data-reveal>
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
             <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-inner">
                 <span class="material-symbols-outlined text-tertiary-fixed text-[36px]">lunch_dining</span>
@@ -408,7 +405,7 @@
                 Siap Menikmati Kelezatan Yan's Food Hari Ini?
             </h2>
             <p class="font-body-lg text-on-primary-container max-w-xl leading-relaxed text-base sm:text-lg">
-                Pesan untuk sarapan keluarga, camilan arisan, makan siang kantor, hingga acara katering spesial Anda.
+                Pesan untuk santapan keluarga, camilan santai, hingga makan siang hangat favorit Anda.
             </p>
             <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
                 <a href="{{ url('/menu') }}" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-surface-warm text-primary font-label-md hover:bg-surface-bright transition-all duration-200 shadow-xl font-bold active:scale-95">

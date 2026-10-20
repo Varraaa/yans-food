@@ -10,13 +10,11 @@ import { initFloatingWA } from './modules/wa-fab.js';
 import { initToast } from './modules/toast.js';
 import { initScrollProgress } from './modules/scroll-progress.js';
 import { initOperatingHours } from './modules/operating-hours.js';
-import { initOrderSuccess } from './modules/order-success.js';
 import { initContactPage } from './modules/contact.js';
 import { initMenuCatalog } from './modules/menu-catalog.js';
 import { initProductModal } from './modules/product-modal.js';
 import { initPesanIntent } from './modules/pesan-intent.js';
 import { initAccordions } from './modules/accordion.js';
-import { initCateringForm } from './modules/catering-form.js';
 import { initLightbox } from './modules/lightbox.js';
 import { initAnalytics } from './modules/analytics.js';
 
@@ -33,12 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initToast();
     initScrollProgress();
     initOperatingHours();
-    initOrderSuccess();
     initContactPage();
     initMenuCatalog();
     initProductModal();
     initPesanIntent();
     initAccordions();
-    initCateringForm();
     initLightbox();
 });

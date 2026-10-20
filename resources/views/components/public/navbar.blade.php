@@ -34,8 +34,8 @@
             'badge' => null,
         ],
         [
-            'label' => 'Form Pesanan',
-            'subtitle' => 'Katering acara, tumpeng & nasi box',
+            'label' => 'Pesan Online',
+            'subtitle' => 'Delivery via mitra & takeaway',
             'url' => url('/pesan'),
             'path' => 'pesan',
             'icon' => 'receipt_long',
@@ -53,8 +53,8 @@
 @endphp
 
 <!-- Header / Fixed Navbar (§3.4) -->
-<header id="main-navbar" class="bg-cream-bg/90">
-    <div class="navbar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-3 sm:gap-4">
+<header id="main-navbar" class="bg-[#FBF6EE]">
+    <div class="navbar-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between gap-3 sm:gap-4 md:gap-6">
         
         <!-- Brand Logo & Monogram -->
         <a href="{{ url('/') }}" class="brand-logo flex items-center gap-2.5 sm:gap-3 group shrink-0" aria-label="Yan's Food — Beranda">
@@ -76,8 +76,8 @@
             </div>
         </a>
 
-        <!-- Desktop Navigation with Sliding Underline Indicator (§3.4: Desktop xl and above) -->
-        <nav class="hidden xl:flex items-center gap-1 desktop-nav-wrap" aria-label="Navigasi Utama">
+        <!-- Desktop Navigation with Sliding Underline Indicator (lg and above: laptop/desktop) -->
+        <nav class="hidden lg:flex items-center gap-1.5 lg:gap-2 desktop-nav-wrap" aria-label="Navigasi Utama">
             <span class="nav-slider-indicator" aria-hidden="true"></span>
             @foreach($navLinks as $link)
                 @php
@@ -85,7 +85,7 @@
                                 ($link['path'] !== '/' && request()->is($link['path'].'*'));
                 @endphp
                 <a href="{{ $link['url'] }}" 
-                   class="desktop-nav-link relative py-3 px-4 flex items-center justify-center font-label-md text-sm transition-colors duration-200 {{ $isActive ? 'is-active text-primary font-bold' : 'text-on-surface/80 hover:text-primary font-medium' }}">
+                   class="desktop-nav-link relative py-2.5 px-3 lg:px-4 flex items-center justify-center font-label-md text-xs lg:text-sm transition-colors duration-200 {{ $isActive ? 'is-active text-primary font-bold' : 'text-on-surface/80 hover:text-primary font-medium' }}">
                     <span class="select-none">{{ $link['label'] }}</span>
                 </a>
             @endforeach
@@ -93,19 +93,19 @@
 
         <!-- Header Actions: CTA & Hamburger -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <!-- CTA Button "Pesan Sekarang" (Hidden on Mobile & Tablet, visible only on Desktop xl) -->
-            <a href="{{ url('/pesan') }}" class="hidden xl:inline-flex btn-primary text-xs sm:text-sm py-2 px-3.5 sm:px-4.5">
+            <!-- CTA Button "Pesan Sekarang" (Visible on Desktop lg) -->
+            <a href="{{ url('/pesan') }}" class="hidden lg:inline-flex btn-primary text-sm py-2 px-4.5">
                 <span class="material-symbols-outlined text-[18px]">local_mall</span>
                 <span>Pesan Sekarang</span>
                 <span class="btn-arrow font-bold" aria-hidden="true">→</span>
             </a>
 
-            <!-- Mobile & Tablet Morphing Hamburger Button (Active on Mobile and Tablet < xl) -->
+            <!-- Morphing Hamburger Button (Visible on Mobile & Tablet screens < lg) -->
             <button id="mobile-menu-toggle"
                     type="button" 
                     aria-label="Buka Menu Navigasi"
                     aria-expanded="false"
-                    class="hamburger-btn xl:hidden hover:bg-surface-container">
+                    class="hamburger-btn lg:hidden hover:bg-surface-container">
                 <span class="hamburger-line" aria-hidden="true"></span>
                 <span class="hamburger-line" aria-hidden="true"></span>
                 <span class="hamburger-line" aria-hidden="true"></span>
@@ -114,133 +114,55 @@
     </div>
 </header>
 
-<!-- Mobile & Tablet Fullscreen Overlay Navigation (§3.4) -->
+<!-- Fullscreen Overlay Navigation (Visible on Mobile & Tablet screens < lg) -->
 <div id="mobile-nav-overlay" 
-     class="mobile-nav-overlay xl:hidden overflow-hidden" 
+     class="mobile-nav-overlay lg:hidden overflow-hidden bg-[#FDFCFB]" 
      role="dialog" 
      aria-modal="true" 
-     aria-label="Menu Navigasi Mobile dan Tablet">
+     aria-label="Menu Navigasi Mobile & Tablet">
 
-    <div class="h-full w-full max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto flex flex-col justify-between overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6">
-        <!-- Overlay Header -->
-        <div class="flex items-center justify-between pb-3.5 border-b border-surface-variant/40 shrink-0">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-xs shrink-0">
-                    <div class="w-full h-full rounded-[10px] bg-[#FBF6EE] flex items-center justify-center">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-[#C1440E]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C11.5 3 13 4 12 5" stroke="#D6A253" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M4 11C4 16 7.5 18 12 18C16.5 18 20 16 20 11H4Z" fill="#C1440E"/>
-                            <line x1="2.5" y1="11" x2="21.5" y2="11" stroke="#26201B" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex flex-col leading-none">
-                    <span class="font-headline-sm text-base md:text-lg font-bold text-on-surface font-serif">Yan's Food</span>
-                    <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-primary font-bold pt-1">Dapur Kuliner Rumahan</span>
-                </div>
-            </div>
-            
-            <button id="mobile-menu-close" 
-                    type="button" 
-                    aria-label="Tutup Menu Navigasi"
-                    class="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-2xl bg-surface-warm/80 border border-surface-variant/40 text-on-surface hover:bg-surface-container active:scale-95 transition-all">
-                <span class="material-symbols-outlined text-[24px] md:text-[26px]">close</span>
-            </button>
-        </div>
-
-        <!-- Featured Pesan Sekarang Hero Card (Placed inside Hamburger Menu for Mobile & Tablet) -->
-        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#C1440E] via-[#A6380A] to-[#782806] text-white p-4.5 md:p-6 shadow-md border border-white/10 group shrink-0">
-            <div class="absolute -right-8 -bottom-8 w-36 h-36 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
-            <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="space-y-1.5 max-w-lg">
-                    <h3 class="font-serif text-base sm:text-lg md:text-xl font-bold text-white tracking-tight leading-snug">
-                        Pesan Makanan & Katering Sekarang
-                    </h3>
-                    <p class="text-[11px] sm:text-xs text-white/90 leading-relaxed">
-                        Pilih kudapan gurih, paket nasi box, atau katering lezat siap santap khas resep rumahan terpercaya.
-                    </p>
-                </div>
-
-                <a href="{{ url('/pesan') }}" 
-                   class="w-full md:w-auto md:shrink-0 py-3 md:py-3.5 px-5 md:px-7 rounded-xl bg-white text-[#C1440E] hover:bg-amber-50 active:scale-[0.98] font-bold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all">
-                    <span class="material-symbols-outlined text-[19px]">local_mall</span>
-                    <span>Pesan Sekarang</span>
-                    <span class="material-symbols-outlined text-[17px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+    <div class="h-full w-full flex flex-col justify-between overflow-y-auto overscroll-contain">
+        
+        <!-- Top Section: Header & Menu Links -->
+        <div class="w-full max-w-lg md:max-w-xl mx-auto flex flex-col">
+            <!-- Overlay Header: Brand Logo & Close Button (Reference Style) -->
+            <div class="w-full px-6 py-5 flex items-center justify-between border-b border-[#EDE6DC]/80 shrink-0">
+                <a href="{{ url('/') }}" class="font-serif text-2xl font-bold tracking-tight text-[#7E3717] hover:opacity-90 transition-opacity">
+                    Yan's Food
                 </a>
+                
+                <button id="mobile-menu-close" 
+                        type="button" 
+                        aria-label="Tutup Menu Navigasi"
+                        class="p-1 -mr-1.5 text-stone-800 hover:text-[#7E3717] transition-colors focus:outline-none cursor-pointer">
+                    <span class="material-symbols-outlined text-[30px] font-light leading-none">close</span>
+                </button>
             </div>
-        </div>
 
-        <!-- Modern Navigation Cards (1-Col on Mobile, 2-Cols Grid on Tablet) -->
-        <nav class="flex-1 py-1" aria-label="Daftar Tautan Mobile dan Tablet">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-3.5">
-                @foreach($mobileNavItems as $item)
+            <!-- Modern Clean Minimalist Navigation Links (Full Width Rows as in Reference) -->
+            <nav class="w-full flex flex-col" aria-label="Daftar Halaman Mobile & Tablet">
+                @foreach($navLinks as $item)
                     @php
                         $isActive = ($item['path'] === '/' && ($currentRoute === '/' || $currentRoute === '')) || 
                                     ($item['path'] !== '/' && request()->is($item['path'].'*'));
                     @endphp
                     <a href="{{ $item['url'] }}" 
-                       class="group relative flex items-center justify-between p-3.5 md:p-4 rounded-2xl transition-all duration-200 border {{ $isActive ? 'bg-primary/10 border-primary/40 ring-1 ring-primary/20 shadow-xs' : 'bg-surface-warm/90 hover:bg-white border-surface-variant/40 hover:border-primary/30 hover:shadow-xs active:scale-[0.99]' }}">
-                        <div class="flex items-center gap-3 md:gap-3.5">
-                            <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-colors shrink-0 {{ $isActive ? 'bg-primary text-white shadow-xs' : 'bg-white text-primary border border-surface-variant/30 group-hover:bg-primary group-hover:text-white' }}">
-                                <span class="material-symbols-outlined text-[20px] md:text-[22px]">{{ $item['icon'] }}</span>
-                            </div>
-                            <div class="flex flex-col text-left">
-                                <div class="flex items-center gap-2">
-                                    <span class="font-serif text-sm sm:text-base md:text-lg font-bold leading-tight {{ $isActive ? 'text-primary' : 'text-on-surface group-hover:text-primary transition-colors' }}">
-                                        {{ $item['label'] }}
-                                    </span>
-                                    @if($item['badge'])
-                                        <span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary text-[10px] font-bold shadow-2xs">
-                                            {{ $item['badge'] }}
-                                        </span>
-                                    @endif
-                                    @if($isActive)
-                                        <span class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true"></span>
-                                    @endif
-                                </div>
-                                <span class="text-[11px] md:text-xs text-secondary leading-tight mt-0.5">
-                                    {{ $item['subtitle'] }}
-                                </span>
-                            </div>
-                        </div>
-                        
-                        <span class="material-symbols-outlined text-[18px] md:text-[20px] text-secondary group-hover:text-primary group-hover:translate-x-1 transition-all">
-                            chevron_right
-                        </span>
+                       class="w-full px-6 py-4.5 border-b border-[#EDE6DC]/80 text-[16px] sm:text-[17px] md:text-[18px] transition-colors duration-150 flex items-center justify-between {{ $isActive ? 'bg-[#F5ECE1]/70 text-[#7E3717] font-bold' : 'text-[#383028] font-semibold hover:bg-stone-50/70 hover:text-[#7E3717]' }}">
+                        <span>{{ $item['label'] }}</span>
+                        @if($isActive)
+                            <span class="w-2.5 h-2.5 rounded-full bg-[#7E3717]"></span>
+                        @endif
                     </a>
                 @endforeach
-            </div>
-        </nav>
+            </nav>
+        </div>
 
-        <!-- Overlay Footer Quick Contact & Social -->
-        <div class="pt-3.5 border-t border-surface-variant/40 shrink-0 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20ingin%20tanya%20seputar%20menu%20dan%20pemesanan" 
-               target="_blank" 
-               rel="noopener"
-               class="w-full md:w-auto py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white flex items-center justify-between md:justify-center gap-3 text-xs md:text-sm font-semibold shadow-xs transition-all">
-                <span class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[18px]">chat</span>
-                    <span>Tanya Admin via WhatsApp</span>
-                </span>
-                <span class="text-[10px] bg-emerald-700/90 px-2 py-0.5 rounded-md font-bold tracking-wide">Fast Response</span>
+        <!-- Bottom Section: ORDER NOW CTA Button (Full Width Rounded Button as in Reference) -->
+        <div class="w-full max-w-lg md:max-w-xl mx-auto px-6 pb-6 pt-4 shrink-0">
+            <a href="{{ url('/pesan') }}" 
+               class="w-full py-4 px-6 rounded-xl bg-[#7E3717] hover:bg-[#682C10] active:scale-[0.99] text-white font-bold text-center block text-sm sm:text-base md:text-lg tracking-widest uppercase transition-all shadow-xs">
+                ORDER NOW
             </a>
-
-            <div class="flex items-center justify-between md:justify-end gap-4 text-[11px] md:text-xs text-secondary">
-                <span class="flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[14px]">schedule</span>
-                    <span>08:00 - 20:00 WIB</span>
-                </span>
-                <div class="flex items-center gap-3">
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Yan's Food" class="text-on-surface hover:text-primary transition-colors flex items-center gap-1 font-medium">
-                        <span class="material-symbols-outlined text-[17px]">photo_camera</span>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp Yan's Food" class="text-on-surface hover:text-primary transition-colors flex items-center gap-1 font-medium">
-                        <span class="material-symbols-outlined text-[17px]">chat</span>
-                        <span>WhatsApp</span>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </div>

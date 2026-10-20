@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CateringOrder;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Services\ReportService;
 
@@ -13,10 +13,8 @@ class DashboardController extends Controller
     {
         $kpis = $reportService->getDashboardKpis();
 
-        $upcomingCatering = CateringOrder::query()
-            ->whereNotIn('status', ['COMPLETED', 'CANCELLED'])
-            ->orderBy('event_date', 'asc')
-            ->orderBy('event_time', 'asc')
+        $lowStockProducts = Product::query()
+            ->orderBy('stock', 'asc')
             ->limit(5)
             ->get();
 
@@ -28,6 +26,6 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.dashboard', compact('kpis', 'upcomingCatering', 'latestTransactions'));
+        return view('admin.dashboard', compact('kpis', 'lowStockProducts', 'latestTransactions'));
     }
 }

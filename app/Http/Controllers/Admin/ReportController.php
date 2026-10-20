@@ -53,14 +53,11 @@ class ReportController extends Controller
 
         $financialData = [];
         $salesData = [];
-        $cateringData = [];
 
         if ($activeTab === 'financial') {
             $financialData = $reportService->getFinancialSummaryReport($startDate, $endDate);
-        } elseif ($activeTab === 'pos') {
-            $salesData = $reportService->getSalesReport($startDate, $endDate, $productId ? (int)$productId : null);
         } else {
-            $cateringData = $reportService->getCateringReport($startDate, $endDate);
+            $salesData = $reportService->getSalesReport($startDate, $endDate, $productId ? (int)$productId : null);
         }
 
         return view('admin.reports.index', compact(
@@ -71,8 +68,7 @@ class ReportController extends Controller
             'productId',
             'products',
             'financialData',
-            'salesData',
-            'cateringData'
+            'salesData'
         ));
     }
 
@@ -119,26 +115,6 @@ class ReportController extends Controller
                 }
                 fclose($handle);
             });
-        } elseif ($activeTab === 'catering') {
-            $cateringReport = $reportService->getCateringReport($startDate, $endDate);
-
-            $response = new StreamedResponse(function () use ($cateringReport) {
-                $handle = fopen('php://output', 'w');
-                fputcsv($handle, ['No. Order', 'Nama Pemesan', 'No. WhatsApp', 'Tanggal Acara', 'Total Pesanan (Rp)', 'Status Progres', 'Status Pembayaran']);
-
-                foreach ($cateringReport['orders'] as $order) {
-                    fputcsv($handle, [
-                        $order->order_number,
-                        $order->customer_name,
-                        $order->customer_phone,
-                        $order->event_date,
-                        $order->total,
-                        $order->status,
-                        $order->payment_status,
-                    ]);
-                }
-                fclose($handle);
-            });
         } else {
             $finReport = $reportService->getFinancialSummaryReport($startDate, $endDate);
 
@@ -146,8 +122,7 @@ class ReportController extends Controller
                 $handle = fopen('php://output', 'w');
                 fputcsv($handle, ['KOMPONEN LAPORAN', 'NILAI (RP)', 'KETERANGAN']);
                 fputcsv($handle, ['Pendapatan Kasir POS', $finReport['pos_revenue'], "{$finReport['pos_count']} Transaksi"]);
-                fputcsv($handle, ['Uang Masuk Catering', $finReport['catering_income'], "{$finReport['catering_payment_count']} Pembayaran"]);
-                fputcsv($handle, ['TOTAL PENDAPATAN KOTOR', $finReport['total_gross_income'], 'Akumulasi Kas Masuk']);
+                fputcsv($handle, ['TOTAL PENDAPATAN KOTOR', $finReport['total_gross_income'], 'Akumulasi Kasir POS']);
                 fputcsv($handle, ['Total Biaya/Pengeluaran Dapur', $finReport['total_expenses'], "{$finReport['expense_count']} Catatan Approved"]);
                 fputcsv($handle, ['LABA BERSIH OPERASIONAL', $finReport['net_profit'], "Margin: {$finReport['profit_margin']}%"]);
                 fputcsv($handle, []);
@@ -155,7 +130,7 @@ class ReportController extends Controller
                 fputcsv($handle, ['Kategori Biaya', 'Total (Rp)', 'Jumlah']);
 
                 foreach ($finReport['expenses_by_category'] as $cat) {
-                    fputcsv($handle, [$cat->category, $cat->total_amount, $cat->count]);
+                    fputcsv($handle, [$cat->category_name ?? 'Operasional', $cat->total_amount, $cat->count]);
                 }
                 fclose($handle);
             });

@@ -48,10 +48,6 @@ class Product extends Model
         return $this->transactionItems();
     }
 
-    public function cateringOrderItems()
-    {
-        return $this->hasMany(CateringOrderItem::class, 'product_id');
-    }
 
     public function scopeAvailable($query)
     {

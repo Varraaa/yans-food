@@ -127,12 +127,11 @@ border-focus: 2px solid #C1440E;
    - Filter chips pill-shaped: `Semua`, `Makanan Ringan`, `Makanan Berat`, `Mie Instan`, `Minuman Segar`.
    - Real-time search bar dengan ikon pencarian bersih.
 
-5. **Pesan / Catering Order Form:**
-   - Section Delivery Online: Card interaktif ShopeeFood, GoFood, GrabFood.
-   - Section Paket Katering: 3 Paket (Snack Box, Nasi Kotak Nusantara beraksen Gold, Prasmanan Mini).
-   - Form Pemesanan Acara: Nama, Nomor WA, Tanggal Acara, Waktu, Paket, Porsi, Alamat, Catatan Khusus dengan generator pesan WhatsApp otomatis.
+5. **Halaman Pesan (Online Delivery & Takeaway Dapur):**
+   - Section Delivery Online: Card interaktif mitra ShopeeFood, GoFood, GrabFood dengan status aktif.
+   - Section Takeaway Mandiri via WhatsApp: Panduan pemesanan langsung untuk diambil di dapur dengan tombol WhatsApp terformat dan nomor telepon resmi.
 
 6. **Footer Persisten:**
-   - 4 Kolom: Brand info, Navigasi, Kontak & Jam operasional, Media sosial.
+   - 4 Kolom: Brand info, Navigasi cepat, Kontak dapur & Jam operasional, Media sosial.
    - Strip terintegrasi "Tersedia juga di: ShopeeFood, GoFood, GrabFood".
    - Hak cipta © 2026 Yan's Food.

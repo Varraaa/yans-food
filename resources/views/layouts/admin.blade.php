@@ -118,28 +118,6 @@
                     </a>
                 </li>
 
-                {{-- CATERING --}}
-                <li class="pt-4 pb-1 px-3 text-[10px] font-black tracking-wider text-stone-400 uppercase">
-                    CATERING
-                </li>
-                <li>
-                    <a href="{{ route('admin.catering.orders.index') }}" class="flex items-center p-2.5 rounded-xl transition {{ request()->routeIs('admin.catering.orders.*') ? 'bg-[#C1440E] text-white font-bold shadow-sm' : 'text-stone-700 hover:bg-stone-100' }}">
-                        <span class="text-base mr-3">🍱</span>
-                        <span>Pesanan Catering</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.catering.payments.index') }}" class="flex items-center p-2.5 rounded-xl transition {{ request()->routeIs('admin.catering.payments.*') ? 'bg-[#C1440E] text-white font-bold shadow-sm' : 'text-stone-700 hover:bg-stone-100' }}">
-                        <span class="text-base mr-3">💳</span>
-                        <span>Pembayaran Catering</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.catering.income.index') }}" class="flex items-center p-2.5 rounded-xl transition {{ request()->routeIs('admin.catering.income.*') ? 'bg-[#C1440E] text-white font-bold shadow-sm' : 'text-stone-700 hover:bg-stone-100' }}">
-                        <span class="text-base mr-3">📈</span>
-                        <span>Penghasilan Catering</span>
-                    </a>
-                </li>
 
                 {{-- FINANCE --}}
                 <li class="pt-4 pb-1 px-3 text-[10px] font-black tracking-wider text-stone-400 uppercase">

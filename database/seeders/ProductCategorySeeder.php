@@ -14,7 +14,7 @@ class ProductCategorySeeder extends Seeder
             'Makanan Berat',
             'Mie Instan',
             'Minuman Segar',
-            'Paket Katering',
+            'Aneka Lauk',
         ];
 
         foreach ($categories as $cat) {

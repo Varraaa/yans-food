@@ -24,7 +24,7 @@
         <div class="bg-white p-8 rounded-3xl shadow-xl border border-stone-200/80 space-y-6">
             <div>
                 <h2 class="text-lg font-bold text-stone-900">Masuk ke Panel Admin</h2>
-                <p class="text-xs text-stone-500 mt-0.5">Kelola operasional katering, kasir POS, dan keuangan usaha.</p>
+                <p class="text-xs text-stone-500 mt-0.5">Kelola operasional kasir POS, katalog produk, dan keuangan usaha.</p>
             </div>
 
             @if(session('success'))

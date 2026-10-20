@@ -5,7 +5,7 @@
         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- 1. Header / Intro Narrative Sub-Hero -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-12 pb-14 lg:pt-16 lg:pb-16 w-full relative z-10" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-14 lg:pt-16 lg:pb-16 w-full relative z-10" data-reveal>
             <div class="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Kisah & Nilai Dapur</span>
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif leading-tight">
@@ -23,11 +23,11 @@
         </section>
 
         <!-- 2. Asymmetrical Brand Story Section -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-10 lg:py-16 w-full border-t border-surface-variant/30" data-reveal>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-12 lg:py-16 w-full border-t border-surface-variant/30" data-reveal>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-16 items-center">
                 <!-- Visual Story Column (Left) -->
-                <div class="lg:col-span-6 relative">
-                    <div class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/5] w-full">
+                <div class="md:col-span-6 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/5] max-h-[350px] sm:max-h-[420px] md:max-h-[480px] w-full">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRT8g-wzoYqZeUDrksy8MnGbkK54k0QHLwrOQjY9qL7V4Hv8d4qmf1uK3-VgIntBqHioQJRnQkfdGj_qjH9DSll49RWYcUjdTXLsmbLWQtjZrBM4n2M_8YrdNLt7WRiTx-NPA3XFsIZrO03tpGPXefj9O-ho2dweK4X7Uto5vboGOmU_AKp_FnvP8cywJc8JvrIE5MwfDXtglImY-P1_2gpLyDNhQPq-X47HBJXyGn7CweR2D0y6F" 
                              alt="Proses Masak Dapur Yan's Food" 
                              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
@@ -47,8 +47,8 @@
                         </div>
                     </div>
 
-                    <!-- Decorative Floating Accent Badge -->
-                    <div class="hidden sm:flex absolute bottom-4 sm:-bottom-4 right-4 sm:-right-2 lg:-right-6 bg-surface-warm p-3 sm:p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40">
+                    <!-- Decorative Floating Accent Badge (Visible on Desktop lg) -->
+                    <div class="hidden lg:flex absolute bottom-4 sm:-bottom-4 right-4 sm:-right-2 lg:-right-6 bg-surface-warm p-3 sm:p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40">
                         <span class="material-symbols-outlined text-tertiary text-2xl">verified</span>
                         <div>
                             <p class="font-label-md text-on-surface text-sm font-semibold">Tanpa Pengawet Sintetis</p>
@@ -58,7 +58,7 @@
                 </div>
 
                 <!-- Narrative Column (Right) -->
-                <div class="lg:col-span-6 space-y-6">
+                <div class="md:col-span-6 space-y-6">
                     <div class="space-y-3">
                         <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Filosofi Kami</span>
                         <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif leading-snug">
@@ -106,18 +106,18 @@
         </section>
 
         <!-- 3. PERJALANAN & MILESTONE TIMELINE (§5.4) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16 lg:py-20 w-full" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-20 w-full" data-reveal>
             <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Jejak Langkah</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
                     Perjalanan Menghangatkan Rasa
                 </h2>
                 <p class="font-body-md text-secondary text-sm sm:text-base">
-                    Dari pesanan tetangga dekat hingga ratusan boks katering arisan dan rapat kantor.
+                    Dari pesanan tetangga dekat hingga ratusan pelanggan setia penikmat kudapan hangat.
                 </p>
             </div>
 
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 relative" data-reveal-group>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative" data-reveal-group>
                 <!-- Item 1: 2021 -->
                 <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300">
                     <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2021</span>
@@ -132,16 +132,16 @@
                     <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2022</span>
                     <h3 class="font-label-md font-bold text-on-surface text-base">Layanan Digital</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                        Membuka pemesanan online delivery via ShopeeFood, GoFood, dan paket snack box arisan RT.
+                        Membuka pemesanan online delivery via ShopeeFood, GoFood, dan GrabFood.
                     </p>
                 </div>
 
                 <!-- Item 3: 2023 -->
                 <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300">
                     <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2023</span>
-                    <h3 class="font-label-md font-bold text-on-surface text-base">Ekspansi Katering</h3>
+                    <h3 class="font-label-md font-bold text-on-surface text-base">Ekspansi Menu Pilihan</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                        Menghadirkan paket nasi kotak nusantara komplit dan layanan prasmanan mini rumahan.
+                        Menghadirkan aneka menu makanan berat rumahan komplit dan varian camilan baru.
                     </p>
                 </div>
 
@@ -150,14 +150,14 @@
                     <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2024+</span>
                     <h3 class="font-label-md font-bold text-on-surface text-base">Standar Dapur Higienis</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                        Standardisasi kemasan segel aman, sertifikasi higienis, dan lebih dari 500+ acara sukses terlayani.
+                        Standardisasi kemasan segel aman, sertifikasi higienis, dan lebih dari 500+ pesanan sukses terlayani.
                     </p>
                 </div>
             </div>
         </section>
 
         <!-- 4. Section Visi, Misi & Nilai-Nilai Inti (Card Grid) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16 lg:py-24 w-full bg-surface-container-low/40 rounded-3xl my-8" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-24 w-full bg-surface-container-low/40 rounded-3xl my-8" data-reveal>
             <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Fondasi Kualitas</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
@@ -229,7 +229,7 @@
         </section>
 
         <!-- 4b. Galeri Dapur Higienis & Bahan Pilihan (§5.2, M27) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-16 w-full" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 lg:py-16 w-full" data-reveal>
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Dokumentasi Dapur</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
@@ -309,20 +309,20 @@
         </div>
 
         <!-- 5. CTA to Menu (§5.4) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 pb-20 text-center" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 pb-20 text-center" data-reveal>
             <div class="p-8 sm:p-12 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col items-center gap-6">
                 <h3 class="font-headline-md text-2xl sm:text-3xl text-on-surface font-serif">
                     Ingin Mencoba Cita Rasa Kami?
                 </h3>
                 <p class="font-body-md text-secondary max-w-xl text-sm sm:text-base">
-                    Jelajahi menu harian kami atau pesan paket katering spesial untuk acara Anda hari ini.
+                    Jelajahi menu kami atau pesan kudapan lezat favorit Anda hari ini.
                 </p>
                 <div class="flex flex-wrap items-center justify-center gap-4">
                     <a href="{{ url('/menu') }}" class="px-7 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-colors shadow-md text-sm">
                         Buka Katalog Menu
                     </a>
                     <a href="{{ url('/pesan') }}" class="px-7 py-3.5 rounded-xl bg-surface-container text-on-surface font-label-md hover:bg-surface-container-high transition-colors text-sm">
-                        Pesan Katering & Online
+                        Pesan Online Delivery
                     </a>
                 </div>
             </div>

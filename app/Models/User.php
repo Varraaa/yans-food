@@ -58,15 +58,6 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class, 'cashier_id');
     }
 
-    public function cateringOrders()
-    {
-        return $this->hasMany(CateringOrder::class, 'created_by');
-    }
-
-    public function cateringPayments()
-    {
-        return $this->hasMany(CateringPayment::class, 'received_by');
-    }
 
     public function expenses()
     {
