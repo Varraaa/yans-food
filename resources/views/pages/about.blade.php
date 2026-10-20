@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Decorative Floating Accent Badge -->
-                    <div class="hidden sm:flex absolute -bottom-6 -right-6 bg-surface-warm p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40">
+                    <div class="hidden sm:flex absolute bottom-4 sm:-bottom-4 right-4 sm:-right-2 lg:-right-6 bg-surface-warm p-3 sm:p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40">
                         <span class="material-symbols-outlined text-tertiary text-2xl">verified</span>
                         <div>
                             <p class="font-label-md text-on-surface text-sm font-semibold">Tanpa Pengawet Sintetis</p>

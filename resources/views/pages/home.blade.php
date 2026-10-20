@@ -107,7 +107,7 @@
                          class="w-full h-full object-cover">
                 </div>
                 <!-- Offset Detail Card -->
-                <div class="absolute -bottom-6 -right-4 sm:-right-6 p-5 sm:p-6 rounded-2xl bg-inverse-surface text-inverse-on-surface max-w-xs shadow-xl hidden sm:block">
+                <div class="absolute -bottom-6 right-2 sm:right-4 lg:-right-6 p-5 sm:p-6 rounded-2xl bg-inverse-surface text-inverse-on-surface max-w-xs shadow-xl hidden sm:block">
                     <div class="flex items-center gap-2 mb-2 text-tertiary-fixed">
                         <span class="material-symbols-outlined text-[20px]">verified</span>
                         <span class="font-label-sm font-bold uppercase tracking-wider text-xs">Komitmen Kualitas</span>
@@ -168,8 +168,8 @@
                 </a>
             </div>
 
-            <!-- 4 Featured Cards Grid (Mobile 2-Cols, Desktop 4-Cols) -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6" data-reveal-group>
+            <!-- 4 Featured Cards Grid (Mobile & Tablet 2-Cols, Desktop 4-Cols) -->
+            <div class="grid grid-cols-2 xl:grid-cols-4 gap-3.5 sm:gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
                 <x-public.product-card 
                     title="Risol Mayo Spesial"
