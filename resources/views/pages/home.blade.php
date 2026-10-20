@@ -2,11 +2,11 @@
     <x-slot name="title">Beranda | Yan's Food — Dapur Kuliner Rumahan</x-slot>
 
     <!-- 1. HERO SECTION (§5.1 & §3.3) -->
-    <section class="relative w-full overflow-hidden bg-cream-bg py-10 lg:py-16 px-4 sm:px-6 lg:px-12 flex items-center min-h-[560px] max-h-[920px] lg:min-h-[calc(100svh-5rem)]" data-hero-section>
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+    <section class="relative w-full overflow-hidden bg-cream-bg pt-6 pb-12 sm:pt-10 sm:pb-16 lg:py-16 px-4 sm:px-6 lg:px-12 block lg:flex lg:items-center lg:min-h-[calc(100svh-5rem)] lg:max-h-[920px]" data-hero-section>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             
             <!-- Left Hero Content -->
-            <div class="lg:col-span-7 flex flex-col items-start gap-5 lg:gap-7">
+            <div class="lg:col-span-7 flex flex-col items-start gap-4 sm:gap-5 lg:gap-7">
                 <!-- Review Pill Badge (§5.1) -->
                 <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container text-tertiary shadow-xs border border-surface-variant/40">
                     <span class="flex items-center text-[#E5A000] text-sm">
@@ -22,7 +22,7 @@
                 </div>
 
                 <!-- Main Headline -->
-                <h1 class="font-headline-lg text-4xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.15]" data-hero-step="headline">
+                <h1 class="font-headline-lg text-3xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight font-serif leading-[1.2] sm:leading-[1.15]" data-hero-step="headline">
                     Rasa Rumahan, <br class="hidden sm:block"/>
                     <span class="text-primary italic font-normal">Disajikan dengan Hati</span>
                 </h1>

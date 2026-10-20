@@ -31,7 +31,7 @@
             'url' => url('/menu'),
             'path' => 'menu',
             'icon' => 'restaurant_menu',
-            'badge' => 'Populer',
+            'badge' => null,
         ],
         [
             'label' => 'Form Pesanan',
@@ -135,13 +135,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col leading-none">
-                    <div class="flex items-center gap-2">
-                        <span class="font-headline-sm text-base md:text-lg font-bold text-on-surface font-serif">Yan's Food</span>
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-[10px] md:text-[11px] font-semibold">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            Buka • Siap Melayani
-                        </span>
-                    </div>
+                    <span class="font-headline-sm text-base md:text-lg font-bold text-on-surface font-serif">Yan's Food</span>
                     <span class="text-[9px] md:text-[10px] uppercase tracking-wider text-primary font-bold pt-1">Dapur Kuliner Rumahan</span>
                 </div>
             </div>
@@ -159,13 +153,6 @@
             <div class="absolute -right-8 -bottom-8 w-36 h-36 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="space-y-1.5 max-w-lg">
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-bold tracking-wider uppercase text-amber-100">
-                            <span class="material-symbols-outlined text-[13px]">bolt</span>
-                            Pemesanan Cepat
-                        </span>
-                        <span class="text-[11px] text-amber-200 font-medium">Katering Acara & Harian</span>
-                    </div>
                     <h3 class="font-serif text-base sm:text-lg md:text-xl font-bold text-white tracking-tight leading-snug">
                         Pesan Makanan & Katering Sekarang
                     </h3>
