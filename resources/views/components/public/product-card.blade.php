@@ -43,56 +43,56 @@
                  loading="lazy">
             
             <!-- Category & Favorite Badges (§5.3) -->
-            <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-10">
+            <div class="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-wrap gap-1 sm:gap-1.5 z-10">
                 @if($isFavorite)
-                    <span class="badge-favorite px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-[11px] font-bold shadow-xs">
+                    <span class="badge-favorite px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-[10px] sm:text-[11px] font-bold shadow-xs">
                         Favorit
                     </span>
                 @endif
-                <span class="px-2.5 py-1 rounded-full bg-surface-warm/95 backdrop-blur-md text-on-surface font-label-sm text-[11px] font-semibold shadow-xs border border-surface-variant/30">
+                <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-surface-warm/95 backdrop-blur-md text-on-surface font-label-sm text-[10px] sm:text-[11px] font-semibold shadow-xs border border-surface-variant/30">
                     {{ $category }}
                 </span>
             </div>
 
             <!-- Availability Status Badge -->
-            <div class="absolute top-2.5 right-2.5 z-10">
+            <div class="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 z-10">
                 @if($isAvailable)
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-100/95 text-emerald-800 font-label-sm text-[11px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-xs">
+                    <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-emerald-100/95 text-emerald-800 font-label-sm text-[10px] sm:text-[11px] font-semibold shadow-xs flex items-center gap-1 backdrop-blur-xs">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                        Sedia
+                        <span class="hidden xs:inline sm:inline">Sedia</span>
                     </span>
                 @else
-                    <span class="px-2.5 py-1 rounded-full bg-surface-container text-secondary font-label-sm text-[11px] font-semibold shadow-xs border border-surface-variant/40">
-                        Habis
+                    <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-surface-container text-secondary font-label-sm text-[10px] sm:text-[11px] font-semibold shadow-xs border border-surface-variant/40">
+                        <span class="hidden xs:inline sm:inline">Habis</span>
                     </span>
                 @endif
             </div>
         </div>
 
         <!-- 2. Typography & Story Description (Max 2 lines, §5.3) -->
-        <div class="space-y-1.5">
-            <h3 class="font-headline-sm text-on-surface group-hover:text-primary transition-colors text-lg sm:text-xl font-serif line-clamp-2 leading-snug">
+        <div class="space-y-1 sm:space-y-1.5">
+            <h3 class="font-headline-sm text-on-surface group-hover:text-primary transition-colors text-sm sm:text-base md:text-xl font-serif line-clamp-2 leading-snug">
                 {{ $title }}
             </h3>
-            <p class="font-body-sm text-secondary line-clamp-2 text-xs sm:text-sm leading-relaxed">
+            <p class="font-body-sm text-secondary line-clamp-2 text-[11px] sm:text-xs md:text-sm leading-relaxed">
                 {{ $desc }}
             </p>
         </div>
     </div>
 
     <!-- 3. Price & Action Hint (§5.3) -->
-    <div class="pt-4 mt-3 flex items-center justify-between border-t border-surface-variant/40">
+    <div class="pt-2.5 sm:pt-4 mt-2 sm:mt-3 flex items-center justify-between border-t border-surface-variant/40">
         <div>
-            <span class="font-label-sm text-secondary block text-[11px]">Harga</span>
-            <div class="font-bold tabular-nums text-primary text-base sm:text-lg">
+            <span class="font-label-sm text-secondary block text-[10px] sm:text-[11px]">Harga</span>
+            <div class="font-bold tabular-nums text-primary text-sm sm:text-base md:text-lg">
                 Rp {{ $formattedPrice }}
-                <span class="font-normal text-secondary text-xs">{{ $unit }}</span>
+                <span class="font-normal text-secondary text-[10px] sm:text-xs">{{ $unit }}</span>
             </div>
         </div>
 
-        <div class="inline-flex items-center gap-1 text-xs font-label-md text-secondary group-hover:text-primary transition-colors">
+        <div class="inline-flex items-center gap-0.5 sm:gap-1 text-[11px] sm:text-xs font-label-md text-secondary group-hover:text-primary transition-colors">
             <span class="hidden sm:inline">Detail</span>
-            <span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-0.5">arrow_forward</span>
+            <span class="material-symbols-outlined text-[16px] sm:text-[18px] transition-transform duration-200 group-hover:translate-x-0.5">arrow_forward</span>
         </div>
     </div>
 </article>

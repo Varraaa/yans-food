@@ -168,8 +168,8 @@
                 </a>
             </div>
 
-            <!-- 4 Featured Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-reveal-group>
+            <!-- 4 Featured Cards Grid (Mobile 2-Cols, Desktop 4-Cols) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
                 <x-public.product-card 
                     title="Risol Mayo Spesial"
