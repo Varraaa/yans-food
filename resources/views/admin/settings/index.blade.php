@@ -30,7 +30,7 @@
 
                     <div class="space-y-1">
                         <label class="block font-bold text-stone-700 uppercase tracking-wider">Nomor WhatsApp Admin *</label>
-                        <input type="text" name="store_phone" value="{{ old('store_phone', $settings['store_phone'] ?? '081234567890') }}" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                        <input type="text" name="store_phone" value="{{ old('store_phone', $settings['store_phone'] ?? '082221222936') }}" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     </div>
                 </div>
 

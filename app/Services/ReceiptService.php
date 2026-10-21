@@ -20,8 +20,8 @@ class ReceiptService
         }
 
         $storeName = $settings['store_name'] ?? "Yan's Food";
-        $storeAddress = $settings['store_address'] ?? 'Jl. Babakan Tarogong No. 12, Bandung';
-        $storePhone = $settings['store_phone'] ?? '081234567890';
+        $storeAddress = $settings['store_address'] ?? 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang';
+        $storePhone = $settings['store_phone'] ?? '082221222936';
 
         $items = [];
         foreach ($transaction->items as $item) {

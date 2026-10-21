@@ -693,7 +693,7 @@
 
         const storeName = receipt.header?.store_name || "YAN'S FOOD";
         const storeAddress = receipt.header?.address || 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang';
-        const storePhone = receipt.header?.phone || '081234567890';
+        const storePhone = receipt.header?.phone || '082221222936';
         const orderNum = receipt.order_info?.number || '-';
         const cashierName = receipt.order_info?.cashier || 'Kasir';
         const orderDate = receipt.order_info?.date || '';

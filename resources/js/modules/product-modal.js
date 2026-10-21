@@ -89,7 +89,7 @@ export function initProductModal() {
         }
 
         // Actions configuration (§5.3 points 346–348)
-        const adminWA = "6281234567890";
+        const adminWA = "6282221222936";
         if (isAvailable) {
             if (platformActionBtn) {
                 platformActionBtn.classList.remove('hidden');

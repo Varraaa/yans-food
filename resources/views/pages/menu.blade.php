@@ -191,7 +191,7 @@
                     Mau Menikmati Sajian Lezat Yan's Food Sekarang?
                 </h3>
                 <p class="font-body-md text-secondary leading-relaxed text-sm sm:text-base">
-                    Pesan menu favorit Anda langsung melalui platform online delivery (ShopeeFood, GoFood, GrabFood) atau ambil langsung di dapur kami.
+                    Pesan menu favorit Anda langsung melalui platform online delivery (ShopeeFood, GoFood, GrabFood) atau datang langsung ke dapur kami.
                 </p>
             </div>
             
@@ -201,12 +201,12 @@
                     <span class="material-symbols-outlined text-[20px]">local_mall</span>
                     <span>Pesan Online Delivery</span>
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20pesan" 
+                <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" 
                    target="_blank" 
-                   rel="noopener" 
-                   class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container active:scale-[0.98] transition-all border border-surface-variant/40 text-xs sm:text-sm font-semibold">
-                    <span class="material-symbols-outlined text-[20px] text-emerald-600">chat</span>
-                    <span>Pesan via WA</span>
+                   rel="noopener noreferrer" 
+                   class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container active:scale-[0.98] transition-all border border-surface-variant/40 text-xs sm:text-sm font-semibold group">
+                    <span class="material-symbols-outlined text-[20px] text-primary transition-transform duration-200 group-hover:scale-110">near_me</span>
+                    <span>Datang Langsung ke Tempat</span>
                 </a>
             </div>
         </div>

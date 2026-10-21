@@ -52,7 +52,7 @@ export function initContactPage() {
             const portion = (document.getElementById('portionEstimate')?.value || '').trim();
             const eventDate = (document.getElementById('eventDate')?.value || '').trim();
             const message = (document.getElementById('messageContent')?.value || '').trim();
-            const adminWA = "6281234567890";
+            const adminWA = "6282221222936";
 
             let msgText = `Halo Admin Yan's Food, saya ingin berkomunikasi & negosiasi pesanan:\n\n` +
                 `• Nama: ${name}\n` +

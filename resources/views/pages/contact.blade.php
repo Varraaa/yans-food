@@ -77,14 +77,14 @@
                                 </div>
                                 <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">WhatsApp Resmi</h3>
                                 <p class="font-numeric-currency text-primary-container mb-1 tracking-normal text-base font-bold">
-                                    +62 812-3456-7890
+                                    +62 822-2122-2936
                                 </p>
                                 <p class="font-body-sm text-secondary text-xs">
                                     Layanan CS, informasi menu, &amp; pemesanan takeout/delivery.
                                 </p>
                             </div>
                             <div class="pt-4 mt-2">
-                                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-label-md text-emerald-600 hover:text-emerald-700 font-bold">
+                                <a href="https://wa.me/6282221222936" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-label-md text-emerald-600 hover:text-emerald-700 font-bold">
                                     <span class="material-symbols-outlined text-[16px]">send</span>
                                     <span>Chat Langsung</span>
                                 </a>

@@ -281,22 +281,16 @@
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
                 <div class="flex items-center gap-3 flex-wrap justify-center">
                     <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
-                        <svg class="w-5 h-5 shrink-0 text-[#EE4D2D]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 6h-3.18C15.4 3.84 13.78 2 12 2s-3.4 1.84-3.82 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-2c1.08 0 2.09 1.13 2.5 2h-5c.41-.87 1.42-2 2.5-2zm7 16H5V8h14v12zm-7-9c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
-                        </svg>
-                        <span class="font-medium group-hover:text-primary transition-colors">ShopeeFood</span>
+                        <img src="{{ asset('images/platforms/shopeefood.svg') }}" alt="ShopeeFood" class="w-6 h-6 rounded-md shrink-0 object-contain shadow-xs">
+                        <span class="font-medium group-hover:text-[#EE4D2D] transition-colors">ShopeeFood</span>
                     </a>
                     <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
-                        <svg class="w-5 h-5 shrink-0 text-[#ED2724]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3-5c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
-                        </svg>
-                        <span class="font-medium group-hover:text-primary transition-colors">GoFood</span>
+                        <img src="{{ asset('images/platforms/gofood.svg') }}" alt="GoFood" class="w-6 h-6 rounded-md shrink-0 object-contain shadow-xs">
+                        <span class="font-medium group-hover:text-[#EE2737] transition-colors">GoFood</span>
                     </a>
                     <a href="{{ url('/pesan') }}#online" class="px-5 py-3 rounded-xl bg-surface-warm shadow-xs flex items-center gap-2.5 font-label-md text-on-surface hover:-translate-y-0.5 transition-all border border-surface-variant/40 group">
-                        <svg class="w-5 h-5 shrink-0 text-[#00B14F]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                        </svg>
-                        <span class="font-medium group-hover:text-primary transition-colors">GrabFood</span>
+                        <img src="{{ asset('images/platforms/grabfood.svg') }}" alt="GrabFood" class="w-6 h-6 rounded-md shrink-0 object-contain shadow-xs">
+                        <span class="font-medium group-hover:text-[#00B14F] transition-colors">GrabFood</span>
                     </a>
                 </div>
                 <a href="{{ url('/pesan') }}" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-inverse-surface text-inverse-on-surface hover:bg-black font-label-md transition-all shadow-xs shrink-0 active:scale-95">
@@ -412,7 +406,7 @@
                     <span>Buka Menu Lengkap</span>
                     <span class="material-symbols-outlined text-[20px]">restaurant_menu</span>
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20pesan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-inverse-surface/40 hover:bg-inverse-surface/60 text-white font-label-md backdrop-blur-md transition-all duration-200 border border-white/10 active:scale-95">
+                <a href="https://wa.me/6282221222936?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20pesan" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-inverse-surface/40 hover:bg-inverse-surface/60 text-white font-label-md backdrop-blur-md transition-all duration-200 border border-white/10 active:scale-95">
                     <span class="material-symbols-outlined text-[20px]">chat</span>
                     <span>Pesan via WhatsApp</span>
                 </a>

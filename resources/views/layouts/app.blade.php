@@ -30,7 +30,7 @@
         "description": "Kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.",
         "servesCuisine": "Indonesian",
         "priceRange": "$$",
-        "telephone": "+6281234567890",
+        "telephone": "+6282221222936",
         "address": {
             "{{ '@type' }}": "PostalAddress",
             "streetAddress": "Kp. Ciloa, RT.04/RW.10, Kec. Soreang",

@@ -110,11 +110,7 @@
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-[#FFF0ED] flex items-center justify-center text-[#EE4D2D]">
-                                    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19 6h-3.18C15.4 3.84 13.78 2 12 2s-3.4 1.84-3.82 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-2c1.08 0 2.09 1.13 2.5 2h-5c.41-.87 1.42-2 2.5-2zm7 16H5V8h14v12zm-7-9c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
-                                    </svg>
-                                </div>
+                                <img src="{{ asset('images/platforms/shopeefood.svg') }}" alt="ShopeeFood" class="w-14 h-14 rounded-2xl shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
                                 <span class="px-3 py-1 rounded-full bg-[#FFF0ED] text-[#EE4D2D] font-label-sm text-xs font-semibold">
                                     ShopeeFood
                                 </span>
@@ -145,11 +141,7 @@
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-[#FFECEC] flex items-center justify-center text-[#ED2724]">
-                                    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3-5c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
-                                    </svg>
-                                </div>
+                                <img src="{{ asset('images/platforms/gofood.svg') }}" alt="GoFood" class="w-14 h-14 rounded-2xl shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
                                 <span class="px-3 py-1 rounded-full bg-[#FFECEC] text-[#ED2724] font-label-sm text-xs font-semibold">
                                     GoFood
                                 </span>
@@ -180,11 +172,7 @@
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <div class="w-14 h-14 rounded-2xl bg-[#E8F8F0] flex items-center justify-center text-[#00B14F]">
-                                    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                                    </svg>
-                                </div>
+                                <img src="{{ asset('images/platforms/grabfood.svg') }}" alt="GrabFood" class="w-14 h-14 rounded-2xl shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0">
                                 <span class="px-3 py-1 rounded-full bg-[#E8F8F0] text-[#00B14F] font-label-sm text-xs font-semibold">
                                     GrabFood
                                 </span>
@@ -231,16 +219,6 @@
                             Konsep layanan simpel mirip <em>drive-thru</em>: Anda datang langsung ke lokasi dapur kami, pesan menu favorit di tempat, tunggu beberapa menit pesanan disiapkan dan digoreng hangat dadakan, terima pesanan terkemas rapi, lalu siap dibawa pulang.
                         </p>
 
-                        <!-- Alert Box: Tidak Bisa Makan di Tempat (No Dine-In) -->
-                        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200/80 text-amber-950 flex items-start gap-3.5 shadow-xs">
-                            <span class="material-symbols-outlined text-amber-600 text-[24px] shrink-0 mt-0.5">no_meals</span>
-                            <div class="space-y-1 text-xs sm:text-sm">
-                                <p class="font-label-md font-bold text-amber-900">Perhatian: Hanya Melayani Pesan Bawa Pulang (Tidak Ada Dine-in)</p>
-                                <p class="text-amber-800 leading-relaxed">
-                                    Yan's Food <strong>tidak menyediakan fasilitas meja atau kursi untuk makan di tempat</strong>. Seluruh pesanan yang dipesan langsung di lokasi dikemas khusus secara higienis untuk dibawa pulang (<em>takeaway only</em>).
-                                </p>
-                            </div>
-                        </div>
 
                         <!-- 4 Step Flow: Datang -> Pesan -> Tunggu -> Bawa Pulang -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
@@ -316,10 +294,6 @@
                             <div class="pt-1 flex items-center justify-between text-xs font-semibold">
                                 <span class="text-secondary">Jam Layanan:</span>
                                 <span class="text-primary font-bold">08.00 – 20.00 WIB (Setiap Hari)</span>
-                            </div>
-                            <div class="pt-1 flex items-center gap-2 text-[11px] text-amber-800 bg-amber-100/60 px-2.5 py-1 rounded-lg">
-                                <span class="material-symbols-outlined text-[14px]">info</span>
-                                <span>Layanan langsung khusus bawa pulang (no dine-in).</span>
                             </div>
                         </div>
 

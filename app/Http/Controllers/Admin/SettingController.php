@@ -22,8 +22,8 @@ class SettingController extends Controller
 
         return [
             'store_name' => "Yan's Food",
-            'store_address' => 'Jl. Babakan Tarogong No. 12, Bandung',
-            'store_phone' => '081234567890',
+            'store_address' => 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang',
+            'store_phone' => '082221222936',
             'operational_hours' => 'Senin - Sabtu: 08:00 - 20:00 WIB',
             'shopeefood_url' => 'https://shopee.co.id/universal-link/now-food',
             'gofood_url' => 'https://gofood.link/u/yansfood',
