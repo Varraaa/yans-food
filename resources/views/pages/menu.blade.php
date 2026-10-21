@@ -197,15 +197,15 @@
             
             <!-- Action Buttons: Clean Row on Tablet & Desktop, Full Width Stack on Mobile -->
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full lg:w-auto">
-                <a href="{{ url('/pesan') }}" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md flex items-center justify-center gap-2 shadow-sm hover:bg-primary-dark active:scale-[0.98] transition-all text-xs sm:text-sm font-bold">
-                    <span class="material-symbols-outlined text-[20px]">local_mall</span>
+                <a href="{{ url('/pesan') }}" class="btn-hover-sophisticated w-full sm:w-auto px-6 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md flex items-center justify-center gap-2 shadow-md hover:bg-primary-dark transition-all text-xs sm:text-sm font-bold group">
+                    <span class="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">local_mall</span>
                     <span>Pesan Online Delivery</span>
                 </a>
                 <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" 
                    target="_blank" 
                    rel="noopener noreferrer" 
-                   class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container active:scale-[0.98] transition-all border border-surface-variant/40 text-xs sm:text-sm font-semibold group">
-                    <span class="material-symbols-outlined text-[20px] text-primary transition-transform duration-200 group-hover:scale-110">near_me</span>
+                   class="btn-hover-glass w-full sm:w-auto px-6 py-3.5 rounded-xl bg-surface-warm text-on-surface font-label-md flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container transition-all border border-surface-variant/50 text-xs sm:text-sm font-semibold group">
+                    <span class="material-symbols-outlined text-[20px] text-primary transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5">near_me</span>
                     <span>Datang Langsung ke Tempat</span>
                 </a>
             </div>

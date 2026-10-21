@@ -1129,6 +1129,91 @@ html.js [data-reveal].is-visible {
 }
 
 /* ==========================================================================
+   h. ADVANCED INTERACTIVE HOVER & MICRO-ANIMATIONS
+   ========================================================================== */
+.hover-card-premium {
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease,
+                background-color 0.3s ease;
+    will-change: transform, box-shadow;
+}
+.hover-card-premium:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px -8px rgba(193, 68, 14, 0.12), 0 4px 14px rgba(38, 32, 27, 0.05);
+    border-color: rgba(193, 68, 14, 0.35);
+}
+.hover-card-premium:active {
+    transform: translateY(-2px) scale(0.99);
+}
+
+.hover-icon-bounce {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, color 0.25s ease;
+}
+.group:hover .hover-icon-bounce {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.btn-hover-sophisticated {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(193, 68, 14, 0.2);
+}
+.btn-hover-sophisticated::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+.btn-hover-sophisticated:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -4px rgba(193, 68, 14, 0.38), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.btn-hover-sophisticated:hover::after {
+    left: 140%;
+}
+.btn-hover-sophisticated:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.btn-hover-glass {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-hover-glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+.btn-hover-glass:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+.btn-hover-glass:hover::after {
+    left: 140%;
+}
+.btn-hover-glass:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ==========================================================================
    i. @MEDIA (PREFERS-REDUCED-MOTION: REDUCE) — §3.1
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {

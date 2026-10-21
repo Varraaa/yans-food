@@ -119,36 +119,36 @@
 
             <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative" data-reveal-group>
                 <!-- Item 1: 2021 -->
-                <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300">
-                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2021</span>
-                    <h3 class="font-label-md font-bold text-on-surface text-base">Meja Makan Rumah</h3>
+                <div class="group hover-card-premium p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative cursor-default">
+                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif group-hover:scale-110 transition-transform duration-300 origin-left inline-block">2021</span>
+                    <h3 class="font-label-md font-bold text-on-surface text-base group-hover:text-primary transition-colors duration-300">Meja Makan Rumah</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                         Mulai membuat risoles mayo dan kudapan hangat untuk keluarga serta pesanan tetangga terdekat.
                     </p>
                 </div>
 
                 <!-- Item 2: 2022 -->
-                <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300">
-                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2022</span>
-                    <h3 class="font-label-md font-bold text-on-surface text-base">Layanan Digital</h3>
+                <div class="group hover-card-premium p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative cursor-default">
+                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif group-hover:scale-110 transition-transform duration-300 origin-left inline-block">2022</span>
+                    <h3 class="font-label-md font-bold text-on-surface text-base group-hover:text-primary transition-colors duration-300">Layanan Digital</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                         Membuka pemesanan online delivery via ShopeeFood, GoFood, dan GrabFood.
                     </p>
                 </div>
 
                 <!-- Item 3: 2023 -->
-                <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300">
-                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2023</span>
-                    <h3 class="font-label-md font-bold text-on-surface text-base">Ekspansi Menu Pilihan</h3>
+                <div class="group hover-card-premium p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative cursor-default">
+                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif group-hover:scale-110 transition-transform duration-300 origin-left inline-block">2023</span>
+                    <h3 class="font-label-md font-bold text-on-surface text-base group-hover:text-primary transition-colors duration-300">Ekspansi Menu Pilihan</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                         Menghadirkan aneka menu makanan berat rumahan komplit dan varian camilan baru.
                     </p>
                 </div>
 
                 <!-- Item 4: 2024 -->
-                <div class="p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative hover:-translate-y-1 transition-all duration-300 ring-2 ring-primary/40">
-                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif">2024+</span>
-                    <h3 class="font-label-md font-bold text-on-surface text-base">Standar Dapur Higienis</h3>
+                <div class="group hover-card-premium p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative cursor-default ring-2 ring-primary/40">
+                    <span class="font-headline-sm text-primary font-bold text-2xl font-serif group-hover:scale-110 transition-transform duration-300 origin-left inline-block">2024+</span>
+                    <h3 class="font-label-md font-bold text-on-surface text-base group-hover:text-primary transition-colors duration-300">Standar Dapur Higienis</h3>
                     <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                         Standardisasi kemasan segel aman, sertifikasi higienis, dan lebih dari 500+ pesanan sukses terlayani.
                     </p>
@@ -170,12 +170,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group>
                 <!-- Card 1 -->
-                <div class="group p-8 rounded-3xl bg-surface-warm shadow-xs hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between border border-surface-variant/40">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
                     <div class="space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-success-surface flex items-center justify-center text-success transition-transform duration-300 group-hover:scale-110">
+                        <div class="w-14 h-14 rounded-2xl bg-success-surface flex items-center justify-center text-success hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">sanitizer</span>
                         </div>
-                        <h3 class="font-headline-sm text-on-surface font-serif text-xl">
+                        <h3 class="font-headline-sm text-on-surface font-serif text-xl group-hover:text-primary transition-colors duration-300">
                             Dapur Bersih Berstandar Resto
                         </h3>
                         <p class="font-body-md text-secondary leading-relaxed text-sm">
@@ -184,17 +184,17 @@
                     </div>
                     <div class="pt-6 flex items-center gap-2 text-success font-label-sm font-semibold text-xs border-t border-surface-variant/30 mt-6">
                         <span class="material-symbols-outlined text-[18px]">verified_user</span>
-                        <span>Higienis & Terinspeksi Harian</span>
+                        <span>Higienis &amp; Terinspeksi Harian</span>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="group p-8 rounded-3xl bg-surface-warm shadow-xs hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between border border-surface-variant/40">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
                     <div class="space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center text-primary-container transition-transform duration-300 group-hover:scale-110">
+                        <div class="w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center text-primary-container hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">eco</span>
                         </div>
-                        <h3 class="font-headline-sm text-on-surface font-serif text-xl">
+                        <h3 class="font-headline-sm text-on-surface font-serif text-xl group-hover:text-primary transition-colors duration-300">
                             Bahan Baku Segar Pagi Hari
                         </h3>
                         <p class="font-body-md text-secondary leading-relaxed text-sm">
@@ -208,12 +208,12 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group p-8 rounded-3xl bg-surface-warm shadow-xs hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between border border-surface-variant/40">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
                     <div class="space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant transition-transform duration-300 group-hover:scale-110">
+                        <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">favorite</span>
                         </div>
-                        <h3 class="font-headline-sm text-on-surface font-serif text-xl">
+                        <h3 class="font-headline-sm text-on-surface font-serif text-xl group-hover:text-tertiary transition-colors duration-300">
                             Rasa yang Bikin Kangen Rumah
                         </h3>
                         <p class="font-body-md text-secondary leading-relaxed text-sm">
@@ -228,86 +228,6 @@
             </div>
         </section>
 
-        <!-- 4b. Galeri Dapur Higienis & Bahan Pilihan (§5.2, M27) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 lg:py-16 w-full" data-reveal>
-            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Dokumentasi Dapur</span>
-                <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
-                    Di Balik Kelezatan Sajian Kami
-                </h2>
-                <p class="font-body-md text-secondary text-sm sm:text-base">
-                    Klik foto untuk memperbesar dan melihat standar kebersihan proses produksi kami.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6" data-reveal-group>
-                <!-- Gallery 1 -->
-                <div class="group relative aspect-square rounded-2xl overflow-hidden bg-surface-container cursor-pointer shadow-xs border border-surface-variant/40"
-                     data-lightbox-src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRT8g-wzoYqZeUDrksy8MnGbkK54k0QHLwrOQjY9qL7V4Hv8d4qmf1uK3-VgIntBqHioQJRnQkfdGj_qjH9DSll49RWYcUjdTXLsmbLWQtjZrBM4n2M_8YrdNLt7WRiTx-NPA3XFsIZrO03tpGPXefj9O-ho2dweK4X7Uto5vboGOmU_AKp_FnvP8cywJc8JvrIE5MwfDXtglImY-P1_2gpLyDNhQPq-X47HBJXyGn7CweR2D0y6F"
-                     data-lightbox-caption="Proses penyiapan adonan kulit risol segar setiap pagi di dapur higienis Yan's Food">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRT8g-wzoYqZeUDrksy8MnGbkK54k0QHLwrOQjY9qL7V4Hv8d4qmf1uK3-VgIntBqHioQJRnQkfdGj_qjH9DSll49RWYcUjdTXLsmbLWQtjZrBM4n2M_8YrdNLt7WRiTx-NPA3XFsIZrO03tpGPXefj9O-ho2dweK4X7Uto5vboGOmU_AKp_FnvP8cywJc8JvrIE5MwfDXtglImY-P1_2gpLyDNhQPq-X47HBJXyGn7CweR2D0y6F" 
-                         alt="Penyiapan Kulit Risol" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-inverse-surface/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined text-[32px]">zoom_in</span>
-                    </div>
-                </div>
-
-                <!-- Gallery 2 -->
-                <div class="group relative aspect-square rounded-2xl overflow-hidden bg-surface-container cursor-pointer shadow-xs border border-surface-variant/40"
-                     data-lightbox-src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyfuXln7cyGrY2lKM07Nk3VKMQjY3ZTmHoC1dw90oSQpU6K9GToD9dsNw7j-ONqeDlAGA4dUHsambXmkUw1VSykY9WS5EuOrd2vXOLVz_gDlJDQpTckcMcGct8EuAcmM-Aj5VFqr78aR9bpsCfWc7L5uPmlfvvfJvmZbLdxztCm-fUjNoCNBg6rJwiIGonOikHOEVhan_cN8QOl7vVORz_mOuXsXhhH3TopjOFzgKMvjN75USyuea4"
-                     data-lightbox-caption="Risol Mayo dengan isian daging asap premium dan saus mayones racikan khusus">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyfuXln7cyGrY2lKM07Nk3VKMQjY3ZTmHoC1dw90oSQpU6K9GToD9dsNw7j-ONqeDlAGA4dUHsambXmkUw1VSykY9WS5EuOrd2vXOLVz_gDlJDQpTckcMcGct8EuAcmM-Aj5VFqr78aR9bpsCfWc7L5uPmlfvvfJvmZbLdxztCm-fUjNoCNBg6rJwiIGonOikHOEVhan_cN8QOl7vVORz_mOuXsXhhH3TopjOFzgKMvjN75USyuea4" 
-                         alt="Risol Mayo Renyah" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-inverse-surface/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined text-[32px]">zoom_in</span>
-                    </div>
-                </div>
-
-                <!-- Gallery 3 -->
-                <div class="group relative aspect-square rounded-2xl overflow-hidden bg-surface-container cursor-pointer shadow-xs border border-surface-variant/40"
-                     data-lightbox-src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFkmFBQYeBj264oHilvJ9JGnrJ_1PQwJXxR2gokTFFviNr5gzGCDexUL9qKdLaBaTQmtl7Kr6kSRlVtonMXlr1NwwYVSGTCtr6AFa_iWNSqQ0D74vSZRm_HMXg6AOgcxsT3bHsrxoTQvSyHcyUcv3avNKLywFGPb8AYZAxOuVzhC-mVzhPiHFbQD6tEbON-W1f62G9pLQr_QEupaxxHXBTmkPriy348OCpVdEAQzNnXKeNuLYcLUDR"
-                     data-lightbox-caption="Pengemasan nasi kotak nusantara yang rapi dan higienis dengan segel khusus">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFkmFBQYeBj264oHilvJ9JGnrJ_1PQwJXxR2gokTFFviNr5gzGCDexUL9qKdLaBaTQmtl7Kr6kSRlVtonMXlr1NwwYVSGTCtr6AFa_iWNSqQ0D74vSZRm_HMXg6AOgcxsT3bHsrxoTQvSyHcyUcv3avNKLywFGPb8AYZAxOuVzhC-mVzhPiHFbQD6tEbON-W1f62G9pLQr_QEupaxxHXBTmkPriy348OCpVdEAQzNnXKeNuLYcLUDR" 
-                         alt="Nasi Kotak Nusantara" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-inverse-surface/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined text-[32px]">zoom_in</span>
-                    </div>
-                </div>
-
-                <!-- Gallery 4 -->
-                <div class="group relative aspect-square rounded-2xl overflow-hidden bg-surface-container cursor-pointer shadow-xs border border-surface-variant/40"
-                     data-lightbox-src="https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX"
-                     data-lightbox-caption="Pisang coklat keju lumer yang digoreng garing renyah emas">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX" 
-                         alt="Pisang Coklat Lumer" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-inverse-surface/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                        <span class="material-symbols-outlined text-[32px]">zoom_in</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Lightbox Modal Container (M27) -->
-        <div id="gallery-lightbox" class="hidden lightbox-modal" role="dialog" aria-modal="true" aria-label="Penampil Galeri Foto">
-            <button type="button" 
-                    id="lightbox-close-btn"
-                    aria-label="Tutup foto"
-                    class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer">
-                <span class="material-symbols-outlined text-[24px]">close</span>
-            </button>
-            <div class="lightbox-dialog">
-                <img id="lightbox-image" 
-                     src="" 
-                     alt="" 
-                     class="max-w-full max-h-[75vh] rounded-2xl object-contain shadow-2xl">
-                <p id="lightbox-caption" class="mt-4 text-center text-white/90 font-body-sm text-sm max-w-xl"></p>
-            </div>
-        </div>
-
         <!-- 5. CTA to Menu (§5.4) -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 pb-20 text-center" data-reveal>
             <div class="p-8 sm:p-12 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col items-center gap-6">
@@ -318,11 +238,13 @@
                     Jelajahi menu kami atau pesan kudapan lezat favorit Anda hari ini.
                 </p>
                 <div class="flex flex-wrap items-center justify-center gap-4">
-                    <a href="{{ url('/menu') }}" class="px-7 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-colors shadow-md text-sm">
-                        Buka Katalog Menu
+                    <a href="{{ url('/menu') }}" class="btn-hover-sophisticated inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary-container text-on-primary font-label-md hover:bg-primary-dark transition-all text-sm font-bold shadow-md group">
+                        <span class="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover:rotate-12">restaurant_menu</span>
+                        <span>Buka Katalog Menu</span>
                     </a>
-                    <a href="{{ url('/pesan') }}" class="px-7 py-3.5 rounded-xl bg-surface-container text-on-surface font-label-md hover:bg-surface-container-high transition-colors text-sm">
-                        Pesan Online Delivery
+                    <a href="{{ url('/pesan') }}" class="btn-hover-glass inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-surface-container text-on-surface font-label-md hover:bg-surface-container-high transition-all text-sm font-semibold border border-surface-variant/50 group">
+                        <span class="material-symbols-outlined text-[18px] text-primary transition-transform duration-300 group-hover:scale-110">local_mall</span>
+                        <span>Pesan Online Delivery</span>
                     </a>
                 </div>
             </div>

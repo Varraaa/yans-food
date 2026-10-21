@@ -20,24 +20,24 @@
 
                 <!-- Intent Switcher (2 Prominent Cards) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8 max-w-4xl">
-                    <!-- Intent Card 1: Pesan Lewat Aplikasi Mitra -->
+                    <!-- Intent Card 1: Pesan Lewat Aplikasi Delivery -->
                     <a href="#online" 
                        id="intent-card-online" 
-                       class="intent-card flex items-start gap-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-orange-100 text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                       class="intent-card hover-card-premium flex items-start gap-4 group p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs transition-all duration-300 cursor-pointer">
+                        <div class="w-14 h-14 rounded-2xl bg-orange-100 text-primary flex items-center justify-center shrink-0 hover-icon-bounce shadow-2xs group-hover:shadow-md transition-all duration-300">
                             <span class="material-symbols-outlined text-[28px]">moped</span>
                         </div>
-                        <div class="space-y-1">
+                        <div class="space-y-1.5 flex-1 min-w-0">
                             <div class="flex items-center justify-between">
-                                <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
+                                <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors duration-300">
                                     1. Pesan Lewat Aplikasi Delivery
                                 </h3>
-                                <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_downward</span>
+                                <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-300 group-hover:translate-y-1 group-hover:text-primary">arrow_downward</span>
                             </div>
                             <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                                 Pesan instan lewat ShopeeFood, GoFood, atau GrabFood. Diantar hangat langsung ke rumah atau kantor Anda oleh kurir aplikasi.
                             </p>
-                            <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1">
+                            <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1 group-hover:translate-x-1 transition-transform duration-200">
                                 <span>Pilih Mitra Pengantaran</span>
                                 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                             </span>
@@ -47,21 +47,21 @@
                     <!-- Intent Card 2: Datang Langsung ke Tempat -->
                     <a href="#langsung" 
                        id="intent-card-takeaway" 
-                       class="intent-card flex items-start gap-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-[#9B3100] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                       class="intent-card hover-card-premium flex items-start gap-4 group p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs transition-all duration-300 cursor-pointer">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-primary flex items-center justify-center shrink-0 hover-icon-bounce shadow-2xs group-hover:shadow-md transition-all duration-300">
                             <span class="material-symbols-outlined text-[28px]">storefront</span>
                         </div>
-                        <div class="space-y-1">
+                        <div class="space-y-1.5 flex-1 min-w-0">
                             <div class="flex items-center justify-between">
-                                <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
+                                <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors duration-300">
                                     2. Datang Langsung ke Tempat
                                 </h3>
-                                <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_downward</span>
+                                <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-300 group-hover:translate-y-1 group-hover:text-primary">arrow_downward</span>
                             </div>
                             <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
                                 Datang langsung, pesan di tempat, tunggu pesanan disiapkan segar, terima &amp; bawa pulang. <em>(Konsep drive-thru / takeaway, tidak bisa makan di tempat)</em>.
                             </p>
-                            <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1">
+                            <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1 group-hover:translate-x-1 transition-transform duration-200">
                                 <span>Panduan Datang Langsung</span>
                                 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                             </span>

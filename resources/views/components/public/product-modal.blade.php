@@ -85,15 +85,6 @@
                     <span class="material-symbols-outlined text-[18px]">chat</span>
                     <span>Tanya via WhatsApp</span>
                 </a>
-            </div>
-
-            <!-- Share Button -->
-            <button type="button" 
-                    id="modal-btn-share" 
-                    class="btn-outline w-full py-2.5 text-xs sm:text-sm">
-                <span class="material-symbols-outlined text-[16px]">share</span>
-                <span>Bagikan Menu Ini</span>
-            </button>
         </div>
     </div>
 </div>
