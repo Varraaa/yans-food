@@ -14,7 +14,7 @@
                         Pesan Sajian <span class="text-primary italic font-normal">Yan's Food</span>
                     </h1>
                     <p class="font-body-lg text-secondary leading-relaxed text-base sm:text-lg">
-                        Nikmati aneka kudapan renyah dan santapan hangat khas dapur rumahan kami melalui 2 pilihan layanan resmi: diantar langsung lewat aplikasi online delivery atau datang langsung ke tempat kami (pesan di tempat & bawa pulang, tidak bisa makan di tempat).
+                        Nikmati aneka kudapan renyah dan santapan hangat khas dapur rumahan kami melalui 2 pilihan layanan resmi: diantar langsung lewat aplikasi online delivery atau datang langsung ke tempat kami.
                     </p>
                 </div>
 
