@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="title">Cara Pesan — Online Delivery & Takeaway | Yan's Food</x-slot>
+    <x-slot name="title">Cara Pesan — Online Delivery & Datang Langsung | Yan's Food</x-slot>
 
     <div>
         <!-- 1. Editorial Hero Header with Prominent Intent Switcher -->
@@ -8,13 +8,13 @@
                 <div class="max-w-3xl space-y-3">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container text-primary font-label-sm uppercase tracking-wider text-xs font-semibold">
                         <span class="material-symbols-outlined text-[16px]">local_mall</span>
-                        <span>Pilihan Layanan Pesan Praktis & Cepat</span>
+                        <span>2 Pilihan Layanan Pemesanan Yan's Food</span>
                     </div>
                     <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif font-bold">
                         Pesan Sajian <span class="text-primary italic font-normal">Yan's Food</span>
                     </h1>
                     <p class="font-body-lg text-secondary leading-relaxed text-base sm:text-lg">
-                        Nikmati aneka kudapan renyah dan santapan hangat khas dapur rumahan kami. Diantar langsung ke pintu Anda lewat aplikasi online atau pesan langsung untuk diambil di dapur.
+                        Nikmati aneka kudapan renyah dan santapan hangat khas dapur rumahan kami melalui 2 pilihan layanan resmi: diantar langsung lewat aplikasi online delivery atau datang langsung ke tempat kami (pesan di tempat & bawa pulang, tidak bisa makan di tempat).
                     </p>
                 </div>
 
@@ -30,12 +30,12 @@
                         <div class="space-y-1">
                             <div class="flex items-center justify-between">
                                 <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
-                                    Pesan Lewat Aplikasi Delivery
+                                    1. Pesan Lewat Aplikasi Delivery
                                 </h3>
                                 <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_downward</span>
                             </div>
                             <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                                Pesan instan lewat ShopeeFood, GoFood, atau GrabFood. Diantar hangat langsung ke rumah atau kantor Anda.
+                                Pesan instan lewat ShopeeFood, GoFood, atau GrabFood. Diantar hangat langsung ke rumah atau kantor Anda oleh kurir aplikasi.
                             </p>
                             <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1">
                                 <span>Pilih Mitra Pengantaran</span>
@@ -44,8 +44,8 @@
                         </div>
                     </a>
 
-                    <!-- Intent Card 2: Pesan Langsung / Ambil di Dapur -->
-                    <a href="#takeaway" 
+                    <!-- Intent Card 2: Datang Langsung ke Tempat -->
+                    <a href="#langsung" 
                        id="intent-card-takeaway" 
                        class="intent-card flex items-start gap-4 group">
                         <div class="w-14 h-14 rounded-2xl bg-amber-100 text-[#9B3100] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -54,15 +54,15 @@
                         <div class="space-y-1">
                             <div class="flex items-center justify-between">
                                 <h3 class="font-headline-sm text-on-surface font-serif text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
-                                    Pesan Takeaway / Ambil Sendiri
+                                    2. Datang Langsung ke Tempat
                                 </h3>
                                 <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_downward</span>
                             </div>
                             <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                                Hubungi dapur via WhatsApp untuk siapkan pesanan terlebih dahulu, lalu ambil hangat tanpa antre di lokasi kami.
+                                Datang langsung, pesan di tempat, tunggu pesanan disiapkan segar, terima &amp; bawa pulang. <em>(Konsep drive-thru / takeaway, tidak bisa makan di tempat)</em>.
                             </p>
                             <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1">
-                                <span>Panduan Pesan Ambil</span>
+                                <span>Panduan Datang Langsung</span>
                                 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                             </span>
                         </div>
@@ -211,61 +211,84 @@
             </div>
         </section>
 
-        <!-- 3. SECTION B: Takeaway & Pesan Langsung via WhatsApp (#takeaway) -->
-        <section id="takeaway" class="w-full py-16 lg:py-24 bg-surface-container-low/50 scroll-mt-24" data-reveal>
+        <!-- 3. SECTION B: Datang Langsung ke Tempat (#langsung / #takeaway) -->
+        <section id="langsung" class="w-full py-16 lg:py-24 bg-surface-container-low/50 scroll-mt-24" data-reveal>
+            <!-- Backwards-compatible anchor for legacy links -->
+            <span id="takeaway" class="sr-only"></span>
+
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
                     <!-- Left: Information & Instructions -->
                     <div class="lg:col-span-7 space-y-6">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sand-bg-alt text-on-surface font-label-sm uppercase tracking-wider text-xs font-semibold">
                             <span class="material-symbols-outlined text-primary text-[16px]">storefront</span>
-                            <span>Pesan Ambil di Dapur / Takeaway</span>
+                            <span>Datang Langsung ke Tempat (Pesan &amp; Bawa Pulang)</span>
                         </div>
                         <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface font-serif font-bold">
-                            Ambil Hangat di Dapur Tanpa Menunggu
+                            Pesan Langsung di Tempat, Bawa Pulang Hangat
                         </h2>
                         <p class="font-body-lg text-secondary leading-relaxed text-base sm:text-lg">
-                            Ingin makanan siap saat Anda tiba? Hubungi kami beberapa menit sebelumnya melalui WhatsApp, kami akan menyiapkan pesanan Anda hangat-hangat langsung dari penggorengan.
+                            Konsep layanan simpel mirip <em>drive-thru</em>: Anda datang langsung ke lokasi dapur kami, pesan menu favorit di tempat, tunggu beberapa menit pesanan disiapkan dan digoreng hangat dadakan, terima pesanan terkemas rapi, lalu siap dibawa pulang.
                         </p>
 
-                        <!-- 3 Step Flow -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                        <!-- Alert Box: Tidak Bisa Makan di Tempat (No Dine-In) -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200/80 text-amber-950 flex items-start gap-3.5 shadow-xs">
+                            <span class="material-symbols-outlined text-amber-600 text-[24px] shrink-0 mt-0.5">no_meals</span>
+                            <div class="space-y-1 text-xs sm:text-sm">
+                                <p class="font-label-md font-bold text-amber-900">Perhatian: Hanya Melayani Pesan Bawa Pulang (Tidak Ada Dine-in)</p>
+                                <p class="text-amber-800 leading-relaxed">
+                                    Yan's Food <strong>tidak menyediakan fasilitas meja atau kursi untuk makan di tempat</strong>. Seluruh pesanan yang dipesan langsung di lokasi dikemas khusus secara higienis untuk dibawa pulang (<em>takeaway only</em>).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 4 Step Flow: Datang -> Pesan -> Tunggu -> Bawa Pulang -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
                             <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     1
                                 </div>
-                                <h4 class="font-label-md font-bold text-on-surface text-sm">Pilih Menu</h4>
+                                <h4 class="font-label-md font-bold text-on-surface text-sm">Datang ke Tempat</h4>
                                 <p class="font-body-sm text-secondary text-xs leading-relaxed">
-                                    Buka daftar menu kami dan tentukan varian kudapan atau sajian yang ingin dipesan.
+                                    Kunjungi lokasi dapur kami di Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang. Parkir nyaman tersedia.
                                 </p>
                             </div>
                             <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     2
                                 </div>
-                                <h4 class="font-label-md font-bold text-on-surface text-sm">Chat WhatsApp</h4>
+                                <h4 class="font-label-md font-bold text-on-surface text-sm">Pesan di Kasir</h4>
                                 <p class="font-body-sm text-secondary text-xs leading-relaxed">
-                                    Kirim daftar pesanan & jam estimasi tiba ke admin dapur kami via WhatsApp.
+                                    Pesan langsung menu kudapan atau makanan di tempat dan bayar via Tunai / QRIS.
                                 </p>
                             </div>
                             <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     3
                                 </div>
-                                <h4 class="font-label-md font-bold text-on-surface text-sm">Ambil Hangat</h4>
+                                <h4 class="font-label-md font-bold text-on-surface text-sm">Tunggu Disiapkan</h4>
                                 <p class="font-body-sm text-secondary text-xs leading-relaxed">
-                                    Tiba di dapur Yan's Food, bayar secara tunai atau QRIS, dan nikmati sajian hangat.
+                                    Tunggu 10–15 menit selagi pesanan digoreng &amp; dimasak hangat dadakan.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
+                                <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
+                                    4
+                                </div>
+                                <h4 class="font-label-md font-bold text-on-surface text-sm">Terima &amp; Pulang</h4>
+                                <p class="font-body-sm text-secondary text-xs leading-relaxed">
+                                    Terima paket rapi bersegel higienis dan bawa pulang untuk dinikmati di rumah.
                                 </p>
                             </div>
                         </div>
 
                         <div class="pt-4 flex flex-wrap items-center gap-4">
-                            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Yan's%20Food,%20saya%20mau%20pesan%20takeaway" 
+                            <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" 
                                target="_blank" 
                                rel="noopener noreferrer" 
-                               class="btn-whatsapp text-sm inline-flex">
-                                <span class="material-symbols-outlined text-[18px]">chat</span>
-                                <span>Pesan via WhatsApp Sekarang</span>
+                               class="btn-primary text-sm inline-flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">directions</span>
+                                <span>Petunjuk Arah Google Maps</span>
                             </a>
                             <a href="{{ url('/menu') }}" class="btn-outline text-sm">
                                 <span>Lihat Daftar Menu Lengkap</span>
@@ -280,25 +303,34 @@
                                 <span class="material-symbols-outlined text-[26px]">location_on</span>
                             </div>
                             <div>
-                                <h3 class="font-headline-sm text-on-surface font-serif text-lg font-bold">Lokasi Pick-up Dapur</h3>
-                                <p class="font-body-sm text-secondary text-xs">Parkir mobil & motor nyaman tersedia</p>
+                                <h3 class="font-headline-sm text-on-surface font-serif text-lg font-bold">Lokasi Dapur Yan's Food</h3>
+                                <p class="font-body-sm text-secondary text-xs">Titik datang langsung &amp; ambil pesanan</p>
                             </div>
                         </div>
 
                         <div class="p-4 rounded-2xl bg-cream-bg border border-surface-variant/50 space-y-2">
                             <p class="font-label-md font-bold text-on-surface text-sm">Yan's Food Dapur Rumahan</p>
                             <p class="font-body-sm text-secondary text-xs leading-relaxed">
-                                Jl. Melati No. 14, Jakarta Selatan (200m sebelah timur Masjid At-Taqwa).
+                                Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang.
                             </p>
-                            <p class="font-body-sm text-primary text-xs font-semibold pt-1">
-                                Jam Operasional Ambil: 08.00 – 20.00 WIB
-                            </p>
+                            <div class="pt-1 flex items-center justify-between text-xs font-semibold">
+                                <span class="text-secondary">Jam Layanan:</span>
+                                <span class="text-primary font-bold">08.00 – 20.00 WIB (Setiap Hari)</span>
+                            </div>
+                            <div class="pt-1 flex items-center gap-2 text-[11px] text-amber-800 bg-amber-100/60 px-2.5 py-1 rounded-lg">
+                                <span class="material-symbols-outlined text-[14px]">info</span>
+                                <span>Layanan langsung khusus bawa pulang (no dine-in).</span>
+                            </div>
                         </div>
 
                         <div class="pt-2">
-                            <a href="{{ url('/contact') }}" class="inline-flex items-center gap-1.5 text-xs font-label-md text-primary font-bold hover:underline">
-                                <span>Buka Peta & Petunjuk Arah Lengkap</span>
-                                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-label-md hover:bg-primary-dark transition-all text-xs sm:text-sm font-bold shadow-xs">
+                                <span class="material-symbols-outlined text-[18px]">near_me</span>
+                                <span>Buka di Google Maps</span>
+                                <span class="material-symbols-outlined text-[14px]">open_in_new</span>
                             </a>
                         </div>
                     </div>
@@ -311,22 +343,37 @@
                         <h3 class="font-headline-md text-2xl text-on-surface font-serif font-bold">Pertanyaan Seputar Pemesanan</h3>
                     </div>
 
-                    <!-- Accordion 1: Waktu Pembuatan -->
+                    <!-- Accordion 1: Dine In / Makan di Tempat -->
                     <div class="accordion-item is-open">
                         <button type="button" class="accordion-header" aria-expanded="true">
-                            <span class="font-serif text-base sm:text-lg">Berapa lama waktu penyiapan pesanan?</span>
+                            <span class="font-serif text-base sm:text-lg">Apakah bisa makan di tempat (dine-in)?</span>
                             <span class="material-symbols-outlined accordion-icon">expand_more</span>
                         </button>
                         <div class="accordion-collapse">
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    Semua kudapan kami digoreng dadakan saat pesanan masuk agar tetap renyah optimal. Rata-rata waktu penyiapan berkisar antara <strong>10–20 menit</strong> tergantung jumlah item pesanan Anda.
+                                    <strong>Tidak bisa.</strong> Yan's Food tidak menyediakan meja maupun kursi makan di tempat. Layanan datang langsung kami berkonsep seperti <em>drive-thru</em>: pelanggan datang, memesan langsung di kasir dapur, menunggu pesanan disiapkan hangat, menerima pesanan yang telah dikemas rapi, lalu membawanya pulang untuk dinikmati bersama keluarga atau rekan kerja.
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Accordion 2: Metode Pembayaran -->
+                    <!-- Accordion 2: Waktu Pembuatan -->
+                    <div class="accordion-item">
+                        <button type="button" class="accordion-header" aria-expanded="false">
+                            <span class="font-serif text-base sm:text-lg">Berapa lama waktu penyiapan pesanan saat datang langsung?</span>
+                            <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                        </button>
+                        <div class="accordion-collapse">
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    Semua kudapan dan sajian kami digoreng/dimasak dadakan per pesanan agar tetap renyah optimal. Rata-rata waktu penyiapan berkisar antara <strong>10–15 menit</strong> tergantung jumlah item pesanan Anda.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 3: Metode Pembayaran -->
                     <div class="accordion-item">
                         <button type="button" class="accordion-header" aria-expanded="false">
                             <span class="font-serif text-base sm:text-lg">Apa saja metode pembayaran yang diterima?</span>
@@ -335,13 +382,13 @@
                         <div class="accordion-collapse">
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    Untuk pemesanan via aplikasi (ShopeeFood, GoFood, GrabFood), Anda dapat menggunakan e-wallet (ShopeePay, GoPay, OVO) atau kartu debit/kredit. Untuk pembelian langsung di dapur kami melayani Tunai (Cash) dan <strong>QRIS Semua Bank / E-Wallet</strong>.
+                                    Untuk pemesanan via aplikasi (ShopeeFood, GoFood, GrabFood), Anda dapat menggunakan e-wallet (ShopeePay, GoPay, OVO) atau kartu debit/kredit. Untuk pembelian datang langsung di tempat, kami melayani Tunai (Cash) dan <strong>QRIS Semua Bank / E-Wallet</strong>.
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Accordion 3: Ketersediaan Menu -->
+                    <!-- Accordion 4: Ketersediaan Menu -->
                     <div class="accordion-item">
                         <button type="button" class="accordion-header" aria-expanded="false">
                             <span class="font-serif text-base sm:text-lg">Bagaimana jika menu favorit saya sedang habis?</span>
@@ -350,7 +397,7 @@
                         <div class="accordion-collapse">
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    Karena kami membuat kudapan segar harian tanpa bahan pengawet, stok dibuat terbatas per kloter. Anda dapat mengecek status ketersediaan langsung di katalog online atau bertanya ke admin kami melalui WhatsApp.
+                                    Karena kami membuat sajian segar harian tanpa bahan pengawet, stok dibuat terbatas per kloter. Anda dapat mengecek status ketersediaan langsung di katalog menu online website ini atau bertanya ke admin kami.
                                 </div>
                             </div>
                         </div>

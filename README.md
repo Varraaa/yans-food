@@ -28,10 +28,10 @@ Dalam operasional harian usaha makanan cepat saji rumahan dan gerai fisik, tanta
 1. **Pencatatan Transaksi Kasir POS & Kehilangan Jejak Stok:** Selisih uang kas fisik dengan produk terjual, serta perlunya sinkronisasi stok otomatis setiap kali transaksi diselesaikan.
 2. **Kebutuhan Snapshot Harga Historis:** Perlunya memastikan harga dan data transaksi lama tetap utuh ketika terjadi kenaikan atau pembaruan harga katalog di masa depan.
 3. **Pembukuan Operasional yang Terhubung:** Pengeluaran belanja dapur (gas, minyak, beras, kemasan takeaway) harus terhubung langsung dengan omset penjualan kasir, sehingga pemilik usaha mengetahui laba bersih riil secara akurat.
-4. **Kehadiran Digital & Kanal Pemesanan Online:** Pelanggan membutuhkan profil digital yang interaktif untuk melihat daftar menu, info dapur, serta akses cepat ke kanal pemesanan online delivery (ShopeeFood, GoFood, GrabFood) dan pemesanan takeaway via WhatsApp.
+4. **Kehadiran Digital & 2 Kanal Pemesanan Resmi:** Pelanggan membutuhkan profil digital yang interaktif untuk melihat daftar menu, info dapur, serta akses cepat ke 2 kanal pemesanan resmi: online delivery (ShopeeFood, GoFood, GrabFood) dan panduan datang langsung ke tempat (pesan di tempat & bawa pulang).
 
 **Solusi Terpadu Yan's Food:**  
-Membangun satu ekosistem web terpadu yang memadukan **Company Profile Publik** (sebagai etalase menu, citra brand, kanal pesan online delivery & takeaway) dengan **Admin Back-Office & POS Panel** (sebagai pusat kendali kasir POS, stok produk, resep/BOM dapur, pengeluaran operasional, dan laporan laba rugi).
+Membangun satu ekosistem web terpadu yang memadukan **Company Profile Publik** (sebagai etalase menu, citra brand, kanal pesan online delivery & panduan datang langsung ke tempat) dengan **Admin Back-Office & POS Panel** (sebagai pusat kendali kasir POS, stok produk, resep/BOM dapur, pengeluaran operasional, dan laporan laba rugi).
 
 ---
 
@@ -53,16 +53,19 @@ Sistem dirancang mengadopsi prinsip **Single Source of Truth** — seluruh data 
 │ • Katalog Kudapan & Makanan   │               │ • Manajemen Produk & Stok Fisik   │
 │ • Link Pesan Online Delivery  │──────────────▶│ • Manajemen Resep & Bahan Baku    │
 │   (ShopeeFood/GoFood/GrabFood)│               │ • Pencatatan Biaya Operasional    │
-│ • Pesan Takeaway via WhatsApp │               │ • Laporan Finansial & Cetak Struk │
+│ • Datang Langsung ke Tempat   │               │ • Laporan Finansial & Cetak Struk │
+│   (Pesan & Bawa Pulang)       │               │                                   │
+│ • Form Negosiasi Katering/WA  │               │                                   │
 └───────────────────────────────┘               └───────────────────────────────────┘
 ```
 
 ---
 
-### A. Alur Pemesanan Publik (Online Delivery & Takeaway Dapur)
+### A. Alur Pemesanan Publik (2 Kanal Pemesanan Utama)
 1. **Eksplorasi Menu & Informasi:** Konsumen menjelajahi katalog menu kudapan dan makanan hangat lengkap dengan foto, deskripsi rasa, porsi, dan harga resmi.
-2. **Online Delivery Platform:** Pengunjung dapat langsung menekan tombol platform mitra (ShopeeFood, GoFood, GrabFood) untuk pemesanan instan dengan kurir platform.
-3. **Pemesanan Takeaway Dapur via WhatsApp:** Untuk pemesanan mandiri (ambil di dapur), pelanggan diarahkan langsung ke WhatsApp resmi Yan's Food dengan format pesan otomatis untuk konfirmasi waktu pengambilan.
+2. **Kanal 1: Online Delivery Platform (Mitra Resmi):** Pengunjung dapat langsung menekan tombol platform mitra (**ShopeeFood, GoFood, GrabFood**) untuk pemesanan instan harian yang diantar kurir ke depan rumah.
+3. **Kanal 2: Datang Langsung ke Tempat (Pesan & Bawa Pulang / Konsep Mirip Drive-thru):** Pelanggan datang langsung ke lokasi dapur Yan's Food, memesan langsung di kasir/dapur, menunggu pesanan dimasak/digoreng hangat dadakan, menerima pesanan terkemas rapi, lalu langsung membawanya pulang (**TIDAK BISA MAKAN DI TEMPAT / No Dine-in**).
+4. **Komunikasi & Negosiasi Pesanan Katering Acara (Khusus Non-Sistem):** Jika ada pelanggan yang berminat memesan porsi besar/katering untuk acara, pelanggan dapat mengisi formulir di halaman Kontak yang langsung terhubung ke WhatsApp Admin. Pesanan katering ini **tidak masuk ke dalam sistem software**, melainkan dinegosiasikan langsung di WhatsApp. Admin Yan's Food yang menentukan apakah pesanan katering diterima atau ditolak sesuai kapasitas dapur.
 
 ---
 

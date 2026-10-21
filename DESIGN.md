@@ -127,9 +127,10 @@ border-focus: 2px solid #C1440E;
    - Filter chips pill-shaped: `Semua`, `Makanan Ringan`, `Makanan Berat`, `Mie Instan`, `Minuman Segar`.
    - Real-time search bar dengan ikon pencarian bersih.
 
-5. **Halaman Pesan (Online Delivery & Takeaway Dapur):**
-   - Section Delivery Online: Card interaktif mitra ShopeeFood, GoFood, GrabFood dengan status aktif.
-   - Section Takeaway Mandiri via WhatsApp: Panduan pemesanan langsung untuk diambil di dapur dengan tombol WhatsApp terformat dan nomor telepon resmi.
+5. **Halaman Pesan (2 Kanal Pemesanan Resmi):**
+   - Section Delivery Online: Card interaktif mitra ShopeeFood, GoFood, GrabFood.
+   - Section Datang Langsung ke Tempat (Pesan & Bawa Pulang): Alur 4 langkah pemesanan langsung di kasir dapur (drive-thru style takeaway), info jam operasional, tautan resmi Google Maps (`https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`), serta penegasan tegas tidak melayani makan di tempat (no dine-in).
+   - Jalur Negosiasi Katering Acara (via Contact Page): Komunikasi pesanan porsi besar/acara dilakukan di WhatsApp Admin (non-database sistem).
 
 6. **Footer Persisten:**
    - 4 Kolom: Brand info, Navigasi cepat, Kontak dapur & Jam operasional, Media sosial.

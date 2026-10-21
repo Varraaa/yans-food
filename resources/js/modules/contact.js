@@ -34,30 +34,40 @@ export function initContactPage() {
     const copyAddrBtn = document.getElementById('btn-copy-address');
     if (copyAddrBtn) {
         copyAddrBtn.addEventListener('click', () => {
-            const addr = copyAddrBtn.getAttribute('data-address') || 'Jl. Melati No. 14, Jakarta Selatan';
+            const addr = copyAddrBtn.getAttribute('data-address') || 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang';
             if (window.copyToClipboard) {
                 window.copyToClipboard(addr, 'Alamat dapur berhasil disalin!');
             }
         });
     }
 
-    // 3. Contact form submit handler
+    // 3. Contact form submit handler (Negotiation & Catering Inquiry via WhatsApp)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = (document.getElementById('fullName')?.value || '').trim();
             const phone = (document.getElementById('waNumber')?.value || '').trim();
-            const type = document.getElementById('inquiryType')?.value || 'Tanya Umum';
+            const type = document.getElementById('inquiryType')?.value || 'Konsultasi & Negosiasi Pesanan Katering Acara';
+            const portion = (document.getElementById('portionEstimate')?.value || '').trim();
+            const eventDate = (document.getElementById('eventDate')?.value || '').trim();
             const message = (document.getElementById('messageContent')?.value || '').trim();
             const adminWA = "6281234567890";
 
-            const msgText = `Halo Admin Yan's Food, saya ingin bertanya:\n\n` +
+            let msgText = `Halo Admin Yan's Food, saya ingin berkomunikasi & negosiasi pesanan:\n\n` +
                 `• Nama: ${name}\n` +
-                `• Nomor Kontak: ${phone}\n` +
-                `• Keperluan: ${type}\n` +
-                `• Pesan: ${message}\n\n` +
-                `Mohon informasinya lebih lanjut. Terima kasih!`;
+                `• WhatsApp: ${phone}\n` +
+                `• Topik / Keperluan: ${type}\n`;
+
+            if (portion) {
+                msgText += `• Estimasi Porsi: ${portion}\n`;
+            }
+            if (eventDate) {
+                msgText += `• Rencana Tanggal Acara: ${eventDate}\n`;
+            }
+
+            msgText += `• Rincian / Catatan Negosiasi: ${message}\n\n` +
+                `Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan Admin Yan's Food via WhatsApp. Mohon informasinya lebih lanjut. Terima kasih!`;
 
             const encodedUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(msgText)}`;
             window.open(encodedUrl, '_blank');

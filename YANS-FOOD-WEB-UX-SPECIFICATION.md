@@ -414,7 +414,7 @@ Halaman Pesan adalah **titik konversi terpenting** yang menghubungkan pengunjung
 | Kanal | Tujuan | Sasaran Pengguna | Perilaku Utama |
 |---|---|---|---|
 | **A. Online Delivery Platform** | Pesan antar langsung ke rumah via kurir aplikasi | Konsumen yang ingin diantar segera (ShopeeFood, GoFood, GrabFood) | Card interaktif langsung membuka aplikasi mitra atau website toko resmi |
-| **B. Takeaway Dapur via WhatsApp** | Pesan langsung untuk diambil sendiri di dapur Yan's Food | Konsumen yang ingin ambil sendiri tanpa biaya antar | Tombol WhatsApp terformat otomatis untuk konfirmasi menu & jam ambil |
+| **B. Datang Langsung ke Tempat** | Datang langsung, pesan di tempat, tunggu pesanan dibuat hangat, terima, lalu bawa pulang *(drive-thru style, no dine-in)* | Konsumen yang datang langsung ke lokasi dapur | Menampilkan 4 langkah alur pesan di tempat, penegasan takeaway only, dan tombol Google Maps |
 
 ### 6.2 UX Online Delivery Platform (`#online`)
 - **Tiga Kartu Mitra (ShopeeFood, GoFood, GrabFood):**
@@ -422,29 +422,22 @@ Halaman Pesan adalah **titik konversi terpenting** yang menghubungkan pengunjung
   - Pada perangkat mobile, link menggunakan tautan universal yang otomatis membuka aplikasi native Shopee/Gojek/Grab bila terpasang.
   - Setiap kartu memiliki micro-interaction hover halus (scale 1.02 & shadow terangkat).
 
-### 6.3 UX Pemesanan Takeaway Dapur via WhatsApp (`#takeaway`)
-- **Panduan 3 Langkah Jelas:**
-  1. *Pilih Menu Favorit*: Tentukan menu dari halaman katalog atau menu harian.
-  2. *Konfirmasi via WhatsApp*: Tekan tombol chat WA untuk mengirim rincian menu dan jam estimasi kedatangan.
-  3. *Ambil di Dapur Yan's Food*: Pesanan disiapkan hangat dan higienis siap diambil di lokasi dapur.
-- **Informasi Transparan:**
-  - Menampilkan alamat lengkap dapur dengan tombol "Buka Google Maps".
-  - Jam operasional dapur dan estimasi waktu penyiapan makanan.
+### 6.3 UX Datang Langsung ke Tempat (`#langsung` / `#takeaway`)
+- **Konsep Drive-Thru / Takeaway Only:**
+  - Penegasan bahwa Yan's Food **tidak menyediakan fasilitas meja/kursi untuk makan di tempat (No Dine-In)**. Seluruh pesanan dibungkus rapi khusus untuk dibawa pulang.
+- **Panduan 4 Langkah Jelas:**
+  1. *Datang ke Tempat*: Kunjungi dapur fisik Yan's Food di Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang (Parkir motor & mobil nyaman tersedia).
+  2. *Pesan di Kasir*: Pesan langsung kudapan renyah atau masakan hangat pilihan di kasir dan bayar via Tunai / QRIS.
+  3. *Tunggu Disiapkan Hangat*: Pesanan digoreng & dimasak dadakan (10–15 menit) agar cita rasa dan kerenyahan optimal.
+  4. *Terima & Bawa Pulang*: Terima pesanan bersegel higienis dan bawa pulang untuk disantap di rumah/kantor.
+- **Informasi Transparan & Maps:**
+  - Menampilkan alamat lengkap dapur dengan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
+  - Jam operasional datang langsung: 08.00 – 20.00 WIB (Setiap Hari).
 
-### 6.4 Template Pesan WhatsApp Takeaway Dapur
-
-Format pesan yang di-generate otomatis saat pelanggan menekan tombol WhatsApp Takeaway:
-
-```text
-Halo Admin Yan's Food 👋
-Saya ingin memesan menu untuk takeaway (ambil sendiri di dapur):
-
-Nama: [Nama Pemesan]
-Menu yang ingin dipesan: [Tuliskan menu & jumlah]
-Estimasi waktu pengambilan: [Hari & Jam]
-
-Mohon konfirmasi ketersediaan dan total pembayarannya ya. Terima kasih 🙏
-```
+### 6.4 Komunikasi & Negosiasi Pesanan Katering Acara (Halaman Contact)
+- **Non-Sistem / Jalur WhatsApp:** Pemesanan porsi besar / katering untuk acara tidak diproses via database/sistem otomatis.
+- **Formulir Negosiasi:** Form pada halaman Kontak mengarahkan calon pemesan ke WhatsApp Admin Yan's Food dengan data acara lengkap (nama, WA, topik, estimasi porsi, tanggal acara, rincian menu).
+- **Hak Penentuan:** Keputusan diterima atau ditolaknya pesanan katering ditentukan oleh Admin Yan's Food di WhatsApp berdasarkan ketersediaan bahan dan kapasitas operasional dapur.
 
 ---
 

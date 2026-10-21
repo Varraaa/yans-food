@@ -4,9 +4,9 @@
  */
 export function initPesanIntent() {
     const onlineSection = document.getElementById('online');
-    const takeawaySection = document.getElementById('takeaway');
+    const takeawaySection = document.getElementById('langsung') || document.getElementById('takeaway');
     const intentOnlineCard = document.getElementById('intent-card-online');
-    const intentTakeawayCard = document.getElementById('intent-card-takeaway');
+    const intentTakeawayCard = document.getElementById('intent-card-takeaway') || document.getElementById('intent-card-langsung');
 
     if (!onlineSection || !takeawaySection || !intentOnlineCard || !intentTakeawayCard) return;
 
@@ -28,7 +28,7 @@ export function initPesanIntent() {
                 if (entry.target.id === 'online') {
                     intentOnlineCard.classList.add('is-active');
                     intentTakeawayCard.classList.remove('is-active');
-                } else if (entry.target.id === 'takeaway') {
+                } else if (entry.target.id === 'langsung' || entry.target.id === 'takeaway') {
                     intentTakeawayCard.classList.add('is-active');
                     intentOnlineCard.classList.remove('is-active');
                 }

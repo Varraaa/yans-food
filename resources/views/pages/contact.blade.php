@@ -31,16 +31,16 @@
                                 </div>
                                 <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif">Alamat &amp; Pick-up</h3>
                                 <p class="font-body-sm text-on-surface font-semibold leading-relaxed">
-                                    Jl. Melati No. 14, Jakarta Selatan
+                                    Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang
                                 </p>
                                 <p class="font-body-sm text-secondary mt-1.5 text-xs leading-normal">
-                                    Patokan: 200m timur Masjid At-Taqwa. Parkir motor &amp; mobil teduh tersedia.
+                                    Kp. Ciloa, Soreang, Bandung. Parkir motor &amp; mobil teduh tersedia.
                                 </p>
                             </div>
                             <div class="pt-4 mt-2">
                                 <button type="button" 
                                         id="btn-copy-address"
-                                        data-address="Jl. Melati No. 14, Jakarta Selatan"
+                                        data-address="Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang"
                                         class="inline-flex items-center gap-1.5 text-xs font-label-md text-primary hover:text-primary-dark font-bold cursor-pointer">
                                     <span class="material-symbols-outlined text-[16px]">content_copy</span>
                                     <span>Salin Alamat</span>
@@ -109,22 +109,26 @@
                         </div>
                     </div>
 
-                    <!-- Form Tanya Cepat via WhatsApp -->
+                    <!-- Form Komunikasi & Negosiasi Pesanan Khusus / Katering via WhatsApp -->
                     <div class="bg-surface-warm p-6 sm:p-8 lg:p-10 rounded-3xl shadow-xs border border-surface-variant/40">
-                        <div class="flex items-start justify-between gap-4 mb-6">
+                        <div class="flex items-start justify-between gap-4 mb-4">
                             <div>
-                                <span class="font-label-sm text-tertiary uppercase tracking-wider font-semibold text-xs">Tanya Cepat</span>
-                                <h2 class="font-headline-sm text-on-surface mt-1 font-serif text-xl sm:text-2xl">Kirim Pesan ke Dapur</h2>
+                                <span class="font-label-sm text-primary uppercase tracking-wider font-semibold text-xs">Komunikasi &amp; Negosiasi</span>
+                                <h2 class="font-headline-sm text-on-surface mt-1 font-serif text-xl sm:text-2xl">Konsultasi Pesanan Khusus &amp; Katering</h2>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-sand-bg-alt flex items-center justify-center text-primary shrink-0">
-                                <span class="material-symbols-outlined">mail</span>
+                                <span class="material-symbols-outlined">handshake</span>
                             </div>
                         </div>
+
+                        <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed mb-6">
+                            Tertarik memesan kudapan atau makanan porsi besar untuk acara arisan, syukuran, atau pertemuan keluarga? Sampaikan rencana Anda di bawah untuk terhubung langsung dengan Admin Yan's Food di WhatsApp.
+                        </p>
 
                         <form class="space-y-5" id="contactForm">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <div class="space-y-2">
-                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="fullName">Nama Lengkap *</label>
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="fullName">Nama Lengkap / Penanggung Jawab *</label>
                                     <input type="text" 
                                            id="fullName" 
                                            placeholder="Contoh: Ibu Rina Hartono" 
@@ -132,42 +136,60 @@
                                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="waNumber">Nomor WhatsApp *</label>
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="waNumber">Nomor WhatsApp Aktif *</label>
                                     <input type="tel" 
                                            id="waNumber" 
-                                           placeholder="0812xxxxxxx" 
+                                           placeholder="Contoh: 0812xxxxxxx" 
                                            required 
                                            class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
                                 </div>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="inquiryType">Jenis Keperluan *</label>
+                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="inquiryType">Topik / Jenis Keperluan *</label>
                                 <select id="inquiryType" 
                                         class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer text-sm">
-                                    <option value="Pertanyaan Seputar Menu">Pertanyaan Seputar Menu Harian &amp; Kudapan</option>
-                                    <option value="Pemesanan Makanan / Takeaway">Pemesanan Makanan &amp; Takeaway</option>
-                                    <option value="Kerjasama atau Masukan">Kerjasama, Masukan, atau Saran Rasa</option>
+                                    <option value="Konsultasi & Negosiasi Pesanan Katering Acara" selected>Konsultasi &amp; Negosiasi Pesanan Katering / Acara (Porsi Besar)</option>
+                                    <option value="Negosiasi Paket Kudapan / Makanan Khusus">Negosiasi Paket Kudapan / Makanan Khusus</option>
+                                    <option value="Pertanyaan Seputar Menu & Ketersediaan">Pertanyaan Seputar Menu Harian &amp; Dapur</option>
+                                    <option value="Kerjasama atau Masukan Rasa">Kerjasama, Masukan, atau Saran Rasa</option>
                                 </select>
                             </div>
 
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div class="space-y-2">
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="portionEstimate">Estimasi Jumlah Porsi (Opsional)</label>
+                                    <input type="text" 
+                                           id="portionEstimate" 
+                                           placeholder="Contoh: 30 - 50 box / porsi" 
+                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="eventDate">Estimasi Tanggal Kebutuhan (Opsional)</label>
+                                    <input type="text" 
+                                           id="eventDate" 
+                                           placeholder="Contoh: Sabtu, 28 Oktober 2026" 
+                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm">
+                                </div>
+                            </div>
+
                             <div class="space-y-2">
-                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="messageContent">Pesan Anda *</label>
+                                <label class="block font-label-md text-on-surface text-xs sm:text-sm font-semibold" for="messageContent">Rincian Menu / Pesan Negosiasi *</label>
                                 <textarea id="messageContent" 
                                           rows="4" 
-                                          placeholder="Tuliskan pertanyaan spesifik atau pesanan yang ingin ditanyakan..." 
+                                          placeholder="Tuliskan varian menu yang diminati, kisaran budget, request khusus, atau pertanyaan yang ingin dinegosiasikan..." 
                                           required 
                                           class="w-full px-4 py-3 rounded-xl bg-cream-bg text-on-surface font-body-md border border-surface-variant/60 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y text-sm"></textarea>
                             </div>
 
                             <button type="submit" 
                                     class="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl bg-primary text-white font-label-md hover:bg-primary-dark transition-all duration-200 shadow-md group active:scale-95 text-sm font-bold">
-                                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">send</span>
-                                <span>Kirim Pesan via WhatsApp</span>
+                                <span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">chat</span>
+                                <span>Lanjutkan Negosiasi via WhatsApp Admin</span>
                             </button>
 
                             <p class="font-body-sm text-secondary text-center text-xs">
-                                Pesan ini akan otomatis membuka aplikasi WhatsApp admin Yan's Food dengan teks terformat rapi.
+                                Form ini akan langsung membuka WhatsApp resmi Admin Yan's Food dengan format pesan negosiasi yang rapi.
                             </p>
                         </form>
                     </div>
@@ -185,9 +207,9 @@
                             <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-md border border-surface-variant/40 flex items-center justify-between">
                                 <div class="flex items-center gap-2.5">
                                     <span class="material-symbols-outlined text-primary text-[22px]">pin_drop</span>
-                                    <span class="font-label-sm font-semibold text-on-surface text-xs sm:text-sm">Jakarta Selatan</span>
+                                    <span class="font-label-sm font-semibold text-on-surface text-xs sm:text-sm">Soreang, Bandung</span>
                                 </div>
-                                <a href="https://maps.google.com/?q=Jakarta+Selatan" target="_blank" rel="noopener" 
+                                <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" target="_blank" rel="noopener noreferrer" 
                                    class="text-xs font-label-md text-primary hover:underline flex items-center gap-1 font-bold">
                                     <span>Buka di Google Maps</span>
                                     <span class="material-symbols-outlined text-[14px]">open_in_new</span>
@@ -195,21 +217,21 @@
                             </div>
                         </div>
 
-                        <!-- Pick-up Instructions -->
+                        <!-- Pick-up & Walk-in Instructions -->
                         <div class="p-6 sm:p-8 space-y-4">
-                            <h3 class="font-headline-sm text-on-surface font-serif text-lg">Panduan Pengambilan Pesanan</h3>
+                            <h3 class="font-headline-sm text-on-surface font-serif text-lg">Panduan Datang Langsung ke Lokasi</h3>
                             <ul class="space-y-3 font-body-sm text-secondary text-xs sm:text-sm">
                                 <li class="flex items-start gap-2.5">
                                     <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Konfirmasikan pesanan via WhatsApp minimal 30 menit sebelum jadwal ambil di dapur.</span>
+                                    <span>Datang langsung ke dapur kami di Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang (Parkir motor &amp; mobil tersedia).</span>
                                 </li>
                                 <li class="flex items-start gap-2.5">
                                     <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Tunjukkan nama pemesan atau bukti invoice chat saat tiba di depan pintu dapur.</span>
+                                    <span>Pesan menu pilihan di kasir dapur, tunggu 10–15 menit pesanan disiapkan segar, dan bayar via Tunai atau QRIS.</span>
                                 </li>
                                 <li class="flex items-start gap-2.5">
-                                    <span class="material-symbols-outlined text-success text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                    <span>Pesanan dikemas rapi dalam kantong higienis dan bersuhu hangat siap santap.</span>
+                                    <span class="material-symbols-outlined text-amber-600 text-[18px] shrink-0 mt-0.5">no_meals</span>
+                                    <span class="text-amber-900 font-medium">Hanya melayani bawa pulang (takeaway only). Dapur kami tidak menyediakan meja/kursi makan di tempat.</span>
                                 </li>
                             </ul>
                         </div>

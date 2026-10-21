@@ -34,18 +34,21 @@
                     <li><a href="{{ url('/') }}" class="text-surface-variant hover:text-on-primary transition-colors">Home (Beranda)</a></li>
                     <li><a href="{{ url('/about') }}" class="text-surface-variant hover:text-on-primary transition-colors">About (Tentang Kami)</a></li>
                     <li><a href="{{ url('/menu') }}" class="text-surface-variant hover:text-on-primary transition-colors">Menu (Katalog Lengkap)</a></li>
-                    <li><a href="{{ url('/pesan') }}" class="text-surface-variant hover:text-on-primary transition-colors">Pesan (Online & Takeaway)</a></li>
-                    <li><a href="{{ url('/contact') }}" class="text-surface-variant hover:text-on-primary transition-colors">Contact (Kontak & Lokasi)</a></li>
+                    <li><a href="{{ url('/pesan') }}" class="text-surface-variant hover:text-on-primary transition-colors">Pesan (Delivery &amp; Datang Langsung)</a></li>
+                    <li><a href="{{ url('/contact') }}" class="text-surface-variant hover:text-on-primary transition-colors">Contact (Kontak &amp; Lokasi)</a></li>
                 </ul>
             </div>
 
             <!-- Col 3: Kontak & Operasional -->
             <div class="space-y-4">
-                <h4 class="font-label-md uppercase tracking-wider text-tertiary-fixed font-semibold text-xs">Kontak & Operasional</h4>
+                <h4 class="font-label-md uppercase tracking-wider text-tertiary-fixed font-semibold text-xs">Kontak &amp; Operasional</h4>
                 <ul class="space-y-3 font-body-sm text-surface-variant">
                     <li class="flex items-start gap-2.5">
                         <span class="material-symbols-outlined text-[20px] text-tertiary-fixed shrink-0">location_on</span>
-                        <span>Jl. Melati No. 14, Jakarta Selatan</span>
+                        <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" target="_blank" rel="noopener noreferrer" class="hover:text-tertiary-fixed transition-colors inline-flex items-center gap-1 group">
+                            <span>Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang</span>
+                            <span class="material-symbols-outlined text-[14px] opacity-70 group-hover:opacity-100">open_in_new</span>
+                        </a>
                     </li>
                     <li class="flex items-start gap-2.5">
                         <span class="material-symbols-outlined text-[20px] text-tertiary-fixed shrink-0">schedule</span>

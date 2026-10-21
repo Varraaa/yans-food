@@ -2,7 +2,7 @@
 
 ## 1. Konsep
 
-Yan's Food adalah platform web berbasis Laravel yang menggabungkan **company profile publik** dan **sistem manajemen bisnis kuliner terpadu (POS Kasir & Manajemen Produk)** dalam satu sistem. Public website digunakan pelanggan untuk melihat profil, katalog menu kudapan dan makanan hangat, informasi dapur, serta kanal pemesanan online delivery dan takeaway via WhatsApp. Admin website digunakan pemilik usaha dan kasir untuk mengelola operasional harian gerai.
+Yan's Food adalah platform web berbasis Laravel yang menggabungkan **company profile publik** dan **sistem manajemen bisnis kuliner terpadu (POS Kasir & Manajemen Produk)** dalam satu sistem. Public website digunakan pelanggan untuk melihat profil, katalog menu kudapan dan makanan hangat, informasi dapur, serta 2 kanal pemesanan resmi: online delivery (ShopeeFood, GrabFood, GoFood) dan datang langsung ke tempat (pesan di tempat & bawa pulang, tidak bisa makan di tempat). Admin website digunakan pemilik usaha dan kasir untuk mengelola operasional harian gerai.
 
 **Kategori:** Integrated POS, Product Management & Culinary Company Profile.
 
@@ -40,7 +40,7 @@ Home | About | Menu | Pesan | Contact
 ```
 
 ### Home
-Hero, pengenalan dapur Yan's Food, CTA pesan online delivery, menu favorit pilihan pelanggan, filosofi rasa rumahan, kontak cepat, dan footer.
+Hero, pengenalan dapur Yan's Food, teaser 2 kanal pesan resmi (online delivery & datang langsung), menu favorit pilihan pelanggan, filosofi rasa rumahan, kontak cepat, dan footer.
 
 ### About
 Cerita usaha dapur rumahan, filosofi "Cita Rasa Rumahan Disajikan dengan Hati", komitmen bahan baku segar higienis, dan timeline perjalanan usaha.
@@ -56,12 +56,14 @@ Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
 - Menampilkan card interaktif **ShopeeFood**, **GoFood**, dan **GrabFood**, masing-masing clickable menuju toko resmi Yan's Food di aplikasi tersebut untuk pemesanan instan harian dengan kurir platform.
 - Transaksi dan pembayaran berlangsung di platform pihak ketiga tersebut.
 
-#### B. Pesan Takeaway Dapur (Ambil Sendiri via WhatsApp)
-- Layanan pemesanan langsung untuk diambil di dapur (*self pick-up*).
-- Dilengkapi panduan pemesanan, format pesan otomatis ke WhatsApp Admin, serta nomor kontak resmi untuk konfirmasi waktu pengambilan pesanan.
+#### B. Datang Langsung ke Tempat (Pesan di Tempat & Bawa Pulang / Konsep Drive-thru)
+- Pelanggan datang langsung ke lokasi dapur Yan's Food, memesan langsung di kasir dapur, menunggu pesanan disiapkan dan digoreng hangat dadakan, menerima pesanan terkemas rapi, lalu membawanya pulang.
+- Penegasan: **TIDAK BISA MAKAN DI TEMPAT (No Dine-In / Takeaway Only)**.
+- Dilengkapi panduan 4 langkah datang langsung, informasi jam operasional, dan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
 
 ### Contact
-Alamat dapur, WhatsApp, email, jam operasional, Google Maps interaktif, dan formulir kontak/pertanyaan.
+Alamat dapur, WhatsApp, email, jam operasional, peta lokasi dengan tautan langsung Google Maps (`https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`), serta formulir komunikasi & negosiasi pesanan khusus/katering acara.
+*Catatan Katering:* Pesanan katering acara tidak masuk ke sistem database; komunikasi dan negosiasi dilakukan langsung dengan Admin via WhatsApp, dan Admin yang menentukan apakah pesanan katering diterima atau ditolak sesuai kapasitas dapur.
 
 ### Footer
 Tampil konsisten di seluruh halaman publik. Memuat navigasi cepat, kontak dapur, jam operasional, tautan media sosial, serta baris **"Tersedia juga di:"** (ShopeeFood, GoFood, GrabFood).

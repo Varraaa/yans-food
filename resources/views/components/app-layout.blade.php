@@ -33,9 +33,9 @@
         "telephone": "+6281234567890",
         "address": {
             "{{ '@type' }}": "PostalAddress",
-            "streetAddress": "Jl. Melati No. 14",
-            "addressLocality": "Jakarta Selatan",
-            "addressRegion": "DKI Jakarta",
+            "streetAddress": "Kp. Ciloa, RT.04/RW.10, Kec. Soreang",
+            "addressLocality": "Bandung",
+            "addressRegion": "Jawa Barat",
             "addressCountry": "ID"
         },
         "openingHoursSpecification": [

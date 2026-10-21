@@ -268,14 +268,14 @@
         </div>
     </section>
 
-    <!-- 5. TEASER DELIVERY PLATFORMS & TAKEAWAY (§5.1 point 5) -->
+    <!-- 5. TEASER DELIVERY PLATFORMS & DATANG LANGSUNG (§5.1 point 5) -->
     <section class="w-full py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-cream-bg" data-reveal>
         <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-6 sm:p-8 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 border border-surface-variant/40">
             <div class="space-y-4 max-w-xl text-center lg:text-left">
-                <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Pesan Mudah & Cepat</span>
-                <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu</h2>
+                <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">2 Pilihan Pesan Mudah &amp; Cepat</span>
+                <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu &amp; Datang Langsung</h2>
                 <p class="font-body-lg text-secondary text-sm sm:text-base">
-                    Mau santap lezat tanpa repot keluar rumah? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery atau ambil pesanan takeaway langsung di dapur kami.
+                    Mau santap lezat tanpa repot? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery (ShopeeFood, GoFood, GrabFood) atau datang langsung ke tempat kami untuk pesan &amp; bawa pulang (tidak bisa makan di tempat).
                 </p>
             </div>
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">

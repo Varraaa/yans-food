@@ -35,7 +35,7 @@
         ],
         [
             'label' => 'Pesan Online',
-            'subtitle' => 'Delivery via mitra & takeaway',
+            'subtitle' => 'Delivery via mitra & datang langsung',
             'url' => url('/pesan'),
             'path' => 'pesan',
             'icon' => 'receipt_long',
