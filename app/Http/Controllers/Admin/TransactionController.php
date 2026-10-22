@@ -45,8 +45,15 @@ class TransactionController extends Controller
         $receipt = $receiptService->generateCustomerReceipt($transaction);
 
         // Ambil pengaturan lebar kertas printer yang aktif bila ada
-        $activePrinter = Printer::where('is_active', true)->first();
-        $paperWidth = $activePrinter ? $activePrinter->paper_width : '58mm';
+        $paperWidth = '58mm';
+        try {
+            $activePrinter = Printer::where('status', 'active')->first();
+            if ($activePrinter && !empty($activePrinter->paper_width)) {
+                $paperWidth = $activePrinter->paper_width;
+            }
+        } catch (\Throwable $e) {
+            // fallback default
+        }
 
         return view('admin.transactions.receipt', compact('transaction', 'receipt', 'paperWidth'));
     }

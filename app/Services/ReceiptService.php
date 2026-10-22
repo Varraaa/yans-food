@@ -58,7 +58,7 @@ class ReceiptService
                 'total' => (float) $transaction->total,
             ],
             'payment' => [
-                'method' => $transaction->payment_method,
+                'method' => $transaction->payment_method instanceof \App\Enums\PaymentMethod ? $transaction->payment_method->value : (string) ($transaction->payment_method ?? 'CASH'),
                 'paid' => (float) $transaction->amount_paid,
                 'change' => (float) $transaction->change,
             ],
@@ -82,7 +82,7 @@ class ReceiptService
         }
 
         $storeName = strtoupper($settings['store_name'] ?? "YAN'S FOOD");
-        $storeAddress = $settings['store_address'] ?? 'Jl. Babakan Tarogong No. 12, Bandung';
+        $storeAddress = $settings['store_address'] ?? 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang';
 
         $line = str_repeat('-', $width);
         $doubleLine = str_repeat('=', $width);
@@ -109,13 +109,17 @@ class ReceiptService
             $out .= $this->justify($qtyPrice, $subtotalStr, $width) . "\n";
         }
 
+        $methodStr = $transaction->payment_method instanceof \App\Enums\PaymentMethod 
+            ? $transaction->payment_method->value 
+            : (string) ($transaction->payment_method ?? 'CASH');
+
         $out .= $line . "\n";
         $out .= $this->justify("Subtotal:", "Rp " . number_format($transaction->subtotal, 0, ',', '.'), $width) . "\n";
         if ($transaction->discount > 0) {
             $out .= $this->justify("Diskon:", "-Rp " . number_format($transaction->discount, 0, ',', '.'), $width) . "\n";
         }
         $out .= $this->justify("TOTAL:", "Rp " . number_format($transaction->total, 0, ',', '.'), $width) . "\n";
-        $out .= $this->justify("Metode:", $transaction->payment_method, $width) . "\n";
+        $out .= $this->justify("Metode:", $methodStr, $width) . "\n";
         $out .= $this->justify("Bayar:", "Rp " . number_format($transaction->amount_paid, 0, ',', '.'), $width) . "\n";
         $out .= $this->justify("Kembali:", "Rp " . number_format($transaction->change, 0, ',', '.'), $width) . "\n";
 

@@ -41,7 +41,20 @@
                 </div>
                 <div>
                     <span class="text-stone-400">Metode Bayar:</span>
-                    <div class="font-bold text-stone-800 mt-0.5">{{ $transaction->payment_method }}</div>
+                    <div class="mt-0.5">
+                        @php
+                            $methodVal = $transaction->payment_method instanceof \BackedEnum ? $transaction->payment_method->value : (string) $transaction->payment_method;
+                        @endphp
+                        @if(strtoupper($methodVal) === 'QRIS')
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200">
+                                <i class="fa-solid fa-qrcode text-[10px]"></i> QRIS
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                <i class="fa-solid fa-money-bill-wave text-[10px]"></i> CASH (Tunai)
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
 

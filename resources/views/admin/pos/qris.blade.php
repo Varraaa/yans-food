@@ -110,8 +110,7 @@
                 <button 
                     type="submit" 
                     id="btn-confirm-next"
-                    @if(empty($qrisImagePath)) disabled @endif
-                    class="w-full py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-md active:scale-98"
+                    class="w-full py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-md active:scale-98 cursor-pointer"
                 >
                     <span id="btn-next-label">Next &rarr; Struk Pembayaran</span>
                     <span class="material-symbols-outlined text-[20px]">receipt_long</span>
