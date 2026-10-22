@@ -46,6 +46,65 @@ class ReportService
     }
 
     /**
+     * Laporan 3 Catatan Metode Pembayaran POS (Cash, QRIS, Total Gabungan) & Rincian Harian (§12)
+     */
+    public function getPaymentMethodReport(?string $startDate = null, ?string $endDate = null): array
+    {
+        $query = Transaction::query()
+            ->completed()
+            ->betweenDates($startDate, $endDate);
+
+        // Agregasi query keseluruhan (satu query efisien)
+        $totals = (clone $query)
+            ->selectRaw("
+                SUM(CASE WHEN payment_method = 'CASH' THEN 1 ELSE 0 END) AS cash_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'CASH' THEN total ELSE 0 END), 0) AS cash_total,
+                SUM(CASE WHEN payment_method = 'QRIS' THEN 1 ELSE 0 END) AS qris_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'QRIS' THEN total ELSE 0 END), 0) AS qris_total,
+                COUNT(id) AS combined_count,
+                COALESCE(SUM(total), 0) AS combined_total
+            ")
+            ->first();
+
+        $cashCount = (int) ($totals->cash_count ?? 0);
+        $cashTotal = (float) ($totals->cash_total ?? 0);
+        $qrisCount = (int) ($totals->qris_count ?? 0);
+        $qrisTotal = (float) ($totals->qris_total ?? 0);
+        $combinedCount = (int) ($totals->combined_count ?? 0);
+        $combinedTotal = (float) ($totals->combined_total ?? 0);
+
+        $cashPercent = $combinedTotal > 0 ? round(($cashTotal / $combinedTotal) * 100, 1) : 0;
+        $qrisPercent = $combinedTotal > 0 ? round(($qrisTotal / $combinedTotal) * 100, 1) : 0;
+
+        // Rincian per hari (§12.3)
+        $dailyBreakdown = (clone $query)
+            ->selectRaw("
+                transaction_date,
+                SUM(CASE WHEN payment_method = 'CASH' THEN 1 ELSE 0 END) AS cash_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'CASH' THEN total ELSE 0 END), 0) AS cash_total,
+                SUM(CASE WHEN payment_method = 'QRIS' THEN 1 ELSE 0 END) AS qris_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'QRIS' THEN total ELSE 0 END), 0) AS qris_total,
+                COUNT(id) AS combined_count,
+                COALESCE(SUM(total), 0) AS combined_total
+            ")
+            ->groupBy('transaction_date')
+            ->orderBy('transaction_date', 'desc')
+            ->get();
+
+        return [
+            'cash_count' => $cashCount,
+            'cash_total' => $cashTotal,
+            'cash_percent' => $cashPercent,
+            'qris_count' => $qrisCount,
+            'qris_total' => $qrisTotal,
+            'qris_percent' => $qrisPercent,
+            'combined_count' => $combinedCount,
+            'combined_total' => $combinedTotal,
+            'daily_breakdown' => $dailyBreakdown,
+        ];
+    }
+
+    /**
      * Laporan Penjualan POS Reguler
      */
     public function getSalesReport(?string $startDate = null, ?string $endDate = null, ?int $productId = null): array
@@ -98,19 +157,17 @@ class ReportService
     }
 
     /**
-     * Laporan Laba Rugi & Arus Kas (Financial Summary)
+     * Laporan Laba Rugi & Arus Kas (Financial Summary) dengan 3 Catatan Pembayaran (§12)
      */
     public function getFinancialSummaryReport(?string $startDate = null, ?string $endDate = null): array
     {
-        // 1. Omset POS
-        $posQuery = Transaction::where('status', 'completed');
-        if ($startDate && $endDate) {
-            $posQuery->whereBetween('transaction_date', [$startDate, $endDate]);
-        }
-        $posRevenue = (float) $posQuery->sum('total');
-        $posCount = $posQuery->count();
+        // 1. Tiga Catatan Pembayaran POS (Cash, QRIS, Total Gabungan)
+        $paymentData = $this->getPaymentMethodReport($startDate, $endDate);
 
-        // 2. Total Pendapatan Kas Masuk
+        $posRevenue = $paymentData['combined_total'];
+        $posCount = $paymentData['combined_count'];
+
+        // 2. Total Pendapatan Kotor POS (Cash + QRIS)
         $totalGrossIncome = $posRevenue;
 
         // 3. Pengeluaran Dapur / Operasional yang Disetujui
@@ -133,11 +190,12 @@ class ReportService
             ->orderByDesc('total_amount')
             ->get();
 
-        // 4. Laba Bersih Operasional
+        // 4. Laba Bersih Operasional = Total Gabungan POS (Cash + QRIS) - Total Pengeluaran (§12.2)
         $netProfit = $totalGrossIncome - $totalExpenses;
         $profitMargin = $totalGrossIncome > 0 ? ($netProfit / $totalGrossIncome) * 100 : 0;
 
         return [
+            'payment_summary' => $paymentData,
             'pos_revenue' => $posRevenue,
             'pos_count' => $posCount,
             'total_gross_income' => $totalGrossIncome,
@@ -146,6 +204,7 @@ class ReportService
             'net_profit' => $netProfit,
             'profit_margin' => round($profitMargin, 1),
             'expenses_by_category' => $expensesByCategory,
+            'daily_breakdown' => $paymentData['daily_breakdown'],
         ];
     }
 }

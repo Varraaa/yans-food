@@ -26,7 +26,8 @@ class TransactionService
         float $amountPaid,
         ?int $cashierId = null,
         float $discount = 0.00,
-        string $paymentMethod = 'CASH'
+        string $paymentMethod = 'CASH',
+        ?string $customerName = null
     ): Transaction {
         if (empty($items)) {
             throw new Exception("Keranjang transaksi kosong.");
@@ -75,11 +76,17 @@ class TransactionService
 
             $total = max(0.00, $subtotal - $discount);
 
-            if ($amountPaid < $total) {
-                throw new Exception("Jumlah bayar (Rp " . number_format($amountPaid, 0, ',', '.') . ") kurang dari total tagihan (Rp " . number_format($total, 0, ',', '.') . ").");
+            $methodValue = $paymentMethod instanceof \App\Enums\PaymentMethod ? $paymentMethod->value : strtoupper((string) $paymentMethod);
+            if ($methodValue === 'QRIS') {
+                $amountPaid = $total;
+                $change = 0.00;
+            } else {
+                $methodValue = 'CASH';
+                if ($amountPaid < $total) {
+                    throw new Exception("Jumlah bayar (Rp " . number_format($amountPaid, 0, ',', '.') . ") kurang dari total tagihan (Rp " . number_format($total, 0, ',', '.') . ").");
+                }
+                $change = $amountPaid - $total;
             }
-
-            $change = $amountPaid - $total;
 
             // Generate Transaction Number Unik & Waktu WIB (Asia/Jakarta)
             $wibNow = now('Asia/Jakarta');
@@ -91,12 +98,14 @@ class TransactionService
                 'transaction_date' => $wibNow->toDateString(),
                 'transaction_time' => $wibNow->format('H:i:s'),
                 'cashier_id' => $cashierId,
+                'customer_name' => $customerName,
                 'subtotal' => $subtotal,
                 'discount' => $discount,
                 'total' => $total,
-                'payment_method' => $paymentMethod,
+                'payment_method' => $methodValue,
                 'amount_paid' => $amountPaid,
                 'change' => $change,
+                'paid_at' => $wibNow,
                 'status' => 'completed',
             ]);
 

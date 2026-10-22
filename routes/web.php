@@ -78,10 +78,16 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
 
     // POS Kasir
     Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::post('/pos/pay-cash', [PosController::class, 'payCash'])->name('pos.pay-cash');
+    Route::post('/pos/qris/prepare', [PosController::class, 'prepareQris'])->name('pos.qris.prepare');
+    Route::get('/pos/qris/{token}', [PosController::class, 'showQris'])->name('pos.qris.show');
+    Route::post('/pos/qris/{token}/confirm', [PosController::class, 'confirmQris'])->name('pos.qris.confirm');
+    Route::post('/pos/qris/{token}/cancel', [PosController::class, 'cancelQris'])->name('pos.qris.cancel');
     Route::post('/pos/checkout', [PosController::class, 'checkout'])->name('pos.checkout');
 
     // Transaksi Kasir POS
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/{transaction}/receipt', [TransactionController::class, 'receipt'])->name('transactions.receipt');
     Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
 
     // Produk
@@ -109,5 +115,14 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
+
+// Storage fallback for local environment without symlink privileges
+Route::get('/storage/{path}', function ($path) {
+    $filePath = storage_path('app/public/' . $path);
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+    return response()->file($filePath);
+})->where('path', '.*');
 
 

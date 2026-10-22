@@ -98,15 +98,20 @@ class ReportController extends Controller
 
             $response = new StreamedResponse(function () use ($report) {
                 $handle = fopen('php://output', 'w');
+                // UTF-8 BOM
+                fwrite($handle, "\xEF\xBB\xBF");
                 fputcsv($handle, ['No. Transaksi', 'Tanggal', 'Waktu', 'Kasir', 'Metode Bayar', 'Subtotal (Rp)', 'Diskon (Rp)', 'Total (Rp)', 'Status']);
 
                 foreach ($report['transactions'] as $tx) {
+                    $methodStr = $tx->payment_method instanceof \App\Enums\PaymentMethod ? $tx->payment_method->value : (string) $tx->payment_method;
+                    $dateStr = $tx->transaction_date instanceof \DateTimeInterface ? $tx->transaction_date->format('Y-m-d') : $tx->transaction_date;
+
                     fputcsv($handle, [
                         $tx->transaction_number,
-                        $tx->transaction_date,
+                        $dateStr,
                         $tx->transaction_time,
                         $tx->cashier?->name ?? 'Kasir',
-                        $tx->payment_method,
+                        $methodStr,
                         $tx->subtotal,
                         $tx->discount,
                         $tx->total,
@@ -120,11 +125,30 @@ class ReportController extends Controller
 
             $response = new StreamedResponse(function () use ($finReport) {
                 $handle = fopen('php://output', 'w');
+                // UTF-8 BOM
+                fwrite($handle, "\xEF\xBB\xBF");
                 fputcsv($handle, ['KOMPONEN LAPORAN', 'NILAI (RP)', 'KETERANGAN']);
-                fputcsv($handle, ['Pendapatan Kasir POS', $finReport['pos_revenue'], "{$finReport['pos_count']} Transaksi"]);
-                fputcsv($handle, ['TOTAL PENDAPATAN KOTOR', $finReport['total_gross_income'], 'Akumulasi Kasir POS']);
-                fputcsv($handle, ['Total Biaya/Pengeluaran Dapur', $finReport['total_expenses'], "{$finReport['expense_count']} Catatan Approved"]);
-                fputcsv($handle, ['LABA BERSIH OPERASIONAL', $finReport['net_profit'], "Margin: {$finReport['profit_margin']}%"]);
+                fputcsv($handle, ['Catatan 1: Pembayaran Tunai (Cash)', $finReport['payment_summary']['cash_total'], "{$finReport['payment_summary']['cash_count']} Transaksi ({$finReport['payment_summary']['cash_percent']}%)"]);
+                fputcsv($handle, ['Catatan 2: Pembayaran QRIS', $finReport['payment_summary']['qris_total'], "{$finReport['payment_summary']['qris_count']} Transaksi ({$finReport['payment_summary']['qris_percent']}%)"]);
+                fputcsv($handle, ['Catatan 3: TOTAL GABUNGAN POS (Cash + QRIS)', $finReport['pos_revenue'], "{$finReport['pos_count']} Transaksi (Dasar Laba Bersih)"]);
+                fputcsv($handle, ['Total Pengeluaran Dapur (Approved)', $finReport['total_expenses'], "{$finReport['expense_count']} Catatan Approved"]);
+                fputcsv($handle, ['LABA BERSIH OPERASIONAL (POS - Pengeluaran)', $finReport['net_profit'], "Margin: {$finReport['profit_margin']}%"]);
+                fputcsv($handle, []);
+                fputcsv($handle, ['RINCIAN HARIAN METODE PEMBAYARAN']);
+                fputcsv($handle, ['Tanggal', 'Trx Cash', 'Total Cash (Rp)', 'Trx QRIS', 'Total QRIS (Rp)', 'Total Gabungan (Rp)']);
+
+                foreach ($finReport['daily_breakdown'] as $day) {
+                    $dayDate = $day->transaction_date instanceof \DateTimeInterface ? $day->transaction_date->format('Y-m-d') : $day->transaction_date;
+                    fputcsv($handle, [
+                        $dayDate,
+                        $day->cash_count,
+                        $day->cash_total,
+                        $day->qris_count,
+                        $day->qris_total,
+                        $day->combined_total,
+                    ]);
+                }
+
                 fputcsv($handle, []);
                 fputcsv($handle, ['RINCIAN BIAYA PER KATEGORI']);
                 fputcsv($handle, ['Kategori Biaya', 'Total (Rp)', 'Jumlah']);
@@ -136,7 +160,7 @@ class ReportController extends Controller
             });
         }
 
-        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
         $response->headers->set('Content-Disposition', 'attachment; filename="' . $filename . '"');
 
         return $response;

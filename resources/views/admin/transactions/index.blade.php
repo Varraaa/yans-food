@@ -40,9 +40,8 @@
             <div>
                 <select name="method" class="px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     <option value="all">Semua Metode</option>
-                    <option value="CASH" {{ request('method') === 'CASH' ? 'selected' : '' }}>Tunai (Cash)</option>
-                    <option value="TRANSFER" {{ request('method') === 'TRANSFER' ? 'selected' : '' }}>Transfer</option>
-                    <option value="QRIS" {{ request('method') === 'QRIS' ? 'selected' : '' }}>QRIS</option>
+                    <option value="CASH" {{ strtoupper(request('method')) === 'CASH' ? 'selected' : '' }}>Tunai (Cash)</option>
+                    <option value="QRIS" {{ strtoupper(request('method')) === 'QRIS' ? 'selected' : '' }}>QRIS</option>
                 </select>
             </div>
 
@@ -76,6 +75,11 @@
                 </thead>
                 <tbody class="divide-y divide-stone-100">
                     @forelse($transactions as $tx)
+                        @php
+                            $methodVal = $tx->payment_method instanceof \App\Enums\PaymentMethod 
+                                ? $tx->payment_method->value 
+                                : (string) $tx->payment_method;
+                        @endphp
                         <tr class="hover:bg-amber-50/30 transition">
                             <td class="py-3.5 px-4 font-mono font-bold text-stone-900">
                                 {{ $tx->transaction_number }}
@@ -87,9 +91,17 @@
                                 {{ $tx->cashier?->name ?? 'Kasir' }}
                             </td>
                             <td class="py-3.5 px-4 text-center">
-                                <span class="px-2 py-0.5 rounded font-bold text-[10px] bg-stone-100 text-stone-700">
-                                    {{ $tx->payment_method }}
-                                </span>
+                                @if($methodVal === 'QRIS')
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-sky-50 text-sky-700 border border-sky-200">
+                                        <span class="material-symbols-outlined text-[13px]">qr_code_2</span>
+                                        <span>QRIS</span>
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="material-symbols-outlined text-[13px]">payments</span>
+                                        <span>CASH</span>
+                                    </span>
+                                @endif
                             </td>
                             <td class="py-3.5 px-4 text-right font-medium text-stone-600">
                                 Rp {{ number_format($tx->subtotal, 0, ',', '.') }}
@@ -103,9 +115,15 @@
                                 </span>
                             </td>
                             <td class="py-3.5 px-4 text-center">
-                                <a href="{{ route('admin.transactions.show', $tx->id) }}" class="inline-flex items-center gap-1 px-3 py-1 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-lg font-bold text-[11px] transition">
-                                    <span>👁️ Detail</span>
-                                </a>
+                                <div class="inline-flex items-center gap-1.5">
+                                    <a href="{{ route('admin.transactions.receipt', $tx->id) }}" class="inline-flex items-center gap-1 px-2.5 py-1 bg-stone-900 hover:bg-black text-white rounded-lg font-bold text-[11px] transition shadow-xs" title="Cetak / Buka Struk">
+                                        <span class="material-symbols-outlined text-[13px]">receipt</span>
+                                        <span>Struk</span>
+                                    </a>
+                                    <a href="{{ route('admin.transactions.show', $tx->id) }}" class="inline-flex items-center gap-1 px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg font-bold text-[11px] transition" title="Lihat Rincian Item">
+                                        <span>Detail</span>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @empty

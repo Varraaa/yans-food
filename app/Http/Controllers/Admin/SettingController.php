@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
@@ -15,12 +18,7 @@ class SettingController extends Controller
 
     protected function getSettings(): array
     {
-        $path = $this->getSettingsPath();
-        if (File::exists($path)) {
-            return json_decode(File::get($path), true) ?? [];
-        }
-
-        return [
+        $defaults = [
             'store_name' => "Yan's Food",
             'store_address' => 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang',
             'store_phone' => '082221222936',
@@ -28,7 +26,28 @@ class SettingController extends Controller
             'shopeefood_url' => 'https://shopee.co.id/universal-link/now-food',
             'gofood_url' => 'https://gofood.link/u/yansfood',
             'grabfood_url' => 'https://food.grab.com/id/id/restaurant/yans-food',
+            'qris_merchant_name' => "YAN'S FOOD NASI GORENG, R",
+            'qris_image_path' => file_exists(public_path('images/qris/qris-yansfood.jpeg')) ? 'images/qris/qris-yansfood.jpeg' : null,
         ];
+
+        $path = $this->getSettingsPath();
+        if (File::exists($path)) {
+            $saved = json_decode(File::get($path), true) ?? [];
+            $defaults = array_merge($defaults, $saved);
+        }
+
+        // Ambil data QRIS dari database Setting bila ada
+        $dbQris = Setting::get('qris_image_path');
+        if ($dbQris) {
+            $defaults['qris_image_path'] = $dbQris;
+        }
+
+        $dbMerchant = Setting::get('qris_merchant_name');
+        if ($dbMerchant) {
+            $defaults['qris_merchant_name'] = $dbMerchant;
+        }
+
+        return $defaults;
     }
 
     public function index()
@@ -47,13 +66,49 @@ class SettingController extends Controller
             'shopeefood_url' => ['nullable', 'url', 'max:255'],
             'gofood_url' => ['nullable', 'url', 'max:255'],
             'grabfood_url' => ['nullable', 'url', 'max:255'],
+            'qris_merchant_name' => ['nullable', 'string', 'max:100'],
+            'qris_image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
         ]);
+
+        $settings = $this->getSettings();
+
+        // Handle upload QRIS
+        if ($request->hasFile('qris_image')) {
+            $file = $request->file('qris_image');
+            
+            // Hapus file lama bila ada
+            if (!empty($settings['qris_image_path'])) {
+                $oldRel = str_replace('storage/', '', $settings['qris_image_path']);
+                Storage::disk('public')->delete($oldRel);
+            }
+
+            $filename = 'qris_' . Str::random(12) . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('qris', $filename, 'public');
+            $publicPath = 'storage/' . $path;
+
+            $validated['qris_image_path'] = $publicPath;
+            Setting::set('qris_image_path', $publicPath);
+        } else {
+            $validated['qris_image_path'] = $settings['qris_image_path'] ?? null;
+        }
+
+        if (isset($validated['qris_merchant_name'])) {
+            Setting::set('qris_merchant_name', $validated['qris_merchant_name']);
+        }
+
+        // Hapus file dari array validated sebelum simpan ke json
+        unset($validated['qris_image']);
 
         $path = $this->getSettingsPath();
         File::ensureDirectoryExists(dirname($path));
         File::put($path, json_encode($validated, JSON_PRETTY_PRINT));
 
+        // Simpan juga ke database Setting
+        foreach ($validated as $k => $v) {
+            Setting::set($k, $v);
+        }
+
         return redirect()->route('admin.settings.index')
-            ->with('success', 'Pengaturan informasi usaha & link pesan online berhasil disimpan!');
+            ->with('success', 'Pengaturan toko dan konfigurasi QRIS pembayaran berhasil disimpan!');
     }
 }

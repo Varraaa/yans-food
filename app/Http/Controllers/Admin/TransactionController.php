@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Printer;
 use App\Models\Transaction;
 use App\Services\ReceiptService;
 use Illuminate\Http\Request;
@@ -21,8 +22,8 @@ class TransactionController extends Controller
             $query->whereDate('transaction_date', $request->date);
         }
 
-        if ($request->filled('method') && $request->method !== 'all') {
-            $query->where('payment_method', $request->method);
+        if ($request->filled('method') && in_array(strtoupper($request->method), ['CASH', 'QRIS'])) {
+            $query->where('payment_method', strtoupper($request->method));
         }
 
         $transactions = $query->paginate(15)->withQueryString();
@@ -36,5 +37,17 @@ class TransactionController extends Controller
         $receipt = $receiptService->generateCustomerReceipt($transaction);
 
         return view('admin.transactions.show', compact('transaction', 'receipt'));
+    }
+
+    public function receipt($id, ReceiptService $receiptService)
+    {
+        $transaction = Transaction::with(['cashier', 'items.product'])->findOrFail($id);
+        $receipt = $receiptService->generateCustomerReceipt($transaction);
+
+        // Ambil pengaturan lebar kertas printer yang aktif bila ada
+        $activePrinter = Printer::where('is_active', true)->first();
+        $paperWidth = $activePrinter ? $activePrinter->paper_width : '58mm';
+
+        return view('admin.transactions.receipt', compact('transaction', 'receipt', 'paperWidth'));
     }
 }

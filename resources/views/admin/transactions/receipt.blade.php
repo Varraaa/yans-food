@@ -1,0 +1,155 @@
+@extends('layouts.admin')
+
+@section('content')
+<div class="max-w-2xl mx-auto py-4 px-2 sm:px-4 space-y-6">
+
+    {{-- ALERT SUKSES --}}
+    @if(session('success'))
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-xs print:hidden">
+            <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-emerald-600 text-[22px]">check_circle</span>
+                <span>{{ session('success') }}</span>
+            </div>
+            <span class="text-xs font-mono font-bold text-emerald-700">{{ $transaction->transaction_number }}</span>
+        </div>
+    @endif
+
+    {{-- TOP ACTION BUTTONS BAR (PRINT:HIDDEN) --}}
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm print:hidden">
+        <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
+            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span>Riwayat Transaksi</span>
+        </a>
+
+        <div class="flex items-center gap-2">
+            {{-- TOMBOL CETAK THERMAL --}}
+            <button 
+                type="button" 
+                onclick="window.print()" 
+                class="px-4 py-2.5 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center gap-2 active:scale-95"
+            >
+                <span class="material-symbols-outlined text-[18px]">print</span>
+                <span>Cetak Thermal</span>
+            </button>
+
+            {{-- TOMBOL SELESAI TRANSAKSI (§9.2) --}}
+            <a 
+                href="{{ route('admin.pos.index') }}" 
+                class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center gap-2 active:scale-95"
+            >
+                <span class="material-symbols-outlined text-[18px]">point_of_sale</span>
+                <span>Selesai Transaksi &rarr; Kasir</span>
+            </a>
+        </div>
+    </div>
+
+    {{-- THERMAL RECEIPT CONTAINER (§9.1) --}}
+    @php
+        $is80mm = ($paperWidth ?? '58mm') === '80mm';
+        $widthClass = $is80mm ? 'max-w-[340px]' : 'max-w-[280px]';
+        $methodValue = $transaction->payment_method instanceof \App\Enums\PaymentMethod 
+            ? $transaction->payment_method->value 
+            : (string) $transaction->payment_method;
+    @endphp
+
+    <div class="flex justify-center">
+        <div id="thermal-receipt-printable" class="receipt-thermal-paper {{ $widthClass }} w-full bg-white p-5 sm:p-6 rounded-2xl border border-stone-300 shadow-md font-mono text-xs text-stone-900 space-y-3 leading-tight select-none">
+            
+            {{-- RECEIPT HEADER --}}
+            <div class="text-center pb-2.5 border-b border-dashed border-stone-300 space-y-1">
+                <h2 class="text-base font-black tracking-wider uppercase text-stone-900">
+                    {{ $receipt['header']['store_name'] ?? "YAN'S FOOD" }}
+                </h2>
+                <p class="text-[10px] text-stone-500 font-sans">Dapur Kuliner Rumahan & Selera Nusantara</p>
+                <p class="text-[10px] text-stone-600 leading-snug">
+                    {{ $receipt['header']['address'] ?? 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang' }}
+                </p>
+                <p class="text-[10px] text-stone-500">WA: {{ $receipt['header']['phone'] ?? '082221222936' }}</p>
+            </div>
+
+            {{-- META INFO --}}
+            <div class="py-2 border-b border-dashed border-stone-300 text-[11px] space-y-1">
+                <div class="flex justify-between">
+                    <span class="text-stone-500">No:</span>
+                    <span class="font-bold">{{ $transaction->transaction_number }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-stone-500">Waktu:</span>
+                    <span>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d/m/Y') }} {{ substr($transaction->transaction_time, 0, 5) }} WIB</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-stone-500">Kasir:</span>
+                    <span>{{ $transaction->cashier?->name ?? 'Kasir Utama' }}</span>
+                </div>
+            </div>
+
+            {{-- ITEMS LIST --}}
+            <div class="py-2 border-b border-dashed border-stone-300 space-y-2 text-[11px]">
+                @foreach($transaction->items as $item)
+                    <div>
+                        <div class="font-bold text-stone-900 leading-snug">{{ $item->product_name }}</div>
+                        <div class="flex justify-between text-stone-600 pl-2 mt-0.5">
+                            <span>{{ $item->quantity }} x {{ number_format($item->unit_price, 0, ',', '.') }}</span>
+                            <span class="font-semibold text-stone-900">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- BILLING SUMMARY --}}
+            <div class="py-2 border-b border-dashed border-stone-300 space-y-1.5 text-[11px]">
+                <div class="flex justify-between text-stone-600">
+                    <span>Subtotal:</span>
+                    <span>Rp {{ number_format($transaction->subtotal, 0, ',', '.') }}</span>
+                </div>
+                @if($transaction->discount > 0)
+                    <div class="flex justify-between text-emerald-700">
+                        <span>Diskon:</span>
+                        <span>- Rp {{ number_format($transaction->discount, 0, ',', '.') }}</span>
+                    </div>
+                @endif
+                <div class="flex justify-between text-sm font-black text-stone-900 pt-1 border-t border-dotted border-stone-200">
+                    <span>TOTAL:</span>
+                    <span>Rp {{ number_format($transaction->total, 0, ',', '.') }}</span>
+                </div>
+            </div>
+
+            {{-- PAYMENT BLOCK (§9.1) --}}
+            <div class="py-2 border-b border-dashed border-stone-300 space-y-1 text-[11px]">
+                <div class="flex justify-between items-center font-bold">
+                    <span class="text-stone-500">Metode Bayar:</span>
+                    @if($methodValue === 'QRIS')
+                        <span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 text-[10px] font-black">QRIS</span>
+                    @else
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-black">CASH (TUNAI)</span>
+                    @endif
+                </div>
+
+                @if($methodValue === 'QRIS')
+                    <div class="flex justify-between text-stone-800 font-bold pt-0.5">
+                        <span>Dibayar via QRIS:</span>
+                        <span>Rp {{ number_format($transaction->total, 0, ',', '.') }}</span>
+                    </div>
+                @else
+                    <div class="flex justify-between text-stone-600">
+                        <span>Uang Tunai:</span>
+                        <span>Rp {{ number_format($transaction->amount_paid, 0, ',', '.') }}</span>
+                    </div>
+                    <div class="flex justify-between text-stone-900 font-bold">
+                        <span>Kembalian:</span>
+                        <span>Rp {{ number_format($transaction->change, 0, ',', '.') }}</span>
+                    </div>
+                @endif
+            </div>
+
+            {{-- FOOTER MESSAGE --}}
+            <div class="text-center pt-2 space-y-1 text-[10px] text-stone-500">
+                <p class="font-bold text-stone-700">Terima kasih atas kunjungan Anda!</p>
+                <p>Sajian Rumahan Penuh Kehangatan</p>
+                <p class="font-mono text-[9px] text-stone-400 pt-1">Simpan struk ini sebagai bukti pembayaran yang sah.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endsection
