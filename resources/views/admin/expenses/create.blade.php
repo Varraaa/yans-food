@@ -53,10 +53,6 @@
                 </div>
             </div>
 
-            <div class="space-y-1">
-                <label class="block font-bold text-stone-700 uppercase tracking-wider">Upload Foto Nota / Kwitansi (Opsional)</label>
-                <input type="file" name="receipt_image" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs">
-            </div>
 
             <div class="space-y-1">
                 <label class="block font-bold text-stone-700 uppercase tracking-wider">Catatan Tambahan</label>
