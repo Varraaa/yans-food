@@ -15,9 +15,7 @@ class ExpenseCategorySeeder extends Seeder
             'Listrik',
             'Air',
             'Kemasan',
-            'Transportasi',
             'Peralatan',
-            'Maintenance',
             'Lain-lain',
         ];
 

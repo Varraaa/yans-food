@@ -99,8 +99,8 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::resource('recipes', RecipeController::class);
 
 
-    // Pengeluaran
-    Route::resource('expenses', ExpenseController::class)->only(['index', 'create', 'store']);
+    // Pengeluaran (Full CRUD)
+    Route::resource('expenses', ExpenseController::class);
 
     // Laporan
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');

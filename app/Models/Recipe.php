@@ -20,7 +20,7 @@ class Recipe extends Model
     protected function casts(): array
     {
         return [
-            'yield' => 'integer',
+            'yield' => 'string',
         ];
     }
 

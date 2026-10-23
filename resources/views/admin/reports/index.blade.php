@@ -328,7 +328,7 @@
                             @forelse($financialData['daily_breakdown'] as $day)
                                 <tr class="hover:bg-stone-50/80 transition-colors">
                                     <td class="py-3 px-4 font-semibold text-stone-800 font-sans">
-                                        {{ \Carbon\Carbon::parse($day->date)->translatedFormat('d M Y') }}
+                                        {{ \Carbon\Carbon::parse($day->date ?? $day->transaction_date)->translatedFormat('d M Y') }}
                                     </td>
                                     <td class="py-3 px-4 text-center text-stone-700">
                                         {{ number_format($day->cash_count) }}
@@ -380,34 +380,245 @@
                 </div>
             </div>
 
-            {{-- EXPENSES BY CATEGORY --}}
+            @php
+                $periodBadgeLabels = [
+                    'today' => 'Hari Ini',
+                    'this_week' => 'Minggu Ini',
+                    'this_month' => 'Bulan Ini (' . now()->translatedFormat('F Y') . ')',
+                    'this_year' => 'Tahun Ini (' . now()->format('Y') . ')',
+                    'all' => 'Semua Waktu',
+                    'custom' => 'Rentang Kustom',
+                ];
+                $activePeriodText = $periodBadgeLabels[$period] ?? 'Periode Ini';
+            @endphp
+
+            {{-- EXPENSES BY CATEGORY (MENYESUAIKAN FILTER BULAN INI / TAHUN INI / SEMUA WAKTU) --}}
             <div class="bg-white rounded-2xl p-5 border border-stone-200/90 shadow-sm space-y-4">
-                <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
                     <div>
-                        <h2 class="font-bold text-stone-900 text-sm">Pengeluaran Dapur per Kategori</h2>
-                        <p class="text-xs text-stone-500">Kebutuhan bahan baku &amp; operasional yang telah disetujui</p>
+                        <div class="flex items-center gap-2">
+                            <h2 class="font-bold text-stone-900 text-sm">Pengeluaran Dapur per Kategori</h2>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-stone-100 text-stone-700 border border-stone-200">
+                                {{ $activePeriodText }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-0.5">Rincian alokasi biaya belanja &amp; operasional dapur yang telah disetujui pada periode ini.</p>
                     </div>
-                    <span class="text-xs text-stone-500 font-semibold px-2.5 py-1 bg-stone-100 rounded-lg">
-                        {{ $financialData['expense_count'] }} Catatan
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-stone-500 font-semibold px-2.5 py-1 bg-stone-100 rounded-lg">
+                            {{ $financialData['expense_count'] }} Catatan
+                        </span>
+                        <span class="text-xs text-rose-700 font-black px-2.5 py-1 bg-rose-50 border border-rose-200 rounded-lg font-mono">
+                            Total: Rp {{ number_format($financialData['total_expenses'], 0, ',', '.') }}
+                        </span>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     @forelse($financialData['expenses_by_category'] as $cat)
-                        <div class="flex items-center justify-between p-3.5 rounded-xl bg-stone-50 border border-stone-200/70 text-xs">
-                            <div class="font-semibold text-stone-800">
-                                {{ $cat->category_name ?? $cat->category ?? 'Operasional' }} 
-                                <span class="text-stone-400 font-normal">({{ $cat->count }}x)</span>
+                        <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70 text-xs space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="font-bold text-stone-800">
+                                    {{ $cat->category_name ?? $cat->category ?? 'Operasional' }} 
+                                    <span class="text-stone-400 font-normal">({{ $cat->count }}x)</span>
+                                </div>
+                                <span class="font-black text-rose-600 font-mono text-sm">
+                                    Rp {{ number_format($cat->total_amount, 0, ',', '.') }}
+                                </span>
                             </div>
-                            <span class="font-bold text-rose-600 font-mono">
-                                Rp {{ number_format($cat->total_amount, 0, ',', '.') }}
-                            </span>
+                            <div>
+                                <div class="flex items-center justify-between text-[11px] text-stone-500 mb-1">
+                                    <span>Porsi Biaya:</span>
+                                    <span class="font-bold text-stone-700">{{ $cat->percent ?? 0 }}%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-rose-500 h-full rounded-full transition-all" style="width: {{ min(100, $cat->percent ?? 0) }}%"></div>
+                                </div>
+                            </div>
                         </div>
                     @empty
                         <div class="col-span-full py-6 text-center text-stone-400 text-xs">
-                            Belum ada pengeluaran dapur yang disetujui pada periode ini.
+                            Belum ada pengeluaran dapur yang disetujui pada periode {{ $activePeriodText }}.
                         </div>
                     @endforelse
+                </div>
+            </div>
+
+            {{-- SECTION HASIL UANG BERSIH PER BULAN DAN PER TAHUN --}}
+            <div class="bg-white rounded-2xl p-5 border border-stone-200/90 shadow-sm space-y-5">
+                {{-- HEADER SECTION --}}
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="font-black text-stone-900 text-base font-serif flex items-center gap-2">
+                                <span>💰</span>
+                                <span>Hasil Uang Bersih (Laba Bersih Operasional)</span>
+                            </h2>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold {{ $financialData['net_profit'] >= 0 ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-rose-100 text-rose-800 border border-rose-200' }}">
+                                {{ $financialData['net_profit'] >= 0 ? 'Surplus Laba' : 'Defisit' }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-0.5">Hasil bersih dari Total Omset Kasir dikurangi Seluruh Beban Pengeluaran Dapur, disajikan dinamis per bulan dan per tahun.</p>
+                    </div>
+
+                    {{-- CURRENT FILTER HIGHLIGHT CARD --}}
+                    <div class="p-3 bg-gradient-to-r {{ $financialData['net_profit'] >= 0 ? 'from-emerald-50 to-emerald-100/50 border-emerald-200 text-emerald-900' : 'from-rose-50 to-rose-100/50 border-rose-200 text-rose-900' }} border rounded-xl text-right">
+                        <span class="text-[10px] font-bold uppercase tracking-wider block opacity-75">Uang Bersih ({{ $activePeriodText }})</span>
+                        <div class="text-xl font-black font-mono">
+                            Rp {{ number_format($financialData['net_profit'], 0, ',', '.') }}
+                        </div>
+                        <span class="text-[10px] font-semibold opacity-80 block">Margin: {{ $financialData['profit_margin'] }}%</span>
+                    </div>
+                </div>
+
+                {{-- SUBSECTION 1: RINCIAN UANG BERSIH PER BULAN --}}
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold text-stone-900 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>📅</span>
+                            <span>Rincian Hasil Uang Bersih per Bulan</span>
+                        </h3>
+                        <span class="text-[11px] text-stone-500 font-medium">
+                            {{ count($financialData['monthly_breakdown'] ?? []) }} Periode Bulan Tercatat
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-stone-200">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
+                                <tr>
+                                    <th class="py-3 px-4">Bulan &amp; Tahun</th>
+                                    <th class="py-3 px-4 text-center">Transaksi</th>
+                                    <th class="py-3 px-4 text-right">Pendapatan Kasir</th>
+                                    <th class="py-3 px-4 text-right">Pengeluaran Dapur</th>
+                                    <th class="py-3 px-4 text-right">Hasil Uang Bersih</th>
+                                    <th class="py-3 px-4 text-center">Margin</th>
+                                    <th class="py-3 px-4 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-100 font-mono">
+                                @forelse($financialData['monthly_breakdown'] ?? [] as $m)
+                                    <tr class="hover:bg-stone-50/80 transition-colors {{ $m->month_key === now()->format('Y-m') ? 'bg-amber-50/20' : '' }}">
+                                        <td class="py-3 px-4 font-sans font-bold text-stone-900">
+                                            {{ $m->month_label }}
+                                            @if($m->month_key === now()->format('Y-m'))
+                                                <span class="ml-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-emerald-100 text-emerald-800">
+                                                    Bulan Ini
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-sans text-stone-600">
+                                            {{ $m->tx_count }}x
+                                        </td>
+                                        <td class="py-3 px-4 text-right text-stone-900 font-medium">
+                                            Rp {{ number_format($m->revenue, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-right text-rose-600 font-medium">
+                                            Rp {{ number_format($m->expenses, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-right font-black text-sm {{ $m->net_profit >= 0 ? 'text-emerald-600' : 'text-rose-600' }}">
+                                            Rp {{ number_format($m->net_profit, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-bold {{ $m->net_profit >= 0 ? 'text-emerald-700' : 'text-rose-700' }}">
+                                            {{ $m->profit_margin }}%
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-sans">
+                                            @if($m->is_surplus)
+                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                    <span>Untung</span>
+                                                </span>
+                                            @else
+                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                                    <span>Defisit</span>
+                                                </span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="py-8 text-center text-stone-400 font-sans">
+                                            Belum ada catatan keuangan bulanan.
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {{-- SUBSECTION 2: RINCIAN UANG BERSIH PER TAHUN --}}
+                <div class="space-y-3 pt-3 border-t border-stone-100">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold text-stone-900 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>📈</span>
+                            <span>Rincian Hasil Uang Bersih per Tahun</span>
+                        </h3>
+                        <span class="text-[11px] text-stone-500 font-medium">
+                            Rekapitulasi Tahunan Historis
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-stone-200">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
+                                <tr>
+                                    <th class="py-3 px-4">Tahun</th>
+                                    <th class="py-3 px-4 text-center">Total Transaksi</th>
+                                    <th class="py-3 px-4 text-right">Total Pendapatan Kasir</th>
+                                    <th class="py-3 px-4 text-right">Total Beban Pengeluaran</th>
+                                    <th class="py-3 px-4 text-right">Hasil Uang Bersih Tahunan</th>
+                                    <th class="py-3 px-4 text-center">Margin Laba</th>
+                                    <th class="py-3 px-4 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-100 font-mono">
+                                @forelse($financialData['yearly_breakdown'] ?? [] as $y)
+                                    <tr class="hover:bg-stone-50/80 transition-colors {{ $y->year === now()->format('Y') ? 'bg-amber-50/20' : '' }}">
+                                        <td class="py-3 px-4 font-sans font-black text-stone-900 text-sm">
+                                            Tahun {{ $y->year }}
+                                            @if($y->year === now()->format('Y'))
+                                                <span class="ml-1.5 px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-emerald-100 text-emerald-800">
+                                                    Tahun Ini
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-sans text-stone-600">
+                                            {{ $y->tx_count }} Transaksi
+                                        </td>
+                                        <td class="py-3 px-4 text-right text-stone-900 font-semibold">
+                                            Rp {{ number_format($y->revenue, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-right text-rose-600 font-semibold">
+                                            Rp {{ number_format($y->expenses, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-right font-black text-base {{ $y->net_profit >= 0 ? 'text-emerald-600' : 'text-rose-600' }}">
+                                            Rp {{ number_format($y->net_profit, 0, ',', '.') }}
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-bold {{ $y->net_profit >= 0 ? 'text-emerald-700' : 'text-rose-700' }}">
+                                            {{ $y->profit_margin }}%
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-sans">
+                                            @if($y->is_surplus)
+                                                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                                    <span>Surplus Laba</span>
+                                                </span>
+                                            @else
+                                                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                                    <span>Defisit</span>
+                                                </span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="py-8 text-center text-stone-400 font-sans">
+                                            Belum ada catatan tahunan.
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

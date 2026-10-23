@@ -80,6 +80,7 @@ class ReportService
         $dailyBreakdown = (clone $query)
             ->selectRaw("
                 transaction_date,
+                transaction_date AS date,
                 SUM(CASE WHEN payment_method = 'CASH' THEN 1 ELSE 0 END) AS cash_count,
                 COALESCE(SUM(CASE WHEN payment_method = 'CASH' THEN total ELSE 0 END), 0) AS cash_total,
                 SUM(CASE WHEN payment_method = 'QRIS' THEN 1 ELSE 0 END) AS qris_count,
@@ -194,6 +195,126 @@ class ReportService
         $netProfit = $totalGrossIncome - $totalExpenses;
         $profitMargin = $totalGrossIncome > 0 ? ($netProfit / $totalGrossIncome) * 100 : 0;
 
+        // Tambahkan persentase porsi pada setiap kategori pengeluaran
+        $expensesByCategory->transform(function ($item) use ($totalExpenses) {
+            $item->percent = $totalExpenses > 0 ? round(($item->total_amount / $totalExpenses) * 100, 1) : 0;
+            return $item;
+        });
+
+        // 5. Rincian Hasil Uang Bersih Per Bulan
+        $revMonthly = Transaction::completed()
+            ->selectRaw("
+                DATE_FORMAT(transaction_date, '%Y-%m') as m_key,
+                COUNT(*) as tx_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'CASH' THEN total ELSE 0 END), 0) as cash_rev,
+                COALESCE(SUM(CASE WHEN payment_method = 'QRIS' THEN total ELSE 0 END), 0) as qris_rev,
+                COALESCE(SUM(total), 0) as total_rev
+            ")
+            ->groupBy('m_key')
+            ->get()
+            ->keyBy('m_key');
+
+        $expMonthly = Expense::where('expenses.status', 'APPROVED')
+            ->selectRaw("
+                DATE_FORMAT(expense_date, '%Y-%m') as m_key,
+                COUNT(*) as exp_count,
+                COALESCE(SUM(amount), 0) as total_exp
+            ")
+            ->groupBy('m_key')
+            ->get()
+            ->keyBy('m_key');
+
+        $allMonthKeys = $revMonthly->keys()->merge($expMonthly->keys())->unique()->sortDesc();
+
+        $monthlyBreakdown = $allMonthKeys->map(function ($key) use ($revMonthly, $expMonthly) {
+            $rev = $revMonthly->get($key);
+            $exp = $expMonthly->get($key);
+
+            $revenue = (float) ($rev->total_rev ?? 0);
+            $cashRev = (float) ($rev->cash_rev ?? 0);
+            $qrisRev = (float) ($rev->qris_rev ?? 0);
+            $expenses = (float) ($exp->total_exp ?? 0);
+            $txCount = (int) ($rev->tx_count ?? 0);
+            $expCount = (int) ($exp->exp_count ?? 0);
+
+            $net = $revenue - $expenses;
+            $margin = $revenue > 0 ? ($net / $revenue) * 100 : 0;
+
+            try {
+                $date = Carbon::createFromFormat('Y-m', $key);
+                $label = $date->translatedFormat('F Y');
+            } catch (\Throwable $e) {
+                $label = $key;
+            }
+
+            return (object) [
+                'month_key' => $key,
+                'month_label' => $label,
+                'revenue' => $revenue,
+                'cash_revenue' => $cashRev,
+                'qris_revenue' => $qrisRev,
+                'expenses' => $expenses,
+                'net_profit' => $net,
+                'profit_margin' => round($margin, 1),
+                'tx_count' => $txCount,
+                'expense_count' => $expCount,
+                'is_surplus' => $net >= 0,
+            ];
+        });
+
+        // 6. Rincian Hasil Uang Bersih Per Tahun
+        $revYearly = Transaction::completed()
+            ->selectRaw("
+                YEAR(transaction_date) as y_key,
+                COUNT(*) as tx_count,
+                COALESCE(SUM(CASE WHEN payment_method = 'CASH' THEN total ELSE 0 END), 0) as cash_rev,
+                COALESCE(SUM(CASE WHEN payment_method = 'QRIS' THEN total ELSE 0 END), 0) as qris_rev,
+                COALESCE(SUM(total), 0) as total_rev
+            ")
+            ->groupBy('y_key')
+            ->get()
+            ->keyBy('y_key');
+
+        $expYearly = Expense::where('expenses.status', 'APPROVED')
+            ->selectRaw("
+                YEAR(expense_date) as y_key,
+                COUNT(*) as exp_count,
+                COALESCE(SUM(amount), 0) as total_exp
+            ")
+            ->groupBy('y_key')
+            ->get()
+            ->keyBy('y_key');
+
+        $allYearKeys = $revYearly->keys()->merge($expYearly->keys())->unique()->sortDesc();
+
+        $yearlyBreakdown = $allYearKeys->map(function ($key) use ($revYearly, $expYearly) {
+            $rev = $revYearly->get($key);
+            $exp = $expYearly->get($key);
+
+            $revenue = (float) ($rev->total_rev ?? 0);
+            $cashRev = (float) ($rev->cash_rev ?? 0);
+            $qrisRev = (float) ($rev->qris_rev ?? 0);
+            $expenses = (float) ($exp->total_exp ?? 0);
+            $txCount = (int) ($rev->tx_count ?? 0);
+            $expCount = (int) ($exp->exp_count ?? 0);
+
+            $net = $revenue - $expenses;
+            $margin = $revenue > 0 ? ($net / $revenue) * 100 : 0;
+
+            return (object) [
+                'year' => (string) $key,
+                'revenue' => $revenue,
+                'cash_revenue' => $cashRev,
+                'qris_revenue' => $qrisRev,
+                'expenses' => $expenses,
+                'net_profit' => $net,
+                'profit_margin' => round($margin, 1),
+                'tx_count' => $txCount,
+                'expense_count' => $expCount,
+                'is_surplus' => $net >= 0,
+            ];
+        });
+
         return [
             'payment_summary' => $paymentData,
             'pos_revenue' => $posRevenue,
@@ -205,6 +326,8 @@ class ReportService
             'profit_margin' => round($profitMargin, 1),
             'expenses_by_category' => $expensesByCategory,
             'daily_breakdown' => $paymentData['daily_breakdown'],
+            'monthly_breakdown' => $monthlyBreakdown,
+            'yearly_breakdown' => $yearlyBreakdown,
         ];
     }
 }
