@@ -1,7 +1,24 @@
 @extends('layouts.admin')
 
+@php
+    $title = "Kasir — Yan's Food";
+@endphp
+
 @section('content')
 <div class="space-y-4">
+    {{-- PAGE HEADER --}}
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+            <h1 class="text-xl sm:text-2xl font-black text-stone-900 font-serif flex items-center gap-2">
+                <span>🛒</span>
+                <span>Kasir</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-stone-500 mt-0.5">
+                Panel kasir penjualan langsung &amp; cetak struk pesanan Yan's Food.
+            </p>
+        </div>
+    </div>
+
     {{-- SESSION ALERTS --}}
     @if(session('success'))
         <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center justify-between shadow-xs">
@@ -57,13 +74,6 @@
                         >
                             <span class="material-symbols-outlined text-[18px]">close</span>
                         </button>
-                    </div>
-
-                    {{-- LIVE CLOCK BADGE FOR MOBILE/TABLET --}}
-                    <div class="hidden sm:flex lg:hidden items-center gap-2 px-3 py-2 bg-stone-50 rounded-xl border border-stone-200 text-xs font-mono font-bold text-stone-700">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="pos-realtime-clock">--:--:--</span>
-                        <span class="text-[10px] text-stone-400">WIB</span>
                     </div>
                 </div>
 
@@ -192,18 +202,6 @@
                     <span class="material-symbols-outlined text-[15px]">delete_sweep</span>
                     <span>Kosongkan</span>
                 </button>
-            </div>
-
-            {{-- REAL-TIME CLOCK BADGE --}}
-            <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-stone-50 border border-stone-200 text-xs">
-                <div class="flex items-center gap-1.5 text-stone-600 text-[11px]">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="font-semibold">Waktu Kasir Real-Time:</span>
-                </div>
-                <div class="flex items-center gap-1.5 font-mono font-bold text-stone-800 text-xs">
-                    <span id="pos-realtime-clock" class="pos-realtime-clock">--:--:--</span>
-                    <span class="px-1.5 py-0.5 bg-stone-200 text-stone-700 rounded text-[9px] font-black uppercase">WIB</span>
-                </div>
             </div>
 
             {{-- CUSTOMER NAME FIELD (OPTIONAL) --}}
@@ -995,28 +993,5 @@
         }
     });
     @endif
-
-    // Live Real-Time WIB Clock (Asia/Jakarta)
-    function updatePosRealtimeClock() {
-        const clockEls = document.querySelectorAll('.pos-realtime-clock');
-        if (!clockEls.length) return;
-        try {
-            const now = new Date();
-            const timeString = new Intl.DateTimeFormat('id-ID', {
-                timeZone: 'Asia/Jakarta',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).format(now);
-            clockEls.forEach(el => el.textContent = timeString);
-        } catch (e) {
-            const now = new Date();
-            const str = now.toTimeString().split(' ')[0];
-            clockEls.forEach(el => el.textContent = str);
-        }
-    }
-    updatePosRealtimeClock();
-    setInterval(updatePosRealtimeClock, 1000);
 </script>
 @endpush

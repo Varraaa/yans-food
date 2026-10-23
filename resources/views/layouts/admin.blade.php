@@ -95,7 +95,7 @@
                 <li>
                     <a href="{{ route('admin.pos.index') }}" class="flex items-center p-2.5 rounded-xl transition {{ request()->routeIs('admin.pos.*') ? 'bg-[#C1440E] text-white font-bold shadow-sm' : 'text-stone-700 hover:bg-stone-100' }}">
                         <span class="text-base mr-3">🛒</span>
-                        <span>POS (Kasir)</span>
+                        <span>Kasir</span>
                     </a>
                 </li>
                 <li>

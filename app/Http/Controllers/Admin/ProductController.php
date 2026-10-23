@@ -12,7 +12,9 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('name', 'not like', '%katering%')
+            ->where('name', 'not like', '%ketring%')
+            ->get();
         $query = Product::with('category')->orderBy('name');
 
         if ($request->filled('search')) {
@@ -34,7 +36,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('name', 'not like', '%katering%')
+            ->where('name', 'not like', '%ketring%')
+            ->get();
         return view('admin.products.create', compact('categories'));
     }
 
@@ -63,7 +67,9 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('name', 'not like', '%katering%')
+            ->where('name', 'not like', '%ketring%')
+            ->get();
         return view('admin.products.edit', compact('product', 'categories'));
     }
 

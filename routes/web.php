@@ -30,7 +30,9 @@ Route::get('/about', function () {
 
 Route::get('/menu', function () {
     try {
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('name', 'not like', '%katering%')
+            ->where('name', 'not like', '%ketring%')
+            ->get();
         $products = Product::with('category')->get();
     } catch (\Throwable $e) {
         $categories = collect();
@@ -124,5 +126,3 @@ Route::get('/storage/{path}', function ($path) {
     }
     return response()->file($filePath);
 })->where('path', '.*');
-
-

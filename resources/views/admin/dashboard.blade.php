@@ -20,7 +20,7 @@
                     <span class="text-2xl">🛒</span>
                     <span class="text-[10px] font-black bg-white/20 px-2 py-0.5 rounded-full">KASIR</span>
                 </div>
-                <h4 class="font-bold text-sm sm:text-base leading-tight">Buka Kasir POS</h4>
+                <h4 class="font-bold text-sm sm:text-base leading-tight">Buka Kasir</h4>
                 <p class="text-[11px] text-white/80 mt-1 line-clamp-1">Transaksi cepat &amp; cetak struk</p>
             </a>
 
