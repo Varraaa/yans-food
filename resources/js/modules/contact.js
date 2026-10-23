@@ -15,13 +15,13 @@ export function initContactPage() {
         const minutes = wib.getMinutes();
         const currentTime = hours * 60 + minutes;
 
-        // Jam buka: 08:00 - 20:00
+        // Jam buka: 08:00 - 22:00
         const openTime = 8 * 60;
-        const closeTime = 20 * 60;
+        const closeTime = 22 * 60;
 
         if (currentTime >= openTime && currentTime < closeTime) {
             dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-            text.textContent = "Buka Sekarang • Dapur aktif melayani sampai 20:00 WIB";
+            text.textContent = "Buka Sekarang • Dapur aktif melayani sampai 22:00 WIB";
             text.className = "text-emerald-700 font-semibold";
         } else {
             dot.className = "w-2 h-2 rounded-full bg-amber-500";
@@ -54,20 +54,14 @@ export function initContactPage() {
             const message = (document.getElementById('messageContent')?.value || '').trim();
             const adminWA = "6282221222936";
 
-            let msgText = `Halo Admin Yan's Food, saya ingin berkomunikasi & negosiasi pesanan:\n\n` +
+            const msgText = `Halo Kak, saya ingin berkomunikasi & negosiasi pesanan:\n\n` +
                 `• Nama: ${name}\n` +
                 `• WhatsApp: ${phone}\n` +
-                `• Topik / Keperluan: ${type}\n`;
-
-            if (portion) {
-                msgText += `• Estimasi Porsi: ${portion}\n`;
-            }
-            if (eventDate) {
-                msgText += `• Rencana Tanggal Acara: ${eventDate}\n`;
-            }
-
-            msgText += `• Rincian / Catatan Negosiasi: ${message}\n\n` +
-                `Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan Admin Yan's Food via WhatsApp. Mohon informasinya lebih lanjut. Terima kasih!`;
+                `• Topik / Keperluan: ${type}\n` +
+                `• Estimasi Porsi: ${portion || '-'}\n` +
+                `• Rencana Tanggal Acara: ${eventDate || '-'}\n` +
+                `• Rincian / Catatan Negosiasi: ${message}\n\n` +
+                `Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan. Mohon informasinya lebih lanjut. Terima kasih!`;
 
             const encodedUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(msgText)}`;
             window.open(encodedUrl, '_blank');

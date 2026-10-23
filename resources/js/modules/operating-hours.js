@@ -1,6 +1,6 @@
 /**
  * Live Operating Hours Pill (§5.5)
- * Updates live status pill based on WIB time (08:00 - 20:00)
+ * Updates live status pill based on WIB time (08:00 - 22:00)
  */
 export function initOperatingHours() {
     const pill = document.getElementById('live-status-pill');
@@ -16,14 +16,14 @@ export function initOperatingHours() {
     const minutes = wib.getMinutes();
     const currentTime = hours * 60 + minutes;
 
-    // Jam buka: 08:00 (480) - 20:00 (1200)
+    // Jam buka: 08:00 (480) - 22:00 (1320)
     const openTime = 8 * 60;
-    const closeTime = 20 * 60;
+    const closeTime = 22 * 60;
 
     if (currentTime >= openTime && currentTime < closeTime) {
         pill.className = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-xs font-semibold';
         dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
-        text.textContent = 'Buka Sekarang • Tutup jam 20:00 WIB';
+        text.textContent = 'Buka Sekarang • Tutup jam 22:00 WIB';
     } else {
         pill.className = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-secondary font-label-sm text-xs font-semibold';
         dot.className = 'w-2 h-2 rounded-full bg-outline';

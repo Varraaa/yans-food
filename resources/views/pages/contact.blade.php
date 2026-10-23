@@ -22,20 +22,20 @@
                 <!-- Left Column: Info Cards & Form (7 Cols) -->
                 <div class="lg:col-span-7 flex flex-col gap-8">
                     <!-- 4 Info Cards Grid -->
-                    <!-- 4 Info Cards Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-reveal-group>
+                    <!-- 3 Info Cards Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-reveal-group>
                         <!-- Card 1: Alamat -->
-                        <div class="group hover-card-premium bg-surface-warm p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">location_on</span>
                                 </div>
-                                <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif group-hover:text-primary transition-colors duration-300">Alamat &amp; Pick-up</h3>
-                                <p class="font-body-sm text-on-surface font-semibold leading-relaxed">
+                                <h3 class="font-headline-sm text-on-surface mb-1 text-base sm:text-lg font-serif group-hover:text-primary transition-colors duration-300">Alamat &amp; Pick-up</h3>
+                                <p class="font-body-sm text-on-surface font-semibold leading-relaxed text-xs sm:text-sm">
                                     Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang
                                 </p>
                                 <p class="font-body-sm text-secondary mt-1.5 text-xs leading-normal">
-                                    Kp. Ciloa, Soreang, Bandung. Parkir motor &amp; mobil teduh tersedia.
+                                    Kp. Ciloa, Soreang, Bandung. Parkir aman &amp; teduh tersedia.
                                 </p>
                             </div>
                             <div class="pt-4 mt-2">
@@ -50,42 +50,42 @@
                         </div>
 
                         <!-- Card 2: Jam Operasional -->
-                        <div class="group hover-card-premium bg-surface-warm p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">schedule</span>
                                 </div>
-                                <h3 class="font-headline-sm text-on-surface mb-2 text-lg font-serif group-hover:text-primary transition-colors duration-300">Jam Buka Dapur</h3>
-                                <div class="space-y-1 text-xs sm:text-sm">
+                                <h3 class="font-headline-sm text-on-surface mb-2 text-base sm:text-lg font-serif group-hover:text-primary transition-colors duration-300">Jam Buka Dapur</h3>
+                                <div class="space-y-1 text-xs">
                                     <div class="flex items-center justify-between font-body-sm">
                                         <span class="text-secondary">Dapur &amp; Ambil:</span>
-                                        <span class="font-semibold text-on-surface">08.00 - 20.00 WIB</span>
+                                        <span class="font-semibold text-on-surface">08.00 - 22.00 WIB</span>
                                     </div>
                                     <div class="flex items-center justify-between font-body-sm">
                                         <span class="text-secondary">Delivery Online:</span>
-                                        <span class="font-semibold text-on-surface">09.00 - 19.30 WIB</span>
+                                        <span class="font-semibold text-on-surface">08.30 - 21.30 WIB</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="pt-4 mt-2">
                                 <span class="inline-block px-2.5 py-0.5 rounded-full bg-success-surface text-success font-label-sm text-[11px] font-semibold">
-                                    Sedia Setiap Hari
+                                    Buka Setiap Hari
                                 </span>
                             </div>
                         </div>
 
                         <!-- Card 3: WhatsApp Resmi -->
-                        <div class="group hover-card-premium bg-surface-warm p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">chat</span>
                                 </div>
-                                <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif group-hover:text-primary transition-colors duration-300">WhatsApp Resmi</h3>
-                                <p class="font-numeric-currency text-primary-container mb-1 tracking-normal text-base font-bold">
+                                <h3 class="font-headline-sm text-on-surface mb-1 text-base sm:text-lg font-serif group-hover:text-primary transition-colors duration-300">WhatsApp Resmi</h3>
+                                <p class="font-numeric-currency text-primary-container mb-1 tracking-normal text-sm sm:text-base font-bold">
                                     +62 822-2122-2936
                                 </p>
                                 <p class="font-body-sm text-secondary text-xs">
-                                    Layanan CS, informasi menu, &amp; pemesanan takeout/delivery.
+                                    Layanan CS, konsultasi pesanan khusus, &amp; pemesanan cepat.
                                 </p>
                             </div>
                             <div class="pt-4 mt-2">
@@ -93,28 +93,6 @@
                                     <span class="material-symbols-outlined text-[16px]">send</span>
                                     <span>Chat Langsung</span>
                                 </a>
-                            </div>
-                        </div>
-
-                        <!-- Card 4: Email & Sosmed -->
-                        <div class="group hover-card-premium bg-surface-warm p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
-                            <div>
-                                <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
-                                    <span class="material-symbols-outlined text-[22px]">alternate_email</span>
-                                </div>
-                                <h3 class="font-headline-sm text-on-surface mb-1 text-lg font-serif group-hover:text-primary transition-colors duration-300">Surel &amp; Medsos</h3>
-                                <a href="mailto:halo@yansfood.id" class="font-body-sm text-on-surface font-semibold hover:text-primary transition-colors block text-sm">
-                                    halo@yansfood.id
-                                </a>
-                                <div class="flex items-center gap-3 mt-2 text-secondary font-body-sm text-xs">
-                                    <span class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-[16px] text-tertiary">photo_camera</span>
-                                        @yansfood.official
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="pt-4 mt-2 text-xs text-secondary font-label-sm">
-                                <span>Respons Cepat</span>
                             </div>
                         </div>
                     </div>

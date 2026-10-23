@@ -58,7 +58,7 @@ export function initProductModal() {
 
     // 2. Populate modal content from card data attributes
     function populateModalData(card) {
-        const title = card.getAttribute('data-name') || '';
+        const title = card.getAttribute('data-title') || card.querySelector('h3')?.textContent?.trim() || card.getAttribute('data-name') || '';
         const price = card.getAttribute('data-price-formatted') || card.getAttribute('data-price') || '';
         const unit = card.getAttribute('data-unit') || '/ pcs';
         const category = card.getAttribute('data-category-name') || card.getAttribute('data-category') || '';
@@ -90,13 +90,13 @@ export function initProductModal() {
 
         // Actions configuration (§5.3 points 346–348)
         const adminWA = "6282221222936";
+        const waMsg = encodeURIComponent(`Halo Kak, saya ingin pesan *${title}* apakah masih ready stok nya kak ?`);
         if (isAvailable) {
             if (platformActionBtn) {
                 platformActionBtn.classList.remove('hidden');
                 platformActionBtn.href = '/pesan#online';
             }
             if (waActionBtn) {
-                const waMsg = encodeURIComponent(`Halo Yan's Food, saya ingin pesan *${title}*.`);
                 waActionBtn.href = `https://wa.me/${adminWA}?text=${waMsg}`;
                 waActionBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">chat</span><span>Tanya via WhatsApp</span>';
             }
@@ -105,9 +105,8 @@ export function initProductModal() {
                 platformActionBtn.classList.add('hidden');
             }
             if (waActionBtn) {
-                const waMsg = encodeURIComponent(`Halo Yan's Food, kapan menu *${title}* tersedia kembali?`);
                 waActionBtn.href = `https://wa.me/${adminWA}?text=${waMsg}`;
-                waActionBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">notifications</span><span>Tanya Kapan Tersedia</span>';
+                waActionBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">chat</span><span>Tanya via WhatsApp</span>';
             }
         }
 

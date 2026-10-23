@@ -293,7 +293,7 @@
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">2 Pilihan Pesan Mudah &amp; Cepat</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu &amp; Datang Langsung</h2>
                 <p class="font-body-lg text-secondary text-sm sm:text-base">
-                    Mau santap lezat tanpa repot? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery (ShopeeFood, GoFood, GrabFood) atau datang langsung ke tempat kami untuk pesan &amp; bawa pulang.
+                    Mau santap lezat tanpa repot? Kami siap antar langsung pesanan hangat ke depan pintumu lewat online delivery (ShopeeFood, GoFood, GrabFood) atau datang langsung ke tempat kami untuk pesan.
                 </p>
             </div>
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">

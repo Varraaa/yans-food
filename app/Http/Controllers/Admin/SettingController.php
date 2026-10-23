@@ -22,7 +22,7 @@ class SettingController extends Controller
             'store_name' => "Yan's Food",
             'store_address' => 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang',
             'store_phone' => '082221222936',
-            'operational_hours' => 'Senin - Sabtu: 08:00 - 20:00 WIB',
+            'operational_hours' => 'Setiap Hari: 08:00 - 22:00 WIB',
             'shopeefood_url' => 'https://shopee.co.id/universal-link/now-food',
             'gofood_url' => 'https://gofood.link/u/yansfood',
             'grabfood_url' => 'https://food.grab.com/id/id/restaurant/yans-food',

@@ -126,7 +126,7 @@
 
                 <div class="space-y-1">
                     <label class="block font-bold text-stone-700 uppercase tracking-wider">Jam Operasional *</label>
-                    <input type="text" name="operational_hours" value="{{ old('operational_hours', $settings['operational_hours'] ?? 'Senin - Sabtu: 08:00 - 20:00 WIB') }}" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                    <input type="text" name="operational_hours" value="{{ old('operational_hours', $settings['operational_hours'] ?? 'Setiap Hari: 08:00 - 22:00 WIB') }}" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                 </div>
             </div>
 

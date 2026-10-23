@@ -26,6 +26,7 @@
          data-category="{{ $categorySlug }}"
          data-category-name="{{ $category }}"
          data-name="{{ strtolower($title) }}"
+         data-title="{{ $title }}"
          data-price="{{ $numPrice }}"
          data-price-formatted="{{ $formattedPrice }}"
          data-unit="{{ $unit }}"

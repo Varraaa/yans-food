@@ -1,7 +1,7 @@
 <!-- Modular Footer (§5.6) -->
 <footer class="w-full bg-inverse-surface text-inverse-on-surface pt-16 pb-24 lg:pb-12 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20">
             
             <!-- Col 1: Brand & Motto -->
             <div class="space-y-4">
@@ -52,34 +52,15 @@
                     </li>
                     <li class="flex items-start gap-2.5">
                         <span class="material-symbols-outlined text-[20px] text-tertiary-fixed shrink-0">schedule</span>
-                        <span>Buka Setiap Hari: 08.00 - 20.00 WIB</span>
+                        <span>Buka Setiap Hari: 08.00 - 22.00 WIB</span>
                     </li>
                     <li class="flex items-start gap-2.5">
                         <span class="material-symbols-outlined text-[20px] text-tertiary-fixed shrink-0">call</span>
                         <a href="https://wa.me/6282221222936" target="_blank" rel="noopener" class="hover:text-tertiary-fixed transition-colors">
-                            +62 822-2122-2936
+                            +62 822-2122-2936 (WhatsApp Admin)
                         </a>
                     </li>
                 </ul>
-            </div>
-
-            <!-- Col 4: Sosial Media -->
-            <div class="space-y-4">
-                <h4 class="font-label-md uppercase tracking-wider text-tertiary-fixed font-semibold text-xs">Sosial Media</h4>
-                <div class="flex flex-col gap-2.5 font-body-sm text-surface-variant">
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Yan's Food" class="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-                        <span class="material-symbols-outlined text-[18px] text-tertiary-fixed">photo_camera</span>
-                        <span>Instagram @yansfood.official</span>
-                    </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok Yan's Food" class="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-                        <span class="material-symbols-outlined text-[18px] text-tertiary-fixed">videocam</span>
-                        <span>TikTok @yansfood</span>
-                    </a>
-                    <a href="mailto:halo@yansfood.id" aria-label="Email Yan's Food" class="flex items-center gap-2 hover:text-tertiary-fixed transition-colors">
-                        <span class="material-symbols-outlined text-[18px] text-tertiary-fixed">mail</span>
-                        <span>halo@yansfood.id</span>
-                    </a>
-                </div>
             </div>
         </div>
 

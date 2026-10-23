@@ -59,7 +59,7 @@
                                 <span class="material-symbols-outlined text-secondary text-[20px] transition-transform duration-300 group-hover:translate-y-1 group-hover:text-primary">arrow_downward</span>
                             </div>
                             <p class="font-body-sm text-secondary text-xs sm:text-sm leading-relaxed">
-                                Datang langsung, pesan di tempat, tunggu pesanan disiapkan segar, terima &amp; bawa pulang. <em>(Konsep drive-thru / takeaway, tidak bisa makan di tempat)</em>.
+                                Datang langsung, pesan di tempat, tunggu pesanan disiapkan segar, terima &amp; bawa pulang. <em>(Konsep drive-thru / takeaway)</em>.
                             </p>
                             <span class="font-label-sm text-primary font-bold text-xs inline-flex items-center gap-1 pt-1 group-hover:translate-x-1 transition-transform duration-200">
                                 <span>Panduan Datang Langsung</span>
@@ -96,7 +96,7 @@
                         </div>
                         <div>
                             <p class="font-label-sm text-secondary text-xs font-medium">Jam Buka Dapur Online</p>
-                            <p class="font-label-md text-on-surface font-bold text-sm">08.00 – 20.00 WIB (Setiap Hari)</p>
+                            <p class="font-label-md text-on-surface font-bold text-sm">08.00 – 22.00 WIB (Setiap Hari)</p>
                         </div>
                     </div>
                 </div>
@@ -293,7 +293,7 @@
                             </p>
                             <div class="pt-1 flex items-center justify-between text-xs font-semibold">
                                 <span class="text-secondary">Jam Layanan:</span>
-                                <span class="text-primary font-bold">08.00 – 20.00 WIB (Setiap Hari)</span>
+                                <span class="text-primary font-bold">08.00 – 22.00 WIB (Setiap Hari)</span>
                             </div>
                         </div>
 
