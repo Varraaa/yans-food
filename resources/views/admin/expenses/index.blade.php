@@ -96,12 +96,6 @@
                         class="px-3 py-1 rounded-lg font-bold text-xs transition flex items-center gap-1.5 {{ request('month') === $m['key'] ? 'bg-[#C1440E] text-white shadow-xs' : 'bg-stone-100 text-stone-700 hover:bg-stone-200' }}"
                     >
                         <span>{{ $m['label'] }}</span>
-                        @if($m['is_current'])
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Bulan Berjalan"></span>
-                        @endif
-                        <span class="px-1.5 py-0.2 rounded-full text-[10px] {{ request('month') === $m['key'] ? 'bg-white/20 text-white' : 'bg-stone-200 text-stone-600' }}">
-                            {{ $m['count'] }}
-                        </span>
                     </a>
                 @endforeach
             </div>
@@ -149,21 +143,9 @@
                         🗓️
                     </div>
                     <div>
-                        <div class="flex items-center gap-2">
-                            <h2 class="text-base font-black text-stone-900 font-serif">
-                                Pengeluaran Dapur: {{ $monthTitle }}
-                            </h2>
-                            @if($isCurrentMonth)
-                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
-                                    <span>Bulan Berjalan (Real-time)</span>
-                                </span>
-                            @else
-                                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-stone-100 text-stone-600 border border-stone-200">
-                                    Arsip Riwayat
-                                </span>
-                            @endif
-                        </div>
+                        <h2 class="text-base font-black text-stone-900 font-serif">
+                            Pengeluaran Dapur: {{ $monthTitle }}
+                        </h2>
                         <p class="text-[11px] text-stone-500 mt-0.5">Seluruh catatan belanja &amp; biaya dapur pada bulan {{ $monthTitle }}</p>
                     </div>
                 </div>

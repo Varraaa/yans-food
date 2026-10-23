@@ -19,10 +19,7 @@
                 </div>
             </div>
             <div>
-                <div class="flex items-center gap-2">
-                    <h1 class="text-xl font-black text-stone-900 tracking-tight font-serif">Laporan &amp; Keuangan</h1>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-[#C1440E] border border-amber-200">Yan's Food</span>
-                </div>
+                <h1 class="text-xl font-black text-stone-900 tracking-tight font-serif">Laporan &amp; Keuangan</h1>
                 <p class="text-xs text-stone-500 mt-0.5">Analisis arus kas kasir POS, performa menu, dan laba rugi operasional</p>
             </div>
         </div>
