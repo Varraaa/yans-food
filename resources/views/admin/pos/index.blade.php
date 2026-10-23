@@ -63,7 +63,7 @@
                         <input 
                             type="text" 
                             id="search-input"
-                            placeholder="Cari menu Yan's Food... (tekan F2)" 
+                            placeholder="Cari menu Yan's Food..." 
                             class="w-full pl-10 pr-9 py-2.5 rounded-xl border border-stone-300 bg-stone-50/70 text-stone-900 text-sm focus:bg-white focus:ring-2 focus:ring-[#C1440E] focus:outline-none transition shadow-inner placeholder:text-stone-400"
                         >
                         <button 
@@ -181,7 +181,7 @@
         </div>
 
         {{-- RIGHT COLUMN: CART & BILLING TERMINAL (5 or 4 COLS) --}}
-        <div class="lg:col-span-5 xl:col-span-4 bg-white rounded-2xl shadow-sm border border-stone-200/90 p-4 sm:p-5 space-y-4 sticky top-20">
+        <div id="cart-column" class="lg:col-span-5 xl:col-span-4 bg-white rounded-2xl shadow-sm border border-stone-200/90 p-4 sm:p-5 space-y-4 sticky top-20">
             {{-- CART HEADER --}}
             <div class="flex items-center justify-between pb-3 border-b border-stone-200">
                 <div class="flex items-center gap-2.5">
@@ -231,7 +231,6 @@
             <div class="pt-3 border-t border-stone-200 space-y-2">
                 <div class="flex items-center justify-between">
                     <label class="block text-[10px] font-black text-stone-400 uppercase tracking-widest">Metode Pembayaran</label>
-                    <span class="text-[10px] text-stone-400 font-mono">(Tekan F4)</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2 p-1 bg-stone-100 rounded-2xl border border-stone-200/80">
                     {{-- CASH BUTTON --}}
@@ -373,12 +372,33 @@
                         class="w-full py-3.5 px-4 rounded-xl font-black text-white shadow-md transition flex items-center justify-center gap-2 bg-stone-300 cursor-not-allowed text-xs sm:text-sm active:scale-[0.99]"
                     >
                         <span class="material-symbols-outlined text-[18px]">payments</span>
-                        <span id="btn-process-text">BAYAR CASH & CETAK STRUK (F9)</span>
+                        <span id="btn-process-text">BAYAR CASH</span>
                     </button>
                 </div>
             </div>
+</div>
+
+{{-- FLOATING MOBILE CART BAR (lg:hidden) --}}
+<div id="mobile-cart-bar" class="lg:hidden fixed bottom-4 left-3 right-3 z-30 hidden transition-all duration-300">
+    <a 
+        href="#cart-column"
+        onclick="document.getElementById('cart-column')?.scrollIntoView({behavior: 'smooth'})"
+        class="w-full bg-stone-900/95 backdrop-blur-md text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-between border border-white/20 active:scale-[0.98] transition hover:bg-stone-900"
+    >
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#C1440E] text-white flex items-center justify-center font-black text-sm shadow-sm" id="mobile-cart-badge">
+                0
+            </div>
+            <div>
+                <span class="text-[10px] text-stone-300 font-bold uppercase tracking-wider block">Total Pesanan</span>
+                <span class="text-base font-black text-amber-400 font-mono tracking-tight" id="mobile-cart-total">Rp 0</span>
+            </div>
         </div>
-    </div>
+        <div class="flex items-center gap-1.5 text-xs font-black bg-white/20 hover:bg-white/30 px-3.5 py-2 rounded-xl transition">
+            <span>Bayar</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+        </div>
+    </a>
 </div>
 
 {{-- RECEIPT MODAL (FALLBACK MODAL) --}}
@@ -668,6 +688,20 @@
         if (labelItemCount) labelItemCount.textContent = `${itemCount} menu dipilih`;
         if (qrisSummaryTotal) qrisSummaryTotal.textContent = window.formatRupiah(total);
 
+        // Update Floating Mobile Cart Bar
+        const mobileCartBar = document.getElementById('mobile-cart-bar');
+        const mobileCartBadge = document.getElementById('mobile-cart-badge');
+        const mobileCartTotal = document.getElementById('mobile-cart-total');
+        if (mobileCartBar) {
+            if (itemCount > 0) {
+                mobileCartBar.classList.remove('hidden');
+                if (mobileCartBadge) mobileCartBadge.textContent = itemCount;
+                if (mobileCartTotal) mobileCartTotal.textContent = window.formatRupiah(total);
+            } else {
+                mobileCartBar.classList.add('hidden');
+            }
+        }
+
         const change = Math.max(0, amountPaid - total);
         const shortfall = Math.max(0, total - amountPaid);
 
@@ -684,7 +718,7 @@
         const hasItems = Object.keys(window.cart).length > 0;
 
         if (window.paymentMethod === 'CASH') {
-            if (btnProcessText) btnProcessText.textContent = 'BAYAR CASH & CETAK STRUK (F9)';
+            if (btnProcessText) btnProcessText.textContent = 'BAYAR CASH';
             
             if (amountPaid < total && total > 0) {
                 if (statusShortfall) statusShortfall.classList.remove('hidden');
@@ -802,7 +836,7 @@
             .catch(err => {
                 if (btnProcess) {
                     btnProcess.disabled = false;
-                    btnProcess.innerHTML = `<span class="material-symbols-outlined text-[18px]">payments</span><span id="btn-process-text">BAYAR CASH & CETAK STRUK (F9)</span>`;
+                    btnProcess.innerHTML = `<span class="material-symbols-outlined text-[18px]">payments</span><span id="btn-process-text">BAYAR CASH</span>`;
                 }
                 alert('Kesalahan Transaksi: ' + err.message);
             });

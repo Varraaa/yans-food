@@ -3,18 +3,18 @@
 @section('content')
 <div class="space-y-6 max-w-4xl mx-auto">
     {{-- BACK & ACTIONS --}}
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
             <span>← Kembali ke Riwayat Transaksi</span>
         </a>
-        <button type="button" onclick="window.print()" class="px-4 py-2 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+        <button type="button" onclick="window.print()" class="px-4 py-2 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5 w-full sm:w-auto">
             <span>🖨️ Cetak Struk Ulang</span>
         </button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {{-- DETAILS CARD --}}
-        <div class="md:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
+        <div class="md:col-span-7 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
             <div class="flex items-center justify-between pb-4 border-b border-stone-200">
                 <div>
                     <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Nomor Struk</span>
@@ -65,8 +65,8 @@
             {{-- ITEMS TABLE --}}
             <div class="pt-2">
                 <h4 class="text-xs font-bold text-stone-900 uppercase tracking-wider mb-2">Item Belanja</h4>
-                <div class="rounded-xl border border-stone-200 overflow-hidden">
-                    <table class="w-full text-left text-xs">
+                <div class="rounded-xl border border-stone-200 overflow-x-auto">
+                    <table class="w-full text-left text-xs whitespace-nowrap min-w-[340px]">
                         <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200">
                             <tr>
                                 <th class="py-2.5 px-3">Nama Menu</th>

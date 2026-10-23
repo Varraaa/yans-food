@@ -8,9 +8,9 @@
         </a>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
         <div>
-            <h1 class="text-xl font-bold text-stone-900">Catat Pengeluaran Dapur</h1>
+            <h1 class="text-lg sm:text-xl font-bold text-stone-900">Catat Pengeluaran Dapur</h1>
             <p class="text-xs text-stone-500 mt-0.5">Catat belanja bahan baku, gas, peralatan, atau biaya operasional.</p>
         </div>
 
@@ -59,9 +59,9 @@
                 <textarea name="description" rows="2" placeholder="Nama toko, pasar, atau rincian..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">{{ old('description') }}</textarea>
             </div>
 
-            <div class="pt-4 flex items-center justify-end gap-3 border-t border-stone-100">
-                <a href="{{ route('admin.expenses.index') }}" class="px-4 py-2 text-stone-600 hover:text-stone-900 font-bold">Batal</a>
-                <button type="submit" class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition">
+            <div class="pt-4 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 border-t border-stone-100">
+                <a href="{{ route('admin.expenses.index') }}" class="px-4 py-2.5 sm:py-2 text-stone-600 hover:text-stone-900 font-bold text-center">Batal</a>
+                <button type="submit" class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition text-center">
                     Simpan Pengeluaran
                 </button>
             </div>

@@ -65,17 +65,17 @@
                 <div id="ingredients-wrapper" class="space-y-2.5">
                     <!-- Default Row 1 -->
                     <div class="ingredient-row grid grid-cols-12 gap-2 items-center bg-stone-50 p-2.5 rounded-xl border border-stone-200">
-                        <div class="col-span-5">
+                        <div class="col-span-12 sm:col-span-5">
                             <input type="text" name="ingredients[0][name]" placeholder="Nama Bahan (Ayam, Bawang, Kecap)" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
                         </div>
-                        <div class="col-span-3">
+                        <div class="col-span-5 sm:col-span-3">
                             <input type="number" step="any" name="ingredients[0][quantity]" placeholder="Qty" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
                         </div>
-                        <div class="col-span-3">
+                        <div class="col-span-5 sm:col-span-3">
                             <input type="text" name="ingredients[0][unit]" placeholder="Satuan (kg, gr, sdm)" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
                         </div>
-                        <div class="col-span-1 text-center">
-                            <button type="button" onclick="this.closest('.ingredient-row').remove()" class="text-rose-500 hover:text-rose-700 font-bold text-base">✕</button>
+                        <div class="col-span-2 sm:col-span-1 text-center">
+                            <button type="button" onclick="this.closest('.ingredient-row').remove()" class="text-rose-500 hover:text-rose-700 font-bold text-base p-1">✕</button>
                         </div>
                     </div>
                 </div>
@@ -98,17 +98,17 @@
         const div = document.createElement('div');
         div.className = 'ingredient-row grid grid-cols-12 gap-2 items-center bg-stone-50 p-2.5 rounded-xl border border-stone-200';
         div.innerHTML = `
-            <div class="col-span-5">
+            <div class="col-span-12 sm:col-span-5">
                 <input type="text" name="ingredients[${rowIndex}][name]" placeholder="Nama Bahan" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
             </div>
-            <div class="col-span-3">
+            <div class="col-span-5 sm:col-span-3">
                 <input type="number" step="any" name="ingredients[${rowIndex}][quantity]" placeholder="Qty" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
             </div>
-            <div class="col-span-3">
+            <div class="col-span-5 sm:col-span-3">
                 <input type="text" name="ingredients[${rowIndex}][unit]" placeholder="Satuan" required class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 bg-white text-xs">
             </div>
-            <div class="col-span-1 text-center">
-                <button type="button" onclick="this.closest('.ingredient-row').remove()" class="text-rose-500 hover:text-rose-700 font-bold text-base">✕</button>
+            <div class="col-span-2 sm:col-span-1 text-center">
+                <button type="button" onclick="this.closest('.ingredient-row').remove()" class="text-rose-500 hover:text-rose-700 font-bold text-base p-1">✕</button>
             </div>
         `;
         wrapper.appendChild(div);

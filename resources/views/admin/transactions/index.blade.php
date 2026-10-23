@@ -21,72 +21,74 @@
             </a>
         </div>
 
-        <form action="{{ route('admin.transactions.index') }}" method="GET" class="pt-3 border-t border-stone-100 flex flex-wrap items-center gap-3 text-xs">
-            <div class="flex-1 min-w-[200px]">
+        <form action="{{ route('admin.transactions.index') }}" method="GET" class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 text-xs">
+            <div class="w-full sm:flex-1 sm:min-w-[200px]">
                 <input 
                     type="text" 
                     name="search" 
                     value="{{ request('search') }}" 
                     placeholder="Cari nomor transaksi / nama pelanggan..." 
-                    class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
+                    class="w-full px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
                 >
             </div>
 
             {{-- FILTER BULAN --}}
-            <div>
-                <select name="month" class="px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+            <div class="w-full sm:w-auto">
+                <select name="month" class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     <option value="all">Semua Bulan</option>
                     @foreach($availableMonths as $m)
                         <option value="{{ $m['key'] }}" {{ request('month') === $m['key'] ? 'selected' : '' }}>
-                            {{ $m['label'] }} {{ $m['is_current'] ? '(Bulan Ini)' : '' }} ({{ $m['count'] }})
+                            {{ $m['label'] }} {{ $m['is_current'] ? '(Bulan Ini)' : '' }}
                         </option>
                     @endforeach
                 </select>
             </div>
 
-            <div>
+            <div class="w-full sm:w-auto">
                 <input 
                     type="date" 
                     name="date" 
                     value="{{ request('date') }}" 
-                    class="px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
+                    class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
                     title="Filter Tanggal Spesifik"
                 >
             </div>
 
-            <div>
-                <select name="method" class="px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+            <div class="w-full sm:w-auto">
+                <select name="method" class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     <option value="all">Semua Metode</option>
                     <option value="CASH" {{ strtoupper(request('method')) === 'CASH' ? 'selected' : '' }}>Tunai (Cash)</option>
                     <option value="QRIS" {{ strtoupper(request('method')) === 'QRIS' ? 'selected' : '' }}>QRIS</option>
                 </select>
             </div>
 
-            <button type="submit" class="px-4 py-2 bg-stone-800 text-white rounded-xl font-bold hover:bg-stone-900 transition">
-                Filter
-            </button>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <button type="submit" class="flex-1 sm:flex-initial px-5 py-2.5 sm:py-2 bg-stone-800 text-white rounded-xl font-bold hover:bg-stone-900 transition text-center">
+                    Filter
+                </button>
 
-            @if(request()->hasAny(['search', 'date', 'month', 'method']))
-                <a href="{{ route('admin.transactions.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold transition">
-                    Reset
-                </a>
-            @endif
+                @if(request()->hasAny(['search', 'date', 'month', 'method']))
+                    <a href="{{ route('admin.transactions.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold transition text-center">
+                        Reset
+                    </a>
+                @endif
+            </div>
         </form>
 
         {{-- QUICK MONTH NAVIGATION PILLS --}}
         @if($availableMonths->count() > 0)
-            <div class="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-                <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider mr-1">Pilih Bulan:</span>
+            <div class="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+                <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider mr-1 shrink-0">Pilih Bulan:</span>
                 <a 
                     href="{{ route('admin.transactions.index', array_merge(request()->except('month'), ['month' => 'all'])) }}"
-                    class="px-3 py-1 rounded-lg font-bold text-xs transition {{ (!request('month') || request('month') === 'all') ? 'bg-stone-900 text-white shadow-xs' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
+                    class="px-3 py-1 rounded-lg font-bold text-xs transition shrink-0 {{ (!request('month') || request('month') === 'all') ? 'bg-stone-900 text-white shadow-xs' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
                 >
                     Semua Bulan
                 </a>
                 @foreach($availableMonths as $m)
                     <a 
                         href="{{ route('admin.transactions.index', array_merge(request()->except('month'), ['month' => $m['key']])) }}"
-                        class="px-3 py-1 rounded-lg font-bold text-xs transition flex items-center gap-1.5 {{ request('month') === $m['key'] ? 'bg-[#C1440E] text-white shadow-xs' : 'bg-stone-100 text-stone-700 hover:bg-stone-200' }}"
+                        class="px-3 py-1 rounded-lg font-bold text-xs transition flex items-center gap-1.5 shrink-0 {{ request('month') === $m['key'] ? 'bg-[#C1440E] text-white shadow-xs' : 'bg-stone-100 text-stone-700 hover:bg-stone-200' }}"
                     >
                         <span>{{ $m['label'] }}</span>
                     </a>
@@ -96,17 +98,17 @@
     </div>
 
     {{-- TOTAL BANNER --}}
-    <div class="bg-gradient-to-r from-amber-600 to-[#C1440E] text-white p-5 rounded-2xl shadow-sm flex items-center justify-between">
+    <div class="bg-gradient-to-r from-amber-600 to-[#C1440E] text-white p-4 sm:p-5 rounded-2xl shadow-sm flex items-center justify-between gap-3">
         <div>
-            <span class="text-xs uppercase font-bold tracking-wider opacity-85">
-                Total Omset Transaksi Sesuai Filter
+            <span class="text-[11px] sm:text-xs uppercase font-bold tracking-wider opacity-85 block">
+                Total Omset Transaksi
                 @if(request('month') && request('month') !== 'all')
                     ({{ \Carbon\Carbon::createFromFormat('Y-m', request('month'))->translatedFormat('F Y') }})
                 @endif
             </span>
-            <h2 class="text-2xl font-black mt-1 font-mono">Rp {{ number_format($totalFilteredAmount, 0, ',', '.') }}</h2>
+            <h2 class="text-xl sm:text-2xl font-black mt-1 font-mono">Rp {{ number_format($totalFilteredAmount, 0, ',', '.') }}</h2>
         </div>
-        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/20 flex items-center justify-center text-xl sm:text-2xl shrink-0">
             🧾
         </div>
     </div>
@@ -136,13 +138,13 @@
 
         <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden space-y-0">
             {{-- MONTH SECTION HEADER --}}
-            <div class="p-4 sm:p-5 bg-gradient-to-r from-stone-50 via-amber-50/20 to-white border-b border-stone-200 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="p-4 sm:p-5 bg-gradient-to-r from-stone-50 via-amber-50/20 to-white border-b border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl {{ $isCurrentMonth ? 'bg-[#C1440E] text-white' : 'bg-stone-200 text-stone-700' }} flex items-center justify-center font-bold text-sm shadow-xs">
+                    <div class="w-9 h-9 rounded-xl {{ $isCurrentMonth ? 'bg-[#C1440E] text-white' : 'bg-stone-200 text-stone-700' }} flex items-center justify-center font-bold text-sm shadow-xs shrink-0">
                         🗓️
                     </div>
                     <div>
-                        <h2 class="text-base font-black text-stone-900 font-serif">
+                        <h2 class="text-sm sm:text-base font-black text-stone-900 font-serif">
                             Riwayat Transaksi: {{ $monthTitle }}
                         </h2>
                         <p class="text-[11px] text-stone-500 mt-0.5">Seluruh transaksi penjualan kasir pada bulan {{ $monthTitle }}</p>
@@ -150,17 +152,17 @@
                 </div>
 
                 {{-- MONTH KPI SUMMARY CHIPS --}}
-                <div class="flex flex-wrap items-center gap-2 text-xs">
-                    <span class="px-2.5 py-1 bg-stone-100 text-stone-700 rounded-lg font-bold">
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs">
+                    <span class="px-2.5 py-1 bg-stone-100 text-stone-700 rounded-lg font-bold text-[11px] sm:text-xs">
                         {{ $monthTxCount }} Transaksi
                     </span>
-                    <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-bold font-mono">
+                    <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg font-bold font-mono text-[11px] sm:text-xs">
                         Cash: Rp {{ number_format($cashTotal, 0, ',', '.') }}
                     </span>
-                    <span class="px-2.5 py-1 bg-sky-50 text-sky-800 border border-sky-200 rounded-lg font-bold font-mono">
+                    <span class="px-2.5 py-1 bg-sky-50 text-sky-800 border border-sky-200 rounded-lg font-bold font-mono text-[11px] sm:text-xs">
                         QRIS: Rp {{ number_format($qrisTotal, 0, ',', '.') }}
                     </span>
-                    <span class="px-3 py-1 bg-stone-900 text-white rounded-lg font-black font-mono">
+                    <span class="px-2.5 sm:px-3 py-1 bg-stone-900 text-white rounded-lg font-black font-mono text-[11px] sm:text-xs">
                         Total: Rp {{ number_format($monthTotal, 0, ',', '.') }}
                     </span>
                 </div>
@@ -168,7 +170,7 @@
 
             {{-- TRANSACTIONS TABLE UNTUK BULAN INI --}}
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
+                <table class="w-full text-left text-xs whitespace-nowrap min-w-[720px]">
                     <thead class="bg-stone-50/75 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                         <tr>
                             <th class="py-3 px-4">No. Transaksi</th>

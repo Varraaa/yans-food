@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto space-y-6">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
         <div>
             <span class="text-[10px] font-bold text-[#C1440E] uppercase tracking-wider">Pengelolaan Akun</span>
-            <h1 class="text-xl font-bold text-stone-900 mt-0.5">Akun Admin Tunggal (Owner)</h1>
+            <h1 class="text-lg sm:text-xl font-bold text-stone-900 mt-0.5">Akun Admin Tunggal (Owner)</h1>
             <p class="text-xs text-stone-500 mt-1">
                 Yan's Food dikelola oleh satu orang pemilik yang bertindak langsung sebagai administrator utama dengan kendali penuh atas seluruh sistem dan operasional.
             </p>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="pt-4 flex items-center justify-end border-t border-stone-100">
-                <button type="submit" class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition">
+                <button type="submit" class="w-full sm:w-auto px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition text-center">
                     Simpan Perubahan Akun
                 </button>
             </div>

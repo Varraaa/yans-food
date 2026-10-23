@@ -159,7 +159,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
+                <table class="w-full text-left text-xs whitespace-nowrap min-w-[460px]">
                     <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                         <tr>
                             <th class="py-2.5 px-4">Nama Produk</th>
@@ -214,7 +214,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
+                <table class="w-full text-left text-xs whitespace-nowrap min-w-[460px]">
                     <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                         <tr>
                             <th class="py-2.5 px-4">No. Transaksi</th>

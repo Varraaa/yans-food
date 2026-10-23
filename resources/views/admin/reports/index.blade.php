@@ -24,29 +24,29 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
+        <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
             {{-- TABS --}}
-            <div class="bg-stone-100 p-1 rounded-xl flex items-center gap-1 border border-stone-200">
+            <div class="bg-stone-100 p-1 rounded-xl flex items-center gap-1 border border-stone-200 w-full sm:w-auto overflow-x-auto">
                 <a 
                     href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'financial'])) }}"
-                    class="px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-2 {{ $activeTab === 'financial' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
+                    class="flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 {{ $activeTab === 'financial' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
                 >
                     <span class="material-symbols-outlined text-[16px] text-amber-600">balance</span>
-                    <span>Laba Rugi &amp; Arus Kas</span>
+                    <span class="whitespace-nowrap">Laba Rugi &amp; Arus Kas</span>
                 </a>
                 <a 
                     href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'pos'])) }}"
-                    class="px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-2 {{ $activeTab === 'pos' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
+                    class="flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 {{ $activeTab === 'pos' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
                 >
                     <span class="material-symbols-outlined text-[16px] text-emerald-600">point_of_sale</span>
-                    <span>Penjualan Kasir</span>
+                    <span class="whitespace-nowrap">Penjualan Kasir</span>
                 </a>
             </div>
 
             {{-- EXPORT BUTTON --}}
             <a 
                 href="{{ route('admin.reports.export', request()->query()) }}"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-sm transition active:scale-[0.98]"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-sm transition active:scale-[0.98]"
             >
                 <span class="material-symbols-outlined text-[16px]">download</span>
                 <span>Export CSV</span>
@@ -55,8 +55,8 @@
     </div>
 
     {{-- FILTER BAR: PERIOD SHORTCUTS & CUSTOM DATES --}}
-    <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200/80 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-1.5 overflow-x-auto text-xs pb-1 sm:pb-0">
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+        <div class="flex items-center gap-1.5 overflow-x-auto text-xs pb-1 sm:pb-0 no-scrollbar w-full md:w-auto">
             @foreach([
                 'today' => 'Hari Ini',
                 'this_week' => 'Minggu Ini',
@@ -67,21 +67,21 @@
             ] as $key => $label)
                 <a 
                     href="{{ route('admin.reports.index', array_merge(request()->query(), ['period' => $key])) }}"
-                    class="px-3.5 py-1.5 rounded-lg font-bold text-xs transition {{ $period === $key ? 'bg-stone-900 text-white shadow-sm' : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900' }}"
+                    class="px-3.5 py-1.5 rounded-lg font-bold text-xs transition shrink-0 {{ $period === $key ? 'bg-stone-900 text-white shadow-sm' : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900' }}"
                 >
                     {{ $label }}
                 </a>
             @endforeach
         </div>
 
-        <form action="{{ route('admin.reports.index') }}" method="GET" class="flex flex-wrap items-center gap-2 text-xs">
+        <form action="{{ route('admin.reports.index') }}" method="GET" class="flex flex-wrap items-center gap-2 text-xs w-full md:w-auto">
             <input type="hidden" name="tab" value="{{ $activeTab }}">
             <input type="hidden" name="period" value="{{ $period }}">
 
             @if($activeTab === 'pos')
-                <div class="flex items-center gap-1.5">
-                    <span class="text-stone-500 font-medium">Filter Menu:</span>
-                    <select name="product_id" onchange="this.form.submit()" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-stone-50 text-xs text-stone-800 focus:ring-1 focus:ring-stone-400">
+                <div class="flex items-center gap-1.5 w-full sm:w-auto">
+                    <span class="text-stone-500 font-medium shrink-0">Filter Menu:</span>
+                    <select name="product_id" onchange="this.form.submit()" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-stone-50 text-xs text-stone-800 focus:ring-1 focus:ring-stone-400 w-full sm:w-auto">
                         <option value="">Semua Menu</option>
                         @foreach($products as $prod)
                             <option value="{{ $prod->id }}" {{ $productId == $prod->id ? 'selected' : '' }}>{{ $prod->name }}</option>
@@ -91,11 +91,11 @@
             @endif
 
             @if($period === 'custom')
-                <div class="flex items-center gap-2">
-                    <input type="date" name="start_date" value="{{ $startDate }}" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-white text-xs text-stone-800">
-                    <span class="text-stone-400 font-bold">-</span>
-                    <input type="date" name="end_date" value="{{ $endDate }}" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-white text-xs text-stone-800">
-                    <button type="submit" class="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-lg text-xs transition">Terapkan</button>
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full sm:w-auto">
+                    <input type="date" name="start_date" value="{{ $startDate }}" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-white text-xs text-stone-800 w-full sm:w-auto">
+                    <span class="text-stone-400 font-bold hidden sm:inline">-</span>
+                    <input type="date" name="end_date" value="{{ $endDate }}" class="py-1.5 px-3 rounded-lg border border-stone-300 bg-white text-xs text-stone-800 w-full sm:w-auto">
+                    <button type="submit" class="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-lg text-xs transition w-full sm:w-auto">Terapkan</button>
                 </div>
             @endif
         </form>
@@ -310,7 +310,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
+                    <table class="w-full text-left text-xs whitespace-nowrap min-w-[620px]">
                         <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[11px]">
                             <tr>
                                 <th class="py-3 px-4">Tanggal</th>
@@ -481,7 +481,7 @@
                     </div>
 
                     <div class="overflow-x-auto rounded-xl border border-stone-200">
-                        <table class="w-full text-left text-xs">
+                        <table class="w-full text-left text-xs whitespace-nowrap min-w-[680px]">
                             <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                                 <tr>
                                     <th class="py-3 px-4">Bulan &amp; Tahun</th>
@@ -556,7 +556,7 @@
                     </div>
 
                     <div class="overflow-x-auto rounded-xl border border-stone-200">
-                        <table class="w-full text-left text-xs">
+                        <table class="w-full text-left text-xs whitespace-nowrap min-w-[600px]">
                             <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[10px]">
                                 <tr>
                                     <th class="py-3 px-4">Tahun</th>
@@ -680,7 +680,7 @@
                     </div>
 
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
+                        <table class="w-full text-left text-xs whitespace-nowrap min-w-[500px]">
                             <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[11px]">
                                 <tr>
                                     <th class="py-2.5 px-4">Nama Menu</th>
@@ -704,17 +704,36 @@
                 </div>
             @endif
 
+            @php
+                $periodDescriptor = match($period) {
+                    'today' => 'Hari Ini (' . \Carbon\Carbon::now()->translatedFormat('d M Y') . ')',
+                    'this_week' => 'Minggu Ini (' . \Carbon\Carbon::now()->startOfWeek()->translatedFormat('d M') . ' - ' . \Carbon\Carbon::now()->endOfWeek()->translatedFormat('d M Y') . ')',
+                    'this_month' => 'Bulan Ini (' . \Carbon\Carbon::now()->translatedFormat('F Y') . ')',
+                    'this_year' => 'Tahun Ini (' . \Carbon\Carbon::now()->format('Y') . ')',
+                    'custom' => ($startDate && $endDate) 
+                        ? '(' . \Carbon\Carbon::parse($startDate)->translatedFormat('d M Y') . ' s/d ' . \Carbon\Carbon::parse($endDate)->translatedFormat('d M Y') . ')'
+                        : '(Periode Kustom)',
+                    'all' => 'Semua Waktu',
+                    default => 'Bulan Ini (' . \Carbon\Carbon::now()->translatedFormat('F Y') . ')'
+                };
+            @endphp
+
             {{-- TRANSACTION HISTORY TABLE --}}
             <div class="bg-white rounded-2xl shadow-sm border border-stone-200/90 overflow-hidden">
-                <div class="p-4 border-b border-stone-200/80 flex items-center justify-between">
+                <div class="p-4 border-b border-stone-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
-                        <h2 class="font-bold text-stone-900 text-sm">Daftar Transaksi Penjualan Kasir</h2>
-                        <p class="text-xs text-stone-500">Histori struk transaksi kasir</p>
+                        <h2 class="font-bold text-stone-900 text-sm">
+                            Daftar Transaksi Penjualan Kasir ({{ $periodDescriptor }})
+                        </h2>
+                        <p class="text-xs text-stone-500">Histori struk transaksi kasir periode {{ strtolower($periodDescriptor) }}</p>
                     </div>
+                    <span class="text-xs font-semibold px-2.5 py-1 bg-stone-100 text-stone-600 rounded-lg self-start sm:self-auto">
+                        {{ count($salesData['transactions'] ?? []) }} Transaksi
+                    </span>
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
+                    <table class="w-full text-left text-xs whitespace-nowrap min-w-[650px]">
                         <thead class="bg-stone-50 text-stone-600 font-bold border-b border-stone-200 uppercase tracking-wider text-[11px]">
                             <tr>
                                 <th class="py-3 px-4">No. Transaksi</th>

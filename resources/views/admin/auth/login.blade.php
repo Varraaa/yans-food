@@ -21,7 +21,7 @@
         </div>
 
         <!-- LOGIN CARD -->
-        <div class="bg-white p-8 rounded-3xl shadow-xl border border-stone-200/80 space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-stone-200/80 space-y-6">
             <div>
                 <h2 class="text-lg font-bold text-stone-900">Masuk ke Panel Admin</h2>
                 <p class="text-xs text-stone-500 mt-0.5">Kelola operasional kasir POS, katalog produk, dan keuangan usaha.</p>

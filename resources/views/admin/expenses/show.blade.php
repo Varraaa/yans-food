@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <a href="{{ route('admin.expenses.index') }}" class="text-xs font-bold text-stone-600 hover:text-stone-900 transition flex items-center gap-1">
             <span>←</span>
             <span>Kembali ke Daftar Pengeluaran</span>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
         {{-- HEADER INFO --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-stone-100 gap-3">
             <div>

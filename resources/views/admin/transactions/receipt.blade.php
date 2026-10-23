@@ -15,18 +15,18 @@
     @endif
 
     {{-- TOP ACTION BUTTONS BAR (PRINT:HIDDEN) --}}
-    <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm print:hidden">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm print:hidden">
         <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
             <span class="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Riwayat Transaksi</span>
         </a>
 
-        <div class="flex items-center gap-2">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
             {{-- TOMBOL CETAK THERMAL --}}
             <button 
                 type="button" 
                 onclick="window.print()" 
-                class="px-4 py-2.5 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center gap-2 active:scale-95"
+                class="px-4 py-2.5 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-2 active:scale-95 text-center"
             >
                 <span class="material-symbols-outlined text-[18px]">print</span>
                 <span>Cetak Thermal</span>
@@ -35,10 +35,10 @@
             {{-- TOMBOL SELESAI TRANSAKSI (§9.2) --}}
             <a 
                 href="{{ route('admin.pos.index') }}" 
-                class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center gap-2 active:scale-95"
+                class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-2 active:scale-95 text-center"
             >
                 <span class="material-symbols-outlined text-[18px]">point_of_sale</span>
-                <span>Selesai Transaksi &rarr; Kasir</span>
+                <span>Selesai &rarr; Kasir</span>
             </a>
         </div>
     </div>

@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto space-y-6">
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
+    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 space-y-6">
         <div>
             <span class="text-[10px] font-bold text-[#C1440E] uppercase tracking-wider">Sistem & Konfigurasi</span>
-            <h1 class="text-xl font-bold text-stone-900 mt-0.5">Pengaturan Informasi Usaha & Pembayaran</h1>
+            <h1 class="text-lg sm:text-xl font-bold text-stone-900 mt-0.5">Pengaturan Informasi Usaha & Pembayaran</h1>
             <p class="text-xs text-stone-500 mt-1">
                 Kelola profil kontak, tautan pemesanan delivery, serta konfigurasi QRIS pembayaran resmi Yan's Food.
             </p>
@@ -37,8 +37,8 @@
             @method('PUT')
 
             {{-- PENGATURAN QRIS PEMBAYARAN (§10) --}}
-            <div class="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/80 space-y-4">
-                <div class="flex items-start justify-between">
+            <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/50 border border-amber-200/80 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5">
                     <div>
                         <h3 class="font-bold text-stone-900 text-sm flex items-center gap-2">
                             <span class="w-6 h-6 rounded-lg bg-[#C1440E] text-white flex items-center justify-center text-xs">📱</span>
@@ -49,12 +49,12 @@
                         </p>
                     </div>
                     @if(!empty($settings['qris_image_path']))
-                        <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px] flex items-center gap-1">
+                        <span class="self-start px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px] flex items-center gap-1 shrink-0">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                             <span>QRIS Aktif</span>
                         </span>
                     @else
-                        <span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 font-bold text-[10px] flex items-center gap-1">
+                        <span class="self-start px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 font-bold text-[10px] flex items-center gap-1 shrink-0">
                             <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
                             <span>Belum Ada QRIS</span>
                         </span>
@@ -166,7 +166,7 @@
             </div>
 
             <div class="pt-4 flex items-center justify-end border-t border-stone-100">
-                <button type="submit" class="px-6 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition">
+                <button type="submit" class="w-full sm:w-auto px-6 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl shadow-sm transition text-center">
                     Simpan Pengaturan
                 </button>
             </div>

@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="space-y-6">
-    <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-            <h1 class="text-xl font-bold text-stone-900 flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-bold text-stone-900 flex items-center gap-2">
                 <span>🖨️</span>
                 <span>Konfigurasi Thermal Printer</span>
             </h1>
             <p class="text-xs text-stone-500 mt-0.5">Kelola sambungan printer kasir Bluetooth, USB, atau Jaringan (LAN).</p>
         </div>
-        <button type="button" onclick="document.getElementById('modal-add-printer').classList.remove('hidden')" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition">
+        <button type="button" onclick="document.getElementById('modal-add-printer').classList.remove('hidden')" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition w-full sm:w-auto">
             <span>+ Tambah Printer Baru</span>
         </button>
     </div>
