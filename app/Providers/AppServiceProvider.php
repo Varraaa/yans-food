@@ -19,6 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('transactions') && !\Illuminate\Support\Facades\Schema::hasColumn('transactions', 'customer_name')) {
+                \Illuminate\Support\Facades\Schema::table('transactions', function (\Illuminate\Database\Schema\Blueprint $table) {
+                    $table->string('customer_name', 100)->nullable()->after('cashier_id');
+                });
+            }
+        } catch (\Throwable $e) {
+            // Ignore if DB not ready
+        }
     }
 }

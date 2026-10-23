@@ -19,7 +19,7 @@ class PayCashRequest extends FormRequest
             'items.*.quantity' => ['required', 'integer', 'min:1'],
             'amount_paid' => ['required', 'numeric', 'min:0'],
             'discount' => ['nullable', 'numeric', 'min:0'],
-            'customer_name' => ['nullable', 'string', 'max:255'],
+            'customer_name' => ['required', 'string', 'max:100'],
         ];
     }
 
@@ -30,6 +30,7 @@ class PayCashRequest extends FormRequest
             'items.min' => 'Pilih minimal satu menu untuk transaksi.',
             'amount_paid.required' => 'Masukkan nominal uang yang diterima dari pelanggan.',
             'amount_paid.min' => 'Nominal uang diterima tidak valid.',
+            'customer_name.required' => 'Nama pelanggan wajib diisi.',
         ];
     }
 }

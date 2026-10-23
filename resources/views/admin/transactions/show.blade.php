@@ -36,6 +36,10 @@
                     <div class="font-bold text-stone-800 font-mono mt-0.5">{{ $transaction->transaction_time }} WIB</div>
                 </div>
                 <div>
+                    <span class="text-stone-400">Nama Pelanggan:</span>
+                    <div class="font-bold text-stone-900 mt-0.5">{{ $transaction->customer_name ?: '-' }}</div>
+                </div>
+                <div>
                     <span class="text-stone-400">Kasir Bertugas:</span>
                     <div class="font-bold text-stone-800 mt-0.5">{{ $transaction->cashier?->name ?? 'Kasir' }}</div>
                 </div>

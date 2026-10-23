@@ -101,7 +101,7 @@
                 <li>
                     <a href="{{ route('admin.transactions.index') }}" class="flex items-center p-2.5 rounded-xl transition {{ request()->routeIs('admin.transactions.*') ? 'bg-[#C1440E] text-white font-bold shadow-sm' : 'text-stone-700 hover:bg-stone-100' }}">
                         <span class="text-base mr-3">🧾</span>
-                        <span>Transaksi</span>
+                        <span>Riwayat</span>
                     </a>
                 </li>
 

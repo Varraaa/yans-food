@@ -18,7 +18,7 @@ class PrepareQrisRequest extends FormRequest
             'items.*.product_id' => ['required', 'integer', 'exists:products,id'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
             'discount' => ['nullable', 'numeric', 'min:0'],
-            'customer_name' => ['nullable', 'string', 'max:255'],
+            'customer_name' => ['required', 'string', 'max:100'],
         ];
     }
 
@@ -27,6 +27,7 @@ class PrepareQrisRequest extends FormRequest
         return [
             'items.required' => 'Keranjang pesanan tidak boleh kosong.',
             'items.min' => 'Pilih minimal satu menu untuk transaksi.',
+            'customer_name.required' => 'Nama pelanggan wajib diisi.',
         ];
     }
 }

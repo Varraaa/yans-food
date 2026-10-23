@@ -15,7 +15,11 @@ class TransactionController extends Controller
         $query = Transaction::query()->with(['cashier', 'items'])->orderBy('created_at', 'desc');
 
         if ($request->filled('search')) {
-            $query->where('transaction_number', 'like', '%' . $request->search . '%');
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('transaction_number', 'like', '%' . $search . '%')
+                  ->orWhere('customer_name', 'like', '%' . $search . '%');
+            });
         }
 
         if ($request->filled('date')) {

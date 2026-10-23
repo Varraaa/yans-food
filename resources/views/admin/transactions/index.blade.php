@@ -1,19 +1,23 @@
 @extends('layouts.admin')
 
+@php
+    $title = "Riwayat — Yan's Food";
+@endphp
+
 @section('content')
 <div class="space-y-6">
     {{-- HEADER & FILTERS --}}
     <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-                <h1 class="text-xl font-bold text-stone-900 flex items-center gap-2">
+                <h1 class="text-xl sm:text-2xl font-black text-stone-900 font-serif flex items-center gap-2">
                     <span>🧾</span>
-                    <span>Riwayat Transaksi Kasir POS</span>
+                    <span>Riwayat</span>
                 </h1>
-                <p class="text-xs text-stone-500 mt-0.5">Daftar struk belanja yang telah diproses di kasir Yan's Food.</p>
+                <p class="text-xs text-stone-500 mt-0.5">Daftar riwayat transaksi dan struk belanja yang telah diproses di kasir Yan's Food.</p>
             </div>
             <a href="{{ route('admin.pos.index') }}" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition">
-                <span>+ Buka Kasir POS</span>
+                <span>+ Buka Kasir</span>
             </a>
         </div>
 
@@ -23,7 +27,7 @@
                     type="text" 
                     name="search" 
                     value="{{ request('search') }}" 
-                    placeholder="Cari nomor transaksi..." 
+                    placeholder="Cari nomor transaksi / nama pelanggan..." 
                     class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
                 >
             </div>
@@ -65,6 +69,7 @@
                     <tr>
                         <th class="py-3.5 px-4">No. Transaksi</th>
                         <th class="py-3.5 px-4">Tanggal & Jam</th>
+                        <th class="py-3.5 px-4">Pelanggan</th>
                         <th class="py-3.5 px-4">Kasir</th>
                         <th class="py-3.5 px-4 text-center">Metode</th>
                         <th class="py-3.5 px-4 text-right">Subtotal</th>
@@ -86,6 +91,9 @@
                             </td>
                             <td class="py-3.5 px-4 font-mono text-stone-600">
                                 {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }} <span class="text-stone-500 font-semibold text-[11px]">{{ substr($tx->transaction_time, 0, 5) }} WIB</span>
+                            </td>
+                            <td class="py-3.5 px-4 font-bold text-stone-900">
+                                {{ $tx->customer_name ?: '-' }}
                             </td>
                             <td class="py-3.5 px-4 text-stone-700">
                                 {{ $tx->cashier?->name ?? 'Kasir' }}
@@ -128,7 +136,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="py-12 text-center text-stone-400">
+                            <td colspan="9" class="py-12 text-center text-stone-400">
                                 <div class="text-3xl mb-1">📭</div>
                                 Tidak ada transaksi yang sesuai dengan filter pencarian.
                             </td>

@@ -100,7 +100,7 @@ class ReportController extends Controller
                 $handle = fopen('php://output', 'w');
                 // UTF-8 BOM
                 fwrite($handle, "\xEF\xBB\xBF");
-                fputcsv($handle, ['No. Transaksi', 'Tanggal', 'Waktu', 'Kasir', 'Metode Bayar', 'Subtotal (Rp)', 'Diskon (Rp)', 'Total (Rp)', 'Status']);
+                fputcsv($handle, ['No. Transaksi', 'Tanggal', 'Waktu', 'Pelanggan', 'Kasir', 'Metode Bayar', 'Subtotal (Rp)', 'Diskon (Rp)', 'Total (Rp)', 'Status']);
 
                 foreach ($report['transactions'] as $tx) {
                     $methodStr = $tx->payment_method instanceof \App\Enums\PaymentMethod ? $tx->payment_method->value : (string) $tx->payment_method;
@@ -110,6 +110,7 @@ class ReportController extends Controller
                         $tx->transaction_number,
                         $dateStr,
                         $tx->transaction_time,
+                        $tx->customer_name ?: '-',
                         $tx->cashier?->name ?? 'Kasir',
                         $methodStr,
                         $tx->subtotal,

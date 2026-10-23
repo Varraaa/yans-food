@@ -42,7 +42,7 @@
                     class="px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-2 {{ $activeTab === 'pos' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
                 >
                     <span class="material-symbols-outlined text-[16px] text-emerald-600">point_of_sale</span>
-                    <span>Penjualan Kasir POS</span>
+                    <span>Penjualan Kasir</span>
                 </a>
             </div>
 
@@ -500,7 +500,7 @@
             <div class="bg-white rounded-2xl shadow-sm border border-stone-200/90 overflow-hidden">
                 <div class="p-4 border-b border-stone-200/80 flex items-center justify-between">
                     <div>
-                        <h2 class="font-bold text-stone-900 text-sm">Daftar Transaksi Kasir POS</h2>
+                        <h2 class="font-bold text-stone-900 text-sm">Daftar Transaksi Penjualan Kasir</h2>
                         <p class="text-xs text-stone-500">Histori struk transaksi kasir</p>
                     </div>
                 </div>
@@ -511,6 +511,7 @@
                             <tr>
                                 <th class="py-3 px-4">No. Transaksi</th>
                                 <th class="py-3 px-4">Waktu</th>
+                                <th class="py-3 px-4">Pelanggan</th>
                                 <th class="py-3 px-4">Kasir</th>
                                 <th class="py-3 px-4 text-center">Metode</th>
                                 <th class="py-3 px-4 text-right">Total</th>
@@ -523,6 +524,9 @@
                                     <td class="py-3 px-4 font-mono font-bold text-stone-800">{{ $tx->transaction_number }}</td>
                                     <td class="py-3 px-4 font-mono text-stone-500">
                                         {{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }} {{ $tx->transaction_time }}
+                                    </td>
+                                    <td class="py-3 px-4 font-bold text-stone-900">
+                                        {{ $tx->customer_name ?: '-' }}
                                     </td>
                                     <td class="py-3 px-4 font-medium text-stone-700">{{ $tx->cashier?->name ?? 'Kasir' }}</td>
                                     <td class="py-3 px-4 text-center">
@@ -552,7 +556,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="py-10 text-center text-stone-400 text-xs">
+                                    <td colspan="7" class="py-10 text-center text-stone-400 text-xs">
                                         Tidak ada transaksi kasir tercatat pada periode ini.
                                     </td>
                                 </tr>

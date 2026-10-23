@@ -47,6 +47,7 @@ class ReceiptService
             ],
             'order_info' => [
                 'number' => $transaction->transaction_number,
+                'customer' => $transaction->customer_name ?: 'Pelanggan',
                 'cashier' => $transaction->cashier?->name ?? 'Kasir Utama',
                 'date' => $dateStr,
                 'time' => $timeStr,
@@ -99,6 +100,7 @@ class ReceiptService
 
         $out .= "No: " . $transaction->transaction_number . "\n";
         $out .= "Tgl: " . $dateStr . " " . substr($transaction->transaction_time, 0, 5) . " WIB\n";
+        $out .= "Pelanggan: " . ($transaction->customer_name ?: '-') . "\n";
         $out .= "Kasir: " . ($transaction->cashier?->name ?? 'Kasir') . "\n";
         $out .= $line . "\n";
 

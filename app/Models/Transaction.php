@@ -14,6 +14,7 @@ class Transaction extends Model
         'transaction_date',
         'transaction_time',
         'cashier_id',
+        'customer_name',
         'subtotal',
         'discount',
         'total',

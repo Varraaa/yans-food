@@ -78,6 +78,10 @@
                     <span>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d/m/Y') }} {{ substr($transaction->transaction_time, 0, 5) }} WIB</span>
                 </div>
                 <div class="flex justify-between">
+                    <span class="text-stone-500">Pelanggan:</span>
+                    <span class="font-bold text-stone-900">{{ $transaction->customer_name ?: 'Pelanggan' }}</span>
+                </div>
+                <div class="flex justify-between">
                     <span class="text-stone-500">Kasir:</span>
                     <span>{{ $transaction->cashier?->name ?? 'Kasir Utama' }}</span>
                 </div>

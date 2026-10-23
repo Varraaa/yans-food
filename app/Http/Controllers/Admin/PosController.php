@@ -209,6 +209,7 @@ class PosController extends Controller
             'amount_paid' => ['required', 'numeric', 'min:0'],
             'discount' => ['nullable', 'numeric', 'min:0'],
             'payment_method' => ['required', 'string', 'in:CASH,QRIS'],
+            'customer_name' => ['required', 'string', 'max:100'],
         ]);
 
         try {
@@ -217,7 +218,8 @@ class PosController extends Controller
                 amountPaid: (float) $validated['amount_paid'],
                 cashierId: Auth::id() ?? 1,
                 discount: (float) ($validated['discount'] ?? 0),
-                paymentMethod: $validated['payment_method']
+                paymentMethod: $validated['payment_method'],
+                customerName: $validated['customer_name']
             );
 
             $receipt = $receiptService->generateCustomerReceipt($transaction);

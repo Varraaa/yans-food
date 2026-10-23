@@ -204,7 +204,7 @@
                 </button>
             </div>
 
-            {{-- CUSTOMER NAME FIELD (OPTIONAL) --}}
+            {{-- CUSTOMER NAME FIELD (MANDATORY) --}}
             <div class="relative">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
                     <span class="material-symbols-outlined text-[18px]">person</span>
@@ -212,8 +212,9 @@
                 <input 
                     type="text" 
                     id="input-customer-name"
-                    placeholder="Nama Pelanggan (Meja / Bawa Pulang)"
-                    class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs text-stone-800 focus:bg-white focus:ring-1 focus:ring-[#C1440E] focus:outline-none transition placeholder:text-stone-400"
+                    placeholder="Nama Pelanggan *"
+                    class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-xs text-stone-800 focus:bg-white focus:ring-1 focus:ring-[#C1440E] focus:outline-none transition placeholder:text-stone-400 font-medium"
+                    required
                 >
             </div>
 
@@ -751,6 +752,17 @@
         const customerNameInput = document.getElementById('input-customer-name');
         const customerName = customerNameInput ? customerNameInput.value.trim() : '';
 
+        if (!customerName) {
+            alert('Wajib mengisi Nama Pelanggan sebelum memproses transaksi.');
+            if (customerNameInput) {
+                customerNameInput.focus();
+                customerNameInput.classList.add('border-rose-500', 'ring-1', 'ring-rose-500');
+            }
+            return;
+        } else if (customerNameInput) {
+            customerNameInput.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+        }
+
         const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
         const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
         const btnProcess = document.getElementById('btn-process');
@@ -888,6 +900,10 @@
                     <div class="flex justify-between">
                         <span>No: ${orderNum}</span>
                         <span>Kasir: ${cashierName}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Pelanggan:</span>
+                        <span class="font-bold text-stone-900">${receipt.order_info?.customer || customerName || '-'}</span>
                     </div>
                     <div class="flex justify-between text-stone-500">
                         <span>Tgl: ${orderDate}</span>
