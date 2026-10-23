@@ -6,7 +6,6 @@
 import { initScrollReveal } from './modules/reveal.js';
 import { initNavbar } from './modules/navbar.js';
 import { initHeroIntro } from './modules/hero-intro.js';
-import { initFloatingWA } from './modules/wa-fab.js';
 import { initToast } from './modules/toast.js';
 import { initScrollProgress } from './modules/scroll-progress.js';
 import { initOperatingHours } from './modules/operating-hours.js';
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initNavbar();
     initHeroIntro();
-    initFloatingWA();
     initToast();
     initScrollProgress();
     initOperatingHours();

@@ -47,6 +47,8 @@ Cerita usaha dapur rumahan, filosofi "Cita Rasa Rumahan Disajikan dengan Hati", 
 
 ### Menu
 Katalog kuliner dinamis dari basis data produk dengan filter kategori (Kudapan Renyah, Makanan Hangat, Aneka Lauk, Minuman Segar). Produk berstatus **Sedia** ditampilkan dengan badge hijau; produk **Tidak Tersedia** ditampilkan non-aktif.
+- **Tanya via WhatsApp Langsung:** Setiap kartu produk saat dibuka modal detailnya menyediakan tombol aksi "Tanya via WhatsApp" yang langsung membuka chat ke WhatsApp Admin (+62 822-2122-2936) dengan template otomatis:
+  > *"Halo Kak, saya ingin pesan \*[Nama Produk]\* apakah masih ready stok nya kak ?"*
 
 ### Pesan
 
@@ -59,14 +61,32 @@ Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
 #### B. Datang Langsung ke Tempat (Pesan di Tempat & Bawa Pulang / Konsep Drive-thru)
 - Pelanggan datang langsung ke lokasi dapur Yan's Food, memesan langsung di kasir dapur, menunggu pesanan disiapkan dan digoreng hangat dadakan, menerima pesanan terkemas rapi, lalu membawanya pulang.
 - Penegasan: **TIDAK BISA MAKAN DI TEMPAT (No Dine-In / Takeaway Only)**.
-- Dilengkapi panduan 4 langkah datang langsung, informasi jam operasional, dan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
+- Dilengkapi panduan 4 langkah datang langsung, informasi jam operasional resmi **08.00 – 22.00 WIB (Setiap Hari)**, dan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
 
 ### Contact
-Alamat dapur, WhatsApp, email, jam operasional, peta lokasi dengan tautan langsung Google Maps (`https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`), serta formulir komunikasi & negosiasi pesanan khusus/katering acara.
-*Catatan Katering:* Pesanan katering acara tidak masuk ke sistem database; komunikasi dan negosiasi dilakukan langsung dengan Admin via WhatsApp, dan Admin yang menentukan apakah pesanan katering diterima atau ditolak sesuai kapasitas dapur.
+Alamat dapur (Kp. Ciloa, Soreang, Bandung), WhatsApp resmi (+62 822-2122-2936), jam operasional resmi (**08.00 - 22.00 WIB Setiap Hari**), peta lokasi interaktif Google Maps, serta formulir komunikasi & negosiasi pesanan khusus / katering acara.
+- **Tanpa Akun Media Sosial:** Yan's Food tidak menggunakan Instagram, TikTok, atau akun medsos lainnya. Seluruh interaksi digital resmi berpusat langsung pada WhatsApp Admin.
+- **Format Otomatis Negosiasi via WA:** Calon pelanggan yang mengklik tombol *"Lanjutkan Negosiasi via WhatsApp Admin"* akan otomatis diarahkan ke WhatsApp Admin dengan template format:
+  ```text
+  Halo Kak, saya ingin berkomunikasi & negosiasi pesanan:
+
+  • Nama: [nama]
+  • WhatsApp: [wa]
+  • Topik / Keperluan: [topik]
+  • Estimasi Porsi: [porsi]
+  • Rencana Tanggal Acara: [tanggal]
+  • Rincian / Catatan Negosiasi: [catatan]
+
+  Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan. Mohon informasinya lebih lanjut. Terima kasih!
+  ```
+- *Catatan Katering:* Pesanan katering acara tidak masuk ke sistem database; komunikasi dan negosiasi dilakukan langsung dengan Admin via WhatsApp, dan Admin yang menentukan apakah pesanan katering diterima atau ditolak sesuai kapasitas dapur.
 
 ### Footer
-Tampil konsisten di seluruh halaman publik. Memuat navigasi cepat, kontak dapur, jam operasional, tautan media sosial, serta baris **"Tersedia juga di:"** (ShopeeFood, GoFood, GrabFood).
+Tampil konsisten di seluruh halaman publik dengan tata letak modular 3 kolom yang seimbang dan bebas dari tautan medsos:
+1. **Brand & Motto:** Profil singkat Yan's Food dan dedikasi cita rasa rumahan.
+2. **Navigasi Cepat:** Tautan langsung ke Home, About, Menu, Pesan, Contact.
+3. **Kontak & Operasional:** Alamat dapur fisik, jam operasional resmi (08.00 - 22.00 WIB), dan WhatsApp Admin (+62 822-2122-2936).
+4. **Platform Delivery Resmi:** Baris *"Tersedia juga di:"* (ShopeeFood, GoFood, GrabFood).
 
 ## 5. Admin Website
 
@@ -189,13 +209,15 @@ Pilih Produk Sedia
 → Subtotal
 → Diskon (opsional)
 → Total Tagihan
-→ Input Nominal Uang Tunai Diterima
-→ Perhitungan Kembalian Otomatis
+→ Pilih Metode Pembayaran: Tunai (Cash) atau QRIS
+→ Jika Cash: Input Nominal Uang Tunai Diterima → Perhitungan Kembalian Otomatis
+→ Jika QRIS: Tampilkan QR Code Resmi Kasir → Konfirmasi Pembayaran
 → Simpan Transaksi (Atomic Transaction & Potong Stok Otomatis)
-→ Cetak Struk Kasir Thermal
+→ Cetak Struk Kasir Thermal (58mm/80mm)
 ```
 
-Kalkulasi harga, subtotal, total, dan kembalian dihitung ulang oleh backend service. Client tidak menjadi sumber kebenaran transaksi.
+- **UI Ringkas & Efisien:** Tampilan kasir bersih dari petunjuk pintasan keyboard (F2/F4/F9) yang tidak perlu, search bar yang responsif dan leluasa, serta tombol aksi cepat "Bayar Cash" dan "Lanjut ke QRIS".
+- Kalkulasi harga, subtotal, total, dan kembalian dihitung ulang oleh backend service. Client tidak menjadi sumber kebenaran transaksi.
 
 ## 10. Transaksi Kasir
 
@@ -230,20 +252,17 @@ created_at
 updated_at
 ```
 
-Nama produk dan harga satuan disimpan sebagai snapshot historis agar nota lama tetap akurat meskipun harga katalog diubah di masa depan.
+- **Pengelompokan Otomatis Riwayat per Bulan (Include Monthly):** Daftar riwayat transaksi kasir mengelompokkan arsip per bulan secara realtime/otomatis (section khusus per bulan dengan riwayat transaksi lengkap), memudahkan kasir dan pemilik usaha meninjau data historis tanpa kehilangan konteks.
+- **Tampilan Bersih & Minimalis:** Menghilangkan badge bulan berjalan berlebih dan angka counter redundan agar interface fokus pada kejelasan data transaksi.
+- Nama produk dan harga satuan disimpan sebagai snapshot historis agar nota lama tetap akurat meskipun harga katalog diubah di masa depan.
 
 ## 11. Pengeluaran Operasional Dapur
 
-Pencatatan biaya operasional harian dapur:
-- Bahan Baku
-- Gas Dapur
-- Listrik
-- Air
-- Kemasan / Packaging
-- Transportasi
-- Peralatan Dapur
-- Pemeliharaan / Maintenance
-- Biaya Lain-lain
+Pencatatan biaya operasional harian dapur dengan fitur manajemen penuh (Full CRUD):
+- Kategori pengeluaran: Bahan Baku, Gas Dapur, Listrik, Air, Kemasan/Packaging, Transportasi, Peralatan Dapur, Pemeliharaan/Maintenance, dan Biaya Lain-lain.
+- **Filterisasi Rentang Waktu:** Mendukung filter hari ini, minggu ini, bulan ini, tahun ini, dan rentang tanggal kustom (*custom range*).
+- **Pengelompokan Riwayat Pengeluaran per Bulan:** Section riwayat pengeluaran otomatis include per bulan untuk memudahkan audit berkala.
+- **Proses Cepat & Ringkas:** Menghapus keharusan upload foto nota fisik dan kolom bukti nota di tabel, sehingga kasir/admin dapat mencatat belanja harian secara instan di lapangan.
 
 `expense_categories`:
 ```text
@@ -266,7 +285,6 @@ payment_method
 period_start
 period_end
 description
-receipt_image
 status
 created_by
 created_at
@@ -276,11 +294,14 @@ updated_at
 ## 12. Laporan Keuangan & Penjualan
 
 Page Laporan adalah pusat analisis performa finansial dan penjualan produk:
-- Ringkasan Finansial: Total Penjualan POS, Total Pengeluaran Operasional, dan Laba Bersih Sederhana.
-- Analisis Produk Terlaris: Kuantitas terjual, jumlah transaksi, dan kontribusi omset per item menu.
-- Riwayat Transaksi Kasir lengkap dengan filter waktu.
-- Filter Rentang Waktu: Hari Ini, Minggu Ini, Bulan Ini, Custom Date, dan Keseluruhan.
+- **Ringkasan Finansial:** Total Penjualan POS Kasir, Total Pengeluaran Operasional, dan Laba Bersih Sederhana.
+- **Rincian Arus Kas Harian (Akurat & Fixed):** Menampilkan rekap harian kas masuk (penjualan) dan kas keluar (pengeluaran) secara lengkap dan kronologis, termasuk tanggal-tanggal transaksi historis sebelum tanggal berjalan.
+- **Komparasi Hasil Uang Bersih (Laba Bersih Dinamis):** Section ringkasan hasil uang bersih per bulan dan per tahun yang dinamis menyesuaikan filter waktu yang sedang aktif (bulan ini, tahun ini, atau semua waktu).
+- **Rincian Pengeluaran Dapur per Kategori:** Grafik dan rincian proporsi pengeluaran dapur yang sinkron dengan periode filter aktif.
+- **Tab Penjualan Kasir:** Daftar transaksi penjualan kasir otomatis include dan menampilkan label periode waktu aktif (hari, minggu, bulan, tahun, semua waktu).
+- **Analisis Produk Terlaris:** Kuantitas terjual, jumlah transaksi, dan kontribusi omset per item menu.
 - **Export CSV:** Mengunduh data penjualan dan performa produk secara dinamis mengikuti filter yang sedang aktif di layar.
+- **UI Bersih:** Menghapus elemen dekoratif dan badge redundan di samping header laporan agar fokus pada visualisasi metrik bisnis.
 
 ## 13. Printer Thermal
 
@@ -329,11 +350,17 @@ DB::beginTransaction()
 ```
 Jika terjadi kegagalan: `DB::rollBack()`.
 
-## 16. Manajemen Hak Akses Pengguna
+## 16. Manajemen Pengguna & Tata Letak Antarmuka Admin
 
 Peran pengguna:
 - **Admin:** Memiliki akses penuh ke seluruh modul sistem (Dashboard, POS, Transaksi, Produk, Resep, Pengeluaran, Laporan Keuangan, Printer, dan Pengaturan Pengguna).
 - **Kasir:** Terbatas pada modul operasional harian (POS Kasir, Riwayat Transaksi Penjualan, dan Konfigurasi Printer).
+- **Tampilan Bersih:** Menghilangkan teks status hak akses redundan pada halaman pengguna agar antarmuka ringkas dan profesional.
+
+### Desain Responsif & Optimalisasi Ruang (Layout Admin)
+- **Navbar Sidebar Optimal:** Posisi navbar samping dinaikkan untuk menghilangkan ruang kosong bagian atas (*whitespace*) sehingga navigasi lebih seimbang dan estetik.
+- **Responsif di Semua Perangkat:** Seluruh halaman admin dioptimalkan untuk dapat diakses secara nyaman dan jelas di layar Desktop, Tablet, hingga Ponsel (Mobile).
+- **Tata Letak Grid Produk & Resep:** Tampilan foto produk dan kartu resep dapur diatur dengan sistem 2-grid proporsional di perangkat mobile/tablet agar informasi resep dan detail produk terbaca dengan jelas tanpa memakan ruang vertikal berlebih.
 
 ## 17. Struktur Folder Proyek
 

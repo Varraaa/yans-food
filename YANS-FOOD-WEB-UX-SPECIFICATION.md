@@ -432,12 +432,28 @@ Halaman Pesan adalah **titik konversi terpenting** yang menghubungkan pengunjung
   4. *Terima & Bawa Pulang*: Terima pesanan bersegel higienis dan bawa pulang untuk disantap di rumah/kantor.
 - **Informasi Transparan & Maps:**
   - Menampilkan alamat lengkap dapur dengan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
-  - Jam operasional datang langsung: 08.00 – 20.00 WIB (Setiap Hari).
+  - Jam operasional datang langsung: 08.00 – 22.00 WIB (Setiap Hari).
 
 ### 6.4 Komunikasi & Negosiasi Pesanan Katering Acara (Halaman Contact)
 - **Non-Sistem / Jalur WhatsApp:** Pemesanan porsi besar / katering untuk acara tidak diproses via database/sistem otomatis.
-- **Formulir Negosiasi:** Form pada halaman Kontak mengarahkan calon pemesan ke WhatsApp Admin Yan's Food dengan data acara lengkap (nama, WA, topik, estimasi porsi, tanggal acara, rincian menu).
+- **Formulir Negosiasi & Template Resmi:** Form pada halaman Kontak mengarahkan calon pemesan ke WhatsApp Admin Yan's Food (+62 822-2122-2936) dengan format pesan otomatis:
+  ```text
+  Halo Kak, saya ingin berkomunikasi & negosiasi pesanan:
+
+  • Nama: [Nama Pelanggan]
+  • WhatsApp: [Nomor WhatsApp Pelanggan]
+  • Topik / Keperluan: [Topik / Keperluan]
+  • Estimasi Porsi: [Estimasi Porsi]
+  • Rencana Tanggal Acara: [Tanggal Acara]
+  • Rincian / Catatan Negosiasi: [Rincian / Catatan]
+
+  Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan. Mohon informasinya lebih lanjut. Terima kasih!
+  ```
 - **Hak Penentuan:** Keputusan diterima atau ditolaknya pesanan katering ditentukan oleh Admin Yan's Food di WhatsApp berdasarkan ketersediaan bahan dan kapasitas operasional dapur.
+
+### 6.5 Template Tanya Produk via WhatsApp
+- Pada modal detail produk, tombol **Tanya via WhatsApp** mengarahkan pelanggan langsung ke WhatsApp Admin dengan template chat:
+  > *"Halo Kak, saya ingin pesan \*[Nama Produk]\* apakah masih ready stok nya kak ?"*
 
 ---
 
@@ -515,7 +531,7 @@ Banyak pengunjung datang dari hasil pencarian kuliner rumahan dan dari tautan ya
 - **Meta per halaman:** `<title>` unik (≤ 60 karakter, "Menu — Yan's Food | Risol Mayo, Nasi Goreng Jadul & Lainnya"), meta description (≤ 155 karakter) yang menjual, canonical URL.
 - **Open Graph & Twitter Card:** `og:title`, `og:description`, `og:image` (1200×630, foto makanan menggugah + logo, bukan foto kosong), `og:locale="id_ID"`. Setiap produk memiliki OG sendiri (foto + nama + harga) agar saat dibagikan ke WA terlihat menarik.
 - **Structured data (JSON-LD):**
-  - `Restaurant`/`FoodEstablishment` (nama, alamat, telepon, jam buka, `servesCuisine`, `priceRange`, `sameAs` ke sosmed & platform).
+  - `Restaurant`/`FoodEstablishment` (nama, alamat, telepon, jam buka 08.00 - 22.00 WIB, `servesCuisine`, `priceRange`, link WhatsApp resmi dan platform delivery online ShopeeFood, GoFood, GrabFood).
   - `Menu` / `MenuItem` / `Product` + `Offer` (harga, `availability` sesuai status) untuk halaman Menu/produk.
   - `BreadcrumbList` tidak diperlukan (struktur datar).
 - **Google Business Profile:** konsisten (nama, alamat, telepon, jam) dengan data di website.
