@@ -14,8 +14,9 @@ class DashboardController extends Controller
         $kpis = $reportService->getDashboardKpis();
 
         $lowStockProducts = Product::query()
+            ->where('stock', '<=', 10)
             ->orderBy('stock', 'asc')
-            ->limit(5)
+            ->limit(10)
             ->get();
 
         $latestTransactions = Transaction::query()

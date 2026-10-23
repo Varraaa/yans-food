@@ -33,7 +33,7 @@ class ReportService
         $simpleNetProfitToday = $revenueToday - $expensesToday;
 
         $totalProducts = Product::count();
-        $lowStockCount = Product::where('stock', '<=', 5)->count();
+        $lowStockCount = Product::where('stock', '<=', 10)->count();
 
         return [
             'revenue_today' => $revenueToday,

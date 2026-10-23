@@ -4,20 +4,13 @@
 <div class="space-y-6">
     {{-- WELCOME & QUICK ACTION BANNER --}}
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
-            <div>
-                <h1 class="text-xl sm:text-2xl font-black text-stone-900 font-serif flex items-center gap-2">
-                    <span>Selamat Datang, {{ Auth::user()->name ?? 'Owner Yan\'s Food' }}!</span>
-                    <span class="text-xl">👋</span>
-                </h1>
-                <p class="text-xs sm:text-sm text-stone-500 mt-1">
-                    Panel kendali utama sistem kasir POS &amp; manajemen produk Yan's Food.
-                </p>
-            </div>
-            <div class="flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 w-fit">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Sistem Kasir Aktif</span>
-            </div>
+        <div class="mb-5">
+            <h1 class="text-xl sm:text-2xl font-black text-stone-900 font-serif">
+                Selamat Datang, {{ Auth::user()->name ?? 'Owner Yan\'s Food' }}!
+            </h1>
+            <p class="text-xs sm:text-sm text-stone-500 mt-1">
+                Panel kendali utama sistem kasir POS &amp; manajemen produk Yan's Food.
+            </p>
         </div>
 
         {{-- 4 QUICK SHORTCUTS --}}
@@ -147,7 +140,7 @@
                     ⚠️
                 </div>
             </div>
-            <p class="text-[11px] text-stone-400 mt-2 font-medium">Produk dengan stok &le; 5 porsi</p>
+            <p class="text-[11px] text-stone-400 mt-2 font-medium">Produk dengan stok &le; 10 porsi</p>
         </div>
     </div>
 
@@ -186,7 +179,7 @@
                                     Rp {{ number_format($prod->price, 0, ',', '.') }}
                                 </td>
                                 <td class="py-3 px-4 text-center">
-                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold {{ $prod->stock <= 5 ? 'bg-rose-100 text-rose-800' : 'bg-stone-100 text-stone-700' }}">
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold {{ $prod->stock <= 5 ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800' }}">
                                         {{ $prod->stock }} {{ $prod->unit ?? 'pcs' }}
                                     </span>
                                 </td>
@@ -199,7 +192,7 @@
                         @empty
                             <tr>
                                 <td colspan="4" class="py-8 text-center text-stone-400 text-xs">
-                                    Belum ada produk terdaftar.
+                                    Semua stok produk dalam kondisi aman (&gt; 10 porsi).
                                 </td>
                             </tr>
                         @endforelse
