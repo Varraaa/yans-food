@@ -11,13 +11,6 @@
             </p>
         </div>
 
-        <div class="p-4 bg-amber-50/70 border border-amber-200/60 rounded-xl flex items-start gap-3">
-            <span class="text-lg">👑</span>
-            <div class="text-xs text-amber-900">
-                <strong>Status Hak Akses:</strong> Pemilik Usaha & Administrator Utama (Full Access). Tidak ada role sekunder untuk mencegah kerancuan wewenang.
-            </div>
-        </div>
-
         <form action="{{ route('admin.users.update') }}" method="POST" class="space-y-4 text-xs">
             @csrf
             @method('PUT')

@@ -360,9 +360,6 @@
                         <p class="text-stone-700 text-xs">
                             Total tagihan QRIS: <strong class="text-stone-900 tabular-nums font-black text-sm" id="qris-summary-total">Rp 0</strong>
                         </p>
-                        <p class="text-[11px] text-stone-500 leading-tight">
-                            Klik tombol <strong>Lanjut ke QRIS</strong> di bawah untuk menampilkan gambar QR code kepada pelanggan. Setelah pelanggan berhasil scan dan membayar, klik <strong>Next</strong> untuk konfirmasi dan mencetak struk.
-                        </p>
                     </div>
                 </div>
 
@@ -378,11 +375,6 @@
                         <span class="material-symbols-outlined text-[18px]">payments</span>
                         <span id="btn-process-text">BAYAR CASH & CETAK STRUK (F9)</span>
                     </button>
-                </div>
-
-                {{-- KEYBOARD SHORTCUTS HINT --}}
-                <div class="text-[10px] text-stone-400 text-center pt-1 font-mono">
-                    Pintasan: <strong>F9</strong> Eksekusi • <strong>F2</strong> Cari • <strong>F4</strong> Ganti Metode
                 </div>
             </div>
         </div>
@@ -714,7 +706,7 @@
             }
         } else {
             // QRIS Method
-            if (btnProcessText) btnProcessText.textContent = 'LANJUT KE QRIS (F9)';
+            if (btnProcessText) btnProcessText.textContent = 'LANJUT KE QRIS';
             if (statusShortfall) statusShortfall.classList.add('hidden');
             if (statusChange) statusChange.classList.add('hidden');
 
@@ -849,7 +841,7 @@
             .catch(err => {
                 if (btnProcess) {
                     btnProcess.disabled = false;
-                    btnProcess.innerHTML = `<span class="material-symbols-outlined text-[18px]">qr_code_2</span><span id="btn-process-text">LANJUT KE QRIS (F9)</span>`;
+                    btnProcess.innerHTML = `<span class="material-symbols-outlined text-[18px]">qr_code_2</span><span id="btn-process-text">LANJUT KE QRIS</span>`;
                 }
                 alert('Kesalahan QRIS: ' + err.message);
             });
