@@ -42,6 +42,13 @@ class TransactionService
             $subtotal = 0.00;
             $preparedItems = [];
 
+            $totalQtyPerProduct = [];
+            foreach ($items as $item) {
+                $pId = (int) ($item['product_id'] ?? 0);
+                $q = (int) ($item['quantity'] ?? 0);
+                $totalQtyPerProduct[$pId] = ($totalQtyPerProduct[$pId] ?? 0) + $q;
+            }
+
             // Validasi & Hitung Ulang Harga di Server-Side (Server is single source of truth)
             foreach ($items as $item) {
                 $product = Product::lockForUpdate()->find($item['product_id']);
@@ -59,15 +66,22 @@ class TransactionService
                     throw new Exception("Kuantitas untuk produk '{$product->name}' harus lebih dari 0.");
                 }
 
-                if ($product->stock < $qty) {
-                    throw new Exception("Stok untuk produk '{$product->name}' tidak mencukupi (Tersisa: {$product->stock}).");
+                $totalRequested = $totalQtyPerProduct[$product->id] ?? $qty;
+                if ($product->stock < $totalRequested) {
+                    throw new Exception("Stok untuk produk '{$product->name}' tidak mencukupi (Diminta: {$totalRequested}, Tersisa: {$product->stock}).");
                 }
 
                 $itemSubtotal = $product->price * $qty;
                 $subtotal += $itemSubtotal;
 
+                $displayName = $product->name;
+                if (!empty($item['variant'])) {
+                    $displayName = preg_replace('/\s*\(\s*Hangat\s*\/\s*Dingin\s*\)/i', ' (' . $item['variant'] . ')', $displayName);
+                }
+
                 $preparedItems[] = [
                     'product' => $product,
+                    'name' => $displayName,
                     'quantity' => $qty,
                     'unit_price' => $product->price,
                     'subtotal' => $itemSubtotal,
@@ -114,7 +128,7 @@ class TransactionService
                 TransactionItem::create([
                     'transaction_id' => $transaction->id,
                     'product_id' => $prep['product']->id,
-                    'product_name' => $prep['product']->name, // Snapshot nama historis
+                    'product_name' => $prep['name'] ?? $prep['product']->name, // Snapshot nama historis dengan varian
                     'quantity' => $prep['quantity'],
                     'unit_price' => $prep['unit_price'],       // Snapshot harga historis
                     'subtotal' => $prep['subtotal'],

@@ -103,6 +103,7 @@
                 @forelse($products as $product)
                     @php
                         $isAvailable = $product->status === 'available' && $product->stock > 0;
+                        $hasTempOption = (stripos($product->name, 'Hangat') !== false && stripos($product->name, 'Dingin') !== false);
                     @endphp
                     <div 
                         id="product-card-{{ $product->id }}"
@@ -112,7 +113,8 @@
                         data-unit="{{ $product->unit ?? 'porsi' }}"
                         data-stock="{{ (int) $product->stock }}"
                         data-category="{{ $product->category_id }}"
-                        onclick="posAddToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ (float) $product->price }}, '{{ $product->unit ?? 'porsi' }}', {{ (int) $product->stock }})"
+                        data-has-temp="{{ $hasTempOption ? '1' : '0' }}"
+                        onclick="{{ $hasTempOption ? 'posPromptTemp(' . $product->id . ', \'' . addslashes($product->name) . '\', ' . (float)$product->price . ', \'' . ($product->unit ?? 'cup') . '\', ' . (int)$product->stock . ')' : 'posAddToCart(' . $product->id . ', \'' . addslashes($product->name) . '\', ' . (float)$product->price . ', \'' . ($product->unit ?? 'porsi') . '\', ' . (int)$product->stock . ')' }}"
                         class="product-item group relative bg-white border border-stone-200/90 rounded-2xl overflow-hidden transition-all duration-200 flex flex-col justify-between select-none {{ $isAvailable ? 'cursor-pointer hover:border-[#C1440E]/70 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]' : 'opacity-60 cursor-not-allowed bg-stone-50/70' }}"
                     >
                         {{-- PRODUCT IMAGE --}}
@@ -153,6 +155,13 @@
                                 <h4 class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-[#C1440E] transition product-title">
                                     {{ $product->name }}
                                 </h4>
+                                @if($hasTempOption)
+                                    <div class="mt-1">
+                                        <span class="inline-flex items-center gap-1 text-[9.5px] font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full">
+                                            <span>☕ Hangat / 🧊 Dingin</span>
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
@@ -164,9 +173,10 @@
                                 </div>
                                 <button 
                                     type="button" 
+                                    title="{{ $hasTempOption ? 'Pilih varian suhu' : 'Tambah ke keranjang' }}"
                                     class="w-7 h-7 rounded-lg {{ $isAvailable ? 'bg-stone-100 text-stone-700 group-hover:bg-[#C1440E] group-hover:text-white' : 'bg-stone-100 text-stone-300' }} flex items-center justify-center transition text-xs font-black shadow-2xs"
                                 >
-                                    <span class="material-symbols-outlined text-[16px]">add</span>
+                                    <span class="material-symbols-outlined text-[16px]">{{ $hasTempOption ? 'tune' : 'add' }}</span>
                                 </button>
                             </div>
                         </div>
@@ -401,6 +411,67 @@
     </a>
 </div>
 
+{{-- MODAL PILIH VARIAN SUHU (HANGAT / DINGIN) KHUSUS MINUMAN --}}
+<div id="modal-temp-variant" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-stone-900/60 backdrop-blur-xs p-4 transition-opacity">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-200 flex flex-col space-y-4 animate-in fade-in zoom-in-95 duration-150">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-[#C1440E]">
+                <span class="material-symbols-outlined text-[24px]">local_cafe</span>
+                <span class="text-xs font-black uppercase tracking-wider text-stone-600">Pilih Varian Suhu</span>
+            </div>
+            <button type="button" onclick="closeTempModal()" class="w-8 h-8 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 flex items-center justify-center transition cursor-pointer">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+        </div>
+
+        <div>
+            <h3 id="modal-temp-name" class="font-bold text-stone-900 text-base leading-snug">Nama Minuman</h3>
+            <p id="modal-temp-price" class="text-xs text-[#C1440E] font-extrabold mt-0.5">Rp 0</p>
+            <p class="text-[11px] text-stone-500 mt-1">Pilih penyajian pesanan untuk minuman ini:</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-1">
+            <!-- Pilihan Dingin -->
+            <button 
+                type="button" 
+                onclick="applyTempChoice('Dingin')" 
+                class="group p-4 rounded-2xl border-2 border-sky-200 bg-sky-50/70 hover:bg-sky-100 hover:border-sky-500 active:scale-95 transition flex flex-col items-center justify-center text-center space-y-2 cursor-pointer shadow-xs"
+            >
+                <div class="w-12 h-12 rounded-xl bg-sky-500 text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition duration-200 text-2xl">
+                    🧊
+                </div>
+                <div>
+                    <span class="block font-black text-sky-950 text-sm">DINGIN</span>
+                    <span class="block text-[10px] text-sky-700 font-semibold">Segar Pakai Es</span>
+                </div>
+            </button>
+
+            <!-- Pilihan Hangat -->
+            <button 
+                type="button" 
+                onclick="applyTempChoice('Hangat')" 
+                class="group p-4 rounded-2xl border-2 border-amber-200 bg-amber-50/70 hover:bg-amber-100 hover:border-amber-500 active:scale-95 transition flex flex-col items-center justify-center text-center space-y-2 cursor-pointer shadow-xs"
+            >
+                <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition duration-200 text-2xl">
+                    ☕
+                </div>
+                <div>
+                    <span class="block font-black text-amber-950 text-sm">HANGAT</span>
+                    <span class="block text-[10px] text-amber-700 font-semibold">Hangat / Panas</span>
+                </div>
+            </button>
+        </div>
+
+        <button 
+            type="button" 
+            onclick="closeTempModal()" 
+            class="w-full py-2.5 rounded-xl border border-stone-200 text-stone-600 font-bold text-xs hover:bg-stone-100 transition cursor-pointer"
+        >
+            Batal
+        </button>
+    </div>
+</div>
+
 {{-- RECEIPT MODAL (FALLBACK MODAL) --}}
 <div id="receipt-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-stone-900/60 backdrop-blur-xs p-4">
     <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
@@ -494,42 +565,114 @@
         });
     }
 
-    window.posAddToCart = function(id, name, price, unit, stock) {
+    window.pendingTempProduct = null;
+
+    window.posPromptTemp = function(id, name, price, unit, stock) {
         if (stock <= 0) {
             alert(`Stok produk "${name}" sedang habis.`);
             return;
         }
 
-        if (window.cart[id]) {
-            if (window.cart[id].qty >= stock) {
-                alert(`Kuantitas di keranjang sudah mencapai batas sisa stok (${stock} ${unit}).`);
-                return;
-            }
-            window.cart[id].qty += 1;
-        } else {
-            window.cart[id] = { id, name, price, unit: unit || 'porsi', qty: 1, stock: stock };
-        }
-        window.renderCart();
+        window.pendingTempProduct = { id, name, price, unit, stock };
+        
+        const modal = document.getElementById('modal-temp-variant');
+        const modalName = document.getElementById('modal-temp-name');
+        const modalPrice = document.getElementById('modal-temp-price');
+
+        if (modalName) modalName.textContent = name;
+        if (modalPrice) modalPrice.textContent = window.formatRupiah(price) + ' / ' + (unit || 'cup');
+
+        if (modal) modal.classList.remove('hidden');
     };
-    window.addToCart = window.posAddToCart;
 
-    window.updateCartQty = function(id, delta) {
-        if (!window.cart[id]) return;
+    window.closeTempModal = function() {
+        window.pendingTempProduct = null;
+        const modal = document.getElementById('modal-temp-variant');
+        if (modal) modal.classList.add('hidden');
+    };
 
-        if (delta > 0 && window.cart[id].stock !== undefined && window.cart[id].qty >= window.cart[id].stock) {
-            alert(`Kuantitas maksimal adalah sisa stok yang tersedia (${window.cart[id].stock} ${window.cart[id].unit}).`);
+    window.applyTempChoice = function(variant) {
+        if (!window.pendingTempProduct) return;
+        const p = window.pendingTempProduct;
+        window.posAddToCartWithVariant(p.id, p.name, p.price, p.unit, p.stock, variant);
+        window.closeTempModal();
+    };
+
+    window.posAddToCartWithVariant = function(id, name, price, unit, stock, variant) {
+        if (stock <= 0) {
+            alert(`Stok produk "${name}" sedang habis.`);
             return;
         }
 
-        window.cart[id].qty += delta;
-        if (window.cart[id].qty <= 0) {
-            delete window.cart[id];
+        // Cek total kuantitas produk ini di keranjang (akumulasi semua varian hangat & dingin)
+        let totalCurrentQty = 0;
+        for (const k in window.cart) {
+            if (window.cart[k].productId === id) {
+                totalCurrentQty += window.cart[k].qty;
+            }
+        }
+
+        if (totalCurrentQty >= stock) {
+            alert(`Kuantitas di keranjang sudah mencapai batas sisa stok (${stock} ${unit}).`);
+            return;
+        }
+
+        const cartKey = variant ? `${id}_${variant.toLowerCase()}` : `${id}`;
+        let displayName = name;
+        if (variant) {
+            displayName = name.replace(/\s*\(\s*Hangat\s*\/\s*Dingin\s*\)/i, '').trim() + ` (${variant})`;
+        }
+
+        if (window.cart[cartKey]) {
+            window.cart[cartKey].qty += 1;
+        } else {
+            window.cart[cartKey] = {
+                key: cartKey,
+                productId: id,
+                name: displayName,
+                rawName: name,
+                variant: variant || null,
+                price: price,
+                unit: unit || 'porsi',
+                qty: 1,
+                stock: stock
+            };
+        }
+
+        window.renderCart();
+    };
+
+    window.posAddToCart = function(id, name, price, unit, stock) {
+        window.posAddToCartWithVariant(id, name, price, unit, stock, null);
+    };
+    window.addToCart = window.posAddToCart;
+
+    window.updateCartQty = function(cartKey, delta) {
+        if (!window.cart[cartKey]) return;
+        const item = window.cart[cartKey];
+
+        if (delta > 0 && item.stock !== undefined) {
+            let totalQtyForProduct = 0;
+            for (const k in window.cart) {
+                if (window.cart[k].productId === item.productId) {
+                    totalQtyForProduct += window.cart[k].qty;
+                }
+            }
+            if (totalQtyForProduct >= item.stock) {
+                alert(`Kuantitas maksimal adalah sisa stok yang tersedia (${item.stock} ${item.unit}).`);
+                return;
+            }
+        }
+
+        item.qty += delta;
+        if (item.qty <= 0) {
+            delete window.cart[cartKey];
         }
         window.renderCart();
     };
 
-    window.removeFromCart = function(id) {
-        delete window.cart[id];
+    window.removeFromCart = function(cartKey) {
+        delete window.cart[cartKey];
         window.renderCart();
     };
 
@@ -592,8 +735,8 @@
 
     window.calculateSubtotal = function() {
         let subtotal = 0;
-        for (const id in window.cart) {
-            subtotal += window.cart[id].price * window.cart[id].qty;
+        for (const k in window.cart) {
+            subtotal += window.cart[k].price * window.cart[k].qty;
         }
         return subtotal;
     };
@@ -610,14 +753,22 @@
         const clearBtn = document.getElementById('btn-clear-cart');
         const keys = Object.keys(window.cart);
 
-        // Update badges pada katalog produk
+        // Update badges pada katalog produk (akumulasi semua varian untuk tiap produk)
         document.querySelectorAll('.product-item').forEach(el => {
-            const id = el.getAttribute('data-id');
+            const id = parseInt(el.getAttribute('data-id'));
             const badge = document.getElementById('badge-cart-' + id);
             const badgeQty = document.getElementById('badge-qty-' + id);
-            if (window.cart[id]) {
+
+            let totalQtyForProduct = 0;
+            for (const k in window.cart) {
+                if (window.cart[k].productId === id) {
+                    totalQtyForProduct += window.cart[k].qty;
+                }
+            }
+
+            if (totalQtyForProduct > 0) {
                 if (badge) badge.classList.remove('hidden');
-                if (badgeQty) badgeQty.textContent = window.cart[id].qty + 'x';
+                if (badgeQty) badgeQty.textContent = totalQtyForProduct + 'x';
                 el.classList.add('border-[#C1440E]', 'shadow-xs', 'ring-1', 'ring-[#C1440E]/60');
             } else {
                 if (badge) badge.classList.add('hidden');
@@ -639,26 +790,35 @@
         } else {
             if (clearBtn) clearBtn.classList.remove('hidden');
             let html = '';
-            for (const id in window.cart) {
-                const item = window.cart[id];
+            for (const k in window.cart) {
+                const item = window.cart[k];
+                const variantBadge = item.variant 
+                    ? (item.variant.toLowerCase() === 'dingin'
+                        ? '<span class="inline-flex items-center gap-0.5 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-sky-100 text-sky-800 border border-sky-200">🧊 Dingin</span>'
+                        : '<span class="inline-flex items-center gap-0.5 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 border border-amber-200">☕ Hangat</span>')
+                    : '';
+
                 html += `
                     <div class="pt-2.5 first:pt-0 flex items-center justify-between gap-2 text-xs">
                         <div class="flex-1 min-w-0 pr-1">
                             <h5 class="font-bold text-stone-800 truncate text-xs leading-tight">${item.name}</h5>
-                            <span class="text-[10px] text-stone-400">${window.formatRupiah(item.price)} / ${item.unit}</span>
+                            <div class="flex items-center gap-1.5 mt-0.5">
+                                <span class="text-[10px] text-stone-400">${window.formatRupiah(item.price)} / ${item.unit}</span>
+                                ${variantBadge}
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-1 bg-stone-100 p-0.5 rounded-lg border border-stone-200">
-                            <button type="button" onclick="updateCartQty(${id}, -1)" class="w-5 h-5 rounded bg-white text-stone-700 hover:bg-stone-200 text-xs font-black shadow-2xs transition flex items-center justify-center">-</button>
+                            <button type="button" onclick="updateCartQty('${item.key}', -1)" class="w-5 h-5 rounded bg-white text-stone-700 hover:bg-stone-200 text-xs font-black shadow-2xs transition flex items-center justify-center cursor-pointer">-</button>
                             <span class="font-black w-5 text-center text-xs text-stone-900">${item.qty}</span>
-                            <button type="button" onclick="updateCartQty(${id}, 1)" class="w-5 h-5 rounded bg-white text-stone-700 hover:bg-stone-200 text-xs font-black shadow-2xs transition flex items-center justify-center">+</button>
+                            <button type="button" onclick="updateCartQty('${item.key}', 1)" class="w-5 h-5 rounded bg-white text-stone-700 hover:bg-stone-200 text-xs font-black shadow-2xs transition flex items-center justify-center cursor-pointer">+</button>
                         </div>
 
                         <div class="text-right min-w-[70px]">
                             <span class="font-black text-stone-900 text-xs tabular-nums">${window.formatRupiah(item.price * item.qty)}</span>
                         </div>
 
-                        <button type="button" onclick="removeFromCart(${id})" title="Hapus dari keranjang" class="text-stone-300 hover:text-rose-600 transition p-1">
+                        <button type="button" onclick="removeFromCart('${item.key}')" title="Hapus dari keranjang" class="text-stone-300 hover:text-rose-600 transition p-1 cursor-pointer">
                             <span class="material-symbols-outlined text-[15px]">delete</span>
                         </button>
                     </div>
@@ -758,10 +918,11 @@
 
     window.submitTransaction = function() {
         const items = [];
-        for (const id in window.cart) {
+        for (const k in window.cart) {
             items.push({
-                product_id: parseInt(id),
-                quantity: window.cart[id].qty
+                product_id: parseInt(window.cart[k].productId),
+                quantity: window.cart[k].qty,
+                variant: window.cart[k].variant || null
             });
         }
 

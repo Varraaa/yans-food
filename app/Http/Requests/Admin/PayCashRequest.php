@@ -17,6 +17,7 @@ class PayCashRequest extends FormRequest
             'items' => ['required', 'array', 'min:1'],
             'items.*.product_id' => ['required', 'integer', 'exists:products,id'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
+            'items.*.variant' => ['nullable', 'string', 'max:50'],
             'amount_paid' => ['required', 'numeric', 'min:0'],
             'discount' => ['nullable', 'numeric', 'min:0'],
             'customer_name' => ['required', 'string', 'max:100'],

@@ -27,6 +27,13 @@ class PosCheckoutService
 
         $subtotal = 0.0;
         $validatedItems = [];
+        $totalQtyPerProduct = [];
+
+        foreach ($items as $item) {
+            $pId = (int) ($item['product_id'] ?? 0);
+            $q = (int) ($item['quantity'] ?? 0);
+            $totalQtyPerProduct[$pId] = ($totalQtyPerProduct[$pId] ?? 0) + $q;
+        }
 
         foreach ($items as $item) {
             $productId = (int) ($item['product_id'] ?? 0);
@@ -45,17 +52,24 @@ class PosCheckoutService
                 throw new Exception("Produk '{$product->name}' sedang tidak tersedia untuk dijual.");
             }
 
-            if ($product->stock < $qty) {
-                throw new Exception("Stok untuk produk '{$product->name}' tidak mencukupi (Tersisa: {$product->stock}).");
+            $totalRequested = $totalQtyPerProduct[$productId] ?? $qty;
+            if ($product->stock < $totalRequested) {
+                throw new Exception("Stok untuk produk '{$product->name}' tidak mencukupi (Diminta: {$totalRequested}, Tersisa: {$product->stock}).");
             }
 
             $unitPrice = (float) $product->price;
             $itemSubtotal = $unitPrice * $qty;
             $subtotal += $itemSubtotal;
 
+            $displayName = $product->name;
+            if (!empty($item['variant'])) {
+                $displayName = preg_replace('/\s*\(\s*Hangat\s*\/\s*Dingin\s*\)/i', ' (' . $item['variant'] . ')', $displayName);
+            }
+
             $validatedItems[] = [
                 'product_id' => $product->id,
-                'name' => $product->name,
+                'name' => $displayName,
+                'variant' => $item['variant'] ?? null,
                 'quantity' => $qty,
                 'unit_price' => $unitPrice,
                 'subtotal' => $itemSubtotal,
