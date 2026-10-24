@@ -329,7 +329,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" data-reveal-group>
-                <!-- Quote 1 -->
+                <!-- Quote 1: Risol Mayo (Data Master) -->
                 <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
@@ -340,7 +340,7 @@
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
-                            &ldquo;Snack box arisan kemarin laris manis! Risol mayonya masih hangat dan sausnya lumer creamy. Ibu-ibu RT pada nanyain pesannya di mana. Pasti langganan terus.&rdquo;
+                            &ldquo;Risol mayonya bener-bener juara! Kulit luarnya garing renyah keemasan, dan isian mayonesnya lumer gurih melimpah. Tiap kali kumpul keluarga atau arisan selalu pesan ini dan langsung ludes seketika.&rdquo;
                         </p>
                     </div>
                     <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
@@ -349,12 +349,12 @@
                         </div>
                         <div>
                             <p class="font-label-md text-on-surface font-semibold text-sm">Ibu Rina Wardani</p>
-                            <p class="font-body-sm text-secondary text-xs">Arisan Warga Melati (40 Box)</p>
+                            <p class="font-body-sm text-secondary text-xs">Pelanggan Setia Risol Mayo</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Quote 2 -->
+                <!-- Quote 2: Nasi Goreng (Data Master) -->
                 <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
@@ -365,7 +365,7 @@
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
-                            &ldquo;Nasi kotak nusantaranya komplit banget. Ayam bumbu rempahnya meresap empuk, sambalnya pas nggak bikin mules, dan box-nya disegel rapi untuk rapat kantor.&rdquo;
+                            &ldquo;Nasi goreng di Yan's Food punya racikan bumbu ulek rempah rumahan yang otentik dan meresap banget. Gurihnya pas, porsinya ngenyangin, telurnya mantap, dan kerupuknya renyah. Menu makan siang andalan kantor!&rdquo;
                         </p>
                     </div>
                     <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
@@ -374,12 +374,12 @@
                         </div>
                         <div>
                             <p class="font-label-md text-on-surface font-semibold text-sm">Dimas Hendrawan</p>
-                            <p class="font-body-sm text-secondary text-xs">Staff Keuangan (Rapat 25 Porsi)</p>
+                            <p class="font-body-sm text-secondary text-xs">Penikmat Nasi Goreng &amp; Menu Berat</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Quote 3 -->
+                <!-- Quote 3: Snack Box & Katering Acara -->
                 <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
                     <div class="space-y-4">
                         <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
@@ -390,7 +390,7 @@
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
                         <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
-                            &ldquo;Pisang coklat crispy-nya nagih parah! Kulit luarnya garing renyah tahan lama, coklatnya meleleh banyak. Sering order lewat GoFood buat nemenin kerja sore.&rdquo;
+                            &ldquo;Pesan paket snack box dan katering untuk acara rapat kantor dan syukuran keluarga besar. Makanannya tiba tepat waktu, kemasannya higienis dan rapi, serta variasinya komplit. Semua tamu dan rekan kerja sangat puas!&rdquo;
                         </p>
                     </div>
                     <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center gap-3">
@@ -399,7 +399,7 @@
                         </div>
                         <div>
                             <p class="font-label-md text-on-surface font-semibold text-sm">Sarah Anindya</p>
-                            <p class="font-body-sm text-secondary text-xs">Penikmat Kudapan Sore</p>
+                            <p class="font-body-sm text-secondary text-xs">Penyelenggara Acara &amp; Katering (50+ Box)</p>
                         </div>
                     </div>
                 </div>

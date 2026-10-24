@@ -65,7 +65,7 @@ class TransactionController extends Controller
             });
 
         $totalFilteredAmount = (float) (clone $query)->where('status', 'completed')->sum('total');
-        $transactions = $query->paginate(30)->withQueryString();
+        $transactions = $query->paginate(50)->withQueryString();
 
         // Kelompokkan data transaksi per bulan (Y-m) untuk dijadikan section per bulan
         $groupedTransactions = $transactions->getCollection()->groupBy(function ($tx) {

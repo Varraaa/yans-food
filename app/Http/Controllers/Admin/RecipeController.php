@@ -41,7 +41,7 @@ class RecipeController extends Controller
         }
 
         $totalRecipesCount = Recipe::count();
-        $recipes = $query->paginate(12)->withQueryString();
+        $recipes = $query->paginate(50)->withQueryString();
         $products = Product::orderBy('name')->get(['id', 'name', 'category_id']);
         $categories = ProductCategory::orderBy('name')->get(['id', 'name']);
 

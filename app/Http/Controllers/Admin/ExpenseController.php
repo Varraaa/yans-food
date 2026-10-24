@@ -85,7 +85,7 @@ class ExpenseController extends Controller
             });
 
         $totalExpenses = (float) (clone $query)->where('status', 'APPROVED')->sum('amount');
-        $expenses = $query->with(['category', 'creator'])->paginate(30)->withQueryString();
+        $expenses = $query->with(['category', 'creator'])->paginate(50)->withQueryString();
 
         // Kelompokkan data pengeluaran per bulan untuk dijadikan section per bulan
         $groupedExpenses = $expenses->getCollection()->groupBy(function ($exp) {

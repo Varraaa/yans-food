@@ -21,20 +21,26 @@
             </a>
         </div>
 
-        <form action="{{ route('admin.transactions.index') }}" method="GET" class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 text-xs">
-            <div class="w-full sm:flex-1 sm:min-w-[200px]">
+        <form action="{{ route('admin.transactions.index') }}" method="GET" id="admin-tx-form" class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 text-xs">
+            <div class="w-full sm:flex-1 sm:min-w-[200px] relative">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-[18px]">search</span>
                 <input 
                     type="text" 
+                    id="admin-tx-search"
                     name="search" 
                     value="{{ request('search') }}" 
-                    placeholder="Cari nomor transaksi / nama pelanggan..." 
-                    class="w-full px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
+                    placeholder="Ketik untuk mencari nomor transaksi / pelanggan..." 
+                    autocomplete="off"
+                    class="w-full pl-9 pr-8 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white transition"
                 >
+                <button type="button" id="admin-tx-clear-btn" class="hidden absolute right-2.5 top-2.5 text-stone-400 hover:text-stone-600">
+                    <span class="material-symbols-outlined text-[16px]">close</span>
+                </button>
             </div>
 
             {{-- FILTER BULAN --}}
             <div class="w-full sm:w-auto">
-                <select name="month" class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                <select name="month" onchange="this.form.submit()" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] cursor-pointer">
                     <option value="all">Semua Bulan</option>
                     @foreach($availableMonths as $m)
                         <option value="{{ $m['key'] }}" {{ request('month') === $m['key'] ? 'selected' : '' }}>
@@ -49,13 +55,14 @@
                     type="date" 
                     name="date" 
                     value="{{ request('date') }}" 
-                    class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
+                    onchange="this.form.submit()"
+                    class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
                     title="Filter Tanggal Spesifik"
                 >
             </div>
 
             <div class="w-full sm:w-auto">
-                <select name="method" class="w-full sm:w-auto px-3 py-2.5 sm:py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                <select name="method" onchange="this.form.submit()" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] cursor-pointer">
                     <option value="all">Semua Metode</option>
                     <option value="CASH" {{ strtoupper(request('method')) === 'CASH' ? 'selected' : '' }}>Tunai (Cash)</option>
                     <option value="QRIS" {{ strtoupper(request('method')) === 'QRIS' ? 'selected' : '' }}>QRIS</option>
@@ -63,15 +70,10 @@
             </div>
 
             <div class="flex items-center gap-2 w-full sm:w-auto">
-                <button type="submit" class="flex-1 sm:flex-initial px-5 py-2.5 sm:py-2 bg-stone-800 text-white rounded-xl font-bold hover:bg-stone-900 transition text-center">
-                    Filter
-                </button>
-
-                @if(request()->hasAny(['search', 'date', 'month', 'method']))
-                    <a href="{{ route('admin.transactions.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold transition text-center">
-                        Reset
-                    </a>
-                @endif
+                <a href="{{ route('admin.transactions.index') }}" id="btn-refresh-tx" class="flex-1 sm:flex-none px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-xs" title="Segarkan dan reset filter">
+                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                    <span>Refresh</span>
+                </a>
             </div>
         </form>
 
@@ -191,7 +193,11 @@
                                     ? $tx->payment_method->value 
                                     : (string) $tx->payment_method;
                             @endphp
-                            <tr class="hover:bg-amber-50/30 transition">
+                            <tr class="transaction-row-item hover:bg-amber-50/30 transition"
+                                data-number="{{ strtolower($tx->transaction_number) }}"
+                                data-customer="{{ strtolower($tx->customer_name ?? '') }}"
+                                data-cashier="{{ strtolower($tx->cashier?->name ?? '') }}"
+                                data-method="{{ strtolower($methodVal) }}">
                                 <td class="py-3.5 px-4 font-mono font-bold text-stone-900">
                                     <a href="{{ route('admin.transactions.show', $tx->id) }}" class="hover:text-[#C1440E] hover:underline">
                                         {{ $tx->transaction_number }}
@@ -256,11 +262,84 @@
         </div>
     @endforelse
 
+    {{-- CLIENT SIDE EMPTY STATE FOR INSTANT SEARCH --}}
+    <div id="admin-tx-empty" class="hidden py-16 text-center bg-white rounded-2xl border border-dashed border-stone-300 space-y-3">
+        <span class="material-symbols-outlined text-4xl text-stone-300">search_off</span>
+        <div>
+            <p class="text-stone-700 text-sm font-bold">Transaksi tidak ditemukan</p>
+            <p class="text-stone-500 text-xs mt-0.5">Tidak ada riwayat transaksi yang cocok dengan kata kunci pencarian Anda.</p>
+        </div>
+        <button type="button" onclick="window.clearTxSearch()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition">
+            <span class="material-symbols-outlined text-[16px]">refresh</span>
+            <span>Reset Pencarian</span>
+        </button>
+    </div>
+
     {{-- PAGINATION --}}
     @if($transactions->hasPages())
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200">
             {{ $transactions->links() }}
         </div>
     @endif
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('admin-tx-search');
+        const clearBtn = document.getElementById('admin-tx-clear-btn');
+        const rows = document.querySelectorAll('.transaction-row-item');
+        const emptyState = document.getElementById('admin-tx-empty');
+
+        function doInstantTxFilter() {
+            const query = (searchInput.value || '').trim().toLowerCase();
+            let visibleCount = 0;
+
+            if (clearBtn) {
+                if (query.length > 0) {
+                    clearBtn.classList.remove('hidden');
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
+            }
+
+            rows.forEach(row => {
+                const number = row.dataset.number || '';
+                const customer = row.dataset.customer || '';
+                const cashier = row.dataset.cashier || '';
+                const method = row.dataset.method || '';
+
+                if (!query || number.includes(query) || customer.includes(query) || cashier.includes(query) || method.includes(query)) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (emptyState) {
+                if (visibleCount === 0 && rows.length > 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', doInstantTxFilter);
+        }
+
+        window.clearTxSearch = function() {
+            if (searchInput) {
+                searchInput.value = '';
+                doInstantTxFilter();
+                searchInput.focus();
+            }
+        };
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', window.clearTxSearch);
+        }
+    });
+    </script>
 </div>
 @endsection

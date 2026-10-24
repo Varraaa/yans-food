@@ -235,19 +235,34 @@ export function initMenuCatalog() {
         });
     }
 
-    // Reset filter
+    // Reset & Refresh filters
+    const handleResetAll = () => {
+        state.category = 'all';
+        state.query = '';
+        state.availableOnly = false;
+        state.sort = 'recommended';
+        state.visibleLimit = 24;
+        if (searchInput) searchInput.value = '';
+        if (availableToggle) availableToggle.checked = false;
+        if (sortSelect) sortSelect.value = 'recommended';
+        sessionStorage.removeItem('yf_filter_available');
+        applyFilters();
+    };
+
     if (resetFilterBtn) {
-        resetFilterBtn.addEventListener('click', () => {
-            state.category = 'all';
-            state.query = '';
-            state.availableOnly = false;
-            state.sort = 'recommended';
-            state.visibleLimit = 24;
-            if (searchInput) searchInput.value = '';
-            if (availableToggle) availableToggle.checked = false;
-            if (sortSelect) sortSelect.value = 'recommended';
-            sessionStorage.removeItem('yf_filter_available');
-            applyFilters();
+        resetFilterBtn.addEventListener('click', handleResetAll);
+    }
+
+    const refreshBtn = document.getElementById('menuRefreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            handleResetAll();
+            // Subtle rotation animation on refresh click
+            const icon = refreshBtn.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.classList.add('transition-transform', 'duration-500', 'rotate-180');
+                setTimeout(() => icon.classList.remove('rotate-180'), 500);
+            }
         });
     }
 

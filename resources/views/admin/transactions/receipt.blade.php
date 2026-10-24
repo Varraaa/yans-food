@@ -52,6 +52,29 @@
             : (string) $transaction->payment_method;
     @endphp
 
+    <style>
+        @media print {
+            @page {
+                size: {{ $is80mm ? '80mm' : '58mm' }} auto;
+                margin: 0;
+            }
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+            }
+            #thermal-receipt-printable {
+                width: {{ $is80mm ? '80mm' : '58mm' }} !important;
+                max-width: {{ $is80mm ? '80mm' : '58mm' }} !important;
+                margin: 0 auto !important;
+                padding: 5mm 3mm !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+        }
+    </style>
+
     <div class="flex justify-center">
         <div id="thermal-receipt-printable" class="receipt-thermal-paper {{ $widthClass }} w-full bg-white p-5 sm:p-6 rounded-2xl border border-stone-300 shadow-md font-mono text-xs text-stone-900 space-y-3 leading-tight select-none">
             

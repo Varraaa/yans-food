@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://upload.wikimedia.org/wikipedia/commons/4/43/Ulibakar.JPG',
                 'status' => 'available',
             ],
             // 2. Pisang Coklat Lumer
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
                 'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Rujak_cireng%2C_Purwokerto_2015-03-22.jpg',
                 'status' => 'available',
             ],
             // 4. Stik Sosis
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1576082869760-4c4f34d10f88?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 5. Kroket Bihun Sayur
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://upload.wikimedia.org/wikipedia/commons/1/14/Kroket.JPG',
                 'status' => 'available',
             ],
             // 6. Stik Keju Mozarela Lumer
@@ -255,7 +255,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 23. Nasi Telur Sosis Orak Arik
@@ -277,7 +277,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1510693206972-df098062cb71?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 25. Nasi Telur Ceplok Sosis

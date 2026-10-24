@@ -21,17 +21,22 @@
 
     {{-- SEARCH & FILTER BAR --}}
     <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-stone-200 space-y-3">
-        <form action="{{ route('admin.recipes.index') }}" method="GET" class="flex flex-col md:flex-row flex-wrap items-stretch md:items-center gap-2.5 sm:gap-3 text-xs">
-            {{-- SEARCH INPUT --}}
+        <form action="{{ route('admin.recipes.index') }}" method="GET" id="admin-recipe-form" class="flex flex-col md:flex-row flex-wrap items-stretch md:items-center gap-2.5 sm:gap-3 text-xs">
+            {{-- SEARCH INPUT (INSTANT SEARCH) --}}
             <div class="flex-1 min-w-[220px] relative">
                 <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-[18px]">search</span>
                 <input 
                     type="text" 
+                    id="admin-recipe-search"
                     name="search" 
                     value="{{ request('search') }}" 
-                    placeholder="Cari resep, nama produk, atau bahan baku..." 
-                    class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white transition"
+                    placeholder="Ketik untuk mencari resep, produk, atau bahan baku..." 
+                    autocomplete="off"
+                    class="w-full pl-9 pr-8 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white transition"
                 >
+                <button type="button" id="admin-recipe-clear-btn" class="hidden absolute right-2.5 top-2.5 text-stone-400 hover:text-stone-600">
+                    <span class="material-symbols-outlined text-[16px]">close</span>
+                </button>
             </div>
 
             {{-- FILTER PRODUK --}}
@@ -58,19 +63,12 @@
                 </select>
             </div>
 
-            {{-- BUTTONS --}}
+            {{-- BUTTON REFRESH --}}
             <div class="flex items-center gap-2">
-                <button type="submit" class="flex-1 md:flex-none px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white rounded-xl font-bold transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer">
-                    <span class="material-symbols-outlined text-[16px]">filter_list</span>
-                    <span>Cari</span>
-                </button>
-
-                @if(request()->hasAny(['search', 'product_id', 'category_id']))
-                    <a href="{{ route('admin.recipes.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold transition flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[16px]">refresh</span>
-                        <span>Reset</span>
-                    </a>
-                @endif
+                <a href="{{ route('admin.recipes.index') }}" id="btn-refresh-recipes" class="flex-1 md:flex-none px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-xs" title="Segarkan dan reset filter">
+                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                    <span>Refresh</span>
+                </a>
             </div>
         </form>
 
@@ -109,9 +107,12 @@
     </div>
 
     {{-- RECIPES GRID (RESPONSIVE) --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+    <div id="recipe-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         @forelse($recipes as $recipe)
-            <div class="bg-white p-3.5 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
+            <div class="recipe-card-item bg-white p-3.5 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition"
+                data-name="{{ strtolower($recipe->name) }}"
+                data-product="{{ strtolower($recipe->product?->name ?? '') }}"
+                data-ingredients="{{ strtolower($recipe->ingredients->pluck('ingredient_name')->implode(' ')) }}">
                 <div class="space-y-2.5 sm:space-y-3">
                     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1.5 sm:gap-2">
                         <div>
@@ -193,8 +194,81 @@
         @endforelse
     </div>
 
+    {{-- CLIENT SIDE EMPTY STATE FOR INSTANT SEARCH --}}
+    <div id="admin-recipe-empty" class="hidden py-16 text-center bg-white rounded-2xl border border-dashed border-stone-300 space-y-3">
+        <span class="material-symbols-outlined text-4xl text-stone-300">search_off</span>
+        <div>
+            <p class="text-stone-700 text-sm font-bold">Resep tidak ditemukan</p>
+            <p class="text-stone-500 text-xs mt-0.5">Tidak ada resep yang sesuai dengan kata kunci pencarian Anda.</p>
+        </div>
+        <button type="button" onclick="window.clearRecipeSearch()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition">
+            <span class="material-symbols-outlined text-[16px]">refresh</span>
+            <span>Reset Pencarian</span>
+        </button>
+    </div>
+
     <div>
         {{ $recipes->links() }}
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('admin-recipe-search');
+        const clearBtn = document.getElementById('admin-recipe-clear-btn');
+        const recipeCards = document.querySelectorAll('.recipe-card-item');
+        const emptyState = document.getElementById('admin-recipe-empty');
+        const cardsContainer = document.getElementById('recipe-cards-container');
+
+        function doInstantRecipeFilter() {
+            const query = (searchInput.value || '').trim().toLowerCase();
+            let visibleCount = 0;
+
+            if (clearBtn) {
+                if (query.length > 0) {
+                    clearBtn.classList.remove('hidden');
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
+            }
+
+            recipeCards.forEach(card => {
+                const name = card.dataset.name || '';
+                const product = card.dataset.product || '';
+                const ingredients = card.dataset.ingredients || '';
+
+                if (!query || name.includes(query) || product.includes(query) || ingredients.includes(query)) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (emptyState) {
+                if (visibleCount === 0 && recipeCards.length > 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', doInstantRecipeFilter);
+        }
+
+        window.clearRecipeSearch = function() {
+            if (searchInput) {
+                searchInput.value = '';
+                doInstantRecipeFilter();
+                searchInput.focus();
+            }
+        };
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', window.clearRecipeSearch);
+        }
+    });
+    </script>
 </div>
 @endsection

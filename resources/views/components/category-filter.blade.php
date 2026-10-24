@@ -45,6 +45,16 @@
                 <div id="menuResultsCount" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-surface-container text-secondary font-label-sm text-xs font-semibold shrink-0">
                     Semua Menu
                 </div>
+
+                <!-- Refresh / Reset Filter Button -->
+                <button type="button" 
+                        id="menuRefreshBtn" 
+                        aria-label="Refresh filter dan kembalikan semua menu"
+                        title="Refresh & Tampilkan Semua Menu"
+                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-warm hover:bg-surface-container text-secondary hover:text-on-surface font-label-sm text-xs font-semibold shadow-xs border border-surface-variant/40 transition active:scale-95 shrink-0 cursor-pointer">
+                    <span class="material-symbols-outlined text-[18px]">refresh</span>
+                    <span class="hidden sm:inline">Refresh</span>
+                </button>
             </div>
         </div>
 

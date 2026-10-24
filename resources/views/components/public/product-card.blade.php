@@ -46,8 +46,8 @@
             <!-- Category & Favorite Badges (§5.3) -->
             <div class="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-wrap gap-1 sm:gap-1.5 z-10">
                 @if($isFavorite)
-                    <span class="badge-favorite px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-[10px] sm:text-[11px] font-bold shadow-xs">
-                        Favorit
+                    <span class="badge-favorite w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-xs shrink-0" title="Menu Favorit">
+                        <span class="material-symbols-outlined text-[14px] sm:text-[16px] leading-none select-none" style="font-variation-settings: 'FILL' 1, 'wght' 700;">star</span>
                     </span>
                 @endif
                 <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-surface-warm/95 backdrop-blur-md text-on-surface font-label-sm text-[10px] sm:text-[11px] font-semibold shadow-xs border border-surface-variant/30">

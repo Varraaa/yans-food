@@ -13,24 +13,40 @@
                 <p class="text-xs text-stone-500 mt-0.5">Kelola seluruh sajian kuliner Yan's Food, status ketersediaan, dan harga.</p>
             </div>
             <a href="{{ route('admin.products.create') }}" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition w-full sm:w-auto">
-                <span>+ Tambah Produk Baru</span>
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                <span>Tambah Produk Baru</span>
             </a>
         </div>
 
-        {{-- SEARCH & FILTER BAR --}}
-        <form action="{{ route('admin.products.index') }}" method="GET" class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 text-xs">
-            <div class="w-full sm:flex-1 sm:min-w-[180px]">
+        {{-- SEARCH & FILTER BAR (INSTANT AUTO-FILTER ON INPUT) --}}
+        <form id="product-filter-form" action="{{ route('admin.products.index') }}" method="GET" class="pt-3 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 text-xs">
+            {{-- INSTANT SEARCH INPUT --}}
+            <div class="relative flex-1 min-w-[200px]">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+                    <span class="material-symbols-outlined text-[18px]">search</span>
+                </span>
                 <input 
                     type="text" 
+                    id="admin-product-search"
                     name="search" 
                     value="{{ request('search') }}" 
-                    placeholder="Cari nama produk..." 
-                    class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]"
+                    placeholder="Ketik nama produk untuk mencari langsung..." 
+                    autocomplete="off"
+                    class="w-full pl-9 pr-8 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs text-stone-900 focus:bg-white focus:ring-1 focus:ring-[#C1440E] focus:outline-none transition"
                 >
+                <button 
+                    type="button" 
+                    id="btn-clear-product-search" 
+                    class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-stone-400 hover:text-stone-600"
+                    title="Hapus pencarian"
+                >
+                    <span class="material-symbols-outlined text-[16px]">close</span>
+                </button>
             </div>
 
+            {{-- KATEGORI DROPDOWN (AUTO FILTER ON CHANGE) --}}
             <div class="w-full sm:w-auto">
-                <select name="category" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                <select name="category" onchange="this.form.submit()" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white font-medium cursor-pointer">
                     <option value="">Semua Kategori</option>
                     @foreach($categories as $cat)
                         <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
@@ -40,32 +56,51 @@
                 </select>
             </div>
 
+            {{-- STATUS DROPDOWN (AUTO FILTER ON CHANGE) --}}
             <div class="w-full sm:w-auto">
-                <select name="status" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                <select name="status" onchange="this.form.submit()" class="w-full sm:w-auto px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white font-medium cursor-pointer">
                     <option value="">Semua Status</option>
                     <option value="available" {{ request('status') === 'available' ? 'selected' : '' }}>Sedia (Available)</option>
                     <option value="unavailable" {{ request('status') === 'unavailable' ? 'selected' : '' }}>Tidak Tersedia</option>
                 </select>
             </div>
 
+            {{-- TOMBOL REFRESH / RESET --}}
             <div class="flex items-center gap-2">
-                <button type="submit" class="flex-1 sm:flex-none px-4 py-2 bg-stone-800 text-white rounded-xl font-bold hover:bg-stone-900 transition text-center">
-                    Filter
-                </button>
-
-                @if(request()->hasAny(['search', 'category', 'status']))
-                    <a href="{{ route('admin.products.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold text-center">
-                        Reset
-                    </a>
-                @endif
+                <a 
+                    href="{{ route('admin.products.index') }}" 
+                    id="btn-refresh-products"
+                    title="Refresh dan Tampilkan Semua Produk"
+                    class="px-3.5 py-2 rounded-xl border border-stone-300 bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-stone-900 font-bold transition flex items-center gap-1.5 shadow-2xs active:scale-95 text-center"
+                >
+                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                    <span>Refresh</span>
+                </a>
             </div>
         </form>
     </div>
 
+    {{-- EMPTY SEARCH NOTICE (CLIENT-SIDE) --}}
+    <div id="admin-product-empty" class="hidden py-16 text-center bg-white rounded-2xl border border-dashed border-stone-300">
+        <div class="text-3xl mb-1">🔍</div>
+        <p class="text-stone-700 text-sm font-bold">Produk tidak ditemukan</p>
+        <p class="text-stone-500 text-xs mt-0.5">Tidak ada produk yang cocok dengan kata kunci pencarian Anda.</p>
+        <div class="mt-3">
+            <button type="button" onclick="resetProductSearch()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition">
+                <span class="material-symbols-outlined text-[16px]">refresh</span>
+                <span>Reset Pencarian</span>
+            </button>
+        </div>
+    </div>
+
     {{-- PRODUCTS GRID (2-GRID RESPONSIVE) --}}
-    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4" id="admin-products-grid">
         @forelse($products as $product)
-            <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between">
+            <div 
+                class="product-card-item bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between"
+                data-name="{{ strtolower($product->name) }}"
+                data-category="{{ strtolower($product->category?->name ?? '') }}"
+            >
                 <div>
                     {{-- SMALLER PRODUCT IMAGE --}}
                     <div class="relative h-28 sm:h-36 bg-stone-100 overflow-hidden">
@@ -83,10 +118,10 @@
                     </div>
 
                     <div class="p-3 sm:p-4">
-                        <span class="text-[9px] sm:text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
+                        <span class="product-item-cat text-[9px] sm:text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
                             {{ $product->category?->name ?? 'Menu' }}
                         </span>
-                        <h3 class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5">
+                        <h3 class="product-item-title font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5">
                             {{ $product->name }}
                         </h3>
                         <p class="text-[11px] sm:text-xs text-stone-500 line-clamp-1 sm:line-clamp-2 mt-1">{{ $product->description ?: 'Tidak ada deskripsi.' }}</p>
@@ -125,4 +160,64 @@
         {{ $products->links() }}
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('admin-product-search');
+    const clearBtn = document.getElementById('btn-clear-product-search');
+    const emptyNotice = document.getElementById('admin-product-empty');
+    const productCards = document.querySelectorAll('.product-card-item');
+
+    function filterProducts() {
+        const q = (searchInput?.value || '').toLowerCase().trim();
+        let visibleCount = 0;
+
+        if (clearBtn) {
+            if (q.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+        }
+
+        productCards.forEach(card => {
+            const name = card.getAttribute('data-name') || '';
+            const cat = card.getAttribute('data-category') || '';
+            if (!q || name.includes(q) || cat.includes(q)) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (emptyNotice) {
+            if (visibleCount === 0 && productCards.length > 0) {
+                emptyNotice.classList.remove('hidden');
+            } else {
+                emptyNotice.classList.add('hidden');
+            }
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterProducts);
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            if (searchInput) {
+                searchInput.value = '';
+                filterProducts();
+                searchInput.focus();
+            }
+        });
+    }
+
+    window.resetProductSearch = function() {
+        if (searchInput) {
+            searchInput.value = '';
+            filterProducts();
+        }
+        window.location.href = "{{ route('admin.products.index') }}";
+    };
+});
+</script>
 @endsection

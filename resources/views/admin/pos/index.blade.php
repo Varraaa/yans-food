@@ -54,7 +54,7 @@
         <div class="lg:col-span-7 xl:col-span-8 space-y-4">
             {{-- SEARCH & FILTER BAR --}}
             <div class="bg-white p-4 rounded-2xl shadow-xs border border-stone-200/90 space-y-3">
-                <div class="flex flex-col sm:flex-row gap-2.5">
+                <div class="flex items-center gap-2.5">
                     {{-- SEARCH INPUT --}}
                     <div class="relative flex-1">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
@@ -63,7 +63,7 @@
                         <input 
                             type="text" 
                             id="search-input"
-                            placeholder="Cari menu Yan's Food..." 
+                            placeholder="Ketik untuk mencari menu secara otomatis..." 
                             class="w-full pl-10 pr-9 py-2.5 rounded-xl border border-stone-300 bg-stone-50/70 text-stone-900 text-sm focus:bg-white focus:ring-2 focus:ring-[#C1440E] focus:outline-none transition shadow-inner placeholder:text-stone-400"
                         >
                         <button 
@@ -75,6 +75,18 @@
                             <span class="material-symbols-outlined text-[18px]">close</span>
                         </button>
                     </div>
+
+                    {{-- TOMBOL REFRESH (§1.1) --}}
+                    <button 
+                        type="button" 
+                        id="btn-refresh-pos" 
+                        onclick="refreshPosFilter(this)" 
+                        title="Refresh & Tampilkan Semua Menu" 
+                        class="px-3.5 py-2.5 rounded-xl border border-stone-300 bg-stone-50 hover:bg-stone-100 text-stone-600 hover:text-stone-900 font-bold text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-xs shrink-0 cursor-pointer"
+                    >
+                        <span class="material-symbols-outlined text-[18px]">refresh</span>
+                        <span class="hidden sm:inline">Refresh</span>
+                    </button>
                 </div>
 
                 {{-- CATEGORY PILLS --}}
@@ -564,6 +576,27 @@
             });
         });
     }
+
+    window.clearSearch = function() {
+        if (searchInput) {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.focus();
+        }
+    };
+
+    window.refreshPosFilter = function(btn) {
+        window.clearSearch();
+        if (btn) {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.classList.add('transition-transform', 'duration-500', 'rotate-180');
+                setTimeout(() => icon.classList.remove('rotate-180'), 500);
+            }
+        }
+        const allBtn = document.querySelector('#category-pills .category-btn');
+        if (allBtn) window.filterCategory('all', allBtn);
+    };
 
     window.pendingTempProduct = null;
 
