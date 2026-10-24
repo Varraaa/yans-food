@@ -39,7 +39,7 @@ Navbar utama:
 Home | About | Menu | Pesan | Contact
 ```
 
-- **Identitas Visual & Icon HD:** Menggunakan aset logo dan icon resmi Yan's Food dalam format vector tajam lossless (`public/images/logo/Icon Yans Food.svg`) dengan kliping melingkar (*circular shape*) pada Favicon Tab Web, serta terintegrasi pada Header Navbar, Mobile Navigation Overlay, Footer, Favicon, serta Top Bar Panel Admin dan Halaman Login Admin untuk menjamin ketajaman visual maksimal tanpa buram di semua kerapatan layar (HiDPI / Retina).
+- **Identitas Visual & Icon HD:** Menggunakan aset icon resmi Yan's Food dalam format vector tajam lossless (`public/images/logo/Icon Yans Food.svg`) dengan latar belakang penuh warna oranye hangat khas brand (`#E2631C`) dan wadah squircle rounded mewah bergradasi emas-tembaga (`bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209]`) yang konsisten pada Header Navbar, Footer, Top Bar Panel Admin, serta Halaman Login Admin. Untuk Favicon Tab Web di browser, digunakan aset khusus melingkar penuh (*circular shape*) `public/images/logo/Favicon Yans Food.svg`.
 - **Persistent Fixed Navbar:** Navbar publik berada pada posisi `fixed` di bagian atas (`z-index: 50`) dengan tinggi dan ukuran logo yang konstan (tetap, tidak mengecil dan tidak membesar saat di-scroll) sehingga selalu melayang mengikuti pergerakan scroll pengguna tanpa pernah tenggelam.
 - **Ketiadaan Sistem/Menu Katering:** Yan's Food tidak menyediakan dan tidak menggunakan sistem maupun menu katering. Seluruh query kategori produk (`ProductCategory`) berjalan bersih tanpa filter katering warisan lama.
 

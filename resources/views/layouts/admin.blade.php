@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? "Admin Panel — Yan's Food" }}</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo/Icon Yans Food.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo/Favicon Yans Food.svg') }}">
 
     <!-- Google Fonts & Material Symbols -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +35,13 @@
                     </button>
                     <!-- Brand -->
                     <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 sm:gap-2.5">
-                        <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
-                             alt="Yan's Food" 
-                             class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-cover shadow-2xs border border-[#E2631C]/30 shrink-0">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[1.5px] shadow-xs shrink-0">
+                            <div class="w-full h-full rounded-[9px] bg-[#E2631C] flex items-center justify-center overflow-hidden">
+                                <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
+                                     alt="Yan's Food" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
                         <div class="leading-tight">
                             <span class="self-center text-sm sm:text-base font-extrabold whitespace-nowrap text-stone-900 tracking-wide font-serif">YAN'S FOOD</span>
                             <span class="block text-[9px] sm:text-[10px] uppercase font-bold text-[#C1440E] tracking-widest">Admin Panel</span>

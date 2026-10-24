@@ -6,7 +6,7 @@
     <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
             {{-- BRAND LOGO BADGE --}}
-            <div class="w-12 h-12 rounded-2xl bg-[#E2631C] p-[2px] shadow-sm shrink-0">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-sm shrink-0">
                 <div class="w-full h-full rounded-[14px] bg-[#E2631C] flex items-center justify-center relative overflow-hidden">
                     <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
                          alt="Yan's Food" 

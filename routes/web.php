@@ -29,6 +29,7 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
+
 Route::get('/menu', function () {
     try {
         $categories = ProductCategory::all();

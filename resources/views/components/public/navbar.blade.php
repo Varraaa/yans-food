@@ -123,9 +123,13 @@
             <!-- Overlay Header: Brand Logo & Close Button (Reference Style) -->
             <div class="w-full px-6 py-5 flex items-center justify-between border-b border-[#EDE6DC]/80 shrink-0">
                 <a href="{{ url('/') }}" class="flex items-center gap-2.5 font-serif text-2xl font-bold tracking-tight text-[#7E3717] hover:opacity-90 transition-opacity">
-                    <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
-                         alt="Yan's Food" 
-                         class="w-9 h-9 rounded-xl object-cover shadow-2xs border border-[#E2631C]/30">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[1.5px] shadow-xs shrink-0">
+                        <div class="w-full h-full rounded-[9px] bg-[#E2631C] flex items-center justify-center overflow-hidden">
+                            <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
+                                 alt="Yan's Food" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
                     <span>Yan's Food</span>
                 </a>
                 
