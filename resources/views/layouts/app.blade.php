@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? "Yan's Food — Dapur Kuliner Rumahan" }}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo/Icon Yans Food.svg') }}">
     <meta name="description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi dari dapur higienis terpercaya.">
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -13,7 +14,7 @@
     <meta property="og:site_name" content="Yan's Food">
     <meta property="og:title" content="{{ $title ?? "Yan's Food — Dapur Kuliner Rumahan" }}">
     <meta property="og:description" content="Yan's Food menyajikan sajian kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.">
-    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image" content="{{ asset('images/logo/Icon Yans Food.svg') }}">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -26,7 +27,7 @@
         "{{ '@context' }}": "https://schema.org",
         "{{ '@type' }}": "Restaurant",
         "name": "Yan's Food",
-        "image": "{{ asset('images/logo.png') }}",
+        "image": "{{ asset('images/logo/Icon Yans Food.svg') }}",
         "description": "Kuliner rumahan otentik, kudapan renyah, dan masakan hangat bernutrisi higienis terpercaya.",
         "servesCuisine": "Indonesian",
         "priceRange": "$$",

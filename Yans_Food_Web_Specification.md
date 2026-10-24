@@ -39,6 +39,8 @@ Navbar utama:
 Home | About | Menu | Pesan | Contact
 ```
 
+- **Identitas Visual & Icon HD:** Menggunakan aset logo dan icon resmi Yan's Food dalam format vector tajam lossless (`public/images/logo/Icon Yans Food.svg`) secara terintegrasi pada Header Navbar, Mobile Navigation Overlay, Footer, Favicon, serta Top Bar Panel Admin dan Halaman Login Admin untuk menjamin ketajaman visual maksimal tanpa buram di semua kerapatan layar (HiDPI / Retina).
+
 ### Home
 Hero, pengenalan dapur Yan's Food, teaser 2 kanal pesan resmi (online delivery & datang langsung), menu favorit pilihan pelanggan, filosofi rasa rumahan, kontak cepat, dan footer.
 

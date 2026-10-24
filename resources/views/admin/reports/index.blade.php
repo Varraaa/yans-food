@@ -6,16 +6,11 @@
     <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
             {{-- BRAND LOGO BADGE --}}
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209] p-[2px] shadow-sm shrink-0">
-                <div class="w-full h-full rounded-[14px] bg-[#FBF6EE] flex items-center justify-center relative overflow-hidden">
-                    <svg class="w-7 h-7 text-[#C1440E]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C11.5 3 13 4 12 5" stroke="#D6A253" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M8 3.5C7.5 4.5 9 5.5 8 6.5" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round"/>
-                        <path d="M16 3.5C15.5 4.5 17 5.5 16 6.5" stroke="#C1440E" stroke-width="1.8" stroke-linecap="round"/>
-                        <path d="M4 11C4 16 7.5 18 12 18C16.5 18 20 16 20 11H4Z" fill="#C1440E"/>
-                        <line x1="2.5" y1="11" x2="21.5" y2="11" stroke="#26201B" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="12" cy="19.5" r="1.5" fill="#D6A253"/>
-                    </svg>
+            <div class="w-12 h-12 rounded-2xl bg-[#E2631C] p-[2px] shadow-sm shrink-0">
+                <div class="w-full h-full rounded-[14px] bg-[#E2631C] flex items-center justify-center relative overflow-hidden">
+                    <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
+                         alt="Yan's Food" 
+                         class="w-full h-full object-cover">
                 </div>
             </div>
             <div>

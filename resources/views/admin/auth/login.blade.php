@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin — Yan's Food</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo/Icon Yans Food.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,9 +14,9 @@
     <div class="max-w-md w-full">
         <!-- BRAND LOGO -->
         <div class="text-center mb-8">
-            <div class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-[#C1440E] items-center justify-center text-white font-extrabold text-3xl shadow-lg mb-3">
-                Y
-            </div>
+            <img src="{{ asset('images/logo/Icon Yans Food.svg') }}" 
+                 alt="Yan's Food" 
+                 class="inline-block w-24 h-24 rounded-3xl shadow-lg mb-3 object-cover border border-[#E2631C]/30">
             <h1 class="text-2xl font-black text-stone-900 tracking-tight font-serif">YAN'S FOOD</h1>
             <p class="text-xs text-stone-500 mt-1 uppercase tracking-widest font-bold">Admin Management System</p>
         </div>
