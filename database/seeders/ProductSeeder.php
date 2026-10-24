@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $ringan->id,
                 'name' => 'Cireng Rujak',
                 'description' => 'Cireng renyah kenyal dengan cocolan bumbu rujak pedas manis segar. Dapat disajikan matang atau frozen. Gratis saus & mayones.',
-                'price' => 10850,
+                'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
                 'image' => 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80',
@@ -459,7 +459,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $prod) {
-            Product::create($prod);
+            Product::updateOrCreate(
+                ['name' => $prod['name']],
+                $prod
+            );
         }
     }
 }
