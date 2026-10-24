@@ -169,55 +169,55 @@
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6" data-reveal-group>
                 <!-- 1: Risol Mayo -->
                 <x-public.product-card 
-                    title="Risol Mayo Spesial"
-                    category="Kudapan Gurih"
+                    title="Risol Mayo"
+                    category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="4500"
-                    unit="/ pcs"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuCyfuXln7cyGrY2lKM07Nk3VKMQjY3ZTmHoC1dw90oSQpU6K9GToD9dsNw7j-ONqeDlAGA4dUHsambXmkUw1VSykY9WS5EuOrd2vXOLVz_gDlJDQpTckcMcGct8EuAcmM-Aj5VFqr78aR9bpsCfWc7L5uPmlfvvfJvmZbLdxztCm-fUjNoCNBg6rJwiIGonOikHOEVhan_cN8QOl7vVORz_mOuXsXhhH3TopjOFzgKMvjN75USyuea4"
-                    desc="Kulit renyah lembut, smoked beef, telur, & racikan saus mayo gurih lumer khas racikan Yan's Food."
+                    price="14000"
+                    unit="/ porsi"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB"
+                    desc="Risol mayo creamy gurih berbalut kulit renyah emas, pilihan pedas atau original. Gratis saus dan mayones."
                     status="sedia"
                     :isFavorite="true"
-                    slug="risol-mayo-spesial" />
+                    slug="risol-mayo" />
 
                 <!-- 2: Nasi Goreng Jadul -->
                 <x-public.product-card 
                     title="Nasi Goreng Jadul"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="22000"
+                    price="21000"
                     unit="/ porsi"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuCvbMqJp4vasmNPRn7HlUQ53R3QwrbMiAJGRmOeSP3xoEqc-hb5EkQx28tGjOOddzhbh0BvjFwX_K2C7FkHaJpySF2zidCDs-Bx_mHHA3URhRcMv1OQhfIUJ4SnK1xWUswF-WwKCxa8-zJZmfBBJz1XBLusLQAzk5BcvZvIXzaDl0b5CzAHuTSEZQKFm2axnelXGbXdYgGwaMGpV41iikvWXq7ZllZ-h_pkIUZOUgUcN8KoU_ETwohF"
-                    desc="Aroma bumbu ulek terasi tradisional dengan suwiran ayam, telur ceplok setengah matang, & kerupuk."
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5"
+                    desc="Nasi goreng jadul bumbu ulek tradisional dengan 1 butir telur, sayuran, kerupuk, dalam kemasan higienis."
                     status="sedia"
                     :isFavorite="true"
                     slug="nasi-goreng-jadul" />
 
-                <!-- 3: Pisang Coklat Crispy -->
+                <!-- 3: Pisang Coklat Lumer -->
                 <x-public.product-card 
                     title="Pisang Coklat Lumer"
-                    category="Kudapan Manis"
+                    category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="3500"
-                    unit="/ pcs"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBts6_Y8VjNhmV1LnrN6Dm5iR4sSQV3xhLKrMWDJ6fdyqbxY5O9UUI0S756Cpv4FT1Yz-u3S4boBHAif6DwRvoIGDRnvaOAQC6T3FOJTit1ctKXlOxUcwCSHO1NAsIzokrAtdKAhabshRPcb8-79Kx_Y0Npfeb0F49PFjc2JS3S2A5MMw-cxhx3jqPOPn8bT9D07fWrCrU6OzYatoJuHKSSOFKhB75_p_Sr9SRd84JFSYkDWNiu3HvX"
-                    desc="Pisang raja manis legit dengan coklat melimpah berbalut kulit crispy emas yang renyah tahan lama."
+                    price="14000"
+                    unit="/ porsi"
+                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX"
+                    desc="Pisang manis legit dengan isian cokelat lumer berbalut kulit pastry renyah khas racikan Yan's Food."
                     status="sedia"
                     :isFavorite="true"
                     slug="pisang-coklat-lumer" />
 
-                <!-- 4: Es Kopi Susu Aren -->
+                <!-- 4: Teh Manis (Hangat / Dingin) -->
                 <x-public.product-card 
-                    title="Es Kopi Susu Aren"
+                    title="Teh Manis (Hangat / Dingin)"
                     category="Minuman Segar"
                     categorySlug="minuman"
-                    price="15000"
+                    price="7000"
                     unit="/ cup"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuDuU3Yxrcih-pg6m2nRhDlGOylXXNiZpcpRJOwpGtbqdy2tID_2dcQH8vFY45VJyojhQ_EhfmASszkIE7eY72DmaCVEuoHwd-g6ry7je_ScQ_2fJ8jLVTp1o_iCgl3eLUn5tGJpOrxa83pkjoHbquHRihUHOkcatbhcowl5ghx9jMRDqgTc1xq11rmDLIGt391ni6_gw1qdmchrGD1pMbRA1MfIPrtdWISTKpeaLC0pLS0h91QGgf47"
-                    desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang menyegarkan."
+                    image="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
+                    desc="Seduhan teh melati wangi khas Jawa dengan daun teh pilihan, tersedia pilihan hangat atau dingin segar."
                     status="sedia"
                     :isFavorite="false"
-                    slug="es-kopi-susu-aren" />
+                    slug="teh-manis-hangat-dingin" />
             </div>
         </div>
     </section>

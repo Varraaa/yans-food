@@ -31,13 +31,8 @@ Route::get('/about', function () {
 
 
 Route::get('/menu', function () {
-    try {
-        $categories = ProductCategory::all();
-        $products = Product::with('category')->get();
-    } catch (\Throwable $e) {
-        $categories = collect();
-        $products = collect();
-    }
+    $categories = ProductCategory::all();
+    $products = Product::with('category')->get();
     return view('pages.menu', compact('categories', 'products'));
 })->name('menu');
 
