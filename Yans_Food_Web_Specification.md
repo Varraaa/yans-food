@@ -54,9 +54,14 @@ Katalog kuliner dinamis dari basis data produk dengan filter kategori (Kudapan R
 
 Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
 
-#### A. Pesan Online Delivery (Mitra Platform)
-- Menampilkan card interaktif **ShopeeFood**, **GoFood**, dan **GrabFood**, masing-masing clickable menuju toko resmi Yan's Food di aplikasi tersebut untuk pemesanan instan harian dengan kurir platform.
-- Transaksi dan pembayaran berlangsung di platform pihak ketiga tersebut.
+#### A. Pesan Online Delivery (Mitra Platform Langsung ke Aplikasi Mobile)
+- Menampilkan card interaktif **ShopeeFood**, **GoFood**, dan **GrabFood**, masing-masing menggunakan tautan langsung (*direct deep link*) yang otomatis membuka aplikasi mobile (*APK / native app*) toko resmi Yan's Food di perangkat pengguna:
+  - **ShopeeFood:** `https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link`
+  - **GoFood:** `https://gofood.link/a/Fj6y8Jy`
+  - **GrabFood:** `https://app.grab.com/s/07XMlcm7`
+- **Keterangan Panduan Pengguna (Mobile Guidance Notice):** Pada website publik di atas kartu platform online, disediakan kotak informasi ramah yang menyarankan pengunjung untuk membuka tautan melalui perangkat seluler (*handphone / smartphone*) agar langsung diarahkan ke aplikasi mobile yang terpasang di HP.
+- Tautan bersifat dinamis dan tersinkronisasi dengan pengaturan toko (`\App\Models\Setting`).
+- Transaksi dan pembayaran berlangsung di aplikasi mitra pihak ketiga tersebut.
 
 #### B. Datang Langsung ke Tempat (Pesan di Tempat & Bawa Pulang / Konsep Drive-thru)
 - Pelanggan datang langsung ke lokasi dapur Yan's Food, memesan langsung di kasir dapur, menunggu pesanan disiapkan dan digoreng hangat dadakan, menerima pesanan terkemas rapi, lalu membawanya pulang.
@@ -361,6 +366,10 @@ Peran pengguna:
 - **Navbar Sidebar Optimal:** Posisi navbar samping dinaikkan untuk menghilangkan ruang kosong bagian atas (*whitespace*) sehingga navigasi lebih seimbang dan estetik.
 - **Responsif di Semua Perangkat:** Seluruh halaman admin dioptimalkan untuk dapat diakses secara nyaman dan jelas di layar Desktop, Tablet, hingga Ponsel (Mobile).
 - **Tata Letak Grid Produk & Resep:** Tampilan foto produk dan kartu resep dapur diatur dengan sistem 2-grid proporsional di perangkat mobile/tablet agar informasi resep dan detail produk terbaca dengan jelas tanpa memakan ruang vertikal berlebih.
+
+### Pengaturan Toko & Tautan Mitra Delivery (Admin Panel)
+- **Manajemen Tautan Direct Mobile:** Mengelola konfigurasi tautan ShopeeFood, GoFood, dan GrabFood menggunakan URL direct mobile link toko.
+- **Antarmuka Admin Bersih:** Pada halaman pengaturan admin, tautan direct dikelola langsung tanpa menampilkan keterangan/anjuran buka di HP, sehingga antarmuka kontrol panel tetap ringkas, fungsional, dan fokus pada manajemen data toko.
 
 ## 17. Struktur Folder Proyek
 

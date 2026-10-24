@@ -23,9 +23,9 @@ class SettingController extends Controller
             'store_address' => 'Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang',
             'store_phone' => '082221222936',
             'operational_hours' => 'Setiap Hari: 08:00 - 22:00 WIB',
-            'shopeefood_url' => 'https://shopee.co.id/universal-link/now-food',
-            'gofood_url' => 'https://gofood.link/u/yansfood',
-            'grabfood_url' => 'https://food.grab.com/id/id/restaurant/yans-food',
+            'shopeefood_url' => 'https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link',
+            'gofood_url' => 'https://gofood.link/a/Fj6y8Jy',
+            'grabfood_url' => 'https://app.grab.com/s/07XMlcm7',
             'qris_merchant_name' => "YAN'S FOOD NASI GORENG, R",
             'qris_image_path' => file_exists(public_path('images/qris/qris-yansfood.jpeg')) ? 'images/qris/qris-yansfood.jpeg' : null,
         ];
@@ -34,6 +34,22 @@ class SettingController extends Controller
         if (File::exists($path)) {
             $saved = json_decode(File::get($path), true) ?? [];
             $defaults = array_merge($defaults, $saved);
+        }
+
+        // Ambil data dari database Setting bila ada, jika masih nilai generic lama gantikan dengan direct link baru
+        $legacyLinks = [
+            'https://shopee.co.id/universal-link/now-food',
+            'https://gofood.link/u/yansfood',
+            'https://gofood.link',
+            'https://food.grab.com/id/id/restaurant/yans-food',
+            'https://food.grab.com',
+        ];
+
+        foreach (['shopeefood_url', 'gofood_url', 'grabfood_url'] as $linkKey) {
+            $dbLink = Setting::get($linkKey);
+            if ($dbLink && !in_array($dbLink, $legacyLinks)) {
+                $defaults[$linkKey] = $dbLink;
+            }
         }
 
         // Ambil data QRIS dari database Setting bila ada
@@ -63,9 +79,9 @@ class SettingController extends Controller
             'store_address' => ['required', 'string', 'max:255'],
             'store_phone' => ['required', 'string', 'max:50'],
             'operational_hours' => ['required', 'string', 'max:255'],
-            'shopeefood_url' => ['nullable', 'url', 'max:255'],
-            'gofood_url' => ['nullable', 'url', 'max:255'],
-            'grabfood_url' => ['nullable', 'url', 'max:255'],
+            'shopeefood_url' => ['nullable', 'url', 'max:500'],
+            'gofood_url' => ['nullable', 'url', 'max:500'],
+            'grabfood_url' => ['nullable', 'url', 'max:500'],
             'qris_merchant_name' => ['nullable', 'string', 'max:100'],
             'qris_image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
         ]);

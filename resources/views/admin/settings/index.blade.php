@@ -144,7 +144,7 @@
                             <span class="w-2 h-2 rounded-full bg-orange-500"></span>
                             <span>Link ShopeeFood Toko</span>
                         </label>
-                        <input type="url" name="shopeefood_url" value="{{ old('shopeefood_url', $settings['shopeefood_url'] ?? '') }}" placeholder="https://shopee.co.id/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                        <input type="url" name="shopeefood_url" value="{{ old('shopeefood_url', $settings['shopeefood_url'] ?? 'https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link') }}" placeholder="https://shopee.co.id/universal-link/now-food/shop/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     </div>
 
                     <div class="space-y-1">
@@ -152,7 +152,7 @@
                             <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                             <span>Link GoFood Toko</span>
                         </label>
-                        <input type="url" name="gofood_url" value="{{ old('gofood_url', $settings['gofood_url'] ?? '') }}" placeholder="https://gofood.link/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                        <input type="url" name="gofood_url" value="{{ old('gofood_url', $settings['gofood_url'] ?? 'https://gofood.link/a/Fj6y8Jy') }}" placeholder="https://gofood.link/a/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     </div>
 
                     <div class="space-y-1">
@@ -160,7 +160,7 @@
                             <span class="w-2 h-2 rounded-full bg-green-500"></span>
                             <span>Link GrabFood Toko</span>
                         </label>
-                        <input type="url" name="grabfood_url" value="{{ old('grabfood_url', $settings['grabfood_url'] ?? '') }}" placeholder="https://food.grab.com/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
+                        <input type="url" name="grabfood_url" value="{{ old('grabfood_url', $settings['grabfood_url'] ?? 'https://app.grab.com/s/07XMlcm7') }}" placeholder="https://app.grab.com/s/..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E]">
                     </div>
                 </div>
             </div>

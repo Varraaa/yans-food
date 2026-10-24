@@ -101,10 +101,21 @@
                     </div>
                 </div>
 
+                <!-- Keterangan Rekomendasi Buka di Aplikasi HP (Mobile) -->
+                <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-start sm:items-center gap-3.5 text-amber-950 shadow-2xs">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-800 shadow-2xs">
+                        <span class="material-symbols-outlined text-[22px]">smartphone</span>
+                    </div>
+                    <div class="text-xs sm:text-sm leading-relaxed">
+                        <span class="font-bold text-amber-900 block sm:inline">Disarankan Buka di Aplikasi HP (Mobile):</span>
+                        <span>Tautan ShopeeFood, GoFood, dan GrabFood di bawah ini langsung terhubung (direct link) ke aplikasi mobile toko kami. Untuk kemudahan dan pengalaman terbaik, disarankan membukanya melalui handphone/ponsel agar otomatis membuka aplikasi yang terpasang di HP Anda.</span>
+                    </div>
+                </div>
+
                 <!-- 3 Platform Delivery Cards Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     <!-- ShopeeFood Card -->
-                    <a href="https://shopee.co.id/universal-link/now-food" 
+                    <a href="{{ \App\Models\Setting::get('shopeefood_url', 'https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
@@ -129,13 +140,16 @@
                             </div>
                         </div>
                         <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center justify-between text-primary font-label-md font-bold text-xs sm:text-sm">
-                            <span>Buka di ShopeeFood</span>
+                            <span class="inline-flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[16px]">smartphone</span>
+                                <span>Buka Aplikasi ShopeeFood</span>
+                            </span>
                             <span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">arrow_outward</span>
                         </div>
                     </a>
 
                     <!-- GoFood Card -->
-                    <a href="https://gofood.link" 
+                    <a href="{{ \App\Models\Setting::get('gofood_url', 'https://gofood.link/a/Fj6y8Jy') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
@@ -160,13 +174,16 @@
                             </div>
                         </div>
                         <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center justify-between text-primary font-label-md font-bold text-xs sm:text-sm">
-                            <span>Buka di GoFood</span>
+                            <span class="inline-flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[16px]">smartphone</span>
+                                <span>Buka Aplikasi GoFood</span>
+                            </span>
                             <span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">arrow_outward</span>
                         </div>
                     </a>
 
                     <!-- GrabFood Card -->
-                    <a href="https://food.grab.com" 
+                    <a href="{{ \App\Models\Setting::get('grabfood_url', 'https://app.grab.com/s/07XMlcm7') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
@@ -191,7 +208,10 @@
                             </div>
                         </div>
                         <div class="pt-6 border-t border-surface-variant/40 mt-6 flex items-center justify-between text-primary font-label-md font-bold text-xs sm:text-sm">
-                            <span>Buka di GrabFood</span>
+                            <span class="inline-flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[16px]">smartphone</span>
+                                <span>Buka Aplikasi GrabFood</span>
+                            </span>
                             <span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">arrow_outward</span>
                         </div>
                     </a>
