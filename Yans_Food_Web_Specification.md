@@ -59,7 +59,7 @@ Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
   - **ShopeeFood:** `https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link`
   - **GoFood:** `https://gofood.link/a/Fj6y8Jy`
   - **GrabFood:** `https://app.grab.com/s/07XMlcm7`
-- **Keterangan Panduan Pengguna (Mobile Guidance Notice):** Pada website publik di atas kartu platform online, disediakan kotak informasi ramah yang menyarankan pengunjung untuk membuka tautan melalui perangkat seluler (*handphone / smartphone*) agar langsung diarahkan ke aplikasi mobile yang terpasang di HP.
+- **Keterangan Panduan Pengguna (Mobile Guidance Notice):** Pada website publik di atas kartu platform online, disediakan kotak informasi ringkas *"Disarankan Buka di Aplikasi HP (Mobile)"* dengan ikon smartphone.
 - Tautan bersifat dinamis dan tersinkronisasi dengan pengaturan toko (`\App\Models\Setting`).
 - Transaksi dan pembayaran berlangsung di aplikasi mitra pihak ketiga tersebut.
 

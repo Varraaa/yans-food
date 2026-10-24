@@ -102,14 +102,13 @@
                 </div>
 
                 <!-- Keterangan Rekomendasi Buka di Aplikasi HP (Mobile) -->
-                <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-start sm:items-center gap-3.5 text-amber-950 shadow-2xs">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-800 shadow-2xs">
-                        <span class="material-symbols-outlined text-[22px]">smartphone</span>
+                <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-center gap-3 text-amber-950 shadow-2xs">
+                    <div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-800 shadow-2xs">
+                        <span class="material-symbols-outlined text-[20px]">smartphone</span>
                     </div>
-                    <div class="text-xs sm:text-sm leading-relaxed">
-                        <span class="font-bold text-amber-900 block sm:inline">Disarankan Buka di Aplikasi HP (Mobile):</span>
-                        <span>Tautan ShopeeFood, GoFood, dan GrabFood di bawah ini langsung terhubung (direct link) ke aplikasi mobile toko kami. Untuk kemudahan dan pengalaman terbaik, disarankan membukanya melalui handphone/ponsel agar otomatis membuka aplikasi yang terpasang di HP Anda.</span>
-                    </div>
+                    <p class="text-xs sm:text-sm font-bold text-amber-900 tracking-tight">
+                        Disarankan Buka di Aplikasi HP (Mobile)
+                    </p>
                 </div>
 
                 <!-- 3 Platform Delivery Cards Grid -->
