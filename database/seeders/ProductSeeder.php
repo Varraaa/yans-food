@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1538066755633-dce44fbe18cc?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 5. Kroket Bihun Sayur
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://upload.wikimedia.org/wikipedia/commons/1/14/Kroket.JPG',
+                'image' => 'https://images.unsplash.com/photo-1741399106442-fac74d7fb847?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 6. Stik Keju Mozarela Lumer
@@ -134,7 +134,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 12. Dimsum Jamur
@@ -145,7 +145,7 @@ class ProductSeeder extends Seeder
                 'price' => 17000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1576577445504-6af96477db52?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1559329255-2e7cb2e21ca7?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 13. Nasi + Nugget Ayam + Stick Sosis
@@ -156,7 +156,7 @@ class ProductSeeder extends Seeder
                 'price' => 28000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 14. Nasi + Chicken Nugget
@@ -178,7 +178,7 @@ class ProductSeeder extends Seeder
                 'price' => 28000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1576082869760-4c4f34d10f88?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 16. Nasi + Chicken Katsu
@@ -189,7 +189,7 @@ class ProductSeeder extends Seeder
                 'price' => 26500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 17. Nugget Ayam
@@ -200,7 +200,7 @@ class ProductSeeder extends Seeder
                 'price' => 13500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1776100221863-08e64ce906bb?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 18. Nasi Goreng Mawut
@@ -233,7 +233,7 @@ class ProductSeeder extends Seeder
                 'price' => 21000,
                 'stock' => 35,
                 'unit' => 'porsi',
-                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5',
+                'image' => 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Nasi_Goreng_Kampung_Kangkung.jpg',
                 'status' => 'available',
             ],
             // 21. Nasi Goreng
@@ -244,7 +244,7 @@ class ProductSeeder extends Seeder
                 'price' => 21000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1647093953000-9065ed6f85ef?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 22. Nasi Sosis Saus Tiram
@@ -255,7 +255,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1767065703791-ddc9a028563c?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 23. Nasi Telur Sosis Orak Arik
@@ -266,7 +266,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1558672367-241cd1a01b16?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 24. Nasi Telur Dadar Sosis
@@ -277,7 +277,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1510693206972-df098062cb71?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1563690449029-d6e1b8d6003d?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 25. Nasi Telur Ceplok Sosis
@@ -288,7 +288,7 @@ class ProductSeeder extends Seeder
                 'price' => 18500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1582169296194-e4d644c48063?auto=format&fit=crop&w=600&q=80',
+                'image' => 'https://images.unsplash.com/photo-1624647079030-4407051e3de8?auto=format&fit=crop&w=600&q=80',
                 'status' => 'available',
             ],
             // 26. Teh Manis (Hangat / Dingin)

@@ -115,7 +115,7 @@
                     categorySlug="berat"
                     price="22000"
                     unit="/ porsi"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gFjuwYwzc5byRksAoaPaJCo22HZeR2rTD2kcV7En88UcW7vKVQXq9YS8RXfSwxDMdpiV3U3rvbi8G1OfQbMTfoZAmHnswhGp0WoieoCeNQ8KbJd2HC-yzabd_HDxIAXf658sy5Jn906vGgVVOuiJLKspZ5dt_52kF1IsTKSW7x1eMeywP5Hhz8hNEHbfX4iAk2pDJ1bo9jJHEv-bM2JMOM7AiS6nmi8Qg3jusbDPBLRFGaRDDvp5"
+                    image="https://upload.wikimedia.org/wikipedia/commons/b/b2/Nasi_Goreng_Kampung_Kangkung.jpg"
                     desc="Racikan bumbu ulek terasi khas tempo dulu, suwiran ayam gurih, telur ceplok setengah matang, dan acar timun segar."
                     status="sedia"
                     :isFavorite="true"
