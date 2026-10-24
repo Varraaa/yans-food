@@ -38,14 +38,28 @@
                 </a>
             </div>
 
-            {{-- EXPORT BUTTON --}}
-            <a 
-                href="{{ route('admin.reports.export', request()->query()) }}"
-                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-sm transition active:scale-[0.98]"
-            >
-                <span class="material-symbols-outlined text-[16px]">download</span>
-                <span>Export CSV</span>
-            </a>
+            {{-- EXPORT BUTTONS (TERPISAH & JELAS: LABA RUGI & ARUS KAS VS PENJUALAN KASIR) --}}
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full lg:w-auto">
+                {{-- EXPORT LABA RUGI & ARUS KAS --}}
+                <a 
+                    href="{{ route('admin.reports.export-financial', request()->query()) }}"
+                    class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 {{ $activeTab === 'financial' ? 'bg-amber-600 hover:bg-amber-700 text-white shadow-sm ring-2 ring-amber-400/30' : 'bg-stone-100 hover:bg-stone-200 text-stone-700' }} rounded-xl font-bold text-xs transition active:scale-[0.98]"
+                    title="Unduh laporan laba rugi, kas masuk, pengeluaran & ringkasan bulanan (CSV)"
+                >
+                    <span class="material-symbols-outlined text-[16px]">balance</span>
+                    <span class="whitespace-nowrap">Export Laba Rugi &amp; Kas (CSV)</span>
+                </a>
+
+                {{-- EXPORT PENJUALAN KASIR --}}
+                <a 
+                    href="{{ route('admin.reports.export-sales', request()->query()) }}"
+                    class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 {{ $activeTab === 'pos' ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400/30' : 'bg-stone-100 hover:bg-stone-200 text-stone-700' }} rounded-xl font-bold text-xs transition active:scale-[0.98]"
+                    title="Unduh laporan rekap omset penjualan, menu terlaris & rincian transaksi kasir (CSV)"
+                >
+                    <span class="material-symbols-outlined text-[16px]">point_of_sale</span>
+                    <span class="whitespace-nowrap">Export Penjualan Kasir (CSV)</span>
+                </a>
+            </div>
         </div>
     </div>
 

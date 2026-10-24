@@ -100,6 +100,8 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     // Laporan
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export', [ReportController::class, 'exportCsv'])->name('reports.export');
+    Route::get('/reports/export/financial', [ReportController::class, 'exportFinancialCsv'])->name('reports.export-financial');
+    Route::get('/reports/export/sales', [ReportController::class, 'exportSalesCsv'])->name('reports.export-sales');
 
     // Printer
     Route::resource('printers', PrinterController::class)->only(['index', 'store', 'update', 'destroy']);
@@ -121,5 +123,6 @@ Route::get('/storage/{path}', function ($path) {
     }
     return response()->file($filePath);
 })->where('path', '.*');
+
 
 
