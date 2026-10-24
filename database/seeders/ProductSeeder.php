@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $ringan->id,
                 'name' => 'Stik Sosis',
                 'description' => 'Satu porsi berisi 5 pcs stik sosis gurih lezat, saus dan mayones, tanpa nasi. Bisa disajikan matang atau frozen.',
-                'price' => 10850,
+                'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
                 'image' => 'https://images.unsplash.com/photo-1576082869760-4c4f34d10f88?auto=format&fit=crop&w=600&q=80',

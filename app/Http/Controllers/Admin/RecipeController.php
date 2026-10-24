@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Recipe;
 use App\Models\RecipeIngredient;
 use Illuminate\Http\Request;
@@ -13,18 +14,38 @@ class RecipeController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Recipe::with(['product', 'ingredients'])->orderBy('name');
+        $query = Recipe::with(['product.category', 'ingredients'])->orderBy('name');
 
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhereHas('product', function ($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%');
-                });
+            $search = trim($request->search);
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhereHas('product', function ($pq) use ($search) {
+                        $pq->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('ingredients', function ($iq) use ($search) {
+                        $iq->where('ingredient_name', 'like', '%' . $search . '%');
+                    });
+            });
         }
 
-        $recipes = $query->paginate(12)->withQueryString();
+        if ($request->filled('product_id')) {
+            $query->where('product_id', $request->product_id);
+        }
 
-        return view('admin.recipes.index', compact('recipes'));
+        if ($request->filled('category_id')) {
+            $query->whereHas('product', function ($q) use ($request) {
+                $q->where('category_id', $request->category_id);
+            });
+        }
+
+        $totalRecipesCount = Recipe::count();
+        $recipes = $query->paginate(12)->withQueryString();
+        $products = Product::orderBy('name')->get(['id', 'name', 'category_id']);
+        $categories = ProductCategory::orderBy('name')->get(['id', 'name']);
+
+        return view('admin.recipes.index', compact('recipes', 'products', 'categories', 'totalRecipesCount'));
     }
 
     public function create()

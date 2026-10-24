@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="space-y-6">
+    {{-- HEADER & ACTIONS --}}
     <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
             <h1 class="text-lg sm:text-xl font-bold text-stone-900 flex items-center gap-2">
@@ -10,21 +11,120 @@
             </h1>
             <p class="text-xs text-stone-500 mt-0.5">Dokumentasi bahan baku, takaran porsi, dan resep menu Yan's Food.</p>
         </div>
-        <a href="{{ route('admin.recipes.create') }}" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition w-full sm:w-auto">
-            <span>+ Tambah Resep Baru</span>
-        </a>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('admin.recipes.create') }}" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition w-full sm:w-auto">
+                <span class="material-symbols-outlined text-[16px]">add</span>
+                <span>Tambah Resep Baru</span>
+            </a>
+        </div>
     </div>
 
-    {{-- RECIPES GRID (2-GRID RESPONSIVE) --}}
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+    {{-- SEARCH & FILTER BAR --}}
+    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-stone-200 space-y-3">
+        <form action="{{ route('admin.recipes.index') }}" method="GET" class="flex flex-col md:flex-row flex-wrap items-stretch md:items-center gap-2.5 sm:gap-3 text-xs">
+            {{-- SEARCH INPUT --}}
+            <div class="flex-1 min-w-[220px] relative">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-[18px]">search</span>
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="{{ request('search') }}" 
+                    placeholder="Cari resep, nama produk, atau bahan baku..." 
+                    class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white transition"
+                >
+            </div>
+
+            {{-- FILTER PRODUK --}}
+            <div class="w-full md:w-auto min-w-[190px]">
+                <select name="product_id" onchange="this.form.submit()" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white font-medium cursor-pointer">
+                    <option value="">Semua Produk ({{ $products->count() }})</option>
+                    @foreach($products as $prod)
+                        <option value="{{ $prod->id }}" {{ request('product_id') == $prod->id ? 'selected' : '' }}>
+                            {{ $prod->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- FILTER KATEGORI MENU --}}
+            <div class="w-full md:w-auto min-w-[150px]">
+                <select name="category_id" onchange="this.form.submit()" class="w-full px-3 py-2 rounded-xl border border-stone-300 bg-stone-50 text-xs focus:ring-1 focus:ring-[#C1440E] focus:bg-white font-medium cursor-pointer">
+                    <option value="">Semua Kategori</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>
+                            {{ $cat->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- BUTTONS --}}
+            <div class="flex items-center gap-2">
+                <button type="submit" class="flex-1 md:flex-none px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white rounded-xl font-bold transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer">
+                    <span class="material-symbols-outlined text-[16px]">filter_list</span>
+                    <span>Cari</span>
+                </button>
+
+                @if(request()->hasAny(['search', 'product_id', 'category_id']))
+                    <a href="{{ route('admin.recipes.index') }}" class="px-3 py-2 text-stone-500 hover:text-stone-800 font-bold transition flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">refresh</span>
+                        <span>Reset</span>
+                    </a>
+                @endif
+            </div>
+        </form>
+
+        {{-- FILTER SUMMARY BADGES --}}
+        @if(request()->hasAny(['search', 'product_id', 'category_id']))
+            <div class="pt-2 border-t border-stone-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-500">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="font-bold text-stone-700">Filter Aktif:</span>
+                    @if(request('search'))
+                        <span class="px-2 py-0.5 rounded-md bg-stone-100 border border-stone-200 text-stone-700 font-medium">
+                            Kata kunci: "{{ request('search') }}"
+                        </span>
+                    @endif
+                    @if(request('product_id'))
+                        @php $selectedProd = $products->firstWhere('id', request('product_id')); @endphp
+                        @if($selectedProd)
+                            <span class="px-2 py-0.5 rounded-md bg-amber-50 border border-amber-200 text-amber-800 font-medium">
+                                Produk: {{ $selectedProd->name }}
+                            </span>
+                        @endif
+                    @endif
+                    @if(request('category_id'))
+                        @php $selectedCat = $categories->firstWhere('id', request('category_id')); @endphp
+                        @if($selectedCat)
+                            <span class="px-2 py-0.5 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium">
+                                Kategori: {{ $selectedCat->name }}
+                            </span>
+                        @endif
+                    @endif
+                </div>
+                <span class="font-bold text-stone-600">
+                    Menampilkan {{ $recipes->total() }} dari {{ $totalRecipesCount }} resep
+                </span>
+            </div>
+        @endif
+    </div>
+
+    {{-- RECIPES GRID (RESPONSIVE) --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         @forelse($recipes as $recipe)
             <div class="bg-white p-3.5 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition">
                 <div class="space-y-2.5 sm:space-y-3">
                     <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1.5 sm:gap-2">
                         <div>
-                            <span class="text-[9px] sm:text-[10px] font-bold text-[#C1440E] uppercase tracking-wider block">
-                                {{ $recipe->product?->name ?? 'Menu Produk' }}
-                            </span>
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="text-[9px] sm:text-[10px] font-bold text-[#C1440E] uppercase tracking-wider block">
+                                    {{ $recipe->product?->name ?? 'Menu Produk' }}
+                                </span>
+                                @if($recipe->product?->category)
+                                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-bold bg-stone-100 text-stone-500">
+                                        {{ $recipe->product->category->name }}
+                                    </span>
+                                @endif
+                            </div>
                             <h3 class="font-bold text-stone-900 text-sm sm:text-base mt-0.5 line-clamp-1 sm:line-clamp-2">{{ $recipe->name }}</h3>
                         </div>
                         <span class="self-start px-2 py-0.5 sm:px-2.5 sm:py-1 bg-amber-50 text-amber-800 rounded-lg text-[10px] sm:text-xs font-bold shrink-0">
@@ -56,8 +156,9 @@
                 </div>
 
                 <div class="pt-3 sm:pt-4 border-t border-stone-100 mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <a href="{{ route('admin.recipes.show', $recipe->id) }}" class="text-[11px] sm:text-xs font-bold text-[#C1440E] hover:underline">
-                        Lihat Selengkapnya →
+                    <a href="{{ route('admin.recipes.show', $recipe->id) }}" class="text-[11px] sm:text-xs font-bold text-[#C1440E] hover:underline flex items-center gap-1">
+                        <span>Lihat Selengkapnya</span>
+                        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                     </a>
                     <div class="flex items-center gap-1.5 self-end sm:self-auto">
                         <a href="{{ route('admin.recipes.edit', $recipe->id) }}" class="p-1 sm:p-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs" title="Edit Resep">
@@ -74,9 +175,20 @@
                 </div>
             </div>
         @empty
-            <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-stone-300">
-                <div class="text-3xl mb-1">📖</div>
-                <p class="text-stone-500 text-sm font-medium">Belum ada resep menu masakan tercatat.</p>
+            <div class="col-span-full py-16 text-center bg-white rounded-2xl border border-dashed border-stone-300 space-y-3">
+                <span class="material-symbols-outlined text-4xl text-stone-300">menu_book</span>
+                <div>
+                    <p class="text-stone-700 text-sm font-bold">Resep tidak ditemukan</p>
+                    <p class="text-stone-500 text-xs mt-0.5">Tidak ada resep produk yang sesuai dengan kriteria pencarian atau filter.</p>
+                </div>
+                @if(request()->hasAny(['search', 'product_id', 'category_id']))
+                    <div>
+                        <a href="{{ route('admin.recipes.index') }}" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition">
+                            <span class="material-symbols-outlined text-[16px]">filter_alt_off</span>
+                            <span>Hapus Semua Filter</span>
+                        </a>
+                    </div>
+                @endif
             </div>
         @endforelse
     </div>
