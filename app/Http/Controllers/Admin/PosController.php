@@ -18,10 +18,7 @@ class PosController extends Controller
 {
     public function index()
     {
-        $categories = ProductCategory::where('name', 'not like', '%katering%')
-            ->where('name', 'not like', '%ketring%')
-            ->withCount('products')
-            ->get();
+        $categories = ProductCategory::withCount('products')->get();
         $products = Product::where('status', 'available')
             ->with('category')
             ->orderBy('name')

@@ -358,31 +358,29 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
                     transform var(--dur-base) var(--ease-out);
     }
 
-    #main-navbar.is-shrunk {
+    #main-navbar.is-shrunk,
+    #main-navbar.is-scrolled {
         background-color: #FBF6EE;
         border-bottom: 1px solid rgba(38, 32, 27, 0.12);
         box-shadow: 0 4px 16px -2px rgba(38, 32, 27, 0.08);
     }
 
-    #main-navbar.is-hidden {
-        transform: translateY(-100%);
-    }
-
     #main-navbar .navbar-container {
         height: 80px;
-        transition: height var(--dur-base) var(--ease-out);
     }
 
-    #main-navbar.is-shrunk .navbar-container {
-        height: 64px;
+    #main-navbar.is-shrunk .navbar-container,
+    #main-navbar.is-scrolled .navbar-container {
+        height: 80px; /* Posisi dan ukuran navbar tetap konstan saat scroll */
     }
 
     #main-navbar .brand-logo {
-        transition: transform var(--dur-base) var(--ease-out);
+        transform: none;
     }
 
-    #main-navbar.is-shrunk .brand-logo {
-        transform: scale(0.92);
+    #main-navbar.is-shrunk .brand-logo,
+    #main-navbar.is-scrolled .brand-logo {
+        transform: none; /* Logo tetap tidak mengecil/membesar saat scroll */
     }
 
     /* Desktop Navigation Sliding Underline Indicator (§3.4) */

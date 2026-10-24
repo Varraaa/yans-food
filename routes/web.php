@@ -31,9 +31,7 @@ Route::get('/about', function () {
 
 Route::get('/menu', function () {
     try {
-        $categories = ProductCategory::where('name', 'not like', '%katering%')
-            ->where('name', 'not like', '%ketring%')
-            ->get();
+        $categories = ProductCategory::all();
         $products = Product::with('category')->get();
     } catch (\Throwable $e) {
         $categories = collect();
