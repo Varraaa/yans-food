@@ -27,8 +27,9 @@ class ReportController extends Controller
                 $endDate = $now->copy()->format('Y-m-d');
                 break;
             case 'this_week':
-                $startDate = $now->copy()->startOfWeek()->format('Y-m-d');
-                $endDate = $now->copy()->endOfWeek()->format('Y-m-d');
+                // Menggunakan 7 hari terakhir agar transaksi akhir pekan / kemarin tetap masuk dalam kalkulasi mingguan
+                $startDate = $now->copy()->subDays(6)->format('Y-m-d');
+                $endDate = $now->copy()->format('Y-m-d');
                 break;
             case 'this_month':
                 $startDate = $now->copy()->startOfMonth()->format('Y-m-d');
@@ -377,9 +378,9 @@ class ReportController extends Controller
                 $periodLabel = 'Hari Ini (' . $now->translatedFormat('d F Y') . ')';
                 break;
             case 'this_week':
-                $startDate = $now->copy()->startOfWeek()->format('Y-m-d');
-                $endDate = $now->copy()->endOfWeek()->format('Y-m-d');
-                $periodLabel = 'Minggu Ini (' . $now->copy()->startOfWeek()->translatedFormat('d M') . ' - ' . $now->copy()->endOfWeek()->translatedFormat('d M Y') . ')';
+                $startDate = $now->copy()->subDays(6)->format('Y-m-d');
+                $endDate = $now->copy()->format('Y-m-d');
+                $periodLabel = 'Minggu Ini (' . $now->copy()->subDays(6)->translatedFormat('d M') . ' - ' . $now->translatedFormat('d M Y') . ')';
                 break;
             case 'this_month':
                 $startDate = $now->copy()->startOfMonth()->format('Y-m-d');

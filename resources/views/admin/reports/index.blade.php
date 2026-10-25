@@ -716,7 +716,7 @@
             @php
                 $periodDescriptor = match($period) {
                     'today' => 'Hari Ini (' . \Carbon\Carbon::now()->translatedFormat('d M Y') . ')',
-                    'this_week' => 'Minggu Ini (' . \Carbon\Carbon::now()->startOfWeek()->translatedFormat('d M') . ' - ' . \Carbon\Carbon::now()->endOfWeek()->translatedFormat('d M Y') . ')',
+                    'this_week' => 'Minggu Ini (' . \Carbon\Carbon::now()->subDays(6)->translatedFormat('d M') . ' - ' . \Carbon\Carbon::now()->translatedFormat('d M Y') . ')',
                     'this_month' => 'Bulan Ini (' . \Carbon\Carbon::now()->translatedFormat('F Y') . ')',
                     'this_year' => 'Tahun Ini (' . \Carbon\Carbon::now()->format('Y') . ')',
                     'custom' => ($startDate && $endDate) 
