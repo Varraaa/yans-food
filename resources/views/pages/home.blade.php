@@ -54,7 +54,7 @@
                    aria-label="Lihat Semua Menu dan Sajian Kuliner Yan's Food">
                     
                     <!-- Culinary Photo with Smooth Hover Zoom -->
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau" 
+                    <img src="{{ asset('images/Menu/menu.png') }}" 
                          alt="Sajian kuliner otentik Yan's Food" 
                          class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
 
