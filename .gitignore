@@ -27,3 +27,4 @@ Homestead.yaml
 Thumbs.db
 powershell.bat
 powershell.cmd
+!storage/ca.pem
