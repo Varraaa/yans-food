@@ -1,415 +1,300 @@
-# YAN'S FOOD — WEBSITE SPECIFICATION
+# YAN'S FOOD — WEBSITE SPECIFICATION & TECHNICAL BLUEPRINT
 
-## 1. Konsep
+## 1. Konsep & Filosofi Bisnis
 
-Yan's Food adalah platform web berbasis Laravel yang menggabungkan **company profile publik** dan **sistem manajemen bisnis kuliner terpadu (POS Kasir & Manajemen Produk)** dalam satu sistem. Public website digunakan pelanggan untuk melihat profil, katalog menu kudapan dan makanan hangat, informasi dapur, serta 2 kanal pemesanan resmi: online delivery (ShopeeFood, GrabFood, GoFood) dan datang langsung ke tempat (pesan di tempat & bawa pulang, tidak bisa makan di tempat). Admin website digunakan pemilik usaha dan kasir untuk mengelola operasional harian gerai.
+**Yan's Food** adalah platform web terpadu berbasis Laravel 12 yang mengintegrasikan **Company Profile Publik** dan **Sistem Manajemen Bisnis Kuliner (Point of Sale / Kasir, Resep BOM, Biaya Operasional & Finansial)** dalam satu ekosistem digital.
 
-**Kategori:** Integrated POS, Product Management & Culinary Company Profile.
+- **Sisi Publik:** Digunakan oleh pelanggan untuk mengeksplorasi profil dapur, 40 katalog menu kudapan dan makanan hangat bernutrisi, informasi dapur fisik, serta 2 kanal pemesanan resmi: online delivery (**ShopeeFood, GoFood, GrabFood**) dan datang langsung ke tempat (**Takeaway / Pesan & Bawa Pulang, Tidak Melayani Dine-in**). Serta saluran negosiasi pesanan katering porsi besar via WhatsApp Admin.
+- **Sisi Admin & POS:** Digunakan oleh pemilik usaha dan staf kasir untuk operasional harian: kasir kilat Tunai/QRIS, cetak struk thermal fisik RPP02N (Bluetooth & USB), pemotongan stok otomatis, manajemen resep *Bill of Materials*, pencatatan biaya operasional, dan laporan laba bersih riil.
 
-## 2. Arsitektur
-
-```text
-Public Website ──┐
-                 ├── Laravel Backend ── Service Layer ── MySQL/MariaDB
-Admin Website ───┘
-```
-
-Prinsip:
-- satu backend;
-- satu database;
-- satu business logic;
-- data public dan admin berasal dari sumber yang sama.
-
-## 3. Tech Stack
-
-- PHP 8.2+ / Laravel 12
-- Laravel Blade (public website & admin panel manual)
-- Tailwind CSS v4
-- Flowbite & Vanilla JS interaktif
-- Vite
-- Eloquent ORM
-- MySQL 8.x
-- Thermal printer 58mm/80mm
-
-## 4. Public Website
-
-Navbar utama:
-
-```text
-Home | About | Menu | Pesan | Contact
-```
-
-- **Identitas Visual & Icon HD:** Menggunakan aset icon resmi Yan's Food dalam format vector tajam lossless (`public/images/logo/Icon Yans Food.svg`) dengan latar belakang penuh warna oranye hangat khas brand (`#E2631C`) dan wadah squircle rounded mewah bergradasi emas-tembaga (`bg-gradient-to-br from-[#D6A253] via-[#C1440E] to-[#8F3209]`) yang konsisten pada Header Navbar, Footer, Top Bar Panel Admin, serta Halaman Login Admin. Untuk Favicon Tab Web di browser, digunakan aset khusus melingkar penuh (*circular shape*) `public/images/logo/Favicon Yans Food.svg`.
-- **Persistent Fixed Navbar:** Navbar publik berada pada posisi `fixed` di bagian atas (`z-index: 50`) dengan tinggi dan ukuran logo yang konstan (tetap, tidak mengecil dan tidak membesar saat di-scroll) sehingga selalu melayang mengikuti pergerakan scroll pengguna tanpa pernah tenggelam.
-- **Ketiadaan Sistem/Menu Katering:** Yan's Food tidak menyediakan dan tidak menggunakan sistem maupun menu katering. Seluruh query kategori produk (`ProductCategory`) berjalan bersih tanpa filter katering warisan lama.
-
-### Home
-Hero, pengenalan dapur Yan's Food, teaser 2 kanal pesan resmi (online delivery & datang langsung), menu favorit pilihan pelanggan, filosofi rasa rumahan, kontak cepat, dan footer.
-
-### About
-Cerita usaha dapur rumahan, filosofi "Cita Rasa Rumahan Disajikan dengan Hati", komitmen bahan baku segar higienis, dan timeline perjalanan usaha.
-
-### Menu
-Katalog kuliner dinamis dari basis data produk dengan filter kategori (Kudapan Renyah, Makanan Hangat, Aneka Lauk, Minuman Segar). Produk berstatus **Sedia** ditampilkan dengan badge hijau; produk **Tidak Tersedia** ditampilkan non-aktif.
-- **Tanya via WhatsApp Langsung:** Setiap kartu produk saat dibuka modal detailnya menyediakan tombol aksi "Tanya via WhatsApp" yang langsung membuka chat ke WhatsApp Admin (+62 822-2122-2936) dengan template otomatis:
-  > *"Halo Kak, saya ingin pesan \*[Nama Produk]\* apakah masih ready stok nya kak ?"*
-
-### Pesan
-
-Halaman terintegrasi untuk memesan produk Yan's Food melalui dua kanal resmi:
-
-#### A. Pesan Online Delivery (Mitra Platform Langsung ke Aplikasi Mobile)
-- Menampilkan card interaktif **ShopeeFood**, **GoFood**, dan **GrabFood**, masing-masing menggunakan tautan langsung (*direct deep link*) yang otomatis membuka aplikasi mobile (*APK / native app*) toko resmi Yan's Food di perangkat pengguna:
-  - **ShopeeFood:** `https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link`
-  - **GoFood:** `https://gofood.link/a/Fj6y8Jy`
-  - **GrabFood:** `https://app.grab.com/s/07XMlcm7`
-- **Keterangan Panduan Pengguna (Mobile Guidance Notice):** Pada website publik di atas kartu platform online, disediakan kotak informasi ringkas *"Disarankan Buka di Aplikasi HP (Mobile)"* dengan ikon smartphone.
-- Tautan bersifat dinamis dan tersinkronisasi dengan pengaturan toko (`\App\Models\Setting`).
-- Transaksi dan pembayaran berlangsung di aplikasi mitra pihak ketiga tersebut.
-
-#### B. Datang Langsung ke Tempat (Pesan di Tempat & Bawa Pulang / Konsep Drive-thru)
-- Pelanggan datang langsung ke lokasi dapur Yan's Food, memesan langsung di kasir dapur, menunggu pesanan disiapkan dan digoreng hangat dadakan, menerima pesanan terkemas rapi, lalu membawanya pulang.
-- Penegasan: **TIDAK BISA MAKAN DI TEMPAT (No Dine-In / Takeaway Only)**.
-- Dilengkapi panduan 4 langkah datang langsung, informasi jam operasional resmi **08.00 – 22.00 WIB (Setiap Hari)**, dan tautan resmi Google Maps: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
-
-### Contact
-Alamat dapur (Kp. Ciloa, Soreang, Bandung), WhatsApp resmi (+62 822-2122-2936), jam operasional resmi (**08.00 - 22.00 WIB Setiap Hari**), peta lokasi interaktif Google Maps, serta formulir komunikasi & negosiasi pesanan khusus / katering acara.
-- **Tanpa Akun Media Sosial:** Yan's Food tidak menggunakan Instagram, TikTok, atau akun medsos lainnya. Seluruh interaksi digital resmi berpusat langsung pada WhatsApp Admin.
-- **Format Otomatis Negosiasi via WA:** Calon pelanggan yang mengklik tombol *"Lanjutkan Negosiasi via WhatsApp Admin"* akan otomatis diarahkan ke WhatsApp Admin dengan template format:
-  ```text
-  Halo Kak, saya ingin berkomunikasi & negosiasi pesanan:
-
-  • Nama: [nama]
-  • WhatsApp: [wa]
-  • Topik / Keperluan: [topik]
-  • Estimasi Porsi: [porsi]
-  • Rencana Tanggal Acara: [tanggal]
-  • Rincian / Catatan Negosiasi: [catatan]
-
-  Catatan: Saya memahami pemesanan katering/acara ini memerlukan konfirmasi dan persetujuan. Mohon informasinya lebih lanjut. Terima kasih!
-  ```
-- *Catatan Katering:* Pesanan katering acara tidak masuk ke sistem database; komunikasi dan negosiasi dilakukan langsung dengan Admin via WhatsApp, dan Admin yang menentukan apakah pesanan katering diterima atau ditolak sesuai kapasitas dapur.
-
-### Footer
-Tampil konsisten di seluruh halaman publik dengan tata letak modular 3 kolom yang seimbang dan bebas dari tautan medsos:
-1. **Brand & Motto:** Profil singkat Yan's Food dan dedikasi cita rasa rumahan.
-2. **Navigasi Cepat:** Tautan langsung ke Home, About, Menu, Pesan, Contact.
-3. **Kontak & Operasional:** Alamat dapur fisik, jam operasional resmi (08.00 - 22.00 WIB), dan WhatsApp Admin (+62 822-2122-2936).
-4. **Platform Delivery Resmi:** Baris *"Tersedia juga di:"* (ShopeeFood, GoFood, GrabFood).
-
-## 5. Admin Website
-
-Admin panel dibangun manual dengan Laravel Blade + Tailwind CSS menggunakan satu layout bersama (`layouts/admin.blade.php`).
-
-Sidebar navigasi:
-
-```text
-YAN'S FOOD
-Admin Panel
-
-MAIN
-- Dashboard
-
-TRANSACTION
-- POS
-- Transaksi
-
-CATALOG
-- Produk
-- Resep
-
-FINANCE
-- Pengeluaran
-- Laporan
-
-SYSTEM
-- Printer
-- Pengguna
-- Pengaturan
-```
-
-## 6. Dashboard
-
-KPI & Metrik Harian:
-- Omset POS Hari Ini
-- Total Transaksi Hari Ini
-- Pengeluaran Belanja Operasional Hari Ini
-- Laba Bersih Sederhana
-- Peringatan Stok Produk Menipis / Habis
-
-Formula:
-`Laba Bersih Sederhana = Total Penjualan POS Kasir - Total Biaya Operasional Disetujui`
-
-## 7. Produk & Manajemen Katalog
-
-Fitur:
-- Manajemen seluruh katalog menu kuliner;
-- Pencarian dan filter kategori;
-- Tambah, edit, dan hapus produk (dengan proteksi integritas transaksi kasir);
-- Upload foto menu kuliner;
-- Harga jual, stok fisik, satuan, dan deskripsi menu;
-- Sakelar status: `Sedia` (*available*) dan `Tidak Tersedia` (*unavailable*).
-
-### Database
-
-`product_categories`:
-```text
-id
-name
-created_at
-updated_at
-```
-
-`products`:
-```text
-id
-name
-category_id
-description
-price
-stock
-unit
-image
-status
-created_at
-updated_at
-```
-
-Relationship: `ProductCategory` 1:N `Product`.
-
-## 8. Resep & Inventaris Dapur
-
-Dokumentasi standar resep dapur (*Bill of Materials*) yang mengaitkan menu jadi dengan daftar bahan baku, takaran per porsi, dan petunjuk masak.
-
-`recipes`:
-```text
-id
-product_id
-name
-description
-yield
-notes
-created_at
-updated_at
-```
-
-`recipe_ingredients`:
-```text
-id
-recipe_id
-ingredient_name
-quantity
-unit
-notes
-created_at
-updated_at
-```
-
-Relationship:
-- `Product` 1:N `Recipe`
-- `Recipe` 1:N `RecipeIngredient`
-
-## 9. POS (Point of Sale / Kasir)
-
-Flow:
-```text
-Pilih Produk Sedia
-→ Atur Kuantitas
-→ Subtotal
-→ Diskon (opsional)
-→ Total Tagihan
-→ Pilih Metode Pembayaran: Tunai (Cash) atau QRIS
-→ Jika Cash: Input Nominal Uang Tunai Diterima → Perhitungan Kembalian Otomatis
-→ Jika QRIS: Tampilkan QR Code Resmi Kasir → Konfirmasi Pembayaran
-→ Simpan Transaksi (Atomic Transaction & Potong Stok Otomatis)
-→ Cetak Struk Kasir Thermal (58mm/80mm)
-```
-
-- **UI Ringkas & Efisien:** Tampilan kasir bersih dari petunjuk pintasan keyboard (F2/F4/F9) yang tidak perlu, search bar yang responsif dan leluasa, serta tombol aksi cepat "Bayar Cash" dan "Lanjut ke QRIS".
-- Kalkulasi harga, subtotal, total, dan kembalian dihitung ulang oleh backend service. Client tidak menjadi sumber kebenaran transaksi.
-
-## 10. Transaksi Kasir
-
-`transactions`:
-```text
-id
-transaction_number
-transaction_date
-transaction_time
-cashier_id
-subtotal
-discount
-total
-payment_method
-amount_paid
-change
-status
-created_at
-updated_at
-```
-
-`transaction_items`:
-```text
-id
-transaction_id
-product_id
-product_name
-quantity
-unit_price
-subtotal
-created_at
-updated_at
-```
-
-- **Pengelompokan Otomatis Riwayat per Bulan (Include Monthly):** Daftar riwayat transaksi kasir mengelompokkan arsip per bulan secara realtime/otomatis (section khusus per bulan dengan riwayat transaksi lengkap), memudahkan kasir dan pemilik usaha meninjau data historis tanpa kehilangan konteks.
-- **Tampilan Bersih & Minimalis:** Menghilangkan badge bulan berjalan berlebih dan angka counter redundan agar interface fokus pada kejelasan data transaksi.
-- Nama produk dan harga satuan disimpan sebagai snapshot historis agar nota lama tetap akurat meskipun harga katalog diubah di masa depan.
-
-## 11. Pengeluaran Operasional Dapur
-
-Pencatatan biaya operasional harian dapur dengan fitur manajemen penuh (Full CRUD):
-- Kategori pengeluaran: Bahan Baku, Gas Dapur, Listrik, Air, Kemasan/Packaging, Transportasi, Peralatan Dapur, Pemeliharaan/Maintenance, dan Biaya Lain-lain.
-- **Filterisasi Rentang Waktu:** Mendukung filter hari ini, minggu ini, bulan ini, tahun ini, dan rentang tanggal kustom (*custom range*).
-- **Pengelompokan Riwayat Pengeluaran per Bulan:** Section riwayat pengeluaran otomatis include per bulan untuk memudahkan audit berkala.
-- **Proses Cepat & Ringkas:** Menghapus keharusan upload foto nota fisik dan kolom bukti nota di tabel, sehingga kasir/admin dapat mencatat belanja harian secara instan di lapangan.
-
-`expense_categories`:
-```text
-id
-name
-created_at
-updated_at
-```
-
-`expenses`:
-```text
-id
-expense_number
-expense_date
-expense_type
-category_id
-name
-amount
-payment_method
-period_start
-period_end
-description
-status
-created_by
-created_at
-updated_at
-```
-
-## 12. Laporan Keuangan & Penjualan
-
-Page Laporan adalah pusat analisis performa finansial dan penjualan produk:
-- **Ringkasan Finansial:** Total Penjualan POS Kasir, Total Pengeluaran Operasional, dan Laba Bersih Sederhana.
-- **Rincian Arus Kas Harian (Akurat & Fixed):** Menampilkan rekap harian kas masuk (penjualan) dan kas keluar (pengeluaran) secara lengkap dan kronologis, termasuk tanggal-tanggal transaksi historis sebelum tanggal berjalan.
-- **Komparasi Hasil Uang Bersih (Laba Bersih Dinamis):** Section ringkasan hasil uang bersih per bulan dan per tahun yang dinamis menyesuaikan filter waktu yang sedang aktif (bulan ini, tahun ini, atau semua waktu).
-- **Rincian Pengeluaran Dapur per Kategori:** Grafik dan rincian proporsi pengeluaran dapur yang sinkron dengan periode filter aktif.
-- **Tab Penjualan Kasir:** Daftar transaksi penjualan kasir otomatis include dan menampilkan label periode waktu aktif (hari, minggu, bulan, tahun, semua waktu).
-- **Analisis Produk Terlaris:** Kuantitas terjual, jumlah transaksi, dan kontribusi omset per item menu.
-- **Export CSV:** Mengunduh data penjualan dan performa produk secara dinamis mengikuti filter yang sedang aktif di layar.
-- **UI Bersih:** Menghapus elemen dekoratif dan badge redundan di samping header laporan agar fokus pada visualisasi metrik bisnis.
-
-## 13. Printer Thermal
-
-`printers`:
-```text
-id
-name
-connection_type
-paper_width
-status
-settings
-created_at
-updated_at
-```
-
-- Mendukung cetak nota kasir thermal 58mm dan 80mm.
-- Struk pelanggan mencakup nomor transaksi, tanggal/waktu, nama kasir, rincian menu, subtotal, diskon, total, uang diterima, dan kembalian.
-- Kegagalan cetak printer fisik tidak menggagalkan penyimpanan transaksi kasir; transaksi dapat dicetak ulang kapan saja.
-
-## 14. Service Layer Architecture
-
-```text
-app/Services/
-- TransactionService.php
-- ReceiptService.php
-- ReportService.php
-- ThermalPrinterService.php
-```
-
-Tanggung jawab:
-- `TransactionService`: Alur transaksi kasir, validasi stok, pemotongan stok atomik, dan kalkulasi kembalian.
-- `ReceiptService`: Format struk kasir thermal (header, baris item, subtotal, footer).
-- `ReportService`: Agregasi performa omset POS, laporan laba bersih, rangkuman biaya operasional, dan penyiapan ekspor CSV.
-- `ThermalPrinterService`: Abstraksi perintah printer dan format teks ESC/POS.
-
-## 15. Database Transaction Safety & Triggers
-
-Operasi penyimpanan kasir dan pencatatan belanja dijalankan secara atomik:
-```text
-DB::beginTransaction()
-→ Validasi Data & Ketersediaan Stok
-→ Simpan Transaksi Kasir
-→ Simpan Snapshot Detail Item
-→ Trigger trg_after_transaction_item_insert memotong stok produk
-→ DB::commit()
-```
-Jika terjadi kegagalan: `DB::rollBack()`.
-
-## 16. Manajemen Pengguna & Tata Letak Antarmuka Admin
-
-Peran pengguna:
-- **Admin:** Memiliki akses penuh ke seluruh modul sistem (Dashboard, POS, Transaksi, Produk, Resep, Pengeluaran, Laporan Keuangan, Printer, dan Pengaturan Pengguna).
-- **Kasir:** Terbatas pada modul operasional harian (POS Kasir, Riwayat Transaksi Penjualan, dan Konfigurasi Printer).
-- **Tampilan Bersih:** Menghilangkan teks status hak akses redundan pada halaman pengguna agar antarmuka ringkas dan profesional.
-
-### Desain Responsif & Optimalisasi Ruang (Layout Admin)
-- **Navbar Sidebar Optimal:** Posisi navbar samping dinaikkan untuk menghilangkan ruang kosong bagian atas (*whitespace*) sehingga navigasi lebih seimbang dan estetik.
-- **Responsif di Semua Perangkat:** Seluruh halaman admin dioptimalkan untuk dapat diakses secara nyaman dan jelas di layar Desktop, Tablet, hingga Ponsel (Mobile).
-- **Tata Letak Grid Produk & Resep:** Tampilan foto produk dan kartu resep dapur diatur dengan sistem 2-grid proporsional di perangkat mobile/tablet agar informasi resep dan detail produk terbaca dengan jelas tanpa memakan ruang vertikal berlebih.
-
-### Pengaturan Toko & Tautan Mitra Delivery (Admin Panel)
-- **Manajemen Tautan Direct Mobile:** Mengelola konfigurasi tautan ShopeeFood, GoFood, dan GrabFood menggunakan URL direct mobile link toko.
-- **Antarmuka Admin Bersih:** Pada halaman pengaturan admin, tautan direct dikelola langsung tanpa menampilkan keterangan/anjuran buka di HP, sehingga antarmuka kontrol panel tetap ringkas, fungsional, dan fokus pada manajemen data toko.
-
-## 17. Struktur Folder Proyek
-
-```text
-yans-food/
-├── app/
-│   ├── Http/Controllers/
-│   │   ├── Admin/               (Dashboard, Pos, Transaction, Product, Recipe, Expense, Report, Printer, User, Setting)
-│   │   └── PageController.php   (Home, About, Menu, Pesan, Contact)
-│   ├── Models/                  (Product, ProductCategory, Recipe, RecipeIngredient, Transaction, TransactionItem, Expense, ExpenseCategory, Printer, User)
-│   └── Services/                (TransactionService, ReceiptService, ReportService, ThermalPrinterService)
-├── database/
-│   ├── migrations/              (Users, Product Categories, Products, Recipes, Expenses, Transactions, Printers, Routines)
-│   └── seeders/                 (DatabaseSeeder, ProductCategorySeeder, ProductSeeder, ExpenseCategorySeeder, PrinterSeeder)
-├── resources/
-│   ├── css/app.css              (Tailwind CSS v4)
-│   ├── js/                      (Navbar, Search, Cart, POS, Modal, Analytics)
-│   └── views/
-│       ├── admin/               (Dashboard, POS, Products, Recipes, Transactions, Expenses, Reports, Printers, Users, Settings)
-│       ├── components/          (Public Navbar, Footer, Floating WA, Alert, Confirmation Modal)
-│       ├── layouts/             (app.blade.php untuk publik, admin.blade.php untuk admin)
-│       └── pages/               (home, about, menu, pesan, contact)
-├── routes/
-│   └── web.php                  (Rute publik & rute panel admin)
-└── README.md
-```
-
-## 18. Prinsip Final
-
-1. **One Backend, One Database, One Business Logic.**
-2. **Server-Side Truth:** Jangan mempercayai total atau harga dari sisi client.
-3. **Auditable History:** Tidak melakukan hard-delete pada data produk yang memiliki riwayat transaksi kasir.
-4. **Sinkronisasi Stok:** Pemotongan stok dieksekusi secara real-time via database trigger saat transaksi kasir tersimpan.
-5. **Cetak Mandiri & Andal:** Kegagalan perangkat printer tidak membatalkan transaksi kasir; nota dapat dicetak ulang.
-6. **Laporan Realistis:** Laba bersih sederhana mencerminkan omset kasir riil dikurangi seluruh pengeluaran operasional dapur yang disetujui.
+**Kategori Sistem:** Integrated POS, Recipe/BOM Management, Kitchen Operational Accounting & Culinary Company Profile.
 
 ---
 
-**YAN'S FOOD — POS, PRODUCT MANAGEMENT & COMPANY PROFILE**
+## 2. Arsitektur Sistem (Single Source of Truth)
+
+```text
+┌───────────────────────────────┐     ┌───────────────────────────────────┐
+│     Public Website (Blade)    │     │     Admin Panel & Kasir POS       │
+└───────────────┬───────────────┘     └─────────────────┬─────────────────┘
+                │                                       │
+                ▼                                       ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        Laravel 12 Backend Engine                        │
+│   (Controllers, Middlewares, Enums, Form Requests, Routing Security)    │
+└───────────────────────────────────┬─────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          Enterprise Service Layer                       │
+│    • TransactionService (Kasir & ACID Logic)                            │
+│    • ReportService (Agregasi Keuangan & Ekspor CSV)                     │
+│    • ReceiptService (Format Struk & ESC/POS Command Builder)            │
+│    • ThermalPrinterService (Layout & Pengaturan Cetak)                  │
+└───────────────────────────────────┬─────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     MySQL 8.x Database Engine (RDBMS)                   │
+│   • Trigger trg_after_transaction_item_insert (Auto Deduct Stock)       │
+│   • Stored Function fn_calculate_simple_profit (Net Profit Logic)       │
+│   • Stored Procedure sp_get_daily_sales_summary (Daily Sales Recap)     │
+│   • ACID Transactions (DB::beginTransaction, Commit, Rollback)          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**Prinsip Utama:**
+1. Satu backend, satu basis data relasional, satu business logic.
+2. **Server-Side Truth:** Seluruh kalkulasi harga, potongan diskon, subtotal, total omset, kembalian, dan potongan stok dikontrol mutlak di server untuk mencegah manipulasi client-side.
+3. **Auditable History:** Tidak ada hard-delete pada produk atau transaksi yang memiliki relasi historis.
+
+---
+
+## 3. Tech Stack & Dependensi
+
+- **Backend Framework:** Laravel 12 (PHP 8.2+)
+- **Frontend Template:** Laravel Blade Templates
+- **CSS Engine:** Tailwind CSS v4 (dengan utility kustom `.admin-filter-scroll` untuk scroll responsif mobile yang nyaman)
+- **Javascript Layer:** Vanilla JS interaktif & Vite
+- **Database:** MySQL 8.x
+- **Hardware Integration:** Thermal Printer **RPP02N (Model: DT-58B, 58mm, 5V-1A)** via **Web Bluetooth API** dan **WebUSB / Web Serial API** langsung dari peramban.
+
+---
+
+## 4. Spesifikasi Halaman Publik (Company Profile)
+
+Navbar utama konsisten: `Home | About | Menu | Pesan | Contact`
+
+- **Identitas Visual Resmi:** Menggunakan logo vector resmi [`public/images/logo/Logo Yans Food.svg`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/public/images/logo/Logo%20Yans%20Food.svg), icon squircle [`public/images/logo/Icon Yans Food.svg`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/public/images/logo/Icon%20Yans%20Food.svg), dan favicon browser [`public/images/logo/Favicon Yans Food.svg`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/public/images/logo/Favicon%20Yans%20Food.svg).
+- **Fixed Persistent Navbar:** Melayang konsisten di posisi atas (`z-index: 50`) tanpa perubahan ukuran atau distorsi saat digulir.
+
+### A. Home (`pages.home`)
+- Hero section dinamis dengan ajakan aksi (*Call-to-Action*) cepat.
+- Penjelasan filosofi dapur: *"Cita Rasa Rumahan Disajikan dengan Hati"*.
+- Teaser 2 kanal pemesanan resmi (Delivery & Takeaway).
+- Grid menu favorit pilihan pelanggan dengan foto asli 1:1.
+- Footer 3 kolom modular dengan info operasional dan tautan navigasi.
+
+### B. About (`pages.about`)
+- Kisah berdirinya usaha kuliner rumahan Yan's Food di Soreang, Bandung.
+- Nilai higienitas bahan baku, olahan segar tanpa bahan pengawet berbahaya.
+- Timeline komitmen menjaga cita rasa autentik dan kepuasan pelanggan.
+
+### C. Menu (`pages.menu`)
+- Menampilkan 40 katalog menu resmi yang terbagi ke dalam 4 kategori:
+  1. **Kudapan Renyah:** Dimsum Ayam, Dimsum Jamur, Dimsum Udang, Dimsum Mix, Cireng Rujak, Risol Mayo, Ketan Goreng, Kroket, dll.
+  2. **Makanan Hangat:** Aneka olahan Nasi Telur, Nasi Sosis, Nasi Nugget, Nasi Chicken Katsu, Nasi Goreng Jadul/Mawut/Cikur.
+  3. **Aneka Lauk:** Olahan lauk pauk siap santap.
+  4. **Minuman Segar:** Nutrisari Dingin, Extra Joss Dingin, Teh Manis, Susu Milo, Susu Kental Manis, Es Kul-kul Piscok.
+- **Dedicated Unique Photos:** Setiap produk memiliki foto unik tersendiri di [`public/images/Menu/`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/public/images/Menu/) (tidak ada foto yang dipakai bersama).
+- **Direct WhatsApp Inquiry:** Modal detail produk menyertakan tombol WhatsApp dengan pesan prapopulasi mengecek ketersediaan menu.
+
+### D. Pesan (`pages.pesan`)
+- **Kanal 1 — Online Delivery:** Deep linking langsung ke aplikasi mobile (*native app*) mitra:
+  - ShopeeFood Official Store
+  - GoFood Official Store
+  - GrabFood Official Store
+- **Kanal 2 — Datang Langsung (Takeaway Only):**
+  - Panduan 4 langkah pesan langsung di kasir dapur.
+  - Penegasan: **Tidak Menyediakan Tempat Makan (No Dine-In / Hanya Bawa Pulang)**.
+  - Jam Operasional Resmi: **08.00 – 22.00 WIB (Setiap Hari)**.
+  - Peta Google Maps terintegrasi: `https://maps.app.goo.gl/KnCpj3ViPCHGNmH66`.
+
+### E. Contact (`pages.contact`)
+- Alamat fisik: Kp. Ciloa, Soreang, Kabupaten Bandung.
+- WhatsApp Resmi: `+62 822-2122-2936`.
+- Formulir negosiasi pesanan khusus/katering porsi besar yang langsung memformat teks dan membukanya ke WhatsApp Admin (tidak masuk ke basis data kasir).
+
+---
+
+## 5. Spesifikasi Panel Admin & Kasir POS (Back-Office)
+
+Menggunakan layout terpadu [`resources/views/layouts/admin.blade.php`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/resources/views/layouts/admin.blade.php) dengan sidebar navigasi responsif:
+- **MAIN:** Dashboard
+- **TRANSACTION:** Kasir (POS), Riwayat Transaksi
+- **CATALOG:** Produk, Resep Dapur
+- **FINANCE:** Pengeluaran Operasional, Laporan Keuangan
+- **SYSTEM:** Printer Kasir, Pengaturan Toko
+
+### 1. Dashboard (`Admin\DashboardController`)
+- **Metrik Utama Hari Ini:** Omset Kasir POS, Total Transaksi Kasir, Total Biaya Operasional Disetujui, dan Laba Bersih Sederhana (*Simple Net Profit*).
+- **Grafik Tren Penjualan:** Visualisasi grafik omset vs pengeluaran.
+- **Peringatan Inventaris:** Daftar produk dengan status stok menipis (`<= 5 pcs`) atau habis (`0 pcs`).
+
+### 2. Kasir POS (`Admin\PosController`)
+- **Pencarian Cepat & Filter Kategori:** Dilengkapi scrollbar horizontal halus (`.admin-filter-scroll`) yang nyaman di layar mobile.
+- **Keranjang Belanja Real-Time:** Penambahan produk, pengaturan kuantitas, subtotal, dan diskon.
+- **Metode Pembayaran:**
+  - **Tunai (Cash):** Tombol pecahan nominal uang cepat (*quick cash chips: Rp 10.000, Rp 20.000, Rp 50.000, Rp 100.000, Uang Pas*) dan perhitungan uang kembalian otomatis.
+  - **QRIS (Cashless):** Menampilkan QR Code toko yang diambil langsung dari pengaturan toko (`Setting`).
+- **Penyimpanan Snapshot Transaksi:** Menyalin nama produk dan harga jual saat itu ke `transaction_items`.
+- **Cetak Struk Fisik:** Cetak langsung struk kasir thermal ke RPP02N via Bluetooth atau USB.
+
+### 3. Riwayat Transaksi (`Admin\TransactionController`)
+- Riwayat seluruh transaksi kasir berurutan kronologis.
+- Pengelompokan arsip transaksi otomatis per bulan.
+- Filter tanggal/bulan dengan scrollbar horizontal mobile yang lega dan tidak terpotong.
+- Modal rincian nota dan tombol cetak ulang struk kasir (*reprint*).
+
+### 4. Manajemen Produk (`Admin\ProductController`)
+- CRUD lengkap untuk 40 master produk makanan dan minuman.
+- Pengaturan harga jual, stok kuantitas fisik, satuan (*porsi, pcs, cup*), dan status sedia/tidak tersedia.
+- Upload dan ganti foto menu ke penyimpanan publik.
+- Perlindungan integritas: Produk yang memiliki relasi transaksi kasir dicegah dari penghapusan keras (*prevent hard-delete*).
+
+### 5. Resep & Inventaris Dapur (`Admin\RecipeController`)
+- Penyusunan standar resep dapur (*Bill of Materials / BOM*) untuk setiap produk.
+- Rincian bahan baku: nama bahan, takaran kuantitas, satuan (*gram, ml, butir, lembar*), dan catatan olahan.
+- **Tampilan Responsif Mobile 2x2 Grid:** Katalog resep di layar smartphone ditampilkan dalam format 2 kolom (`grid-cols-2 lg:grid-cols-3`) agar ringkas, padat, dan mudah dibaca tanpa scrolling vertikal berlebihan.
+
+### 6. Pengeluaran Operasional (`Admin\ExpenseController`)
+- Pencatatan biaya operasional harian dapur.
+- Kategori pengeluaran: Bahan Baku, Gas Dapur, Listrik, Air, Kemasan/Packaging, Transportasi, Peralatan Dapur, Pemeliharaan, dan Lain-lain.
+- Filter waktu lengkap (hari ini, minggu ini, bulan ini, tahun ini, rentang kustom) dengan filter bar horizontal ramah mobile.
+- Status persetujuan pengeluaran (*Approved / Pending*) untuk integrasi akurasi laba bersih.
+
+### 7. Laporan Keuangan & Finansial (`Admin\ReportController`)
+- **Agregasi Finansial:** Total Pendapatan POS Kasir, Total Biaya Operasional, dan Laba Bersih Sederhana.
+- **Rincian Arus Kas Harian:** Tabel kronologis pemasukan vs pengeluaran.
+- **Analisis Produk Terlaris:** Peringkat menu berdasarkan kuantitas terjual dan kontribusi omset.
+- **Ekspor CSV:** Fitur unduh laporan penjualan dan rekap produk ke file CSV sesuai filter periode yang dipilih.
+- Filter bar responsive mobile dengan spacing padding yang rapi.
+
+### 8. Integrasi Printer Thermal Kasir (`Admin\PrinterController`)
+- Khusus disiapkan untuk perangkat fisik kasir **RPP02N (Model: DT-58B, 58mm, 5V-1A)**.
+- Menghapus sistem CRUD printer lama dan dialog popup print browser.
+- Tombol **Uji Cetak Bluetooth (Web Bluetooth API)** dan **Uji Cetak USB (WebUSB / Web Serial API)** langsung dari antarmuka kasir.
+
+### 9. Pengaturan Toko (`Admin\SettingController`)
+- Konfigurasi profil usaha: Nama Toko, Nomor WhatsApp, Alamat Gerai, dan Catatan Kaki Struk Kasir.
+- Pengaturan tautan platform online delivery: ShopeeFood, GoFood, GrabFood.
+- Unggah dan perbarui gambar QRIS resmi kasir.
+
+---
+
+## 6. Penerapan Konsep RDBMS & Konsistensi Data (MySQL 8.x)
+
+Sistem mengimplementasikan 5 komponen standar industri dan akademis basis data relasional:
+
+### 1. Database Trigger (`trg_after_transaction_item_insert`)
+```sql
+CREATE TRIGGER trg_after_transaction_item_insert
+AFTER INSERT ON transaction_items
+FOR EACH ROW
+BEGIN
+    UPDATE products
+    SET stock = GREATEST(0, stock - NEW.quantity),
+        updated_at = NOW()
+    WHERE id = NEW.product_id;
+END;
+```
+*Tujuan:* Menjamin sinkronisasi stok fisik produk seketika saat item transaksi kasir tercatat.
+
+### 2. Stored Function (`fn_calculate_simple_profit`)
+```sql
+CREATE FUNCTION fn_calculate_simple_profit(p_start_date DATE, p_end_date DATE)
+RETURNS DECIMAL(15,2)
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE v_revenue DECIMAL(15,2) DEFAULT 0.00;
+    DECLARE v_expense DECIMAL(15,2) DEFAULT 0.00;
+
+    SELECT COALESCE(SUM(total), 0.00) INTO v_revenue
+    FROM transactions
+    WHERE status = 'completed'
+      AND transaction_date BETWEEN p_start_date AND p_end_date;
+
+    SELECT COALESCE(SUM(amount), 0.00) INTO v_expense
+    FROM expenses
+    WHERE status = 'approved'
+      AND expense_date BETWEEN p_start_date AND p_end_date;
+
+    RETURN (v_revenue - v_expense);
+END;
+```
+*Tujuan:* Komputasi laba bersih langsung di memori database engine untuk kecepatan eksekusi query analitik laporan.
+
+### 3. Stored Procedure (`sp_get_daily_sales_summary`)
+```sql
+CREATE PROCEDURE sp_get_daily_sales_summary(
+    IN p_date DATE,
+    OUT p_total_revenue DECIMAL(15,2),
+    OUT p_total_transactions INT
+)
+BEGIN
+    SELECT 
+        COALESCE(SUM(total), 0.00),
+        COUNT(id)
+    INTO 
+        p_total_revenue,
+        p_total_transactions
+    FROM transactions
+    WHERE status = 'completed'
+      AND transaction_date = p_date;
+END;
+```
+*Tujuan:* Menyediakan rekapitulasi penjualan harian kasir melalui parameter output prosedur secara efisien.
+
+### 4. Database Transaction: Commit (`DB::commit()`)
+Diterapkan pada [`TransactionService.php`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/app/Services/TransactionService.php) dan [`RecipeController.php`](file:///c:/SEKOLAH/12semester1/PROD%20(PA%20ANGGA)/Yans%20Food/yans-food/app/Http/Controllers/Admin/RecipeController.php). Seluruh modifikasi data (pembuatan nota transaksi, penyimpanan detail item, pemotongan stok) hanya disimpan permanen setelah seluruh tahapan berhasil 100%.
+
+### 5. Database Transaction: Rollback (`DB::rollBack()`)
+Diterapkan pada blok penanganan error (`try-catch`). Jika terjadi kegagalan (misalnya stok tidak mencukupi atau kegagalan query), sistem membatalkan seluruh perubahan basis data dan mengembalikannya ke kondisi awal (*atomicity*).
+
+---
+
+## 7. Skema Basis Data Relasional Utama
+
+```text
+┌────────────────────┐          ┌───────────────────────┐
+│     products       │ 1      N │        recipes        │
+├────────────────────┤──────────├───────────────────────┤
+│ id (PK)            │          │ id (PK)               │
+│ category_id (FK)   │          │ product_id (FK)       │
+│ name               │          │ name, description     │
+│ price, stock, unit │          └───────────┬───────────┘
+│ image, status      │                      │ 1
+└─────────┬──────────┘                      │ N
+          │ 1                   ┌───────────▼───────────┐
+          │ N                   │  recipe_ingredients   │
+┌─────────▼──────────┐          ├───────────────────────┤
+│ transaction_items  │          │ id (PK)               │
+├────────────────────┤          │ recipe_id (FK)        │
+│ id (PK)            │          │ ingredient_name       │
+│ transaction_id (FK)│          │ quantity, unit        │
+│ product_id (FK)    │          └───────────────────────┘
+│ product_name       │
+│ quantity, unit_price
+│ subtotal           │          ┌───────────────────────┐
+└─────────▲──────────┘          │       expenses        │
+          │ N                   ├───────────────────────┤
+          │ 1                   │ id (PK)               │
+┌─────────┴──────────┐          │ category_id (FK)      │
+│    transactions    │          │ name, amount, date    │
+├────────────────────┤          │ status, payment_method│
+│ id (PK)            │          └───────────────────────┘
+│ transaction_number │
+│ total, amount_paid │          ┌───────────────────────┐
+│ change, payment_mth│          │       settings        │
+│ status             │          ├───────────────────────┤
+└────────────────────┘          │ id, key, value        │
+                                └───────────────────────┘
+```
+
+---
+
+## 8. Panduan Siap Deployment & Kebersihan Repositori
+
+1. **Berkas Sampah & Data Awal:**
+   - Berkas `yans_food_data_produk.csv` adalah berkas referensi awal yang datanya telah disemai (*seeded*) permanen ke dalam database. Berkas ini aman untuk dihapus tanpa memengaruhi berjalannya sistem.
+   - Script lokal Windows seperti `powershell.bat` dan `powershell.cmd` telah terlindungi di dalam `.gitignore` sehingga tidak akan terunggah ke hosting atau repositori produksi.
+2. **Kompilasi Aset Frontend:**
+   - Jalankan `npm run build` sebelum mendeploy ke hosting agar direktori `public/build` terisi aset teroptimasi (*minified CSS & JS*).
+3. **Konfigurasi Lingkungan Produksi:**
+   - Atur `APP_ENV=production` dan `APP_DEBUG=false` pada berkas `.env` server.
+   - Jalankan optimasi cache: `php artisan config:cache`, `php artisan route:cache`, `php artisan view:cache`.
+
+---
+
+© 2026 **Yan's Food** — *Dokumentasi Spesifikasi Teknis Resmi Sistem Web & POS Terpadu.*
