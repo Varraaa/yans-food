@@ -387,9 +387,13 @@
             </div>
 
             @php
+                $weekBadge = ($startDate && $endDate)
+                    ? 'Minggu Ini (' . \Carbon\Carbon::parse($startDate)->translatedFormat('d M') . ' - ' . \Carbon\Carbon::parse($endDate)->translatedFormat('d M') . ')'
+                    : 'Minggu Ini';
+
                 $periodBadgeLabels = [
                     'today' => 'Hari Ini',
-                    'this_week' => 'Minggu Ini',
+                    'this_week' => $weekBadge,
                     'this_month' => 'Bulan Ini (' . now()->translatedFormat('F Y') . ')',
                     'this_year' => 'Tahun Ini (' . now()->format('Y') . ')',
                     'all' => 'Semua Waktu',
@@ -714,9 +718,13 @@
             @endif
 
             @php
+                $weekDescriptor = ($startDate && $endDate)
+                    ? 'Minggu Ini (' . \Carbon\Carbon::parse($startDate)->translatedFormat('d M') . ' - ' . \Carbon\Carbon::parse($endDate)->translatedFormat('d M Y') . ')'
+                    : 'Minggu Ini';
+
                 $periodDescriptor = match($period) {
                     'today' => 'Hari Ini (' . \Carbon\Carbon::now()->translatedFormat('d M Y') . ')',
-                    'this_week' => 'Minggu Ini (' . \Carbon\Carbon::now()->subDays(6)->translatedFormat('d M') . ' - ' . \Carbon\Carbon::now()->translatedFormat('d M Y') . ')',
+                    'this_week' => $weekDescriptor,
                     'this_month' => 'Bulan Ini (' . \Carbon\Carbon::now()->translatedFormat('F Y') . ')',
                     'this_year' => 'Tahun Ini (' . \Carbon\Carbon::now()->format('Y') . ')',
                     'custom' => ($startDate && $endDate) 

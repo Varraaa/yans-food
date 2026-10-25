@@ -27,9 +27,18 @@ class ReportController extends Controller
                 $endDate = $now->copy()->format('Y-m-d');
                 break;
             case 'this_week':
-                // Menggunakan 7 hari terakhir agar transaksi akhir pekan / kemarin tetap masuk dalam kalkulasi mingguan
-                $startDate = $now->copy()->subDays(6)->format('Y-m-d');
-                $endDate = $now->copy()->format('Y-m-d');
+                $startOfWeek = $now->copy()->startOfWeek();
+                $endOfWeek = $now->copy()->endOfWeek();
+                $startOfMonth = $now->copy()->startOfMonth();
+                $endOfMonth = $now->copy()->endOfMonth();
+
+                // Standar ISO-8601: Mulai Senin jam 00:00 s/d Minggu 23:59:59
+                // Reset batas awal bulan: Jika terjadi perubahan bulan (awal bulan), awal bulan adalah awal minggu laporan baru
+                $weekStart = $startOfWeek->isSameMonth($now) ? $startOfWeek : $startOfMonth;
+                $weekEnd = $endOfWeek->isSameMonth($now) ? $endOfWeek : $endOfMonth;
+
+                $startDate = $weekStart->format('Y-m-d');
+                $endDate = $weekEnd->format('Y-m-d');
                 break;
             case 'this_month':
                 $startDate = $now->copy()->startOfMonth()->format('Y-m-d');
@@ -378,9 +387,19 @@ class ReportController extends Controller
                 $periodLabel = 'Hari Ini (' . $now->translatedFormat('d F Y') . ')';
                 break;
             case 'this_week':
-                $startDate = $now->copy()->subDays(6)->format('Y-m-d');
-                $endDate = $now->copy()->format('Y-m-d');
-                $periodLabel = 'Minggu Ini (' . $now->copy()->subDays(6)->translatedFormat('d M') . ' - ' . $now->translatedFormat('d M Y') . ')';
+                $startOfWeek = $now->copy()->startOfWeek();
+                $endOfWeek = $now->copy()->endOfWeek();
+                $startOfMonth = $now->copy()->startOfMonth();
+                $endOfMonth = $now->copy()->endOfMonth();
+
+                // Standar ISO-8601: Mulai Senin jam 00:00 s/d Minggu 23:59:59
+                // Reset batas awal bulan: Jika terjadi perubahan bulan (awal bulan), awal bulan adalah awal minggu laporan baru
+                $weekStart = $startOfWeek->isSameMonth($now) ? $startOfWeek : $startOfMonth;
+                $weekEnd = $endOfWeek->isSameMonth($now) ? $endOfWeek : $endOfMonth;
+
+                $startDate = $weekStart->format('Y-m-d');
+                $endDate = $weekEnd->format('Y-m-d');
+                $periodLabel = 'Minggu Ini (' . $weekStart->translatedFormat('d M') . ' - ' . $weekEnd->translatedFormat('d M Y') . ')';
                 break;
             case 'this_month':
                 $startDate = $now->copy()->startOfMonth()->format('Y-m-d');

@@ -27,4 +27,5 @@ Homestead.yaml
 Thumbs.db
 powershell.bat
 powershell.cmd
+update-vps.bat
 !storage/ca.pem
