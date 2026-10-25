@@ -94,10 +94,11 @@ class TransactionController extends Controller
         $transaction = Transaction::with(['cashier', 'items.product'])->findOrFail($id);
         $receipt = $receiptService->generateCustomerReceipt($transaction);
 
-        // Ambil pengaturan lebar kertas printer yang aktif bila ada
+        // Ambil pengaturan printer yang aktif bila ada
         $paperWidth = '58mm';
+        $activePrinter = null;
         try {
-            $activePrinter = Printer::where('status', 'active')->first();
+            $activePrinter = Printer::whereIn('status', ['ACTIVE', 'active'])->latest()->first();
             if ($activePrinter && !empty($activePrinter->paper_width)) {
                 $paperWidth = $activePrinter->paper_width;
             }
@@ -105,6 +106,6 @@ class TransactionController extends Controller
             // fallback default
         }
 
-        return view('admin.transactions.receipt', compact('transaction', 'receipt', 'paperWidth'));
+        return view('admin.transactions.receipt', compact('transaction', 'receipt', 'paperWidth', 'activePrinter'));
     }
 }

@@ -15,27 +15,69 @@
     @endif
 
     {{-- TOP ACTION BUTTONS BAR (PRINT:HIDDEN) --}}
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-stone-200 shadow-sm print:hidden">
-        <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
-            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-            <span>Riwayat Transaksi</span>
-        </a>
+    {{-- TOP ACTION BUTTONS BAR (PRINT:HIDDEN) --}}
+    <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm print:hidden space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-stone-100">
+            <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                <span>Riwayat Transaksi</span>
+            </a>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
-            {{-- TOMBOL CETAK THERMAL --}}
-            <button 
-                type="button" 
-                onclick="window.print()" 
-                class="px-4 py-2.5 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-2 active:scale-95 text-center"
-            >
-                <span class="material-symbols-outlined text-[18px]">print</span>
-                <span>Cetak Thermal</span>
-            </button>
+            <!-- Status Device RPP02N (DT-58B) -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                <span id="rpp02n-status-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-stone-100 text-stone-700 border border-stone-300">
+                    <span id="rpp02n-status-dot" class="w-2 h-2 rounded-full bg-stone-400"></span>
+                    <span id="rpp02n-status-text">RPP02N Siap Konek</span>
+                </span>
+                
+                <label class="flex items-center gap-1.5 text-xs text-stone-600 cursor-pointer select-none hover:text-stone-900">
+                    <input type="checkbox" id="chk-auto-print" class="w-3.5 h-3.5 rounded text-[#C1440E] focus:ring-[#C1440E]">
+                    <span class="font-medium text-[11px] sm:text-xs">⚡ Otomatis cetak ke RPP02N saat struk dibuka</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+                {{-- TOMBOL UTAMA CETAK KE RPP02N (BLUETOOTH) --}}
+                <button 
+                    type="button" 
+                    id="btn-print-rpp02n"
+                    onclick="printReceiptToRPP02N()" 
+                    class="px-4 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-2 active:scale-95 text-center"
+                    title="Koneksikan & cetak langsung ke printer kecil RPP02N lewat Bluetooth"
+                >
+                    <span class="material-symbols-outlined text-[18px]">bluetooth</span>
+                    <span>🖨️ Cetak ke RPP02N (Bluetooth)</span>
+                </button>
+
+                {{-- TOMBOL CETAK USB --}}
+                <button 
+                    type="button" 
+                    onclick="printReceiptUsb()" 
+                    class="px-3 py-2.5 bg-stone-800 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5 active:scale-95 text-center"
+                    title="Cetak langsung menggunakan kabel data USB"
+                >
+                    <span class="material-symbols-outlined text-[16px]">usb</span>
+                    <span>Cetak via USB</span>
+                </button>
+
+                {{-- TOMBOL FALLBACK DIALOG WINDOWS --}}
+                <button 
+                    type="button" 
+                    onclick="window.print()" 
+                    class="px-3 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl font-bold text-xs border border-stone-300 transition flex items-center justify-center gap-1.5 text-center"
+                    title="Buka dialog cetak bawaan browser (ukuran kertas 58mm)"
+                >
+                    <span class="material-symbols-outlined text-[16px]">print</span>
+                    <span>Dialog Windows (58mm)</span>
+                </button>
+            </div>
 
             {{-- TOMBOL SELESAI TRANSAKSI (§9.2) --}}
             <a 
                 href="{{ route('admin.pos.index') }}" 
-                class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-2 active:scale-95 text-center"
+                class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5 active:scale-95 text-center shrink-0"
             >
                 <span class="material-symbols-outlined text-[18px]">point_of_sale</span>
                 <span>Selesai &rarr; Kasir</span>
@@ -55,22 +97,27 @@
     <style>
         @media print {
             @page {
-                size: {{ $is80mm ? '80mm' : '58mm' }} auto;
+                size: 58mm auto;
                 margin: 0;
             }
-            body {
+            html, body {
+                width: 58mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #ffffff !important;
             }
+            nav, header, footer, aside, .print\:hidden {
+                display: none !important;
+            }
             #thermal-receipt-printable {
-                width: {{ $is80mm ? '80mm' : '58mm' }} !important;
-                max-width: {{ $is80mm ? '80mm' : '58mm' }} !important;
-                margin: 0 auto !important;
-                padding: 5mm 3mm !important;
+                width: 58mm !important;
+                max-width: 58mm !important;
+                margin: 0 !important;
+                padding: 3mm 2mm !important;
                 border: none !important;
                 box-shadow: none !important;
                 border-radius: 0 !important;
+                display: block !important;
             }
         }
     </style>
@@ -179,4 +226,63 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    const receiptData = @json($receipt);
+
+    async function printReceiptToRPP02N() {
+        const btn = document.getElementById('btn-print-rpp02n');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Menghubungkan ke RPP02N...</span>`;
+        }
+
+        try {
+            if (window.RPP02N) {
+                await window.RPP02N.print(receiptData);
+            } else {
+                window.print();
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">bluetooth</span><span>🖨️ Cetak ke RPP02N (Bluetooth)</span>`;
+            }
+        }
+    }
+
+    async function printReceiptUsb() {
+        if (window.RPP02N && navigator.serial) {
+            await window.RPP02N.printUsb(receiptData);
+        } else {
+            alert('Fitur Web Serial USB didukung pada Google Chrome / Edge Desktop. Jika belum terhubung serial, sistem akan membuka Dialog Cetak Windows (58mm).');
+            window.print();
+        }
+    }
+
+    // Auto print hook when receipt page is loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        const autoChk = document.getElementById('chk-auto-print');
+        if (autoChk) {
+            autoChk.checked = localStorage.getItem('rpp02n_auto_print') === 'true';
+            autoChk.addEventListener('change', function () {
+                localStorage.setItem('rpp02n_auto_print', this.checked ? 'true' : 'false');
+                if (this.checked) {
+                    window.RPP02N?.showToast('Otomatis cetak aktif. Setiap struk dibuka akan otomatis dikirim ke RPP02N.', 'info', 3000);
+                }
+            });
+
+            // If auto-print enabled, automatically initiate print to RPP02N after brief DOM ready
+            if (autoChk.checked) {
+                setTimeout(() => {
+                    printReceiptToRPP02N();
+                }, 700);
+            }
+        }
+    });
+</script>
+@endpush
 @endsection

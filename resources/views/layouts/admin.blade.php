@@ -256,6 +256,9 @@
         });
     </script>
 
+    <!-- RPP02N (DT-58B) Thermal Printer Driver -->
+    <script src="{{ asset('js/thermal-printer.js') }}"></script>
+
     @stack('scripts')
 </body>
 </html>

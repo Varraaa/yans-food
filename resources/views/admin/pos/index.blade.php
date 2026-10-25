@@ -5,6 +5,56 @@
 @endphp
 
 @section('content')
+<style>
+    @media print {
+        @page {
+            size: 58mm auto;
+            margin: 0;
+        }
+        html, body {
+            width: 58mm !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #ffffff !important;
+        }
+        nav, header, footer, aside, #sidebar, #sidebar-backdrop, .space-y-4 > div:not(#receipt-modal), .print\:hidden {
+            display: none !important;
+        }
+        #receipt-modal {
+            position: static !important;
+            background: transparent !important;
+            padding: 0 !important;
+            display: block !important;
+        }
+        #receipt-modal > div {
+            box-shadow: none !important;
+            border: none !important;
+            max-width: 58mm !important;
+            width: 58mm !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        #receipt-modal-body {
+            max-height: none !important;
+            overflow: visible !important;
+            padding: 0 !important;
+        }
+        #printable-receipt {
+            width: 58mm !important;
+            max-width: 58mm !important;
+            margin: 0 !important;
+            padding: 3mm 2mm !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            display: block !important;
+        }
+        #receipt-modal .bg-emerald-600,
+        #receipt-modal .bg-stone-50 {
+            display: none !important;
+        }
+    }
+</style>
 <div class="space-y-4">
     {{-- PAGE HEADER --}}
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -499,22 +549,42 @@
             <!-- Thermal Receipt will be injected here -->
         </div>
 
-        <div class="p-4 bg-stone-50 border-t border-stone-200 flex justify-end gap-2.5">
-            <button 
-                type="button" 
-                onclick="window.print()" 
-                class="px-4 py-2.5 bg-stone-900 hover:bg-black text-white font-bold rounded-xl text-xs shadow transition flex items-center gap-1.5"
-            >
-                <span class="material-symbols-outlined text-[16px]">print</span>
-                <span>Cetak Thermal</span>
-            </button>
-            <button 
-                type="button" 
-                onclick="closeReceiptModal()" 
-                class="px-5 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl text-xs shadow transition"
-            >
-                Selesai & Transaksi Baru
-            </button>
+        <div class="p-4 bg-stone-50 border-t border-stone-200 flex flex-wrap items-center justify-between gap-2.5">
+            <div class="flex items-center gap-2">
+                <span id="rpp02n-status-badge" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-stone-100 text-stone-700 border border-stone-300">
+                    <span id="rpp02n-status-dot" class="w-1.5 h-1.5 rounded-full bg-stone-400"></span>
+                    <span id="rpp02n-status-text">RPP02N (DT-58B)</span>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button 
+                    type="button" 
+                    id="btn-pos-print-rpp02n"
+                    onclick="printPosModalToRPP02N()" 
+                    class="px-4 py-2.5 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5 active:scale-95"
+                    title="Koneksikan & cetak langsung ke printer Bluetooth RPP02N"
+                >
+                    <span class="material-symbols-outlined text-[16px]">bluetooth</span>
+                    <span>🖨️ Cetak ke RPP02N</span>
+                </button>
+                <button 
+                    type="button" 
+                    onclick="window.print()" 
+                    class="px-3.5 py-2.5 bg-stone-800 hover:bg-black text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5"
+                    title="Cetak via dialog Windows (58mm)"
+                >
+                    <span class="material-symbols-outlined text-[16px]">print</span>
+                    <span>Dialog Cetak</span>
+                </button>
+                <button 
+                    type="button" 
+                    onclick="closeReceiptModal()" 
+                    class="px-4 py-2.5 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold rounded-xl text-xs transition"
+                >
+                    Selesai
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -1171,6 +1241,39 @@
         const modal = document.getElementById('receipt-modal');
         if (modalBody) modalBody.innerHTML = html;
         if (modal) modal.classList.remove('hidden');
+
+        // Store latest receipt data for direct thermal printing
+        window._latestReceiptData = receipt;
+
+        // Auto print check
+        if (localStorage.getItem('rpp02n_auto_print') === 'true') {
+            setTimeout(() => {
+                window.printPosModalToRPP02N();
+            }, 600);
+        }
+    };
+
+    window.printPosModalToRPP02N = async function() {
+        const btn = document.getElementById('btn-pos-print-rpp02n');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Menghubungkan...</span>`;
+        }
+
+        try {
+            if (window.RPP02N && window._latestReceiptData) {
+                await window.RPP02N.print(window._latestReceiptData);
+            } else {
+                window.print();
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">bluetooth</span><span>🖨️ Cetak ke RPP02N</span>`;
+            }
+        }
     };
 
     window.closeReceiptModal = function() {

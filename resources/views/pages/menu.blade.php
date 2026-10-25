@@ -61,7 +61,7 @@
                         :categorySlug="$catSlug"
                         :price="$product->price"
                         :unit="'/ ' . ($product->unit ?? 'pcs')"
-                        :image="$product->image ?? 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'"
+                        :image="$product->image_url"
                         :desc="$product->description ?? 'Olahan kuliner lezat khas racikan bumbu dapur Yan\'s Food.'"
                         :status="$product->status ?? 'sedia'"
                         :isFavorite="$loop->first || $loop->iteration <= 2"
@@ -69,83 +69,83 @@
                 @endforeach
             @else
                 <!-- Fallback Curated Items (§5.3) -->
-                <!-- Item 1: Risol Mayo Beef & Egg -->
+                <!-- Item 1: Risol Mayo -->
                 <x-public.product-card 
-                    title="Risol Mayo Beef & Egg"
+                    title="Risol Mayo"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="4500"
-                    unit="/ pcs"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB"
-                    desc="Mayo homemade creamy dengan smoked beef dan potongan telur rebus berbalut tepung roti emas renyah."
+                    price="14000"
+                    unit="/ porsi"
+                    :image="asset('images/Menu/Risol Mayo.png')"
+                    desc="Mayo homemade creamy dengan potongan daging dan telur berbalut tepung roti emas renyah."
                     status="sedia"
                     :isFavorite="true"
-                    slug="risol-mayo-beef-egg" />
+                    slug="risol-mayo" />
 
-                <!-- Item 2: Pisang Coklat Crispy -->
+                <!-- Item 2: Pisang Coklat Lumer -->
                 <x-public.product-card 
-                    title="Pisang Coklat Crispy"
+                    title="Pisang Coklat Lumer"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="3500"
-                    unit="/ pcs"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX"
+                    price="14000"
+                    unit="/ porsi"
+                    :image="asset('images/Menu/Pisang Coklat.png')"
                     desc="Pisang manis legit dengan coklat premium leleh di dalam balutan kulit pastry renyah khas racikan Yan's Food."
                     status="sedia"
                     :isFavorite="true"
-                    slug="pisang-coklat-crispy" />
+                    slug="pisang-coklat-lumer" />
 
-                <!-- Item 3: Tahu Bakso Kukus / Goreng -->
+                <!-- Item 3: Cireng Rujak -->
                 <x-public.product-card 
-                    title="Tahu Bakso Kukus/Goreng"
+                    title="Cireng Rujak"
                     category="Makanan Ringan"
                     categorySlug="ringan"
-                    price="4000"
-                    unit="/ pcs"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuBWCJRdB6spLCGTymtJSbPtZOo9HW9h2e5gDOOhwEBsMleb1NUkgXF2RqgdpqDgWsIiYxLJU-17um6yqSXGfVnPGwhcA2IygU-19yHAwJ6H8ttkpLdFe0g_U7Gabr5SOtTcBleLvWsZ6KOhDrJh1hEyy30IU60mbxUEYVPIIROvocFVMKwDDsiyt7_MiGA16pfu0qPrgAGw3l4iKJgmifbCXjfaPjjJeRokLGbi1mepW0guL4PLjhaF"
-                    desc="Daging sapi asli berpadu lembutnya tahu pong gurih, disajikan dengan cabai rawit hijau segar menggigit."
+                    price="10500"
+                    unit="/ porsi"
+                    :image="asset('images/Menu/Cireng Rujak.png')"
+                    desc="Cireng renyah kenyal dengan cocolan bumbu rujak pedas manis segar."
                     status="sedia"
                     :isFavorite="false"
-                    slug="tahu-bakso-kukus-goreng" />
+                    slug="cireng-rujak" />
 
                 <!-- Item 4: Nasi Goreng Jadul Yan's -->
                 <x-public.product-card 
-                    title="Nasi Goreng Jadul Yan's"
+                    title="Nasi Goreng Jadul"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="22000"
+                    price="21000"
                     unit="/ porsi"
-                    image="https://upload.wikimedia.org/wikipedia/commons/b/b2/Nasi_Goreng_Kampung_Kangkung.jpg"
+                    :image="asset('images/Menu/Nasi Goreng Jadul.png')"
                     desc="Racikan bumbu ulek terasi khas tempo dulu, suwiran ayam gurih, telur ceplok setengah matang, dan acar timun segar."
                     status="sedia"
                     :isFavorite="true"
-                    slug="nasi-goreng-jadul-yans" />
+                    slug="nasi-goreng-jadul" />
 
-                <!-- Item 5: Nasi Ayam Sambal Korek -->
+                <!-- Item 5: Nasi Chicken Katsu -->
                 <x-public.product-card 
-                    title="Nasi Ayam Sambal Korek"
+                    title="Nasi + Chicken Katsu"
                     category="Makanan Berat"
                     categorySlug="berat"
-                    price="25000"
+                    price="26500"
                     unit="/ porsi"
-                    image="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yQ-j1z3AvTOxnG1AkwOJ0fmoq8g9MoW0OcApYSuwOdpLt4FLyDdc2QgEF-ukq3fjIM2dKQHU0UJNThY7N4VTaXisRBgJsC6POPbZxqmyfkqRfvPtbc-jSP_QjJWXgWcIdyWiG1qr5EFYCyICPlpR7qPax3-gh_Dd5sOIJ5Z1Jurn7jRr5iufoXtSWwf4mEGafDRK3Qc2aaIJBIDNbvSSDAlVoK21EfipdBbJizEcd-q3tLdbCeau"
-                    desc="Ayam goreng gurih renyah dengan siraman sambal korek bawang pedas nendang, lalapan segar, & nasi hangat."
+                    :image="asset('images/Menu/Nasi Chicken Katsu.png')"
+                    desc="Nasi putih pulen dengan chicken katsu dada ayam renyah, salad sayuran segar, saus dan mayones."
                     status="sedia"
                     :isFavorite="false"
-                    slug="nasi-ayam-sambal-korek" />
+                    slug="nasi-chicken-katsu" />
 
-                <!-- Item 6: Es Kopi Susu Gula Aren -->
+                <!-- Item 6: Teh Manis -->
                 <x-public.product-card 
-                    title="Es Kopi Susu Gula Aren"
+                    title="Teh Manis (Hangat / Dingin)"
                     category="Minuman Segar"
                     categorySlug="minuman"
-                    price="15000"
+                    price="7000"
                     unit="/ cup"
-                    image="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80"
-                    desc="Espresso blend robusta segar dengan gula aren murni dan susu gurih creamy yang pas tanpa rasa manis berlebih."
+                    :image="asset('images/Menu/Teh Manis.png')"
+                    desc="Seduhan teh melati wangi khas Jawa dengan daun teh pilihan, tersedia pilihan hangat atau dingin segar."
                     status="sedia"
                     :isFavorite="false"
-                    slug="es-kopi-susu-gula-aren" />
+                    slug="teh-manis" />
             @endif
         </div>
 

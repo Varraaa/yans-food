@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://upload.wikimedia.org/wikipedia/commons/4/43/Ulibakar.JPG',
+                'image' => 'images/Menu/Ketan Goreng.png',
                 'status' => 'available',
             ],
             // 2. Pisang Coklat Lumer
@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
                 'price' => 14000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDhEq_qfhbhyzfhQayTaoq75HycT7f5SC6DQeMDreglD0Zvhq17xGPZJe1ejQf3tnSRYPDRFrYxFgkPu75dAX0W80yYxNVg_AELoWtWHDypCFtykyNJKV0rm3318FMvSIRN-mD4wSyG1SWpIJpN4AxWc15PB9ObSRXjrfB12Rwaj4pMnQXKuz23o918-tAbM6g5-lBbLo4vIUtnIGfDVzEKMNebYvdIBPwpVDExCZMYmi1Z0ywyuYeX',
+                'image' => 'images/Menu/Pisang Coklat.png',
                 'status' => 'available',
             ],
             // 3. Cireng Rujak
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
                 'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Rujak_cireng%2C_Purwokerto_2015-03-22.jpg',
+                'image' => 'images/Menu/Cireng Rujak.png',
                 'status' => 'available',
             ],
             // 4. Stik Sosis
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'price' => 10500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1538066755633-dce44fbe18cc?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Stick Sosis.png',
                 'status' => 'available',
             ],
             // 5. Kroket Bihun Sayur
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1741399106442-fac74d7fb847?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kroket Bihun Sayur.png',
                 'status' => 'available',
             ],
             // 6. Stik Keju Mozarela Lumer
@@ -79,7 +79,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1531749668029-2db88e4276c7?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Stick Keju Mozarela.png',
                 'status' => 'available',
             ],
             // 7. Risol Mayo
@@ -90,7 +90,7 @@ class ProductSeeder extends Seeder
                 'price' => 14000,
                 'stock' => 40,
                 'unit' => 'porsi',
-                'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBjfgHLT8kteBQDdMGEQYThIxb74MNHgeJMMckFTZwI0tfkB5PllThnkFkmMUO5Y089SEQcOHCHOw9JYj6LxaQ44donrVlAQKZeLUVnj8oxDimXvxadhnVGnDW2NJHl_tQs3pEacp0T7o_4b-nqDYZRu1G2z4oduRYpzPPtf-3iuN1Cuol6-vvCPun4wS-B4vlw9p3kPKqOZ1jWlOFyt5YPhBhhgmQuii3UUHhbFHAiCHaWLOgPkgHB',
+                'image' => 'images/Menu/Risol Mayo.png',
                 'status' => 'available',
             ],
             // 8. Dimsum Ayam
@@ -101,7 +101,7 @@ class ProductSeeder extends Seeder
                 'price' => 17000,
                 'stock' => 35,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Dimsum Ayam.png',
                 'status' => 'available',
             ],
             // 9. Dimsum Udang
@@ -112,7 +112,7 @@ class ProductSeeder extends Seeder
                 'price' => 17000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Dimsum Udang.png',
                 'status' => 'available',
             ],
             // 10. Dimsum Mix
@@ -123,7 +123,7 @@ class ProductSeeder extends Seeder
                 'price' => 17000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Dimsum Mix.png',
                 'status' => 'available',
             ],
             // 11. Pangsit Ayam
@@ -134,7 +134,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Pangsit Ayam.png',
                 'status' => 'available',
             ],
             // 12. Dimsum Jamur
@@ -145,7 +145,7 @@ class ProductSeeder extends Seeder
                 'price' => 17000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1559329255-2e7cb2e21ca7?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Dimsum Jamur.png',
                 'status' => 'available',
             ],
             // 13. Nasi + Nugget Ayam + Stick Sosis
@@ -156,7 +156,7 @@ class ProductSeeder extends Seeder
                 'price' => 28000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Nugget Stick Sosis.png',
                 'status' => 'available',
             ],
             // 14. Nasi + Chicken Nugget
@@ -167,7 +167,7 @@ class ProductSeeder extends Seeder
                 'price' => 28000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Chicken Nugget.png',
                 'status' => 'available',
             ],
             // 15. Nasi + Stick Sosis
@@ -178,7 +178,7 @@ class ProductSeeder extends Seeder
                 'price' => 28000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Stick Sosis.png',
                 'status' => 'available',
             ],
             // 16. Nasi + Chicken Katsu
@@ -189,7 +189,7 @@ class ProductSeeder extends Seeder
                 'price' => 26500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Chicken Katsu.png',
                 'status' => 'available',
             ],
             // 17. Nugget Ayam
@@ -200,7 +200,7 @@ class ProductSeeder extends Seeder
                 'price' => 13500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1776100221863-08e64ce906bb?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nugget Ayam.png',
                 'status' => 'available',
             ],
             // 18. Nasi Goreng Mawut
@@ -211,7 +211,7 @@ class ProductSeeder extends Seeder
                 'price' => 24000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Goreng Mawut.png',
                 'status' => 'available',
             ],
             // 19. Nasi Goreng Cikur
@@ -222,7 +222,7 @@ class ProductSeeder extends Seeder
                 'price' => 21000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Goreng Cikur.png',
                 'status' => 'available',
             ],
             // 20. Nasi Goreng Jadul
@@ -233,7 +233,7 @@ class ProductSeeder extends Seeder
                 'price' => 21000,
                 'stock' => 35,
                 'unit' => 'porsi',
-                'image' => 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Nasi_Goreng_Kampung_Kangkung.jpg',
+                'image' => 'images/Menu/Nasi Goreng Jadul.png',
                 'status' => 'available',
             ],
             // 21. Nasi Goreng
@@ -244,7 +244,7 @@ class ProductSeeder extends Seeder
                 'price' => 21000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1647093953000-9065ed6f85ef?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Goreng.png',
                 'status' => 'available',
             ],
             // 22. Nasi Sosis Saus Tiram
@@ -255,7 +255,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 25,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1767065703791-ddc9a028563c?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Sosis Saus Tiram.png',
                 'status' => 'available',
             ],
             // 23. Nasi Telur Sosis Orak Arik
@@ -266,7 +266,7 @@ class ProductSeeder extends Seeder
                 'price' => 20000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1558672367-241cd1a01b16?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Telur Sosis Orak Arik.png',
                 'status' => 'available',
             ],
             // 24. Nasi Telur Dadar Sosis
@@ -277,7 +277,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1563690449029-d6e1b8d6003d?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Telur Dadar Sosis.png',
                 'status' => 'available',
             ],
             // 25. Nasi Telur Ceplok Sosis
@@ -288,7 +288,7 @@ class ProductSeeder extends Seeder
                 'price' => 18500,
                 'stock' => 30,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1624647079030-4407051e3de8?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nasi Telur Ceplok Sosis.png',
                 'status' => 'available',
             ],
             // 26. Teh Manis (Hangat / Dingin)
@@ -299,7 +299,7 @@ class ProductSeeder extends Seeder
                 'price' => 7000,
                 'stock' => 50,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Teh Manis.png',
                 'status' => 'available',
             ],
             // 27. Nutrisari Dingin Banyak Rasa
@@ -310,7 +310,7 @@ class ProductSeeder extends Seeder
                 'price' => 7000,
                 'stock' => 50,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Nutrisari Dingin.png',
                 'status' => 'available',
             ],
             // 28. Extra Joss (Dingin)
@@ -321,7 +321,7 @@ class ProductSeeder extends Seeder
                 'price' => 7000,
                 'stock' => 40,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Extra Joss.png',
                 'status' => 'available',
             ],
             // 29. Susu Milo (Hangat)
@@ -332,7 +332,7 @@ class ProductSeeder extends Seeder
                 'price' => 8000,
                 'stock' => 40,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Susu Milo.png',
                 'status' => 'available',
             ],
             // 30. Susu Kental Manis (Hangat)
@@ -343,7 +343,7 @@ class ProductSeeder extends Seeder
                 'price' => 9000,
                 'stock' => 40,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Susu Kental Manis.png',
                 'status' => 'available',
             ],
             // 31. Mie Indomie / Sedap Double Mie (Stok Habis)
@@ -354,7 +354,7 @@ class ProductSeeder extends Seeder
                 'price' => 15000,
                 'stock' => 0,
                 'unit' => 'porsi',
-                'image' => 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Mie Indomie Double.png',
                 'status' => 'unavailable',
             ],
             // 32. Es Kul Kul Piscok (Stok Habis)
@@ -365,7 +365,7 @@ class ProductSeeder extends Seeder
                 'price' => 12000,
                 'stock' => 0,
                 'unit' => 'pcs',
-                'image' => 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Es Kul Kul Piscok.png',
                 'status' => 'unavailable',
             ],
             // 33. Kopi Susu ABC (Hangat) (Stok Habis)
@@ -376,7 +376,7 @@ class ProductSeeder extends Seeder
                 'price' => 8000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Susu ABC.png',
                 'status' => 'unavailable',
             ],
             // 34. Kopi Good Day Coolin (Hangat / Dingin) (Stok Habis)
@@ -387,7 +387,7 @@ class ProductSeeder extends Seeder
                 'price' => 8000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Good Day Coolin.png',
                 'status' => 'unavailable',
             ],
             // 35. Kopi Good Day Carrebian Nut (Hangat / Dingin) (Stok Habis)
@@ -398,7 +398,7 @@ class ProductSeeder extends Seeder
                 'price' => 8000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Good Day Carrebian Nut.png',
                 'status' => 'unavailable',
             ],
             // 36. Kopi Good Day Mocaccino (Hangat / Dingin) (Stok Habis)
@@ -409,7 +409,7 @@ class ProductSeeder extends Seeder
                 'price' => 8000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Good Day Mocaccino.png',
                 'status' => 'unavailable',
             ],
             // 37. Kopi Good Day Capuccino (Hangat / Dingin) (Stok Habis)
@@ -420,7 +420,7 @@ class ProductSeeder extends Seeder
                 'price' => 10000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Good Day Capuccino.png',
                 'status' => 'unavailable',
             ],
             // 38. Kopi Good Day Freeze (Dingin) (Stok Habis)
@@ -431,7 +431,7 @@ class ProductSeeder extends Seeder
                 'price' => 11000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Good Day Freeze.png',
                 'status' => 'unavailable',
             ],
             // 39. Kopi Torabika Creamy Latte (Hangat / Dingin) (Stok Habis)
@@ -442,7 +442,7 @@ class ProductSeeder extends Seeder
                 'price' => 10000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Torabika Creamy Latte.png',
                 'status' => 'unavailable',
             ],
             // 40. Kopi Torabika Capuccino (Hangat / Dingin) (Stok Habis)
@@ -453,7 +453,7 @@ class ProductSeeder extends Seeder
                 'price' => 10000,
                 'stock' => 0,
                 'unit' => 'cup',
-                'image' => 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80',
+                'image' => 'images/Menu/Kopi Torabika Capuccino.png',
                 'status' => 'unavailable',
             ],
         ];

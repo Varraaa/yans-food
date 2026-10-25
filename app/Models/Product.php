@@ -62,11 +62,27 @@ class Product extends Model
     public function getImageUrlAttribute(): string
     {
         if (empty($this->image)) {
-            return 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';
+            return asset('images/Menu/Nasi Goreng.png');
         }
 
         if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
             return $this->image;
+        }
+
+        if (str_starts_with($this->image, 'images/')) {
+            return asset($this->image);
+        }
+
+        if (str_starts_with($this->image, '/images/')) {
+            return asset(ltrim($this->image, '/'));
+        }
+
+        if (file_exists(public_path('images/Menu/' . $this->image))) {
+            return asset('images/Menu/' . $this->image);
+        }
+
+        if (file_exists(public_path($this->image))) {
+            return asset($this->image);
         }
 
         return asset('storage/' . $this->image);
