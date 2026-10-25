@@ -140,11 +140,11 @@
                 </div>
 
                 {{-- CATEGORY PILLS --}}
-                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar" id="category-pills">
+                <div class="flex items-center gap-2 overflow-x-auto pt-1 pb-3.5 sm:pb-2.5 text-xs admin-filter-scroll" id="category-pills">
                     <button 
                         type="button"
                         onclick="filterCategory('all', this)"
-                        class="category-btn active px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition bg-[#C1440E] text-white shadow-xs"
+                        class="category-btn active px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition bg-[#C1440E] text-white shadow-xs shrink-0"
                     >
                         Semua Menu ({{ count($products) }})
                     </button>
@@ -152,7 +152,7 @@
                         <button 
                             type="button"
                             onclick="filterCategory('{{ $category->id }}', this)"
-                            class="category-btn px-3.5 py-1.5 rounded-xl font-semibold whitespace-nowrap transition bg-stone-100 text-stone-600 hover:bg-stone-200"
+                            class="category-btn px-3.5 py-1.5 rounded-xl font-semibold whitespace-nowrap transition bg-stone-100 text-stone-600 hover:bg-stone-200 shrink-0"
                         >
                             {{ $category->name }} ({{ $category->products_count }})
                         </button>

@@ -79,18 +79,18 @@
 
         {{-- QUICK MONTH NAVIGATION PILLS --}}
         @if($availableMonths->count() > 0)
-            <div class="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+            <div class="pt-3 border-t border-stone-100 mt-2.5 flex items-center gap-2 overflow-x-auto pb-3.5 sm:pb-2.5 text-xs admin-filter-scroll">
                 <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider mr-1 shrink-0">Pilih Bulan:</span>
                 <a 
                     href="{{ route('admin.transactions.index', array_merge(request()->except('month'), ['month' => 'all'])) }}"
-                    class="px-3 py-1 rounded-lg font-bold text-xs transition shrink-0 {{ (!request('month') || request('month') === 'all') ? 'bg-stone-900 text-white shadow-xs' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
+                    class="px-3 py-1.5 rounded-lg font-bold text-xs transition shrink-0 {{ (!request('month') || request('month') === 'all') ? 'bg-stone-900 text-white shadow-xs' : 'bg-stone-100 text-stone-600 hover:bg-stone-200' }}"
                 >
                     Semua Bulan
                 </a>
                 @foreach($availableMonths as $m)
                     <a 
                         href="{{ route('admin.transactions.index', array_merge(request()->except('month'), ['month' => $m['key']])) }}"
-                        class="px-3 py-1 rounded-lg font-bold text-xs transition flex items-center gap-1.5 shrink-0 {{ request('month') === $m['key'] ? 'bg-[#C1440E] text-white shadow-xs' : 'bg-stone-100 text-stone-700 hover:bg-stone-200' }}"
+                        class="px-3 py-1.5 rounded-lg font-bold text-xs transition flex items-center gap-1.5 shrink-0 {{ request('month') === $m['key'] ? 'bg-[#C1440E] text-white shadow-xs' : 'bg-stone-100 text-stone-700 hover:bg-stone-200' }}"
                     >
                         <span>{{ $m['label'] }}</span>
                     </a>

@@ -103,8 +103,8 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     Route::get('/reports/export/financial', [ReportController::class, 'exportFinancialCsv'])->name('reports.export-financial');
     Route::get('/reports/export/sales', [ReportController::class, 'exportSalesCsv'])->name('reports.export-sales');
 
-    // Printer
-    Route::resource('printers', PrinterController::class)->only(['index', 'store', 'update', 'destroy']);
+    // Printer (Dedicated RPP02N Device Profile)
+    Route::get('/printers', [PrinterController::class, 'index'])->name('printers.index');
 
     // Pengguna (Owner Single Admin)
     Route::get('/users', [UserController::class, 'index'])->name('users.index');

@@ -1317,3 +1317,41 @@ html.js [data-reveal].is-visible {
     }
 }
 
+/* ==========================================================================
+   Admin Filter & Category Horizontal Scrollbar with Generous Clearance
+   ========================================================================== */
+.admin-filter-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.admin-filter-scroll::-webkit-scrollbar {
+    height: 5px;
+}
+
+.admin-filter-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin-inline: 6px;
+}
+
+.admin-filter-scroll::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+}
+
+.admin-filter-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Fallback for elements specifying no-scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+

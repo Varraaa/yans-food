@@ -21,17 +21,17 @@
 
         <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
             {{-- TABS --}}
-            <div class="bg-stone-100 p-1 rounded-xl flex items-center gap-1 border border-stone-200 w-full sm:w-auto overflow-x-auto">
+            <div class="bg-stone-100 p-1.5 rounded-xl flex items-center gap-1.5 border border-stone-200 w-full sm:w-auto overflow-x-auto pt-1 pb-2.5 sm:pb-1.5 admin-filter-scroll">
                 <a 
                     href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'financial'])) }}"
-                    class="flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 {{ $activeTab === 'financial' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
+                    class="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 {{ $activeTab === 'financial' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
                 >
                     <span class="material-symbols-outlined text-[16px] text-amber-600">balance</span>
                     <span class="whitespace-nowrap">Laba Rugi &amp; Arus Kas</span>
                 </a>
                 <a 
                     href="{{ route('admin.reports.index', array_merge(request()->query(), ['tab' => 'pos'])) }}"
-                    class="flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 {{ $activeTab === 'pos' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
+                    class="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 {{ $activeTab === 'pos' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600 hover:text-stone-900' }}"
                 >
                     <span class="material-symbols-outlined text-[16px] text-emerald-600">point_of_sale</span>
                     <span class="whitespace-nowrap">Penjualan Kasir</span>
@@ -65,7 +65,7 @@
 
     {{-- FILTER BAR: PERIOD SHORTCUTS & CUSTOM DATES --}}
     <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
-        <div class="flex items-center gap-1.5 overflow-x-auto text-xs pb-1 sm:pb-0 no-scrollbar w-full md:w-auto">
+        <div class="flex items-center gap-2 overflow-x-auto text-xs pt-1 pb-3.5 sm:pb-2.5 admin-filter-scroll w-full md:w-auto">
             @foreach([
                 'today' => 'Hari Ini',
                 'this_week' => 'Minggu Ini',

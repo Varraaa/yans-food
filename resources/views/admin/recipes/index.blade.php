@@ -106,62 +106,62 @@
         @endif
     </div>
 
-    {{-- RECIPES GRID (RESPONSIVE) --}}
-    <div id="recipe-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+    {{-- RECIPES GRID (RESPONSIVE 2X2 ON MOBILE) --}}
+    <div id="recipe-cards-container" class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
         @forelse($recipes as $recipe)
-            <div class="recipe-card-item bg-white p-3.5 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition"
+            <div class="recipe-card-item bg-white p-3 sm:p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between hover:shadow-md transition"
                 data-name="{{ strtolower($recipe->name) }}"
                 data-product="{{ strtolower($recipe->product?->name ?? '') }}"
                 data-ingredients="{{ strtolower($recipe->ingredients->pluck('ingredient_name')->implode(' ')) }}">
-                <div class="space-y-2.5 sm:space-y-3">
-                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1.5 sm:gap-2">
-                        <div>
-                            <div class="flex items-center gap-1.5 flex-wrap">
-                                <span class="text-[9px] sm:text-[10px] font-bold text-[#C1440E] uppercase tracking-wider block">
+                <div class="space-y-2 sm:space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-2">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 flex-wrap">
+                                <span class="text-[9px] sm:text-[10px] font-bold text-[#C1440E] uppercase tracking-wider truncate block">
                                     {{ $recipe->product?->name ?? 'Menu Produk' }}
                                 </span>
                                 @if($recipe->product?->category)
-                                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-bold bg-stone-100 text-stone-500">
+                                    <span class="px-1.5 py-0.5 rounded text-[8px] sm:text-[8.5px] font-bold bg-stone-100 text-stone-500">
                                         {{ $recipe->product->category->name }}
                                     </span>
                                 @endif
                             </div>
-                            <h3 class="font-bold text-stone-900 text-sm sm:text-base mt-0.5 line-clamp-1 sm:line-clamp-2">{{ $recipe->name }}</h3>
+                            <h3 class="font-bold text-stone-900 text-xs sm:text-base mt-0.5 line-clamp-2 leading-snug">{{ $recipe->name }}</h3>
                         </div>
-                        <span class="self-start px-2 py-0.5 sm:px-2.5 sm:py-1 bg-amber-50 text-amber-800 rounded-lg text-[10px] sm:text-xs font-bold shrink-0">
+                        <span class="self-start px-1.5 py-0.5 sm:px-2.5 sm:py-1 bg-amber-50 text-amber-800 rounded-md sm:rounded-lg text-[9px] sm:text-xs font-bold shrink-0">
                             {{ $recipe->yield ?: '1 Porsi' }}
                         </span>
                     </div>
 
-                    <p class="text-[11px] sm:text-xs text-stone-500 line-clamp-2">
+                    <p class="text-[10.5px] sm:text-xs text-stone-500 line-clamp-2 leading-relaxed">
                         {{ $recipe->description ?: 'Belum ada deskripsi pembuatan.' }}
                     </p>
 
                     <div class="p-2 sm:p-3 bg-stone-50 rounded-xl text-xs space-y-1">
-                        <span class="font-bold text-stone-700 block text-[10px] sm:text-[11px] uppercase tracking-wider">Komposisi Bahan:</span>
-                        <div class="flex flex-wrap gap-1 sm:gap-1.5 pt-0.5 sm:pt-1">
-                            @forelse($recipe->ingredients->take(4) as $ing)
-                                <span class="px-1.5 sm:px-2 py-0.5 rounded-md bg-white border border-stone-200 text-stone-700 text-[9px] sm:text-[10px]">
+                        <span class="font-bold text-stone-700 block text-[9px] sm:text-[11px] uppercase tracking-wider">Komposisi:</span>
+                        <div class="flex flex-wrap gap-1 sm:gap-1.5 pt-0.5">
+                            @forelse($recipe->ingredients->take(3) as $ing)
+                                <span class="px-1.5 sm:px-2 py-0.5 rounded-md bg-white border border-stone-200 text-stone-700 text-[8.5px] sm:text-[10px] leading-tight">
                                     {{ $ing->ingredient_name }} ({{ $ing->quantity }} {{ $ing->unit }})
                                 </span>
                             @empty
-                                <span class="text-stone-400 italic text-[10px] sm:text-[11px]">Belum ada bahan</span>
+                                <span class="text-stone-400 italic text-[9px] sm:text-[11px]">Belum ada bahan</span>
                             @endforelse
-                            @if($recipe->ingredients->count() > 4)
-                                <span class="px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-200 text-stone-600 text-[9px] sm:text-[10px] font-bold">
-                                    +{{ $recipe->ingredients->count() - 4 }} lainnya
+                            @if($recipe->ingredients->count() > 3)
+                                <span class="px-1.5 sm:px-2 py-0.5 rounded-md bg-stone-200 text-stone-600 text-[8.5px] sm:text-[10px] font-bold">
+                                    +{{ $recipe->ingredients->count() - 3 }}
                                 </span>
                             @endif
                         </div>
                     </div>
                 </div>
 
-                <div class="pt-3 sm:pt-4 border-t border-stone-100 mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <a href="{{ route('admin.recipes.show', $recipe->id) }}" class="text-[11px] sm:text-xs font-bold text-[#C1440E] hover:underline flex items-center gap-1">
-                        <span>Lihat Selengkapnya</span>
-                        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                <div class="pt-2.5 sm:pt-4 border-t border-stone-100 mt-2.5 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                    <a href="{{ route('admin.recipes.show', $recipe->id) }}" class="text-[10.5px] sm:text-xs font-bold text-[#C1440E] hover:underline flex items-center gap-0.5">
+                        <span>Detail</span>
+                        <span class="material-symbols-outlined text-[13px] sm:text-[14px]">arrow_forward</span>
                     </a>
-                    <div class="flex items-center gap-1.5 self-end sm:self-auto">
+                    <div class="flex items-center gap-1 self-end sm:self-auto">
                         <a href="{{ route('admin.recipes.edit', $recipe->id) }}" class="p-1 sm:p-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs" title="Edit Resep">
                             ✏️
                         </a>
