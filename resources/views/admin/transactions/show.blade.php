@@ -7,9 +7,10 @@
         <a href="{{ route('admin.transactions.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-stone-900 transition">
             <span>← Kembali ke Riwayat Transaksi</span>
         </a>
-        <button type="button" onclick="window.print()" class="px-4 py-2 bg-stone-900 hover:bg-black text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5 w-full sm:w-auto">
-            <span>🖨️ Cetak Struk Ulang</span>
-        </button>
+        <a href="{{ route('admin.transactions.receipt', $transaction) }}" class="px-4 py-2 bg-[#C1440E] hover:bg-[#a3380b] text-white rounded-xl font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5 w-full sm:w-auto">
+            <span class="material-symbols-outlined text-[16px]">print</span>
+            <span>Cetak Struk RPP02N (Bluetooth / USB)</span>
+        </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">

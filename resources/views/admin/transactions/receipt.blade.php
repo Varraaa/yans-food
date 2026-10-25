@@ -61,17 +61,6 @@
                     <span class="material-symbols-outlined text-[16px]">usb</span>
                     <span>Cetak via USB</span>
                 </button>
-
-                {{-- TOMBOL FALLBACK DIALOG WINDOWS --}}
-                <button 
-                    type="button" 
-                    onclick="window.print()" 
-                    class="px-3 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl font-bold text-xs border border-stone-300 transition flex items-center justify-center gap-1.5 text-center"
-                    title="Buka dialog cetak bawaan browser (ukuran kertas 58mm)"
-                >
-                    <span class="material-symbols-outlined text-[16px]">print</span>
-                    <span>Dialog Windows (58mm)</span>
-                </button>
             </div>
 
             {{-- TOMBOL SELESAI TRANSAKSI (§9.2) --}}
@@ -242,7 +231,7 @@
             if (window.RPP02N) {
                 await window.RPP02N.print(receiptData);
             } else {
-                window.print();
+                alert('Modul printer belum siap atau browser tidak mendukung Web Bluetooth.');
             }
         } catch (e) {
             console.error(e);
@@ -258,8 +247,7 @@
         if (window.RPP02N && navigator.serial) {
             await window.RPP02N.printUsb(receiptData);
         } else {
-            alert('Fitur Web Serial USB didukung pada Google Chrome / Edge Desktop. Jika belum terhubung serial, sistem akan membuka Dialog Cetak Windows (58mm).');
-            window.print();
+            alert('Fitur Web Serial USB didukung pada Google Chrome / Edge Desktop. Pastikan printer terhubung kabel USB.');
         }
     }
 

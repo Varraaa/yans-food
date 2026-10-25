@@ -570,12 +570,13 @@
                 </button>
                 <button 
                     type="button" 
-                    onclick="window.print()" 
-                    class="px-3.5 py-2.5 bg-stone-800 hover:bg-black text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5"
-                    title="Cetak via dialog Windows (58mm)"
+                    id="btn-pos-print-usb"
+                    onclick="printPosModalUsb()" 
+                    class="px-3.5 py-2.5 bg-stone-800 hover:bg-black text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5 active:scale-95"
+                    title="Cetak langsung menggunakan kabel data USB (Web Serial)"
                 >
-                    <span class="material-symbols-outlined text-[16px]">print</span>
-                    <span>Dialog Cetak</span>
+                    <span class="material-symbols-outlined text-[16px]">usb</span>
+                    <span>Cetak via USB</span>
                 </button>
                 <button 
                     type="button" 
@@ -1264,7 +1265,7 @@
             if (window.RPP02N && window._latestReceiptData) {
                 await window.RPP02N.print(window._latestReceiptData);
             } else {
-                window.print();
+                alert('Modul printer belum siap atau browser tidak mendukung Web Bluetooth.');
             }
         } catch (e) {
             console.error(e);
@@ -1272,6 +1273,29 @@
             if (btn) {
                 btn.disabled = false;
                 btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">bluetooth</span><span>🖨️ Cetak ke RPP02N</span>`;
+            }
+        }
+    };
+
+    window.printPosModalUsb = async function() {
+        const btn = document.getElementById('btn-pos-print-usb');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Menghubungkan USB...</span>`;
+        }
+
+        try {
+            if (window.RPP02N && window._latestReceiptData && navigator.serial) {
+                await window.RPP02N.printUsb(window._latestReceiptData);
+            } else {
+                alert('Fitur Web Serial USB didukung pada Google Chrome / Edge Desktop. Pastikan printer terhubung kabel USB.');
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">usb</span><span>Cetak via USB</span>`;
             }
         }
     };
