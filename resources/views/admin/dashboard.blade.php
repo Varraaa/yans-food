@@ -13,27 +13,6 @@
             </p>
         </div>
 
-        @if(Auth::check() && Auth::user()->email === 'dummy@yansfood.id')
-            <div class="mb-5 bg-gradient-to-r from-amber-50 via-orange-50/50 to-amber-50 border border-amber-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div class="flex items-start gap-3">
-                    <span class="text-2xl shrink-0">🎯</span>
-                    <div>
-                        <h3 class="text-xs sm:text-sm font-bold text-stone-900">Mode Simulasi Pengujian (Fresh Experience)</h3>
-                        <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">
-                            Data transaksi, omset, dan pengeluaran dimulai dari <strong>0</strong> agar Anda dapat merasakan alur kasir &amp; pembukuan dari awal. Silakan coba menu <strong>Buka Kasir</strong> untuk melakukan penjualan perdana!
-                        </p>
-                    </div>
-                </div>
-                <form action="{{ route('admin.dummy.reset') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin mereset seluruh data simulasi transaksi & pengeluaran kembali ke 0?')" class="shrink-0">
-                    @csrf
-                    <button type="submit" class="w-full sm:w-auto px-3.5 py-2 bg-white hover:bg-stone-50 border border-amber-300 text-[#C1440E] rounded-xl text-xs font-bold shadow-xs transition flex items-center justify-center gap-1.5 active:scale-95">
-                        <span>🔄</span>
-                        <span>Reset Data Simulasi (Mulai Dari 0)</span>
-                    </button>
-                </form>
-            </div>
-        @endif
-
         {{-- 4 QUICK SHORTCUTS --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             <a href="{{ route('admin.pos.index') }}" class="group block p-4 rounded-xl bg-gradient-to-br from-amber-500 to-[#C1440E] text-white shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-200">
