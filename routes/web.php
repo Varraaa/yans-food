@@ -72,6 +72,23 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
         return redirect()->route('admin.dashboard');
     });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/dummy/reset', function () {
+        if (auth()->check() && auth()->user()->email === 'dummy@yansfood.id') {
+            $dummyId = auth()->id();
+            \App\Models\Transaction::withoutGlobalScopes()
+                ->where('cashier_id', $dummyId)
+                ->each(function ($tx) {
+                    $tx->items()->delete();
+                    $tx->delete();
+                });
+            \App\Models\Expense::withoutGlobalScopes()
+                ->where('created_by', $dummyId)
+                ->delete();
+
+            return back()->with('success', 'Data simulasi kasir & pengeluaran berhasil di-reset kembali ke 0. Anda siap memulai uji coba transaksi baru!');
+        }
+        abort(403);
+    })->name('dummy.reset');
 
     // POS Kasir
     Route::get('/pos', [PosController::class, 'index'])->name('pos.index');

@@ -132,6 +132,18 @@ class ReportService
         $productSalesQuery = TransactionItem::join('transactions', 'transaction_items.transaction_id', '=', 'transactions.id')
             ->where('transactions.status', 'completed');
 
+        if (auth()->check() && auth()->user()->email === 'dummy@yansfood.id') {
+            $productSalesQuery->where('transactions.cashier_id', auth()->id());
+        } elseif (auth()->check()) {
+            $dummyId = \App\Models\User::where('email', 'dummy@yansfood.id')->value('id');
+            if ($dummyId) {
+                $productSalesQuery->where(function ($q) use ($dummyId) {
+                    $q->where('transactions.cashier_id', '!=', $dummyId)
+                      ->orWhereNull('transactions.cashier_id');
+                });
+            }
+        }
+
         if ($startDate && $endDate) {
             $productSalesQuery->whereBetween('transactions.transaction_date', [$startDate, $endDate]);
         }

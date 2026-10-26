@@ -9,6 +9,26 @@ class Expense extends Model
 {
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope('dummy_isolation', function ($builder) {
+            if (auth()->check()) {
+                $user = auth()->user();
+                if ($user->email === 'dummy@yansfood.id') {
+                    $builder->where('expenses.created_by', $user->id);
+                } else {
+                    $dummyUser = \App\Models\User::where('email', 'dummy@yansfood.id')->first(['id']);
+                    if ($dummyUser) {
+                        $builder->where(function ($q) use ($dummyUser) {
+                            $q->where('expenses.created_by', '!=', $dummyUser->id)
+                              ->orWhereNull('expenses.created_by');
+                        });
+                    }
+                }
+            }
+        });
+    }
+
     protected $fillable = [
         'expense_number',
         'expense_date',
