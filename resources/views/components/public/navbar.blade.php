@@ -52,9 +52,9 @@
     ];
 @endphp
 
-<!-- Header / Fixed Navbar (§3.4) -->
-<header id="main-navbar" class="bg-[#FBF6EE]">
-    <div class="navbar-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between gap-3 sm:gap-4 md:gap-6">
+<!-- Header / Fixed Navbar (§3.4 & review_rekomendasi_ux_animasi_yan_s_food.md) -->
+<header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 bg-[#FBF6EE]/90 backdrop-blur-md border-b border-surface-variant/30 transition-all duration-300">
+    <div class="navbar-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between gap-3 sm:gap-4 md:gap-6 h-20 transition-all duration-300">
         
         <!-- Brand Logo & Monogram -->
         <a href="{{ url('/') }}" class="brand-logo flex items-center gap-2.5 sm:gap-3 group shrink-0" aria-label="Yan's Food — Beranda">

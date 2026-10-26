@@ -1,0 +1,54 @@
+PROJECT DASHBOARD,,,,,,,,,,
+Project Name,Yan's Food,Owner,M. Rafih / Tim Yan's Food,,,,,,,
+Start Date,05/10/2026,Target Date,31/10/2026,,,,,,,
+Status,Completed / Live,Version,v1.0.0,,,,,,,
+Progress (%),100%,Current Phase,Live Production & Monitoring,,,,,,,
+Main Notes,Aplikasi POS Kasir & Manajemen Keuangan UMKM Yan's Food (Live di https://yansfoods.my.id),,,,,,,,,,
+,,,,,,,,,,
+TASK DEVELOPMENT,,,,,,,,,,
+ID,Task / Feature,Category,Priority,Status,PIC,Start Date,Deadline,Progress (%),Dependency,Notes
+1,Analisis Kebutuhan & Perancangan Alur Sistem,Planning,High,Done,Rafih,05/10/2026,07/10/2026,100%,-,Memetakan alur kasir dapur dan laporan
+2,Perancangan Database & Pembuatan ERD,Database,High,Done,Rafih,08/10/2026,10/10/2026,100%,Task 1,Struktur tabel produk resep transaksi kas
+3,Setup Project Laravel 11 & Tailwind CSS,Setup,High,Done,Rafih,11/10/2026,12/10/2026,100%,-,Inisialisasi framework dan layout UI
+4,Desain & Pembuatan Landing Page Publik,Frontend,Medium,Done,Rafih,13/10/2026,14/10/2026,100%,Task 3,Halaman profil banner hero dan kontak
+5,Halaman Katalog Menu Publik,Frontend,Medium,Done,Rafih,14/10/2026,15/10/2026,100%,Task 4,Menampilkan 40 menu resmi dan filter kategori
+6,Modul Manajemen Menu & Kategori (CRUD Admin),Backend,High,Done,Rafih,15/10/2026,17/10/2026,100%,Task 2,Kelola menu harga jual foto dan status
+7,Modul Resep Bahan Baku & Kalkulasi HPP,Backend,High,Done,Rafih,17/10/2026,18/10/2026,100%,Task 6,Input takaran bahan untuk hitung modal menu
+8,Sistem Kasir POS (Point of Sale) Interaktif,Fullstack,Critical,Done,Rafih,19/10/2026,21/10/2026,100%,Task 6,Keranjang belanja hitung total dan kembalian
+9,Integrasi Pembayaran Multi-Metode (Tunai & QRIS),Fullstack,High,Done,Rafih,21/10/2026,22/10/2026,100%,Task 8,Pemisahan pencatatan kas fisik dan non-tunai
+10,Fitur Struk Transaksi & Histori Penjualan,Fullstack,Medium,Done,Rafih,22/10/2026,22/10/2026,100%,Task 8,Cetak struk belanja dan nomor transaksi unik
+11,Modul Pencatatan Pengeluaran Operasional & Dapur,Backend,Medium,Done,Rafih,23/10/2026,23/10/2026,100%,Task 2,Catat belanja bahan sewa dan biaya lain
+12,Laporan Penjualan Kasir & Rekap Menu Terlaris,Reporting,High,Done,Rafih,23/10/2026,24/10/2026,100%,Task 8,Statistik omset produk terlaris dan porsi
+13,Laporan Laba Rugi & Analisis Arus Kas,Reporting,High,Done,Rafih,24/10/2026,25/10/2026,100%,Task 11 & 12,Perhitungan omset beban laba kotor & bersih
+14,Filter Periode Laporan Fleksibel (Hari/Minggu/Bulan),Reporting,Medium,Done,Rafih,25/10/2026,26/10/2026,100%,Task 13,Standar kalender mingguan & reset awal bulan
+15,Fitur Export Laporan ke File CSV / Excel,Feature,Low,Done,Rafih,25/10/2026,25/10/2026,100%,Task 13,Unduh data rekap kasir & keuangan
+16,Pengujian Alur Bisnis & Validasi Kasir (Testing),Testing,High,Done,Rafih,25/10/2026,25/10/2026,100%,Task 8 & 13,Testing kalkulasi nominal dan filter data
+17,Setup Server VPS Ubuntu di Biznet Gio,DevOps,Critical,Done,Rafih,25/10/2026,25/10/2026,100%,-,Instalasi Nginx PHP 8.5 dan MySQL di cloud
+18,Deployment Aplikasi Web & Migrasi Database,DevOps,High,Done,Rafih,25/10/2026,25/10/2026,100%,Task 17,Deploy source code dan import 40 data menu
+19,Konfigurasi Domain Custom (yansfoods.my.id),Networking,High,Done,Rafih,25/10/2026,26/10/2026,100%,Task 17,Setting DNS record & nameserver IDwebhost
+20,Pemasangan SSL HTTPS (Let's Encrypt) & Rilis,Security,High,Done,Rafih,26/10/2026,26/10/2026,100%,Task 19,Website aman ber-SSL dan rilis live online
+,,,,,,,,,,
+CHANGELOG,,,,,,,,,,
+Date,Version,Change Description,Type,Developer,Notes,,,,
+05/10/2026,v0.1.0,Perancangan arsitektur sistem flowchart dan database ERD,Feature,Rafih,Tahap inisiasi project,,,,
+12/10/2026,v0.2.0,Pembuatan antarmuka landing page publik dan katalog menu,Feature,Rafih,Tampilan depan selesai,,,,
+18/10/2026,v0.5.0,Selesai manajemen menu resep bahan baku dan kalkulasi HPP,Feature,Rafih,Katalog 40 menu siap,,,,
+22/10/2026,v0.8.0,Peluncuran modul kasir POS struk belanja dan kas tunai/QRIS,Feature,Rafih,Alur kasir selesai,,,,
+25/10/2026,v0.9.0,Penyelesaian laporan laba rugi arus kas dan export CSV,Feature,Rafih,Laporan keuangan siap,,,,
+26/10/2026,v1.0.0,Rilis produksi ke server VPS Biznet Gio dan domain resmi ber-SSL,Release,Rafih,Website resmi live online,,,,
+,,,,,,,,,,
+BUG TRACKER,,,,,,,,,,
+ID Bug,Description,Severity,Status,Found By,Solution,Fix Date,,,,
+BUG-01,Foto banner utama menu di halaman home tidak muncul saat live,Medium,Resolved,Rafih,Memasukkan tracking file menu.png ke repository dan update asset URL,25/10/2026,,,,
+BUG-02,Transaksi hari Minggu tidak muncul di filter mingguan hari Senin,Low,Resolved,Rafih,Menyesuaikan filter mingguan ISO-8601 dengan batas awal bulan,26/10/2026,,,,
+BUG-03,Domain yansfoods.my.id belum terarah ke IP server VPS,High,Resolved,Rafih,Memperbaiki nameserver IDwebhost ke ns1.idwebhost.id dan pasang SSL,26/10/2026,,,,
+,,,,,,,,,,
+REQUIREMENT,,,,,,,,,,
+ID,Requirement,Type,Priority,Status,Source,Notes,,,,
+REQ-01,Halaman publik menampilkan profil warung dan katalog 40 menu,Functional,Medium,Done,User Story,Untuk pelanggan melihat menu,,,,
+REQ-02,Sistem kasir POS untuk input pesanan cepat dan cetak struk,Functional,Critical,Done,User Story,Untuk operasional kasir harian,,,,
+REQ-03,Dukungan pembayaran ganda (Uang Tunai fisik dan QRIS digital),Functional,High,Done,User Story,Pemisahan arus kas masuk,,,,
+REQ-04,Manajemen resep bahan baku untuk hitung modal dasar (HPP),Functional,High,Done,User Story,Kalkulasi otomatis margin laba,,,,
+REQ-05,Pencatatan biaya pengeluaran operasional dan belanja dapur,Functional,High,Done,User Story,Dasar hitung laba rugi bersih,,,,
+REQ-06,Laporan keuangan real-time (omset pengeluaran dan laba bersih),Functional,Critical,Done,User Story,Dashboard laporan pemilik warung,,,,
+REQ-07,Aplikasi online diakses via internet dengan aman (HTTPS),Non-Functional,High,Done,Sistem,Hosting VPS dan domain resmi,,,,

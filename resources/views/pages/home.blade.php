@@ -47,10 +47,10 @@
                 </div>
             </div>
 
-            <!-- Right Visual Interactive Photo Card (md:col-span-5) with Modern UX -->
+            <!-- Right Visual Interactive Photo Card (md:col-span-5) with Modern Floating UX (§3.A) -->
             <div class="md:col-span-5 relative flex justify-center w-full">
                 <a href="{{ url('/menu') }}" 
-                   class="group relative block w-full max-w-[280px] sm:max-w-xs md:max-w-[290px] lg:max-w-md aspect-[4/5] max-h-[360px] sm:max-h-[420px] md:max-h-[440px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-surface-warm bg-surface-container cursor-pointer select-none"
+                   class="group relative block w-full max-w-[280px] sm:max-w-xs md:max-w-[290px] lg:max-w-md aspect-[4/5] max-h-[360px] sm:max-h-[420px] md:max-h-[440px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-4 border-surface-warm bg-surface-container cursor-pointer select-none animate-subtle-float"
                    aria-label="Lihat Semua Menu dan Sajian Kuliner Yan's Food">
                     
                     <!-- Culinary Photo with Smooth Hover Zoom -->

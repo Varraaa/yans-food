@@ -15,13 +15,25 @@ export function initNavbar() {
  * 1. Desktop Navbar: Shrink & Sliding Active Link Indicator (§3.4)
  */
 function initDesktopNavbar(navbar) {
-    // Scroll Shrink State (> 24px)
+    const container = navbar.querySelector('.navbar-container');
+
+    // Scroll Adaptive State (> 20px) — Sesuai Panduan UX review_rekomendasi_ux_animasi_yan_s_food.md (§3.C)
     function onScroll() {
         const scrollY = window.scrollY;
-        if (scrollY > 24) {
-            navbar.classList.add('is-shrunk');
+        if (scrollY > 20) {
+            navbar.classList.add('is-shrunk', 'shadow-sm', 'bg-white/90');
+            navbar.classList.remove('bg-[#FBF6EE]/90');
+            if (container) {
+                container.classList.remove('h-20');
+                container.classList.add('h-16');
+            }
         } else {
-            navbar.classList.remove('is-shrunk');
+            navbar.classList.remove('is-shrunk', 'shadow-sm', 'bg-white/90');
+            navbar.classList.add('bg-[#FBF6EE]/90');
+            if (container) {
+                container.classList.remove('h-16');
+                container.classList.add('h-20');
+            }
         }
     }
 

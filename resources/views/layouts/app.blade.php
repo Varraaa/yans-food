@@ -62,7 +62,10 @@
     <!-- Tailwind v4 & Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-cream-bg font-sans text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary-dark relative">
+<body class="bg-cream-bg font-sans text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary-dark relative pb-14 md:pb-0">
+
+    <!-- Splash Screen Intro (Sesi Pertama) -->
+    <x-public.splash-screen />
 
     <!-- Accessible Skip Link (§3.4, §9) -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-stone-900 focus:text-white focus:rounded-xl focus:shadow-xl focus:font-bold focus:text-xs">
@@ -91,6 +94,9 @@
 
     <!-- Product Detail Modal / Mobile Bottom Sheet (§5.3, M19–M20) -->
     <x-public.product-modal />
+
+    <!-- Mobile Sticky Action Bar (Pemesanan Cepat via WA di Ponsel) -->
+    <x-public.mobile-sticky-bar />
 
 </body>
 </html>
