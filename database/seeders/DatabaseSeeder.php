@@ -23,15 +23,16 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 2. Akun Dummy Khusus Guru / Penguji
+        // 2. Akun Dummy Admin untuk Guru / Penguji
         User::updateOrCreate(
-            ['email' => 'guru@yansfood.id'],
+            ['email' => 'dummy@yansfood.id'],
             [
-                'name' => 'Guru / Penguji (Demo Admin)',
-                'password' => Hash::make('admin123'),
+                'name' => 'Admin Dummy',
+                'password' => Hash::make('dummy123'),
                 'role' => 'admin',
             ]
         );
+        User::where('email', 'guru@yansfood.id')->delete();
 
         // Hapus akun kasir lama jika ada
         User::where('email', 'kasir@yansfood.id')->delete();
