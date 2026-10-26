@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full font-sans text-stone-800 bg-stone-100 flex items-center justify-center p-4 antialiased">
@@ -26,10 +27,51 @@
         </div>
 
         <!-- LOGIN CARD -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-stone-200/80 space-y-6">
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-stone-200/80 space-y-5">
             <div>
                 <h2 class="text-lg font-bold text-stone-900">Masuk ke Panel Admin</h2>
                 <p class="text-xs text-stone-500 mt-0.5">Kelola operasional kasir POS, katalog produk, dan keuangan usaha.</p>
+            </div>
+
+            {{-- INFORMASI AKUN DUMMY UNTUK GURU / PENGUJI --}}
+            <div class="p-4 bg-gradient-to-br from-amber-50 to-orange-50/60 rounded-2xl border border-amber-200/80 text-xs text-stone-800 space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <span class="inline-flex items-center gap-1.5 font-bold text-amber-900 text-xs">
+                        <span class="material-symbols-outlined text-[16px] text-[#C1440E]">lock_person</span>
+                        <span>Akun Demo / Guru (Penguji)</span>
+                    </span>
+                    <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amber-200/80 text-amber-900">
+                        Siap Pakai
+                    </span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] bg-white/90 p-2.5 rounded-xl border border-amber-200/60 shadow-xs">
+                    <div>
+                        <span class="text-stone-500 block text-[10px] font-bold uppercase tracking-wider">Email Dummy:</span>
+                        <code class="font-bold text-stone-900 font-mono select-all">guru@yansfood.id</code>
+                    </div>
+                    <div>
+                        <span class="text-stone-500 block text-[10px] font-bold uppercase tracking-wider">Kata Sandi:</span>
+                        <code class="font-bold text-stone-900 font-mono select-all">admin123</code>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 pt-0.5">
+                    <button 
+                        type="button" 
+                        onclick="document.getElementById('email').value='guru@yansfood.id';document.getElementById('password').value='admin123';"
+                        class="flex-1 py-1.5 px-3 bg-[#C1440E] hover:bg-[#a3380b] text-white font-bold rounded-lg transition text-[11px] flex items-center justify-center gap-1 shadow-xs active:scale-[0.98]"
+                    >
+                        <span class="material-symbols-outlined text-[14px]">touch_app</span>
+                        <span>Isi Akun Guru Otomatis</span>
+                    </button>
+                    <button 
+                        type="button" 
+                        onclick="document.getElementById('email').value='admin@yansfood.id';document.getElementById('password').value='password';"
+                        class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold rounded-lg transition text-[11px] flex items-center justify-center gap-1 active:scale-[0.98]"
+                        title="Isi Akun Owner / Admin"
+                    >
+                        <span>Akun Owner</span>
+                    </button>
+                </div>
             </div>
 
             @if(session('success'))
@@ -61,12 +103,12 @@
                         type="email" 
                         name="email" 
                         id="email" 
-                        value="{{ old('email', 'admin@yansfood.id') }}" 
+                        value="{{ old('email', 'guru@yansfood.id') }}" 
                         required 
                         autocomplete="email" 
                         autofocus
                         class="w-full px-4 py-3 rounded-xl border border-stone-300 bg-stone-50 text-stone-900 text-sm focus:ring-2 focus:ring-[#C1440E] focus:outline-none transition"
-                        placeholder="admin@yansfood.id"
+                        placeholder="guru@yansfood.id"
                     >
                 </div>
 

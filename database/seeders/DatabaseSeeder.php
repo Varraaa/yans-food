@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Akun Tunggal: Owner & Admin Utama Yan's Food
-        User::firstOrCreate(
+        // 1. Akun Admin Utama
+        User::updateOrCreate(
             ['email' => 'admin@yansfood.id'],
             [
                 'name' => 'Owner / Admin Yan\'s Food',
@@ -23,7 +23,17 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Hapus akun kasir jika sebelumnya sempat terbuat (karena Yan's Food dikelola 1 orang admin tunggal)
+        // 2. Akun Dummy Khusus Guru / Penguji
+        User::updateOrCreate(
+            ['email' => 'guru@yansfood.id'],
+            [
+                'name' => 'Guru / Penguji (Demo Admin)',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+            ]
+        );
+
+        // Hapus akun kasir lama jika ada
         User::where('email', 'kasir@yansfood.id')->delete();
 
         // 2. Seed Master Data
