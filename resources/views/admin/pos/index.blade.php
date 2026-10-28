@@ -194,18 +194,6 @@
                                 <span class="material-symbols-outlined text-[13px]">shopping_bag</span>
                                 <span id="badge-qty-{{ $product->id }}">1x</span>
                             </span>
-
-                            {{-- STOCK BADGE --}}
-                            @if($product->stock > 0)
-                                <span class="absolute top-2 right-2 bg-stone-900/80 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-full font-bold shadow-xs flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                    <span id="card-stock-label-{{ $product->id }}">{{ $product->stock }}</span>
-                                </span>
-                            @else
-                                <span class="absolute top-2 right-2 bg-rose-600 text-white text-[10px] px-2.5 py-0.5 rounded-full font-black shadow-xs">
-                                    Habis
-                                </span>
-                            @endif
                         </div>
 
                         {{-- PRODUCT INFO --}}
@@ -214,9 +202,24 @@
                                 <span class="text-[10px] text-stone-400 uppercase tracking-wider font-bold">
                                     {{ $product->category?->name ?? 'Menu' }}
                                 </span>
-                                <h4 class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-[#C1440E] transition product-title">
-                                    {{ $product->name }}
-                                </h4>
+                                
+                                {{-- JUDUL PRODUK & BADGE SISA STOK MODERN DI SEBELAH KANAN --}}
+                                <div class="flex items-start justify-between gap-1.5 mt-0.5">
+                                    <h4 class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 group-hover:text-[#C1440E] transition product-title flex-1">
+                                        {{ $product->name }}
+                                    </h4>
+                                    @if($product->stock > 0)
+                                        <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border transition-colors {{ $product->stock > 10 ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80' : 'bg-amber-50 text-amber-700 border-amber-200/80' }}" title="Sisa Stok: {{ $product->stock }} {{ $product->unit ?? 'porsi' }}">
+                                            <span class="w-1.5 h-1.5 rounded-full {{ $product->stock > 10 ? 'bg-emerald-500' : 'bg-amber-500' }}"></span>
+                                            <span id="card-stock-label-{{ $product->id }}">{{ $product->stock }}</span>
+                                        </span>
+                                    @else
+                                        <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border bg-rose-50 text-rose-700 border-rose-200/80" title="Stok Habis">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                                            <span id="card-stock-label-{{ $product->id }}">0</span>
+                                        </span>
+                                    @endif
+                                </div>
                                 @if($hasTempOption)
                                     <div class="mt-1">
                                         <span class="inline-flex items-center gap-1 text-[9.5px] font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full">

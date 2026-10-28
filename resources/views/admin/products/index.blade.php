@@ -111,26 +111,38 @@
                             loading="lazy"
                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';"
                         >
-
-                        <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase {{ $product->status === 'available' ? 'bg-emerald-600 text-white shadow' : 'bg-rose-600 text-white shadow' }}">
-                            {{ $product->status === 'available' ? 'Sedia' : 'Kosong' }}
-                        </span>
                     </div>
 
                     <div class="p-3 sm:p-4">
                         <span class="product-item-cat text-[9px] sm:text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
                             {{ $product->category?->name ?? 'Menu' }}
                         </span>
-                        <h3 class="product-item-title font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 mt-0.5">
-                            {{ $product->name }}
-                        </h3>
+                        
+                        {{-- JUDUL PRODUK & BADGE SISA STOK MODERN DI SEBELAH KANAN --}}
+                        <div class="flex items-start justify-between gap-1.5 mt-0.5">
+                            <h3 class="product-item-title font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 flex-1">
+                                {{ $product->name }}
+                            </h3>
+                            @if($product->stock > 0)
+                                <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border transition-colors {{ $product->stock > 10 ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80' : 'bg-amber-50 text-amber-700 border-amber-200/80' }}" title="Sisa Stok: {{ $product->stock }} {{ $product->unit }}">
+                                    <span class="w-1.5 h-1.5 rounded-full {{ $product->stock > 10 ? 'bg-emerald-500' : 'bg-amber-500' }}"></span>
+                                    <span>{{ $product->stock }}</span>
+                                </span>
+                            @else
+                                <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border bg-rose-50 text-rose-700 border-rose-200/80" title="Stok Habis">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                                    <span>0</span>
+                                </span>
+                            @endif
+                        </div>
+
                         <p class="text-[11px] sm:text-xs text-stone-500 line-clamp-1 sm:line-clamp-2 mt-1">{{ $product->description ?: 'Tidak ada deskripsi.' }}</p>
 
-                        <div class="mt-2 sm:mt-3 flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-0.5 sm:gap-1">
+                        <div class="mt-2 sm:mt-3 flex items-center justify-between text-xs">
                             <span class="font-black text-sm sm:text-base text-[#C1440E]">
                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                             </span>
-                            <span class="text-stone-500 font-medium text-[10px] sm:text-xs">Stok: {{ $product->stock }} {{ $product->unit }}</span>
+                            <span class="text-stone-400 font-medium text-[10px] sm:text-xs">/ {{ $product->unit }}</span>
                         </div>
                     </div>
                 </div>
