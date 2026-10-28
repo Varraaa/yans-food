@@ -43,9 +43,9 @@
                  alt="{{ $title }}"
                  loading="lazy">
             
-            <!-- Category & Favorite Badges (§5.3) -->
-            <div class="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 flex flex-wrap gap-1 sm:gap-1.5 z-10 items-center">
-                @if($isFavorite)
+            <!-- Favorite Badge (§5.3) -->
+            @if($isFavorite)
+                <div class="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 z-10 flex items-center">
                     <!-- Bintang Realistis 3D Faceted Gold Star (Modern & Mewah) -->
                     <span class="badge-favorite relative inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-stone-900/90 via-stone-800/85 to-stone-950/95 backdrop-blur-md border border-amber-400/50 shadow-md shrink-0 group-hover:scale-110 transition-transform duration-300" title="Menu Favorit Pilihan Pelanggan">
                         <span class="absolute inset-0 rounded-full bg-amber-400/20 blur-[2px]"></span>
@@ -75,21 +75,13 @@
                             <polygon points="12,12 2.5,9.5 9.7,9.5" fill="url(#goldLight-{{ $productSlug }})"/>
                         </svg>
                     </span>
-                @endif
-                <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-surface-warm/95 backdrop-blur-md text-on-surface font-label-sm text-[10px] sm:text-[11px] font-semibold shadow-xs border border-surface-variant/30">
-                    {{ $category }}
-                </span>
-            </div>
+                </div>
+            @endif
 
-            <!-- Availability Status Badge (Modern Glassmorphic Live Indicator) -->
+            <!-- Availability Status Badge (Modern Clean Ready Indicator) -->
             <div class="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 z-10">
                 @if($isAvailable)
                     <span class="px-2.5 py-1 rounded-full bg-stone-900/85 backdrop-blur-md text-emerald-300 font-label-sm text-[10px] sm:text-[11px] font-bold shadow-md flex items-center gap-1.5 border border-emerald-500/40" title="Produk Tersedia & Siap Saji">
-                        <!-- Live Pulse Indicator -->
-                        <span class="relative flex h-2 w-2 shrink-0">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
                         <!-- Verified Check Icon -->
                         <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
