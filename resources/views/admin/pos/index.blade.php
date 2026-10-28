@@ -161,7 +161,7 @@
             </div>
 
             {{-- PRODUCTS GRID --}}
-            <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3.5" id="products-grid">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-3.5" id="products-grid">
                 @forelse($products as $product)
                     @php
                         $isAvailable = $product->status === 'available' && $product->stock > 0;
@@ -180,7 +180,7 @@
                         class="product-item group relative bg-white border border-stone-200/90 rounded-2xl overflow-hidden transition-all duration-200 flex flex-col justify-between select-none {{ $isAvailable ? 'cursor-pointer hover:border-[#C1440E]/70 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]' : 'opacity-60 cursor-not-allowed bg-stone-50/70' }}"
                     >
                         {{-- PRODUCT IMAGE --}}
-                        <div class="relative aspect-[4/3] bg-stone-100 overflow-hidden">
+                        <div class="relative aspect-[16/10] sm:aspect-[4/3] bg-stone-100 overflow-hidden">
                             <img 
                                 src="{{ $product->image_url }}" 
                                 alt="{{ $product->name }}" 
@@ -197,31 +197,31 @@
                         </div>
 
                         {{-- PRODUCT INFO --}}
-                        <div class="p-3 flex-1 flex flex-col justify-between space-y-2">
-                            <div>
-                                <span class="text-[10px] text-stone-400 uppercase tracking-wider font-bold">
+                        <div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between gap-2.5">
+                            <div class="space-y-1">
+                                <span class="text-[10px] text-stone-400 uppercase tracking-wider font-bold block truncate">
                                     {{ $product->category?->name ?? 'Menu' }}
                                 </span>
                                 
-                                {{-- JUDUL PRODUK & BADGE SISA STOK MODERN DI SEBELAH KANAN --}}
-                                <div class="flex items-start justify-between gap-1.5 mt-0.5">
-                                    <h4 class="font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 group-hover:text-[#C1440E] transition product-title flex-1">
+                                {{-- JUDUL PRODUK FULL (TIDAK TERPOTONG) & BADGE SISA STOK MODERN --}}
+                                <div class="flex items-start justify-between gap-1.5">
+                                    <h4 class="font-bold text-stone-900 text-xs sm:text-[13px] leading-snug break-words group-hover:text-[#C1440E] transition product-title flex-1 min-w-0" title="{{ $product->name }}">
                                         {{ $product->name }}
                                     </h4>
                                     @if($product->stock > 0)
-                                        <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border transition-colors {{ $product->stock > 10 ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80' : 'bg-amber-50 text-amber-700 border-amber-200/80' }}" title="Sisa Stok: {{ $product->stock }} {{ $product->unit ?? 'porsi' }}">
+                                        <span class="shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border transition-colors {{ $product->stock > 10 ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80' : 'bg-amber-50 text-amber-700 border-amber-200/80' }}" title="Sisa Stok: {{ $product->stock }} {{ $product->unit ?? 'porsi' }}">
                                             <span class="w-1.5 h-1.5 rounded-full {{ $product->stock > 10 ? 'bg-emerald-500' : 'bg-amber-500' }}"></span>
                                             <span id="card-stock-label-{{ $product->id }}">{{ $product->stock }}</span>
                                         </span>
                                     @else
-                                        <span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border bg-rose-50 text-rose-700 border-rose-200/80" title="Stok Habis">
+                                        <span class="shrink-0 inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md font-mono text-[10px] sm:text-[11px] font-bold border bg-rose-50 text-rose-700 border-rose-200/80" title="Stok Habis">
                                             <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                                             <span id="card-stock-label-{{ $product->id }}">0</span>
                                         </span>
                                     @endif
                                 </div>
                                 @if($hasTempOption)
-                                    <div class="mt-1">
+                                    <div class="pt-0.5">
                                         <span class="inline-flex items-center gap-1 text-[9.5px] font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full">
                                             <span>☕ Hangat / 🧊 Dingin</span>
                                         </span>
@@ -239,7 +239,7 @@
                                 <button 
                                     type="button" 
                                     title="{{ $hasTempOption ? 'Pilih varian suhu' : 'Tambah ke keranjang' }}"
-                                    class="w-7 h-7 rounded-lg {{ $isAvailable ? 'bg-stone-100 text-stone-700 group-hover:bg-[#C1440E] group-hover:text-white' : 'bg-stone-100 text-stone-300' }} flex items-center justify-center transition text-xs font-black shadow-2xs"
+                                    class="w-7 h-7 rounded-lg {{ $isAvailable ? 'bg-stone-100 text-stone-700 group-hover:bg-[#C1440E] group-hover:text-white' : 'bg-stone-100 text-stone-300' }} flex items-center justify-center transition text-xs font-black shadow-2xs cursor-pointer"
                                 >
                                     <span class="material-symbols-outlined text-[16px]">{{ $hasTempOption ? 'tune' : 'add' }}</span>
                                 </button>
@@ -908,7 +908,7 @@
                 html += `
                     <div class="pt-2.5 first:pt-0 flex items-center justify-between gap-2 text-xs">
                         <div class="flex-1 min-w-0 pr-1">
-                            <h5 class="font-bold text-stone-800 truncate text-xs leading-tight">${item.name}</h5>
+                            <h5 class="font-bold text-stone-800 text-xs leading-tight break-words" title="${item.name}">${item.name}</h5>
                             <div class="flex items-center gap-1.5 mt-0.5">
                                 <span class="text-[10px] text-stone-400">${window.formatRupiah(item.price)} / ${item.unit}</span>
                                 ${variantBadge}

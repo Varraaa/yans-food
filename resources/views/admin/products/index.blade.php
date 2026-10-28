@@ -120,7 +120,7 @@
                         
                         {{-- JUDUL PRODUK & BADGE SISA STOK MODERN DI SEBELAH KANAN --}}
                         <div class="flex items-start justify-between gap-1.5 mt-0.5">
-                            <h3 class="product-item-title font-bold text-stone-900 text-xs sm:text-sm leading-snug line-clamp-2 flex-1">
+                            <h3 class="product-item-title font-bold text-stone-900 text-xs sm:text-sm leading-snug break-words flex-1 min-w-0" title="{{ $product->name }}">
                                 {{ $product->name }}
                             </h3>
                             @if($product->stock > 0)
