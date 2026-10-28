@@ -1,5 +1,5 @@
 <!-- Modular Footer (§5.6) -->
-<footer class="w-full bg-inverse-surface text-inverse-on-surface pt-16 pb-24 lg:pb-12 mt-auto">
+<footer class="w-full bg-inverse-surface text-inverse-on-surface pt-16 pb-12 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20">
             
