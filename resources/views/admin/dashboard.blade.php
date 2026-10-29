@@ -16,8 +16,7 @@
         {{-- 4 QUICK SHORTCUTS --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             <a href="{{ route('admin.pos.index') }}" class="group block p-4 rounded-xl bg-gradient-to-br from-amber-500 to-[#C1440E] text-white shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-200">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-2xl">🛒</span>
+                <div class="mb-2">
                     <span class="text-[10px] font-black bg-white/20 px-2 py-0.5 rounded-full">KASIR</span>
                 </div>
                 <h4 class="font-bold text-sm sm:text-base leading-tight">Buka Kasir</h4>
@@ -25,8 +24,7 @@
             </a>
 
             <a href="{{ route('admin.products.index') }}" class="group block p-4 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-800 text-white shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-200">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-2xl">🍗</span>
+                <div class="mb-2">
                     <span class="text-[10px] font-black bg-white/20 px-2 py-0.5 rounded-full">KATALOG</span>
                 </div>
                 <h4 class="font-bold text-sm sm:text-base leading-tight">Kelola Produk</h4>
@@ -34,8 +32,7 @@
             </a>
 
             <a href="{{ route('admin.expenses.create') }}" class="group block p-4 rounded-xl bg-gradient-to-br from-rose-500 to-rose-700 text-white shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-200">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-2xl">💸</span>
+                <div class="mb-2">
                     <span class="text-[10px] font-black bg-white/20 px-2 py-0.5 rounded-full">BIAYA</span>
                 </div>
                 <h4 class="font-bold text-sm sm:text-base leading-tight">Catat Pengeluaran</h4>
@@ -43,8 +40,7 @@
             </a>
 
             <a href="{{ route('admin.reports.index') }}" class="group block p-4 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-200">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-2xl">📊</span>
+                <div class="mb-2">
                     <span class="text-[10px] font-black bg-white/20 px-2 py-0.5 rounded-full">REKAP</span>
                 </div>
                 <h4 class="font-bold text-sm sm:text-base leading-tight">Laporan &amp; Ekspor</h4>
@@ -57,88 +53,58 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 1. PENDAPATAN POS HARI INI -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Omset Kasir POS (Hari Ini)</span>
-                    <h3 class="text-2xl font-black text-stone-900 mt-1">Rp {{ number_format($kpis['revenue_today'], 0, ',', '.') }}</h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
-                    🍔
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Omset Kasir POS (Hari Ini)</span>
+                <h3 class="text-2xl font-black text-stone-900 mt-1">Rp {{ number_format($kpis['revenue_today'], 0, ',', '.') }}</h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">{{ $kpis['transactions_today'] }} transaksi selesai hari ini</p>
         </div>
 
         <!-- 2. TRANSAKSI HARI INI -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Total Transaksi (Hari Ini)</span>
-                    <h3 class="text-2xl font-black text-indigo-600 mt-1">{{ $kpis['transactions_today'] }} Struk</h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
-                    🧾
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Total Transaksi (Hari Ini)</span>
+                <h3 class="text-2xl font-black text-indigo-600 mt-1">{{ $kpis['transactions_today'] }} Struk</h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">Pelayanan kasir luring di kasir</p>
         </div>
 
         <!-- 3. PENGELUARAN HARI INI -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Pengeluaran Dapur (Hari Ini)</span>
-                    <h3 class="text-2xl font-black text-rose-600 mt-1">Rp {{ number_format($kpis['expenses_today'], 0, ',', '.') }}</h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
-                    💸
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Pengeluaran Dapur (Hari Ini)</span>
+                <h3 class="text-2xl font-black text-rose-600 mt-1">Rp {{ number_format($kpis['expenses_today'], 0, ',', '.') }}</h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">Bahan baku &amp; operasional disetujui</p>
         </div>
 
         <!-- 4. LABA BERSIH HARI INI -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Laba Bersih Kasir (Hari Ini)</span>
-                    <h3 class="text-2xl font-black {{ $kpis['simple_net_profit_today'] >= 0 ? 'text-emerald-600' : 'text-rose-600' }} mt-1">
-                        Rp {{ number_format($kpis['simple_net_profit_today'], 0, ',', '.') }}
-                    </h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl {{ $kpis['simple_net_profit_today'] >= 0 ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600' }} flex items-center justify-center text-xl">
-                    ⚖️
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Laba Bersih Kasir (Hari Ini)</span>
+                <h3 class="text-2xl font-black {{ $kpis['simple_net_profit_today'] >= 0 ? 'text-emerald-600' : 'text-rose-600' }} mt-1">
+                    Rp {{ number_format($kpis['simple_net_profit_today'], 0, ',', '.') }}
+                </h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">Omset Kasir POS - Pengeluaran</p>
         </div>
 
         <!-- 5. TOTAL PRODUK -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Total Menu &amp; Produk</span>
-                    <h3 class="text-2xl font-black text-sky-700 mt-1">{{ $kpis['total_products'] }} Item</h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center text-xl">
-                    🍗
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Total Menu &amp; Produk</span>
+                <h3 class="text-2xl font-black text-sky-700 mt-1">{{ $kpis['total_products'] }} Item</h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">Menu aktif di kasir &amp; katalog online</p>
         </div>
 
         <!-- 6. PERINGATAN STOK MENIPIS -->
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
-            <div class="flex items-start justify-between">
-                <div>
-                    <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Peringatan Stok Rendah</span>
-                    <h3 class="text-2xl font-black {{ $kpis['low_stock_count'] > 0 ? 'text-amber-600' : 'text-emerald-600' }} mt-1">
-                        {{ $kpis['low_stock_count'] }} Item
-                    </h3>
-                </div>
-                <div class="w-10 h-10 rounded-xl {{ $kpis['low_stock_count'] > 0 ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600' }} flex items-center justify-center text-xl">
-                    ⚠️
-                </div>
+            <div>
+                <span class="text-[11px] font-bold text-stone-500 uppercase tracking-wider">Peringatan Stok Rendah</span>
+                <h3 class="text-2xl font-black {{ $kpis['low_stock_count'] > 0 ? 'text-amber-600' : 'text-emerald-600' }} mt-1">
+                    {{ $kpis['low_stock_count'] }} Item
+                </h3>
             </div>
             <p class="text-[11px] text-stone-400 mt-2 font-medium">Produk dengan stok &le; 10 porsi</p>
         </div>
@@ -149,10 +115,7 @@
         <!-- LOW STOCK PRODUCTS -->
         <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
             <div class="p-4 border-b border-stone-200 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="text-lg">📦</span>
-                    <h4 class="font-bold text-stone-900 text-sm">Status Stok Produk (Perhatian)</h4>
-                </div>
+                <h4 class="font-bold text-stone-900 text-sm">Status Stok Produk (Perhatian)</h4>
                 <a href="{{ route('admin.products.index') }}" class="text-xs font-bold text-[#C1440E] hover:underline">
                     Lihat Semua Produk →
                 </a>
@@ -204,10 +167,7 @@
         <!-- LATEST POS TRANSACTIONS -->
         <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
             <div class="p-4 border-b border-stone-200 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="text-lg">🛒</span>
-                    <h4 class="font-bold text-stone-900 text-sm">Transaksi Kasir Terakhir</h4>
-                </div>
+                <h4 class="font-bold text-stone-900 text-sm">Transaksi Kasir Terakhir</h4>
                 <a href="{{ route('admin.transactions.index') }}" class="text-xs font-bold text-[#C1440E] hover:underline">
                     Lihat Semua →
                 </a>
