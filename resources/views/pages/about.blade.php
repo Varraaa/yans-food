@@ -5,7 +5,7 @@
         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- 1. Header / Intro Narrative Sub-Hero -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-14 lg:pt-16 lg:pb-16 w-full relative z-10" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-14 lg:pt-16 lg:pb-16 w-full relative z-10" data-reveal="fade" data-reveal-speed="slow">
             <div class="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Kisah & Nilai Dapur</span>
                 <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface tracking-tight font-serif leading-tight">
@@ -23,18 +23,18 @@
         </section>
 
         <!-- 2. Asymmetrical Brand Story Section -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-12 lg:py-16 w-full border-t border-surface-variant/30" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-12 lg:py-16 w-full border-t border-surface-variant/30">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-16 items-center">
                 <!-- Visual Story Column (Left) -->
-                <div class="md:col-span-6 relative">
-                    <div class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/5] max-h-[350px] sm:max-h-[420px] md:max-h-[480px] w-full">
+                <div class="md:col-span-6 relative" data-reveal="left" data-reveal-speed="slow">
+                    <div class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/5] max-h-[350px] sm:max-h-[420px] md:max-h-[480px] w-full img-zoom-container">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRT8g-wzoYqZeUDrksy8MnGbkK54k0QHLwrOQjY9qL7V4Hv8d4qmf1uK3-VgIntBqHioQJRnQkfdGj_qjH9DSll49RWYcUjdTXLsmbLWQtjZrBM4n2M_8YrdNLt7WRiTx-NPA3XFsIZrO03tpGPXefj9O-ho2dweK4X7Uto5vboGOmU_AKp_FnvP8cywJc8JvrIE5MwfDXtglImY-P1_2gpLyDNhQPq-X47HBJXyGn7CweR2D0y6F" 
                              alt="Proses Masak Dapur Yan's Food" 
-                             class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                             class="w-full h-full object-cover img-zoom hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-inverse-surface/10 to-transparent"></div>
                         
                         <!-- Overlay Pill -->
-                        <div class="absolute bottom-6 left-6 right-6 p-4 sm:p-5 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-md border border-surface-variant/40">
+                        <div class="absolute bottom-6 left-6 right-6 p-4 sm:p-5 rounded-2xl bg-surface-warm/95 backdrop-blur-md shadow-md border border-surface-variant/40" data-reveal="up" data-reveal-delay="200">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary-dark shrink-0">
                                     <span class="material-symbols-outlined text-[22px]">skillet</span>
@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Decorative Floating Accent Badge (Visible on Desktop lg) -->
-                    <div class="hidden lg:flex absolute bottom-4 sm:-bottom-4 right-4 sm:-right-2 lg:-right-6 bg-surface-warm p-3 sm:p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40">
+                    <div class="hidden lg:flex absolute bottom-4 sm:-bottom-4 right-4 sm:-right-2 lg:-right-6 bg-surface-warm p-3 sm:p-4 rounded-2xl shadow-xl items-center gap-3 max-w-xs z-20 border border-surface-variant/40 animate-float-slow" data-reveal="scale" data-reveal-delay="300">
                         <span class="material-symbols-outlined text-tertiary text-2xl">verified</span>
                         <div>
                             <p class="font-label-md text-on-surface text-sm font-semibold">Tanpa Pengawet Sintetis</p>
@@ -58,7 +58,7 @@
                 </div>
 
                 <!-- Narrative Column (Right) -->
-                <div class="md:col-span-6 space-y-6">
+                <div class="md:col-span-6 space-y-6" data-reveal="right" data-reveal-speed="slow">
                     <div class="space-y-3">
                         <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Filosofi Kami</span>
                         <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif leading-snug">
@@ -76,7 +76,7 @@
                     </div>
 
                     <!-- Highlight Quote Box -->
-                    <div class="p-6 rounded-2xl bg-sand-bg-alt shadow-xs relative overflow-hidden border border-surface-variant/40">
+                    <div class="p-6 rounded-2xl bg-sand-bg-alt shadow-xs relative overflow-hidden border border-surface-variant/40" data-reveal="up" data-reveal-delay="150">
                         <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
                         <p class="font-headline-sm italic text-on-surface leading-relaxed pl-2 font-serif text-sm sm:text-base">
                             &ldquo;Kami percaya masakan terbaik tidak lahir dari kompor industri, melainkan dari tangan yang telaten dan bumbu rempah yang tak pernah dipangkas demi keuntungan semata.&rdquo;
@@ -87,16 +87,16 @@
                     </div>
 
                     <!-- Stat Chips / Highlights -->
-                    <div class="grid grid-cols-3 gap-3 pt-2">
-                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40">
+                    <div class="grid grid-cols-3 gap-3 pt-2" data-reveal-group data-stagger="120">
+                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40" data-reveal="up">
                             <span class="font-numeric-currency text-primary text-xl sm:text-2xl font-bold font-serif">100%</span>
                             <span class="font-label-sm text-secondary text-[11px] sm:text-xs mt-1">Bebas Pengawet</span>
                         </div>
-                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40">
+                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40" data-reveal="up">
                             <span class="font-numeric-currency text-primary text-xl sm:text-2xl font-bold font-serif">15+</span>
                             <span class="font-label-sm text-secondary text-[11px] sm:text-xs mt-1">Varian Resep</span>
                         </div>
-                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40">
+                        <div class="p-4 rounded-2xl bg-surface-warm shadow-xs flex flex-col items-center text-center justify-center border border-surface-variant/40" data-reveal="up">
                             <span class="font-numeric-currency text-primary text-xl sm:text-2xl font-bold font-serif">500+</span>
                             <span class="font-label-sm text-secondary text-[11px] sm:text-xs mt-1">Acara Terlayani</span>
                         </div>
@@ -106,8 +106,8 @@
         </section>
 
         <!-- 3. PERJALANAN & MILESTONE TIMELINE (§5.4) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-20 w-full" data-reveal>
-            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-20 w-full">
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3" data-reveal="up">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Jejak Langkah</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
                     Perjalanan Menghangatkan Rasa
@@ -117,7 +117,7 @@
                 </p>
             </div>
 
-            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative" data-reveal-group>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative" data-reveal-group data-stagger="140">
                 <!-- Item 1: 2021 -->
                 <div class="group hover-card-premium p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col gap-3 relative cursor-default">
                     <span class="font-headline-sm text-primary font-bold text-2xl font-serif group-hover:scale-110 transition-transform duration-300 origin-left inline-block">2021</span>
@@ -157,8 +157,8 @@
         </section>
 
         <!-- 4. Section Visi, Misi & Nilai-Nilai Inti (Card Grid) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-24 w-full bg-surface-container-low/40 rounded-3xl my-8" data-reveal>
-            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 lg:py-24 w-full bg-surface-container-low/40 rounded-3xl my-8">
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3" data-reveal="fade" data-reveal-speed="slow">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">Fondasi Kualitas</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl lg:text-4xl text-on-surface font-serif">
                     Prinsip yang Selalu Kami Rawat
@@ -168,9 +168,9 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group data-stagger="160">
                 <!-- Card 1 -->
-                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="space-y-4">
                         <div class="w-14 h-14 rounded-2xl bg-success-surface flex items-center justify-center text-success hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">sanitizer</span>
@@ -189,7 +189,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="space-y-4">
                         <div class="w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center text-primary-container hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">eco</span>
@@ -208,7 +208,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col justify-between border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="space-y-4">
                         <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant hover-icon-bounce shrink-0 shadow-2xs">
                             <span class="material-symbols-outlined text-[30px] icon-fill">favorite</span>
@@ -229,7 +229,7 @@
         </section>
 
         <!-- 5. CTA to Menu (§5.4) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 pb-20 text-center" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 pb-20 text-center" data-reveal="scale" data-reveal-speed="slow">
             <div class="p-8 sm:p-12 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs flex flex-col items-center gap-6">
                 <h3 class="font-headline-md text-2xl sm:text-3xl text-on-surface font-serif">
                     Ingin Mencoba Cita Rasa Kami?
