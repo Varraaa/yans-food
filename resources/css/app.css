@@ -582,10 +582,10 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
         pointer-events: auto;
     }
 
-    /* 7. Image Blur-Up & Ratios (§3.8) */
+    /* 7. Image Blur-Up, Smooth Cinematic Scale & Ratios (§3.8) */
     .img-blur-up {
         background-color: #F1E6D6;
-        transition: filter 400ms var(--ease-out), opacity 400ms var(--ease-out);
+        transition: filter 850ms var(--ease-cinematic), opacity 850ms var(--ease-cinematic);
     }
 
     .aspect-hero-desktop {
@@ -607,11 +607,31 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
     .img-zoom-container {
         overflow: hidden;
         border-radius: inherit;
+        position: relative;
     }
 
     .img-zoom {
-        transition: transform var(--dur-slow) var(--ease-out);
+        transition: transform 1100ms var(--ease-cinematic), filter 850ms var(--ease-cinematic);
         transform-origin: center;
+        will-change: transform;
+    }
+
+    /* Ambient Floating Micro-interactions */
+    .animate-float-slow {
+        animation: float-gentle 4.5s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+        animation: float-gentle 5s ease-in-out 1.5s infinite;
+    }
+
+    @keyframes float-gentle {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
     }
 
     /* 8. Scroll Progress Bar */
