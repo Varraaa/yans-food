@@ -6,7 +6,7 @@
         <div class="absolute -left-20 bottom-0 w-80 h-80 rounded-full bg-tertiary-fixed-dim/20 blur-2xl pointer-events-none"></div>
 
         <!-- 1. Header -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 pb-10 flex flex-col items-center text-center" data-reveal="fade" data-reveal-speed="slow">
             <h1 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-surface max-w-3xl tracking-tight mb-4 font-serif">
                 Pintu Dapur Kami Selalu Terbuka untuk Anda
             </h1>
@@ -16,16 +16,15 @@
         </section>
 
         <!-- 2. Main Content Grid -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 pb-20 w-full" data-reveal>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 pb-20 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 
                 <!-- Left Column: Info Cards & Form (7 Cols) -->
                 <div class="lg:col-span-7 flex flex-col gap-8">
-                    <!-- 4 Info Cards Grid -->
                     <!-- 3 Info Cards Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-reveal-group>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-reveal-group data-stagger="140">
                         <!-- Card 1: Alamat -->
-                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">location_on</span>
@@ -50,7 +49,7 @@
                         </div>
 
                         <!-- Card 2: Jam Operasional -->
-                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">schedule</span>
@@ -75,7 +74,7 @@
                         </div>
 
                         <!-- Card 3: WhatsApp Resmi -->
-                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                        <div class="group hover-card-premium bg-surface-warm p-5 sm:p-6 rounded-3xl shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                             <div>
                                 <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-4 hover-icon-bounce shrink-0 shadow-2xs">
                                     <span class="material-symbols-outlined text-[22px]">chat</span>
@@ -98,7 +97,7 @@
                     </div>
 
                     <!-- Form Komunikasi & Negosiasi Pesanan Khusus / Katering via WhatsApp -->
-                    <div class="bg-surface-warm p-6 sm:p-8 lg:p-10 rounded-3xl shadow-xs border border-surface-variant/40">
+                    <div class="bg-surface-warm p-6 sm:p-8 lg:p-10 rounded-3xl shadow-xs border border-surface-variant/40" data-reveal="up" data-reveal-speed="slow">
                         <div class="flex items-start justify-between gap-4 mb-4">
                             <div>
                                 <span class="font-label-sm text-primary uppercase tracking-wider font-semibold text-xs">Komunikasi &amp; Negosiasi</span>
@@ -185,7 +184,7 @@
                 </div>
 
                 <!-- Right Column: Location Map Facade & Pick-up Guide (§5.5) -->
-                <div class="lg:col-span-5 flex flex-col gap-6">
+                <div class="lg:col-span-5 flex flex-col gap-6" data-reveal="right" data-reveal-speed="slow">
                     <div class="bg-surface-warm rounded-3xl overflow-hidden shadow-xs border border-surface-variant/40 flex flex-col">
                         <!-- Real Interactive Google Maps centered on Yan's Food Soreang Bandung -->
                         <div class="relative w-full h-72 sm:h-80 bg-surface-container overflow-hidden group">
