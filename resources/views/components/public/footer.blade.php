@@ -1,10 +1,10 @@
 <!-- Modular Footer (§5.6) -->
 <footer class="w-full bg-inverse-surface text-inverse-on-surface pt-16 pb-12 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 pb-14 border-b border-surface-variant/20" data-reveal-group data-stagger="120">
             
             <!-- Col 1: Brand & Motto -->
-            <div class="space-y-4">
+            <div class="space-y-4" data-reveal="up" data-reveal-speed="slow">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-[#E2631C] p-[2px] shadow-sm shrink-0">
                         <div class="w-full h-full rounded-[14px] bg-[#E2631C] flex items-center justify-center overflow-hidden">
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Col 2: Navigasi Cepat -->
-            <div class="space-y-4">
+            <div class="space-y-4" data-reveal="up" data-reveal-speed="slow">
                 <h4 class="font-label-md uppercase tracking-wider text-tertiary-fixed font-semibold text-xs">Navigasi</h4>
                 <ul class="space-y-2.5 font-body-sm">
                     <li><a href="{{ url('/') }}" class="text-surface-variant hover:text-on-primary transition-colors">Home (Beranda)</a></li>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Col 3: Kontak & Operasional -->
-            <div class="space-y-4">
+            <div class="space-y-4" data-reveal="up" data-reveal-speed="slow">
                 <h4 class="font-label-md uppercase tracking-wider text-tertiary-fixed font-semibold text-xs">Kontak &amp; Operasional</h4>
                 <ul class="space-y-3 font-body-sm text-surface-variant">
                     <li class="flex items-start gap-2.5">
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Row: Platform Delivery & Copyright (§5.6, M22) -->
-        <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-6" data-reveal="fade" data-reveal-speed="slow">
             <div class="flex items-center gap-2.5 flex-wrap">
                 <span class="font-label-sm text-surface-variant mr-1">Tersedia juga di:</span>
                 <a href="{{ url('/pesan') }}#online" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-highest/20 text-surface-variant hover:bg-[#EE4D2D] hover:text-white font-label-sm transition-all duration-200 group">

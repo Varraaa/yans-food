@@ -706,7 +706,7 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
         padding: 1rem;
         opacity: 0;
         pointer-events: none;
-        transition: opacity var(--dur-base) var(--ease-out);
+        transition: opacity var(--dur-medium) var(--ease-cinematic);
     }
 
     .product-modal-backdrop.is-open {
@@ -725,8 +725,8 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
         overflow-y: auto;
         box-shadow: 0 24px 48px -12px rgba(38, 32, 27, 0.25);
         border: 1px solid rgba(38, 32, 27, 0.08);
-        transform: scale(0.96);
-        transition: transform var(--dur-base) var(--ease-out);
+        transform: scale(0.95);
+        transition: transform var(--dur-slow) var(--ease-cinematic);
     }
 
     .product-modal-backdrop.is-open .product-modal-dialog {
@@ -748,7 +748,7 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
             border-top-left-radius: 1.75rem;
             border-top-right-radius: 1.75rem;
             transform: translateY(100%);
-            transition: transform var(--dur-base) var(--ease-out);
+            transition: transform var(--dur-slow) var(--ease-cinematic);
         }
 
         .product-modal-backdrop.is-open .product-modal-dialog {
@@ -864,7 +864,7 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
     }
 
     .accordion-icon {
-        transition: transform var(--dur-base) var(--ease-out);
+        transition: transform var(--dur-slow) var(--ease-cinematic);
         color: #C1440E;
         flex-shrink: 0;
     }
@@ -876,7 +876,7 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
     .accordion-collapse {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows var(--dur-base) var(--ease-out);
+        transition: grid-template-rows var(--dur-slow) var(--ease-cinematic);
     }
 
     .accordion-item.is-open .accordion-collapse {
@@ -892,6 +892,15 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
         color: #655D57;
         font-size: 14px;
         line-height: 1.6;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity var(--dur-slow) var(--ease-cinematic),
+                    transform var(--dur-slow) var(--ease-cinematic);
+    }
+
+    .accordion-item.is-open .accordion-body {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     /* 13. Skeleton Shimmer Loading (§7) */
