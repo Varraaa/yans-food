@@ -342,6 +342,16 @@ Saat proyek dipublikasikan ke layanan hosting (cPanel / VPS / Cloud Server):
 
 ---
 
+## ✨ 9. Sistem Animasi Sinematik & Pengalaman Pengguna (Motion & Scroll Experience)
+
+Website publik Yan's Food mengadopsi prinsip desain gerak kontemporer (*cinematic scroll motion*):
+1. **Unpaced & Graceful Transitions:** Animasi kemunculan elemen saat di-scroll dirancang mengalir dengan durasi yang terukur (`850ms` – `1200ms`) dan kurva pelambatan natural (`cubic-bezier(0.16, 1, 0.3, 1)` dan `cubic-bezier(0.25, 1, 0.35, 1)`), memungkinkan pengunjung merasakan estetika dan kehangatan visual tanpa merasa terburu-buru.
+2. **IntersectionObserver Viewport Offset:** Pemicu animasi diatur dengan margin `-30px` dan ambang batas visibilitas `0.12`, memastikan animasi terjadi secara alami di dalam bidang pandang saat digulir.
+3. **Staggered Cascade Delays:** Card menu, langkah takeaway, opsi pemesanan, dan fitur unggulan muncul bertahap (*cascading stagger* 110ms – 150ms) untuk menciptakan hirarki visual yang memukau.
+4. **Micro-Interactions & Optical Smoothing:** Dilengkapi efek optical blur-up halus, elevasi bayangan dinamis, dan dialog modal/bottom-sheet dengan ekspansi kurva premium.
+
+---
+
 <p align="center">
   <strong>Yan's Food Digital System</strong> — Dapur Kuliner Rumahan & Sistem POS Terpadu.<br>
   © 2026 Yan's Food. Seluruh Hak Cipta Dilindungi Undang-Undang.
