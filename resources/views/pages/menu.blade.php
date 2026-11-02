@@ -43,7 +43,7 @@
 
     <!-- Product Catalog Grid (§5.3: Mobile Grid 2, Tablet/Desktop Grid 3) -->
     <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 pb-16">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3.5 sm:gap-5 lg:gap-8" id="productGrid" data-reveal-group>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3.5 sm:gap-5 lg:gap-8" id="productGrid" data-reveal-group data-stagger="120">
             @if(isset($products) && $products->isNotEmpty())
                 @foreach($products as $product)
                     @php
@@ -180,7 +180,7 @@
     </section>
 
     <!-- Banner Pesan Online & Takeaway Delivery -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20" data-reveal>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pb-20" data-reveal="scale" data-reveal-speed="slow">
         <div class="relative overflow-hidden bg-sand-bg-alt rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 border border-surface-variant/40">
             <div class="space-y-3 w-full lg:max-w-xl text-left">
                 <div class="inline-flex items-center gap-2 text-primary font-label-sm font-bold uppercase tracking-wider text-xs">

@@ -21,6 +21,7 @@
 <article class="card-product group {{ !$isAvailable ? 'card-product-unavailable' : '' }}" 
          tabindex="0"
          role="button"
+         data-reveal="up"
          aria-haspopup="dialog"
          aria-label="Buka detail {{ $title }}"
          data-category="{{ $categorySlug }}"
