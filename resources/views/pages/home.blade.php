@@ -223,17 +223,17 @@
     </section>
 
     <!-- 4. KENAPA PILIH KAMI (§5.1 point 4) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-container-low border-y border-surface-variant/30" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-container-low border-y border-surface-variant/30">
         <div class="max-w-7xl mx-auto flex flex-col gap-14">
-            <div class="text-center max-w-2xl mx-auto space-y-3">
+            <div class="text-center max-w-2xl mx-auto space-y-3" data-reveal="fade" data-reveal-speed="slow">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Keunggulan Yan's Food</span>
                 <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface tracking-tight font-serif">Kualitas Jujur dari Dapur Kami</h2>
                 <p class="font-body-lg text-secondary text-base sm:text-lg">Kami mengutamakan kesegaran dan higienitas untuk menghadirkan rasa yang selalu bisa dipercaya.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8" data-reveal-group>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8" data-reveal-group data-stagger="150">
                 <!-- Feature 1: Bahan Baku Segar Setiap Hari -->
-                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary hover-icon-bounce shrink-0 shadow-2xs group-hover:shadow-md transition-all duration-300">
                         <span class="material-symbols-outlined text-[30px]">eco</span>
                     </div>
@@ -250,7 +250,7 @@
                 </div>
 
                 <!-- Feature 2: Higienis & Standar Dapur Rapi -->
-                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary hover-icon-bounce shrink-0 shadow-2xs group-hover:shadow-md transition-all duration-300">
                         <span class="material-symbols-outlined text-[30px]">sanitizer</span>
                     </div>
@@ -267,7 +267,7 @@
                 </div>
 
                 <!-- Feature 3: Rasa Otentik & Jujur -->
-                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default">
+                <div class="group hover-card-premium p-6 lg:p-8 rounded-3xl bg-surface-warm shadow-xs flex flex-col gap-4 border border-surface-variant/40 cursor-default" data-reveal="up">
                     <div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary hover-icon-bounce shrink-0 shadow-2xs group-hover:shadow-md transition-all duration-300">
                         <span class="material-symbols-outlined text-[30px]">soup_kitchen</span>
                     </div>
@@ -287,8 +287,8 @@
     </section>
 
     <!-- 5. TEASER DELIVERY PLATFORMS & DATANG LANGSUNG (§5.1 point 5) -->
-    <section class="w-full py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-cream-bg" data-reveal>
-        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-6 sm:p-8 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 border border-surface-variant/40">
+    <section class="w-full py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-cream-bg">
+        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container p-6 sm:p-8 lg:p-14 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 border border-surface-variant/40" data-reveal="scale" data-reveal-speed="slow">
             <div class="space-y-4 max-w-xl text-center lg:text-left">
                 <span class="font-label-md uppercase tracking-wider text-primary font-bold text-xs sm:text-sm">2 Pilihan Pesan Mudah &amp; Cepat</span>
                 <h2 class="font-headline-md text-2xl sm:text-3xl text-on-surface tracking-tight font-serif">Tersedia di Platform Favoritmu &amp; Datang Langsung</h2>
@@ -320,26 +320,26 @@
     </section>
 
     <!-- 6. TESTIMONI & SUARA PELANGGAN (§5.1 point 6) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-warm border-t border-surface-variant/30" data-reveal>
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-surface-warm border-t border-surface-variant/30">
         <div class="max-w-7xl mx-auto flex flex-col gap-12">
-            <div class="text-center max-w-2xl mx-auto space-y-3">
+            <div class="text-center max-w-2xl mx-auto space-y-3" data-reveal="up">
                 <span class="font-label-md uppercase tracking-widest text-primary font-bold text-xs sm:text-sm">Kata Pelanggan Kami</span>
                 <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface tracking-tight font-serif">Kisah Nyata dari Meja Mereka</h2>
                 <p class="font-body-lg text-secondary text-base">Testimoni tulus dari para pelanggan yang telah mempercayakan santapan harian dan acara spesial mereka kepada Yan's Food.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" data-reveal-group>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" data-reveal-group data-stagger="160">
                 <!-- Quote 1: Risol Mayo (Data Master) -->
-                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                     <div class="space-y-4">
-                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
+                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-500 origin-left">
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
-                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-500">
                             &ldquo;Risol mayonya bener-bener juara! Kulit luarnya garing renyah keemasan, dan isian mayonesnya lumer gurih melimpah. Tiap kali kumpul keluarga atau arisan selalu pesan ini dan langsung ludes seketika.&rdquo;
                         </p>
                     </div>
@@ -355,16 +355,16 @@
                 </div>
 
                 <!-- Quote 2: Nasi Goreng (Data Master) -->
-                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                     <div class="space-y-4">
-                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
+                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-500 origin-left">
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
-                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-500">
                             &ldquo;Nasi goreng di Yan's Food punya racikan bumbu ulek rempah rumahan yang otentik dan meresap banget. Gurihnya pas, porsinya ngenyangin, telurnya mantap, dan kerupuknya renyah. Menu makan siang andalan kantor!&rdquo;
                         </p>
                     </div>
@@ -380,16 +380,16 @@
                 </div>
 
                 <!-- Quote 3: Snack Box & Katering Acara -->
-                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default">
+                <div class="group hover-card-premium p-6 sm:p-8 rounded-3xl bg-cream-bg shadow-xs border border-surface-variant/40 flex flex-col justify-between cursor-default" data-reveal="up">
                     <div class="space-y-4">
-                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-300 origin-left">
+                        <div class="flex items-center text-[#E5A000] text-sm group-hover:scale-105 transition-transform duration-500 origin-left">
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                             <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
                         </div>
-                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-300">
+                        <p class="font-body-md text-on-surface leading-relaxed italic font-serif text-sm sm:text-base group-hover:text-primary transition-colors duration-500">
                             &ldquo;Pesan paket snack box dan katering untuk acara rapat kantor dan syukuran keluarga besar. Makanannya tiba tepat waktu, kemasannya higienis dan rapi, serta variasinya komplit. Semua tamu dan rekan kerja sangat puas!&rdquo;
                         </p>
                     </div>
@@ -408,9 +408,9 @@
     </section>
 
     <!-- 7. CTA PENUTUP (§5.1 point 7) -->
-    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary" data-reveal>
-        <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
-            <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-inner">
+    <section class="w-full py-16 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-primary-container via-primary to-primary-dark text-on-primary">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8" data-reveal="scale" data-reveal-speed="slow">
+            <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-inner animate-float-slow">
                 <span class="material-symbols-outlined text-tertiary-fixed text-[36px]">lunch_dining</span>
             </div>
             <h2 class="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-on-primary tracking-tight font-serif max-w-2xl">
@@ -420,12 +420,12 @@
                 Pesan untuk santapan keluarga, camilan santai, hingga makan siang hangat favorit Anda.
             </p>
             <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <a href="{{ url('/pesan') }}#online" class="btn-hover-sophisticated inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-surface-warm text-primary font-label-md hover:bg-surface-bright transition-all duration-300 font-bold group shadow-lg">
-                    <span class="material-symbols-outlined text-[22px] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">moped</span>
+                <a href="{{ url('/pesan') }}#online" class="btn-hover-sophisticated inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-surface-warm text-primary font-label-md hover:bg-surface-bright transition-all duration-500 font-bold group shadow-lg">
+                    <span class="material-symbols-outlined text-[22px] transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">moped</span>
                     <span>Pesan via Aplikasi</span>
                 </a>
-                <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" target="_blank" rel="noopener noreferrer" class="btn-hover-glass inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-label-md backdrop-blur-md transition-all duration-300 border border-white/25 font-bold group">
-                    <span class="material-symbols-outlined text-[22px] text-tertiary-fixed transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5">near_me</span>
+                <a href="https://maps.app.goo.gl/KnCpj3ViPCHGNmH66" target="_blank" rel="noopener noreferrer" class="btn-hover-glass inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-label-md backdrop-blur-md transition-all duration-500 border border-white/25 font-bold group">
+                    <span class="material-symbols-outlined text-[22px] text-tertiary-fixed transition-transform duration-500 group-hover:scale-110 group-hover:translate-x-0.5">near_me</span>
                     <span>Datang Langsung ke Tempat</span>
                 </a>
             </div>
