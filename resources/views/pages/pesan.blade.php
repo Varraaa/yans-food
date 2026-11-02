@@ -3,7 +3,7 @@
 
     <div>
         <!-- 1. Editorial Hero Header with Prominent Intent Switcher -->
-        <section class="relative w-full py-12 lg:py-16 bg-cream-bg overflow-hidden border-b border-surface-variant/40" data-reveal>
+        <section class="relative w-full py-12 lg:py-16 bg-cream-bg overflow-hidden border-b border-surface-variant/40" data-reveal="fade" data-reveal-speed="slow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
                 <div class="max-w-3xl space-y-3">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container text-primary font-label-sm uppercase tracking-wider text-xs font-semibold">
@@ -19,10 +19,11 @@
                 </div>
 
                 <!-- Intent Switcher (2 Prominent Cards) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8 max-w-4xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8 max-w-4xl" data-reveal-group data-stagger="140">
                     <!-- Intent Card 1: Pesan Lewat Aplikasi Delivery -->
                     <a href="#online" 
                        id="intent-card-online" 
+                       data-reveal="up"
                        class="intent-card hover-card-premium flex items-start gap-4 group p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs transition-all duration-300 cursor-pointer">
                         <div class="w-14 h-14 rounded-2xl bg-orange-100 text-primary flex items-center justify-center shrink-0 hover-icon-bounce shadow-2xs group-hover:shadow-md transition-all duration-300">
                             <span class="material-symbols-outlined text-[28px]">moped</span>
@@ -47,6 +48,7 @@
                     <!-- Intent Card 2: Datang Langsung ke Tempat -->
                     <a href="#langsung" 
                        id="intent-card-takeaway" 
+                       data-reveal="up"
                        class="intent-card hover-card-premium flex items-start gap-4 group p-6 rounded-3xl bg-surface-warm border border-surface-variant/40 shadow-xs transition-all duration-300 cursor-pointer">
                         <div class="w-14 h-14 rounded-2xl bg-amber-100 text-primary flex items-center justify-center shrink-0 hover-icon-bounce shadow-2xs group-hover:shadow-md transition-all duration-300">
                             <span class="material-symbols-outlined text-[28px]">storefront</span>
@@ -72,10 +74,10 @@
         </section>
 
         <!-- 2. SECTION A: Pesan Online Platform (#online) -->
-        <section id="online" class="w-full py-16 lg:py-20 bg-surface-warm/40 scroll-mt-24" data-reveal>
+        <section id="online" class="w-full py-16 lg:py-20 bg-surface-warm/40 scroll-mt-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
                 <!-- Section Intro & Highlights -->
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12" data-reveal="up">
                     <div class="max-w-2xl space-y-3">
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-[22px]">delivery_dining</span>
@@ -102,7 +104,7 @@
                 </div>
 
                 <!-- Keterangan Rekomendasi Buka di Aplikasi HP (Mobile) -->
-                <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-center gap-3 text-amber-950 shadow-2xs">
+                <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 flex items-center gap-3 text-amber-950 shadow-2xs" data-reveal="fade" data-reveal-delay="100">
                     <div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center shrink-0 text-amber-800 shadow-2xs">
                         <span class="material-symbols-outlined text-[20px]">smartphone</span>
                     </div>
@@ -112,11 +114,12 @@
                 </div>
 
                 <!-- 3 Platform Delivery Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" data-reveal-group data-stagger="150">
                     <!-- ShopeeFood Card -->
                     <a href="{{ \App\Models\Setting::get('shopeefood_url', 'https://shopee.co.id/universal-link/now-food/shop/20759614?deep_and_deferred=1&shareChannel=copy_link') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
+                       data-reveal="up"
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
@@ -151,6 +154,7 @@
                     <a href="{{ \App\Models\Setting::get('gofood_url', 'https://gofood.link/a/Fj6y8Jy') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
+                       data-reveal="up"
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
@@ -185,6 +189,7 @@
                     <a href="{{ \App\Models\Setting::get('grabfood_url', 'https://app.grab.com/s/07XMlcm7') }}" 
                        target="_blank" 
                        rel="noopener noreferrer" 
+                       data-reveal="up"
                        class="group rounded-3xl bg-surface-warm p-5 sm:p-6 lg:p-8 shadow-xs hover:shadow-lg border border-surface-variant/40 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
@@ -219,14 +224,14 @@
         </section>
 
         <!-- 3. SECTION B: Datang Langsung ke Tempat (#langsung / #takeaway) -->
-        <section id="langsung" class="w-full py-16 lg:py-24 bg-surface-container-low/50 scroll-mt-24" data-reveal>
+        <section id="langsung" class="w-full py-16 lg:py-24 bg-surface-container-low/50 scroll-mt-24">
             <!-- Backwards-compatible anchor for legacy links -->
             <span id="takeaway" class="sr-only"></span>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
                     <!-- Left: Information & Instructions -->
-                    <div class="lg:col-span-7 space-y-6">
+                    <div class="lg:col-span-7 space-y-6" data-reveal="left" data-reveal-speed="slow">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sand-bg-alt text-on-surface font-label-sm uppercase tracking-wider text-xs font-semibold">
                             <span class="material-symbols-outlined text-primary text-[16px]">storefront</span>
                             <span>Datang Langsung ke Tempat (Pesan &amp; Bawa Pulang)</span>
@@ -238,10 +243,9 @@
                             Konsep layanan simpel mirip <em>drive-thru</em>: Anda datang langsung ke lokasi dapur kami, pesan menu favorit di tempat, tunggu beberapa menit pesanan disiapkan dan digoreng hangat dadakan, terima pesanan terkemas rapi, lalu siap dibawa pulang.
                         </p>
 
-
                         <!-- 4 Step Flow: Datang -> Pesan -> Tunggu -> Bawa Pulang -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
-                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2" data-reveal-group data-stagger="120">
+                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2" data-reveal="up">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     1
                                 </div>
@@ -250,7 +254,7 @@
                                     Kunjungi lokasi dapur kami di Bandung, Kp. Ciloa, RT.04/RW.10, Kec. Soreang. Parkir nyaman tersedia.
                                 </p>
                             </div>
-                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
+                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2" data-reveal="up">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     2
                                 </div>
@@ -259,7 +263,7 @@
                                     Pesan langsung menu kudapan atau makanan di tempat dan bayar via Tunai / QRIS.
                                 </p>
                             </div>
-                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
+                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2" data-reveal="up">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     3
                                 </div>
@@ -268,7 +272,7 @@
                                     Tunggu 10–15 menit selagi pesanan digoreng &amp; dimasak hangat dadakan.
                                 </p>
                             </div>
-                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2">
+                            <div class="p-4 rounded-2xl bg-surface-warm border border-surface-variant/40 shadow-xs space-y-2" data-reveal="up">
                                 <div class="w-8 h-8 rounded-lg bg-orange-100 text-primary flex items-center justify-center font-bold text-sm font-serif">
                                     4
                                 </div>
@@ -294,7 +298,7 @@
                     </div>
 
                     <!-- Right: Kitchen Location Card -->
-                    <div class="lg:col-span-5 bg-surface-warm p-6 sm:p-8 rounded-3xl border border-surface-variant/40 shadow-sm space-y-5">
+                    <div class="lg:col-span-5 bg-surface-warm p-6 sm:p-8 rounded-3xl border border-surface-variant/40 shadow-sm space-y-5" data-reveal="right" data-reveal-speed="slow">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-primary shrink-0">
                                 <span class="material-symbols-outlined text-[26px]">location_on</span>
@@ -330,67 +334,69 @@
                 </div>
 
                 <!-- FAQ Accordions on Ordering -->
-                <div class="max-w-4xl mx-auto mt-20 space-y-4" data-accordion-group="single">
-                    <div class="text-center mb-8 space-y-2">
+                <div class="max-w-4xl mx-auto mt-20 space-y-4">
+                    <div class="text-center mb-8 space-y-2" data-reveal="up" data-reveal-speed="slow">
                         <span class="font-label-sm text-primary uppercase tracking-wider text-xs font-bold">Pusat Bantuan</span>
                         <h3 class="font-headline-md text-2xl text-on-surface font-serif font-bold">Pertanyaan Seputar Pemesanan</h3>
                     </div>
 
-                    <!-- Accordion 1: Dine In / Makan di Tempat -->
-                    <div class="accordion-item is-open">
-                        <button type="button" class="accordion-header" aria-expanded="true">
-                            <span class="font-serif text-base sm:text-lg">Apakah bisa makan di tempat (dine-in)?</span>
-                            <span class="material-symbols-outlined accordion-icon">expand_more</span>
-                        </button>
-                        <div class="accordion-collapse">
-                            <div class="accordion-content">
-                                <div class="accordion-body">
-                                    <strong>Tidak bisa.</strong> Yan's Food tidak menyediakan meja maupun kursi makan di tempat. Layanan datang langsung kami berkonsep seperti <em>drive-thru</em>: pelanggan datang, memesan langsung di kasir dapur, menunggu pesanan disiapkan hangat, menerima pesanan yang telah dikemas rapi, lalu membawanya pulang untuk dinikmati bersama keluarga atau rekan kerja.
+                    <div class="space-y-4" data-accordion-group="single" data-reveal-group data-stagger="120">
+                        <!-- Accordion 1: Dine In / Makan di Tempat -->
+                        <div class="accordion-item is-open" data-reveal="up">
+                            <button type="button" class="accordion-header" aria-expanded="true">
+                                <span class="font-serif text-base sm:text-lg">Apakah bisa makan di tempat (dine-in)?</span>
+                                <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                            </button>
+                            <div class="accordion-collapse">
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        <strong>Tidak bisa.</strong> Yan's Food tidak menyediakan meja maupun kursi makan di tempat. Layanan datang langsung kami berkonsep seperti <em>drive-thru</em>: pelanggan datang, memesan langsung di kasir dapur, menunggu pesanan disiapkan hangat, menerima pesanan yang telah dikemas rapi, lalu membawanya pulang untuk dinikmati bersama keluarga atau rekan kerja.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Accordion 2: Waktu Pembuatan -->
-                    <div class="accordion-item">
-                        <button type="button" class="accordion-header" aria-expanded="false">
-                            <span class="font-serif text-base sm:text-lg">Berapa lama waktu penyiapan pesanan saat datang langsung?</span>
-                            <span class="material-symbols-outlined accordion-icon">expand_more</span>
-                        </button>
-                        <div class="accordion-collapse">
-                            <div class="accordion-content">
-                                <div class="accordion-body">
-                                    Semua kudapan dan sajian kami digoreng/dimasak dadakan per pesanan agar tetap renyah optimal. Rata-rata waktu penyiapan berkisar antara <strong>10–15 menit</strong> tergantung jumlah item pesanan Anda.
+                        <!-- Accordion 2: Waktu Pembuatan -->
+                        <div class="accordion-item" data-reveal="up">
+                            <button type="button" class="accordion-header" aria-expanded="false">
+                                <span class="font-serif text-base sm:text-lg">Berapa lama waktu penyiapan pesanan saat datang langsung?</span>
+                                <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                            </button>
+                            <div class="accordion-collapse">
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        Semua kudapan dan sajian kami digoreng/dimasak dadakan per pesanan agar tetap renyah optimal. Rata-rata waktu penyiapan berkisar antara <strong>10–15 menit</strong> tergantung jumlah item pesanan Anda.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Accordion 3: Metode Pembayaran -->
-                    <div class="accordion-item">
-                        <button type="button" class="accordion-header" aria-expanded="false">
-                            <span class="font-serif text-base sm:text-lg">Apa saja metode pembayaran yang diterima?</span>
-                            <span class="material-symbols-outlined accordion-icon">expand_more</span>
-                        </button>
-                        <div class="accordion-collapse">
-                            <div class="accordion-content">
-                                <div class="accordion-body">
-                                    Untuk pemesanan via aplikasi (ShopeeFood, GoFood, GrabFood), Anda dapat menggunakan e-wallet (ShopeePay, GoPay, OVO) atau kartu debit/kredit. Untuk pembelian datang langsung di tempat, kami melayani Tunai (Cash) dan <strong>QRIS Semua Bank / E-Wallet</strong>.
+                        <!-- Accordion 3: Metode Pembayaran -->
+                        <div class="accordion-item" data-reveal="up">
+                            <button type="button" class="accordion-header" aria-expanded="false">
+                                <span class="font-serif text-base sm:text-lg">Apa saja metode pembayaran yang diterima?</span>
+                                <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                            </button>
+                            <div class="accordion-collapse">
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        Untuk pemesanan via aplikasi (ShopeeFood, GoFood, GrabFood), Anda dapat menggunakan e-wallet (ShopeePay, GoPay, OVO) atau kartu debit/kredit. Untuk pembelian datang langsung di tempat, kami melayani Tunai (Cash) dan <strong>QRIS Semua Bank / E-Wallet</strong>.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Accordion 4: Ketersediaan Menu -->
-                    <div class="accordion-item">
-                        <button type="button" class="accordion-header" aria-expanded="false">
-                            <span class="font-serif text-base sm:text-lg">Bagaimana jika menu favorit saya sedang habis?</span>
-                            <span class="material-symbols-outlined accordion-icon">expand_more</span>
-                        </button>
-                        <div class="accordion-collapse">
-                            <div class="accordion-content">
-                                <div class="accordion-body">
-                                    Karena kami membuat sajian segar harian tanpa bahan pengawet, stok dibuat terbatas per kloter. Anda dapat mengecek status ketersediaan langsung di katalog menu online website ini atau bertanya ke admin kami.
+                        <!-- Accordion 4: Ketersediaan Menu -->
+                        <div class="accordion-item" data-reveal="up">
+                            <button type="button" class="accordion-header" aria-expanded="false">
+                                <span class="font-serif text-base sm:text-lg">Bagaimana jika menu favorit saya sedang habis?</span>
+                                <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                            </button>
+                            <div class="accordion-collapse">
+                                <div class="accordion-content">
+                                    <div class="accordion-body">
+                                        Karena kami membuat sajian segar harian tanpa bahan pengawet, stok dibuat terbatas per kloter. Anda dapat mengecek status ketersediaan langsung di katalog menu online website ini atau bertanya ke admin kami.
+                                    </div>
                                 </div>
                             </div>
                         </div>
