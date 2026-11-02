@@ -64,33 +64,37 @@
     --color-outline: #8d7168;
     --color-outline-variant: #e1bfb5;
     
-    /* Motion Tokens for Tailwind utilities */
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    /* Motion Tokens for Tailwind utilities — Cinematic Smooth Experience */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-cinematic: cubic-bezier(0.25, 1, 0.35, 1);
     --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
 :root {
-    /* Motion Durations (§3.1) */
+    /* Motion Durations — Kecepatan Alami & Memukau agar Terasa Elegan */
     --dur-instant: 100ms;   /* feedback tap, ripple */
-    --dur-fast:    180ms;   /* hover, focus, toggle */
-    --dur-base:    280ms;   /* kartu, dropdown, tooltip */
-    --dur-slow:    480ms;   /* reveal section, modal besar */
-    --dur-hero:    900ms;   /* hanya sekali: intro hero */
+    --dur-fast:    200ms;   /* hover, focus, toggle */
+    --dur-base:    350ms;   /* kartu, dropdown, tooltip */
+    --dur-slow:    850ms;   /* reveal standar section & card */
+    --dur-reveal:  950ms;   /* durasi scroll reveal halus sinematik */
+    --dur-reveal-slow: 1200ms; /* foto utama, hero, & showcase besar */
+    --dur-hero:    1200ms;  /* intro hero bertahap */
 
-    /* Motion Easings (§3.1) */
-    --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);   /* masuk, default */
-    --ease-in:     cubic-bezier(0.64, 0, 0.78, 0);   /* keluar, lebih cepat */
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);/* hanya pop kecil (badge, centang) */
+    /* Motion Easings — Kurva Percepatan Mewah Berkelas Apple/Stripe */
+    --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);    /* masuk dengan deselerasi lembut */
+    --ease-cinematic: cubic-bezier(0.25, 1, 0.35, 1);   /* meluncur anggun dan empuk */
+    --ease-in:        cubic-bezier(0.64, 0, 0.78, 0);    /* keluar cepat */
+    --ease-spring:    cubic-bezier(0.34, 1.4, 0.64, 1);  /* micro-bounce kenyal & responsif */
 
-    /* Motion Shifts (§3.1) */
-    --shift-sm: 8px;
-    --shift-md: 16px;
-    --shift-lg: 32px;
+    /* Motion Shifts — Jarak Luncur yang Tampak Nyata saat Scroll */
+    --shift-sm: 12px;
+    --shift-md: 28px;
+    --shift-lg: 44px;
 
-    /* Stagger (§3.1) */
-    --stagger: 60ms;
-    --stagger-max: 6;
+    /* Stagger — Jeda Kemunculan Beruntun yang Terlihat Jelas */
+    --stagger: 110ms;
+    --stagger-max: 8;
 }
 
 /* ==========================================================================
@@ -912,52 +916,69 @@ button, a, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 /* ==========================================================================
-   f. ANIMATION UTILITIES: .reveal & Variants (§3.2, §3.3)
+   f. ANIMATION UTILITIES: .reveal & Variants (§3.2, §3.3) — Cinematic Slow Motion
    ========================================================================== */
 html.js [data-reveal] {
     opacity: 0;
-    transition-property: opacity, transform;
-    transition-duration: var(--dur-slow);
+    filter: blur(4px);
+    transition-property: opacity, transform, filter;
+    transition-duration: var(--dur-reveal);
     transition-timing-function: var(--ease-out);
+    will-change: opacity, transform, filter;
 }
 
 html.js [data-reveal="up"] {
-    transform: translateY(var(--shift-md));
+    transform: translateY(var(--shift-md)) scale(0.985);
 }
 
 html.js [data-reveal="fade"] {
-    transform: none;
+    transform: translateY(12px);
 }
 
 html.js [data-reveal="scale"] {
-    transform: scale(0.96);
+    transform: scale(0.93);
+    filter: blur(6px);
 }
 
 html.js [data-reveal="left"] {
-    transform: translateX(calc(-1 * var(--shift-lg)));
+    transform: translateX(calc(-1 * var(--shift-lg))) scale(0.98);
 }
 
 html.js [data-reveal="right"] {
-    transform: translateX(var(--shift-lg));
+    transform: translateX(var(--shift-lg)) scale(0.98);
+}
+
+/* Kecepatan Animasi Khusus untuk Elemen Unggulan */
+html.js [data-reveal-speed="slow"] {
+    transition-duration: var(--dur-reveal-slow);
+}
+
+html.js [data-reveal-speed="epic"] {
+    transition-duration: 1450ms;
 }
 
 html.js [data-reveal].is-revealed,
 html.js [data-reveal].is-visible {
     opacity: 1;
-    transform: none;
+    transform: translate(0, 0) scale(1);
+    filter: blur(0);
 }
 
-/* Hero Intro Animation Classes (§3.3) */
+/* Hero Intro Animation Classes (§3.3) — Lembut & Megah */
 .hero-photo-intro {
     opacity: 0;
-    transform: scale(1.06);
-    transition: opacity var(--dur-hero) var(--ease-out),
-                transform var(--dur-hero) var(--ease-out);
+    transform: scale(1.08) translateY(12px);
+    filter: blur(8px);
+    transition: opacity var(--dur-hero) var(--ease-cinematic),
+                transform var(--dur-hero) var(--ease-cinematic),
+                filter var(--dur-hero) var(--ease-cinematic);
+    will-change: opacity, transform, filter;
 }
 
 .hero-photo-intro.is-loaded {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    filter: blur(0);
 }
 
 /* ==========================================================================
